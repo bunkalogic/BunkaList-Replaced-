@@ -9,4 +9,8 @@
     <color name="colorPrimaryText">#ffffff</color>
     <color name="colorSecondaryText">#757575</color>
     <color name="colorPrimaryTextDark">#000000</color>
+
+    <color name="colorGooglePlusDark">#4285F4</color>
+
+
 </resources>
