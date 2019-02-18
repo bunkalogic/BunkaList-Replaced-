@@ -1,7 +1,8 @@
-package com.bunkalogic.bunkalist
+package com.bunkalogic.bunkalist.Activities.LoginActivities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.bunkalogic.bunkalist.R
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
