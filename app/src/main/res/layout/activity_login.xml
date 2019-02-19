@@ -91,15 +91,15 @@
                 app:layout_constraintBottom_toTopOf="@+id/buttonLogInGoogle"/>
         <Button
                 android:id="@+id/buttonLogInGoogle"
-                android:layout_width="@dimen/login_button_width"
-                android:layout_height="@dimen/login_button_height"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
                 android:background="@drawable/button_ripple_google"
                 android:text="@string/login_sign_in_google"
                 android:textColor="@color/colorPrimaryText"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
                 app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount"/>
 
@@ -109,7 +109,7 @@
                 android:background="@drawable/button_ripple"
                 android:text="@string/login_create_account"
                 android:textColor="@color/colorPrimaryText"
-                android:layout_height="48dp"
+                android:layout_height="42dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
