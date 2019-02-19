@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "614643812863",
+    "firebase_url": "https://bunkalist.firebaseio.com",
+    "project_id": "bunkalist",
+    "storage_bucket": "bunkalist.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614643812863:android:55b3c7e19dc6bf3c",
+        "android_client_info": {
+          "package_name": "com.bunkalogic.bunkalist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614643812863-3ddv98nqt9fhqg8nss2g5393lo5p891q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bunkalogic.bunkalist",
+            "certificate_hash": "025409c828dc8f5d41a33cd45970e4b581289d52"
+          }
+        },
+        {
+          "client_id": "614643812863-9sakbr5j7d1dd67jusstmlhdajhoa8tn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUZ1eCh01_B0NWfoJU6gb3s5cWocjKK4A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614643812863-9sakbr5j7d1dd67jusstmlhdajhoa8tn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
