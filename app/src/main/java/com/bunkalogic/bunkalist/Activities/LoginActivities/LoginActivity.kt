@@ -12,5 +12,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         buttonCreateAccount.setOnClickListener { startActivity(intentFor<SignUpActivity>()) }
+        textViewForgotPassword.setOnClickListener { startActivity(intentFor<ForgotPasswordActivity>()) }
     }
 }
