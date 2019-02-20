@@ -4,6 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.MainActivity
+import com.bunkalogic.bunkalist.Others.isValidEmail
+import com.bunkalogic.bunkalist.Others.isValidPassword
+import com.bunkalogic.bunkalist.Others.validate
 import com.bunkalogic.bunkalist.R
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -36,8 +39,24 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         clickListeners()
+    }
+
+    // This function is responsible for checking if the user has confirmed the email
+    private fun logInByEmail(email: String, password: String){
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{ task ->
+            if (task.isSuccessful){
+                if (mAuth.currentUser!!.isEmailVerified){
+                    startActivity(intentFor<MainActivity>().newTask().clearTask())
+                }else{
+                    toast(R.string.user_confirm_email)
+                }
+            }else{
+                toast(R.string.login_error)
+            }
+
+        }
+
     }
 
 
@@ -65,15 +84,30 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         }
     }
 
-
-
-
-
-
-
-
     // function that contain the clickListener of elements of the graphical interface
     private fun clickListeners(){
+
+        buttonLogIn.setOnClickListener {
+            // I collect the values ​​written in the editText and I check without valid
+            val email = editTextEmail.text.toString()
+            val password = editTextPassword.text.toString()
+            if (isValidEmail(email) && isValidPassword(password)){
+                logInByEmail(email, password)
+            }else{
+                toast("Please make sure all the data is correct")
+            }
+
+        }
+
+        editTextEmail.validate {
+
+            editTextEmail.error = if (isValidEmail(it)) null else " Email is not valid "
+        }
+
+        editTextPassword.validate {
+
+            editTextPassword.error = if (isValidPassword(it)) null else " Your password should contain 8 characters length at least"
+        }
 
 
         textViewForgotPassword.setOnClickListener {

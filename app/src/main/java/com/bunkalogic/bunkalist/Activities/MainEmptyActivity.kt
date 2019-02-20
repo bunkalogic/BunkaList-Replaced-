@@ -13,12 +13,16 @@ class MainEmptyActivity : AppCompatActivity() {
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
+
+    // This activity is responsible for when the App is opened, for the transition to the LoginActivity or MainActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (mAuth.currentUser == null){
             startActivity(intentFor<LoginActivity>().newTask().clearTask())
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }else{
             startActivity(intentFor<MainActivity>().newTask().clearTask())
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
         finish()
     }
