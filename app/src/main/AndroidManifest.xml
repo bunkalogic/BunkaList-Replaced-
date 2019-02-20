@@ -21,8 +21,7 @@
         <activity android:name=".Activities.LoginActivities.SignUpActivity">
         </activity>
         <activity
-                android:name=".Activities.LoginActivities.LoginActivity"
-                android:theme="@style/AppTheme.Launcher">
+                android:name=".Activities.LoginActivities.LoginActivity">
         </activity>
         <activity android:name=".Activities.MainActivity">
         </activity>
