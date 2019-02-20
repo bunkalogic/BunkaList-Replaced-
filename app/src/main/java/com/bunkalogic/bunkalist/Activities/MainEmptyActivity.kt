@@ -5,7 +5,6 @@ import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.LoginActivities.LoginActivity
 import com.bunkalogic.bunkalist.R
 import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
 
@@ -16,14 +15,17 @@ class MainEmptyActivity : AppCompatActivity() {
 
     // This activity is responsible for when the App is opened, for the transition to the LoginActivity or MainActivity
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         if (mAuth.currentUser == null){
-            startActivity(intentFor<LoginActivity>().newTask().clearTask())
+            startActivity(intentFor<LoginActivity>().newTask())
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
         }else{
-            startActivity(intentFor<MainActivity>().newTask().clearTask())
+            startActivity(intentFor<MainActivity>().newTask())
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
         }
-        finish()
     }
+
 }
