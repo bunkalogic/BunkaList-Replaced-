@@ -9,6 +9,10 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 import org.jetbrains.anko.*
 
+/**
+ *  Created by @author Naim Dridi on 19/02/19
+ */
+
 class ForgotPasswordActivity : AppCompatActivity() {
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }

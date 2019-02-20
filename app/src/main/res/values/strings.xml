@@ -13,7 +13,7 @@
     <string name="login_forgot_password">I have forgotten my password</string>
     <string name="login_create_account">Create a new account</string>
     <string name="go_to_login">Go back to Login</string>
-    <string name="select_image_user">select image profile </string>
+    <string name="select_image_user">select image profile</string>
     <string name="email_reset_to_password">Email has been sent to reset your password</string>
     <string name="email_reset_to_password_failed">Please make sure the email address is correct</string>
 

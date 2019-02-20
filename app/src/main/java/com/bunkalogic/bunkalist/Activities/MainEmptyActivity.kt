@@ -5,26 +5,21 @@ import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.LoginActivities.LoginActivity
 import com.bunkalogic.bunkalist.R
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
 
-/**
- *  Created by @author Naim Dridi on 18/02/19
- */
+class MainEmptyActivity : AppCompatActivity() {
 
-class MainActivity : AppCompatActivity() {
-
-    private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        buttonSignOut.setOnClickListener {
-            mAuth.signOut()
-            startActivity(intentFor<LoginActivity>())
+        if (mAuth.currentUser == null){
+            startActivity(intentFor<LoginActivity>().newTask().clearTask())
+        }else{
+            startActivity(intentFor<MainActivity>().newTask().clearTask())
         }
-
-
+        finish()
     }
 }
