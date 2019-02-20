@@ -9,6 +9,7 @@ import org.jetbrains.anko.intentFor
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         buttonCreateAccount.setOnClickListener { startActivity(intentFor<SignUpActivity>()) }
