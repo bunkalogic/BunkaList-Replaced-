@@ -20,6 +20,7 @@
     <string name="login_error">An unexpected error occurred, please try again</string>
     <string name="confirm_email_send">An email has been sent to you. Please confirm before sing in</string>
     <string name="signUp_data_incorrect">Please make sure all the data is correct</string>
+    <string name="add_correct_username_and_image_profile">Your username and your image profile have been added correctly</string>
 
 
 

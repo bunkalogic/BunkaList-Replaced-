@@ -16,14 +16,16 @@ import org.jetbrains.anko.intentFor
 class MainActivity : AppCompatActivity() {
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-    // private lateinit var currentUser: FirebaseUser
-    //val user = FirebaseAuth.getInstance().currentUser
+     //private lateinit var currentUser: FirebaseUser
+    private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //setUpCurrentUser()
-        //textViewName.text = user!!.displayName?.let { user.displayName } ?: run {getString(R.string.signUp_data_incorrect)}
+        setUpCurrentUser()
+        textViewName.text = user!!.displayName
+            ?.let { user.displayName }
+                ?: run {getString(R.string.signUp_data_incorrect)}
 
         buttonSignOut.setOnClickListener {
             mAuth.signOut()
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    //private fun setUpCurrentUser(){
-    //    currentUser = mAuth.currentUser!!
-    //}
+    private fun setUpCurrentUser(){
+        //currentUser = mAuth.currentUser!!
+    }
 }
