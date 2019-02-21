@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.LoginActivities.LoginActivity
 import com.bunkalogic.bunkalist.R
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 
@@ -15,10 +16,14 @@ import org.jetbrains.anko.intentFor
 class MainActivity : AppCompatActivity() {
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    // private lateinit var currentUser: FirebaseUser
+    //val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //setUpCurrentUser()
+        //textViewName.text = user!!.displayName?.let { user.displayName } ?: run {getString(R.string.signUp_data_incorrect)}
 
         buttonSignOut.setOnClickListener {
             mAuth.signOut()
@@ -27,4 +32,8 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    //private fun setUpCurrentUser(){
+    //    currentUser = mAuth.currentUser!!
+    //}
 }

@@ -34,6 +34,7 @@
                 android:inputType="textEmailAddress"
                 android:hint="@string/login_email"
                 android:textSize="@dimen/login_text_size"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -50,6 +51,7 @@
                 android:inputType="textPassword"
                 android:hint="@string/login_password"
                 android:textSize="@dimen/login_text_size"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -66,7 +68,7 @@
         <Button
                 android:id="@+id/buttonLogIn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/login_button_xl_height"
+                android:layout_height="@dimen/login_button_height"
                 android:text="@string/login_sign_in"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="@dimen/login_text_xl_size"
@@ -93,7 +95,7 @@
         <Button
                 android:id="@+id/buttonLogInGoogle"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="@dimen/login_button_height"
                 android:background="@drawable/button_ripple_google"
                 android:text="@string/login_sign_in_google"
                 android:textColor="@color/colorPrimaryText"
@@ -109,12 +111,14 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/button_ripple"
                 android:text="@string/login_create_account"
+                android:textSize="@dimen/login_text_xl_size"
                 android:textColor="@color/colorPrimaryText"
                 android:layout_height="42dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="1.0" android:layout_marginBottom="4dp"/>
+                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginBottom="2dp"/>
 
     </android.support.constraint.ConstraintLayout>
 

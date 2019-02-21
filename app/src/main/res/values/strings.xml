@@ -18,6 +18,10 @@
     <string name="email_reset_to_password_failed">Please make sure the email address is correct</string>
     <string name="user_confirm_email">User must confirm email first</string>
     <string name="login_error">An unexpected error occurred, please try again</string>
+    <string name="confirm_email_send">An email has been sent to you. Please confirm before sing in</string>
+    <string name="signUp_data_incorrect">Please make sure all the data is correct</string>
+
+
 
 
 </resources>

@@ -31,13 +31,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="32dp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextEmailSignUp"
-                android:id="@+id/imageButton"/>
+                android:id="@+id/imageButtonProfile"/>
 
         <EditText
                 android:id="@+id/editTextEmailSignUp"
                 android:inputType="textEmailAddress"
                 android:hint="@string/login_email"
                 android:textSize="@dimen/login_text_size"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -53,9 +54,9 @@
 
         <EditText
                 android:id="@+id/editTextUserName"
-                android:inputType="textEmailAddress"
                 android:hint="@string/login_username"
                 android:textSize="@dimen/login_text_size"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -73,6 +74,7 @@
                 android:inputType="textPassword"
                 android:hint="@string/login_password"
                 android:textSize="@dimen/login_text_size"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -91,6 +93,7 @@
                 android:inputType="textPassword"
                 android:hint="@string/login_confirm_password"
                 android:textSize="@dimen/login_text_size"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -130,7 +133,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"/>
+                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginBottom="2dp"/>
 
     </android.support.constraint.ConstraintLayout>
 
