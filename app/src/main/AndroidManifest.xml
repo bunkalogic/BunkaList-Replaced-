@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.bunkalogic.bunkalist">
 
-    <uses-feature
-            android:name="android.provider.MediaStore.Images"
-            android:required="true"/>
+    <uses-feature android:name="android.provider.MediaStore.Images.Media"/>
+
 
     <application
             android:allowBackup="true"
@@ -32,5 +31,7 @@
         <activity android:name=".Activities.MainActivity">
         </activity>
     </application>
+
+
 
 </manifest>

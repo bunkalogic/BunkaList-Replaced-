@@ -25,6 +25,7 @@
 
     <!-- New User view -->
     <string name="welcome_new_user">Welcome new User </string>
+    <string name="btn_go_toActivity">next</string>
 
 
 </resources>
