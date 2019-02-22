@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.bunkalogic.bunkalist">
 
-    <uses-feature android:name="android.provider.MediaStore.Images" android:required="true" />
-
+    <uses-feature
+            android:name="android.provider.MediaStore.Images"
+            android:required="true"/>
 
     <application
             android:allowBackup="true"
@@ -11,8 +12,11 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainEmptyActivity"
-                    android:theme="@style/AppTheme.Launcher">
+        <activity android:name=".Activities.NewUserActivity">
+        </activity>
+        <activity
+                android:name=".Activities.MainEmptyActivity"
+                android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

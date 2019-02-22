@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.MainActivity
+import com.bunkalogic.bunkalist.Activities.NewUserActivity
 import com.bunkalogic.bunkalist.Others.isValidEmail
 import com.bunkalogic.bunkalist.Others.isValidPassword
 import com.bunkalogic.bunkalist.Others.validate
@@ -47,7 +48,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener{ task ->
             if (task.isSuccessful){
                 if (mAuth.currentUser!!.isEmailVerified){
-                    startActivity(intentFor<MainActivity>().newTask().clearTask())
+                    isNewUser()
                 }else{
                     toast(R.string.user_confirm_email)
                 }
@@ -55,6 +56,19 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
                 toast(R.string.login_error)
             }
 
+        }
+
+    }
+
+    // Esta funcion comprueba si el usuario tiene foto de perfil, con ello determina si es nuevo usuario
+    private fun isNewUser(){
+        val userImage = mAuth.currentUser!!.photoUrl
+
+        if (userImage == null){
+            startActivity(intentFor<NewUserActivity>().newTask().clearTask())
+            toast(R.string.welcome_new_user)
+        }else{
+            startActivity(intentFor<MainActivity>().newTask().clearTask())
         }
 
     }
@@ -80,7 +94,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             if (mGoogleApiClient.isConnected){
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient)
             }
-            startActivity(intentFor<MainActivity>().newTask().clearTask())
+            isNewUser()
         }
     }
 
