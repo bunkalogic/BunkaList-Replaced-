@@ -1,16 +1,14 @@
 package com.bunkalogic.bunkalist.Activities
 
-import android.media.Image
+
+import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
-import com.bunkalogic.bunkalist.Activities.LoginActivities.LoginActivity
 import com.bunkalogic.bunkalist.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_new_user.*
 import org.jetbrains.anko.*
 
@@ -37,11 +35,11 @@ class NewUserActivity : AppCompatActivity() {
 
 
     // Todo saving username and image profile cant implements , profileImage: Uri
-    private fun saveProfileNameAndImageProfile(userName: String, image: String){
+    private fun saveProfileNameAndImageProfile(userName: String, image: Uri){
         val userProfile = UserProfileChangeRequest
             .Builder()
             .setDisplayName(userName)
-            .setPhotoUri(Uri.parse(image))
+            .setPhotoUri(image)
             .build()
 
         currentUser.updateProfile(userProfile).addOnCompleteListener(this){task ->
@@ -55,24 +53,23 @@ class NewUserActivity : AppCompatActivity() {
 
     }
 
-    private fun getProfileImage(image: String){
-
-        startActivityForResult(intentFor<MediaStore.Images.Media>(), requestImageProfile)
-        MediaStore.Images.Media.getContentUri(image)
+    private fun getProfileImage(){
+        val galleryIntent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, requestImageProfile)
     }
+    
 
     private fun clickListeners(){
 
         imageButtonProfile.setOnClickListener {
-            val imageProfile = imageButtonProfile.image.toString()
-            //getProfileImage(imageProfile)
+            getProfileImage()
         }
 
         buttonGoTo.setOnClickListener {
             val username = editTextUserName.text.toString()
             val imageProfile = imageButtonProfile.image.toString()
 
-            saveProfileNameAndImageProfile(username, imageProfile)
+            saveProfileNameAndImageProfile(username, Uri.parse(imageProfile))
 
             startActivity(intentFor<MainActivity>().clearTask().newTask())
         }
