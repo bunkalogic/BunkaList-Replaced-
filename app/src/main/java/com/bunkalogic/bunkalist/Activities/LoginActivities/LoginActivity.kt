@@ -94,7 +94,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             if (mGoogleApiClient.isConnected){
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient)
             }
-            isNewUser()
+            startActivity(intentFor<MainActivity>().newTask().clearTask())
         }
     }
 

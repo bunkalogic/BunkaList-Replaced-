@@ -32,8 +32,9 @@ class MainActivity : AppCompatActivity() {
         currentUser.photoUrl?.let {
             Glide.with(this).load(currentUser.photoUrl)
                 .apply(RequestOptions.circleCropTransform()
-                    .override(150, 150))
-                .into(imageButtonProfile)
+                    .override(100, 100))
+                .into(this.imageButtonProfile)
+
         }
 
 
