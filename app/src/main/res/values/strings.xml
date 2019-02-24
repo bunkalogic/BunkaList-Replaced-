@@ -27,6 +27,8 @@
     <string name="welcome_new_user">Welcome new User </string>
     <string name="btn_go_toActivity">next</string>
     <string name="error_new_user">Please try again</string>
+    <string name="accept_the_permissions">Accept the Permission</string>
+
 
 
 </resources>
