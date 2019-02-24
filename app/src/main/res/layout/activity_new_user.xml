@@ -8,13 +8,12 @@
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark"
             android:fillViewport="true"
-            tools:context=".Activities.LoginActivities.SignUpActivity"
+            tools:context=".Activities.Login.SignUpActivity"
             android:focusableInTouchMode="true">
 
-    <ImageButton
-            android:layout_width="145dp"
-            android:layout_height="132dp"
-            android:background="@drawable/rounded_corners"
+    <ImageView
+            android:layout_width="117dp"
+            android:layout_height="126dp"
             android:src="@drawable/ic_add_a_photo"
             android:clickable="true"
             android:focusable="true"
@@ -25,7 +24,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/imageButtonProfile" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextUserName" app:layout_constraintVertical_bias="0.742"/>
+            app:layout_constraintBottom_toTopOf="@+id/editTextUserName" app:layout_constraintVertical_bias="0.607"/>
 
     <EditText
             android:id="@+id/editTextUserName"

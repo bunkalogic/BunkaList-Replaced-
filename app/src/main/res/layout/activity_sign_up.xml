@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         android:fillViewport="true"
-        tools:context=".Activities.LoginActivities.SignUpActivity">
+        tools:context=".Activities.Login.SignUpActivity">
 
     <android.support.constraint.ConstraintLayout
             xmlns:android="http://schemas.android.com/apk/res/android"

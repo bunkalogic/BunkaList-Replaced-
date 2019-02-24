@@ -2,7 +2,7 @@ package com.bunkalogic.bunkalist.Activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.bunkalogic.bunkalist.Activities.LoginActivities.LoginActivity
+import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.R
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.intentFor

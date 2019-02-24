@@ -1,4 +1,4 @@
-package com.bunkalogic.bunkalist.Activities.LoginActivities
+package com.bunkalogic.bunkalist.Activities.Login
 
 
 import android.os.Bundle

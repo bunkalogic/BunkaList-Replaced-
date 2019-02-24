@@ -1,10 +1,10 @@
-package com.bunkalogic.bunkalist.Activities.LoginActivities
+package com.bunkalogic.bunkalist.Activities.Login
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.MainActivity
-import com.bunkalogic.bunkalist.Activities.NewUserActivity
+import com.bunkalogic.bunkalist.Activities.NewUser.NewUserActivity
 import com.bunkalogic.bunkalist.Others.isValidEmail
 import com.bunkalogic.bunkalist.Others.isValidPassword
 import com.bunkalogic.bunkalist.Others.validate
@@ -15,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.clearTask
@@ -60,11 +59,11 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
     }
 
-    // This function checks if the user has a profile picture, thereby determining if it is a new user
+    // This function checks if the user has a profile picture, there by determining if it is a new user
     private fun isNewUser(){
-        val userImage = mAuth.currentUser!!.photoUrl
+        val username = mAuth.currentUser!!.displayName
 
-        if (userImage == null){
+        if (username == null){
             startActivity(intentFor<NewUserActivity>().newTask().clearTask())
             toast(R.string.welcome_new_user)
         }else{
