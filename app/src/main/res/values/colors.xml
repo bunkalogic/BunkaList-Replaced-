@@ -11,6 +11,7 @@
     <color name="colorPrimaryTextDark">#000000</color>
 
     <color name="colorGooglePlusDark">#4285F4</color>
+    <color name="colorBottomNavigationBar">#b0bec5</color>
 
 
 </resources>
