@@ -16,6 +16,10 @@ import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.support.v4.intentFor
 
+/**
+ *  Created by @author Naim Dridi on 25/02/19
+ */
+
 class SettingsFragment : Fragment() {
 
     private lateinit var _view: View

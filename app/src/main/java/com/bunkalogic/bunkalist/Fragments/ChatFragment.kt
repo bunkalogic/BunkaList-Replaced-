@@ -10,6 +10,10 @@ import android.view.ViewGroup
 import com.bunkalogic.bunkalist.R
 
 
+/**
+ *  Created by @author Naim Dridi on 25/02/19
+ */
+
 class ChatFragment : Fragment() {
 
 
