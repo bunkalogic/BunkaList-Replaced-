@@ -6,7 +6,7 @@
              tools:context=".Fragments.TimeLineFragment">
 
     <TextView
-            android:layout_width="165dp"
+            android:layout_width="250dp"
             android:layout_height="63dp"
             android:textSize="40sp"
             android:text="TimeList"/>
