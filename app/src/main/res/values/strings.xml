@@ -29,6 +29,13 @@
     <string name="error_new_user">Please try again</string>
     <string name="accept_the_permissions">Accept the Permission</string>
 
+    <!-- Button Navigation Menu -->
+
+    <string name="btn_nav_timeline"> Timeline </string>
+    <string name="btn_nav_chat"> Chat </string>
+    <string name="btn_nav_search"> Search </string>
+    <string name="btn_nav_profile"> Profile </string>
+    <string name="btn_nav_settings"> Settings </string>
 
 
 </resources>

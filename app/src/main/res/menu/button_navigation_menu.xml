@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bottom_nav_timeline"
+        android:enabled="true"
+        android:icon="@drawable/ic_nav_timeline"
+        android:title="@string/btn_nav_timeline"
+        app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/bottom_nav_chat"
+            android:enabled="true"
+            android:icon="@drawable/ic_nav_chat"
+            android:title="@string/btn_nav_chat"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/bottom_nav_search"
+            android:enabled="true"
+            android:icon="@drawable/ic_nav_search"
+            android:title="@string/btn_nav_search"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/bottom_nav_profile"
+            android:enabled="true"
+            android:icon="@drawable/ic_nav_profile"
+            android:title="@string/btn_nav_profile"
+            app:showAsAction="ifRoom"/>
+
+    <item
+            android:id="@+id/bottom_nav_settings"
+            android:enabled="true"
+            android:icon="@drawable/ic_nav_settings"
+            android:title="@string/btn_nav_settings"
+            app:showAsAction="ifRoom"/>
+
+
+
+</menu>

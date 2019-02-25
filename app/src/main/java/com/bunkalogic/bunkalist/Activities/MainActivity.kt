@@ -25,13 +25,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpCurrentUser()
-        getUsernameAndImageProfile()
-
-        buttonSignOut.setOnClickListener {
-            mAuth.signOut()
-            startActivity(intentFor<LoginActivity>().clearTask().newTask())
-        }
-
 
     }
 
@@ -39,18 +32,5 @@ class MainActivity : AppCompatActivity() {
         currentUser = mAuth.currentUser!!
     }
 
-    private fun getUsernameAndImageProfile(){
 
-        textViewName.text = currentUser.displayName
-            ?.let { currentUser.displayName }
-            ?: run {getString(R.string.signUp_data_incorrect)}
-
-        currentUser.photoUrl?.let {
-            Glide.with(this).load(currentUser.photoUrl)
-                .apply(RequestOptions.circleCropTransform()
-                    .override(150, 150))
-                .into(this.imageButtonProfile)
-        }   ?: run { toast(R.string.error_new_user) }
-
-    }
 }

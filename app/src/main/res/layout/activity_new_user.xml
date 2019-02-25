@@ -17,6 +17,7 @@
             android:src="@drawable/ic_add_a_photo"
             android:clickable="true"
             android:focusable="true"
+            android:tag="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="32dp"
