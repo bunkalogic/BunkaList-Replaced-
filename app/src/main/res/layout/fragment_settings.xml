@@ -1,26 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".Fragments.SettingsFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".Fragments.SettingsFragment">
+             android:layout_height="wrap_content">
 
 
-    <TextView
-            android:layout_width="274dp"
-            android:layout_height="63dp"
-            android:textSize="40sp"
-            android:text="Settings"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="84dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp" android:id="@+id/textView"/>
-    <Button
-            android:text="Sign Out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/buttonSignOut"
-            android:layout_marginTop="36dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.804"/>
+        <TextView
+                android:text="@string/edit_profile"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:id="@+id/textView_Edit_Profile" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                android:textStyle="bold|italic"
+                android:textColor="@color/colorAccent" android:background="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewProfile"
+                android:layout_marginBottom="32dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <ImageButton
+            android:layout_width="96dp"
+            android:layout_height="88dp"
+            android:src="@drawable/ic_add_a_photo"
+            android:id="@+id/imageViewProfile" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.485" android:background="@drawable/rounded_corners"
+            android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/edit_Text_Username"/>
+        <EditText
+            android:layout_width="218dp"
+            android:layout_height="36dp"
+            android:ems="10"
+            android:id="@+id/edit_Text_Username"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:background="@drawable/edittext_rounded"
+            android:hint="@string/login_username"
+            app:layout_constraintHorizontal_bias="0.497"
+            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/button_apply_changes"/>
+        <ImageButton
+                android:src="@drawable/ic_day_and_night"
+                android:layout_width="0dp"
+                android:layout_height="51dp"
+                android:id="@+id/imageButton"
+                android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_About_the_App"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:id="@+id/textView_Select_Mode"
+                android:text="@string/mode_light_dark"
+                android:textSize="18sp" android:textAlignment="center" android:textStyle="bold|italic"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageButton" android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:text="@string/terms_of_use"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView_Terms_use"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:textSize="14sp" android:textStyle="bold"
+                android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/textViewLicence"/>
+        <TextView
+                android:text="@string/licence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewLicence"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"/>
+        <TextView
+                android:text="@string/about_the_app"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:id="@+id/textView_About_the_App" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                android:textSize="18sp" android:textStyle="bold|italic" android:background="@color/colorPrimaryDark"
+                android:textAlignment="center" android:textColor="@color/colorAccent"
+                android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/textView_Terms_use"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_apply_changes" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_Select_Mode"
+            android:text="@string/apply_changes"/>
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+                android:text="Sign Out"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonSignOut"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="32dp"
+                app:layout_constraintHorizontal_bias="0.498" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
