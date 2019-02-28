@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
     private fun setUpBottomNavigationBar(){
         btn_nav_View.setOnNavigationItemSelectedListener {Item ->
             when(Item.itemId){

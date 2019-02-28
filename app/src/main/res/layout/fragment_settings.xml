@@ -20,17 +20,25 @@
         <TextView
                 android:text="@string/edit_profile"
                 android:layout_width="0dp"
-                android:layout_height="32dp"
+                android:layout_height="22dp"
                 android:id="@+id/textView_Edit_Profile" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
                 android:textStyle="bold|italic"
-                android:textColor="@color/colorAccent" android:background="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewProfile"
                 android:layout_marginBottom="32dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+                android:id="@+id/separatorProfile"
+                android:layout_width="0dp"
+                android:layout_height="0.3dp"
+                android:background="@color/colorSecondaryText"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Edit_Profile"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
         <ImageButton
             android:layout_width="96dp"
             android:layout_height="88dp"
@@ -50,6 +58,36 @@
             android:hint="@string/login_username"
             app:layout_constraintHorizontal_bias="0.497"
             android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/button_apply_changes"/>
+
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_apply_changes" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+                android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_Select_Mode"
+                android:text="@string/apply_changes"/>
+
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:id="@+id/textView_Select_Mode"
+                android:text="@string/mode_light_dark"
+                android:textSize="14sp" android:textStyle="bold|italic"
+                android:textColor="@color/colorAccent"
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/imageButton" android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <View
+                android:id="@+id/separatorMode"
+                android:layout_width="0dp"
+                android:layout_height="0.3dp"
+                android:background="@color/colorSecondaryText"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Select_Mode"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
         <ImageButton
                 android:src="@drawable/ic_day_and_night"
                 android:layout_width="0dp"
@@ -58,18 +96,25 @@
                 android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_About_the_App"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"/>
+
         <TextView
+                android:text="@string/about_the_app"
                 android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:id="@+id/textView_Select_Mode"
-                android:text="@string/mode_light_dark"
-                android:textSize="18sp" android:textAlignment="center" android:textStyle="bold|italic"
-                android:background="@color/colorPrimaryDark"
+                android:layout_height="22dp"
+                android:id="@+id/textView_About_the_App" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                android:textSize="14sp" android:textStyle="bold|italic"
                 android:textColor="@color/colorAccent"
-                android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/imageButton" android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/textView_Terms_use"/>
+        <View
+                android:id="@+id/separatorAbout"
+                android:layout_width="0dp"
+                android:layout_height="0.3dp"
+                android:background="@color/colorSecondaryText"
+                app:layout_constraintTop_toBottomOf="@+id/textView_About_the_App"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
         <TextView
                 android:text="@string/terms_of_use"
                 android:layout_width="wrap_content"
@@ -89,24 +134,8 @@
                 android:layout_marginStart="8dp" android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"/>
-        <TextView
-                android:text="@string/about_the_app"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:id="@+id/textView_About_the_App" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-                android:textSize="18sp" android:textStyle="bold|italic" android:background="@color/colorPrimaryDark"
-                android:textAlignment="center" android:textColor="@color/colorAccent"
-                android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/textView_Terms_use"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/button_apply_changes" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
-            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_Select_Mode"
-            android:text="@string/apply_changes"/>
+
+
 
         <Button
                 android:text="Sign Out"
