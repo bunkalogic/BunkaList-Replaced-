@@ -16,13 +16,16 @@ import com.bunkalogic.bunkalist.R
 
 class ChatFragment : Fragment() {
 
+    private lateinit var _view: View
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+        _view = inflater.inflate(R.layout.fragment_chat, container, false)
+
+
+        return _view
     }
 
 }

@@ -8,9 +8,6 @@
         android:orientation="horizontal"
         tools:context=".Activities.MainActivity">
 
-
-
-
     <android.support.design.widget.BottomNavigationView
             android:id="@+id/btn_nav_View"
             android:layout_width="match_parent"

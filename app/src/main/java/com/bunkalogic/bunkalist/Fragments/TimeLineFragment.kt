@@ -14,12 +14,17 @@ import com.bunkalogic.bunkalist.R
  *  Created by @author Naim Dridi on 25/02/19
  */
 
+
 class TimeLineFragment : Fragment() {
+
+    private lateinit var _view: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_timelist, container, false)
+        _view = inflater.inflate(R.layout.fragment_timelist, container, false)
+
+        return _view
     }
 
 
