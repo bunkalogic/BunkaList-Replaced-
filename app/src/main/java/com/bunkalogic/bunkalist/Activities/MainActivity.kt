@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
+
     }
 
     // Collect all fragment implements in the adapter
