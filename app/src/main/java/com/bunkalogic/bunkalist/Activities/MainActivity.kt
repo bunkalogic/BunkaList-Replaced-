@@ -3,6 +3,7 @@ package com.bunkalogic.bunkalist.Activities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatDelegate
 import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import android.view.MenuItem
 import com.bunkalogic.bunkalist.Fragments.*
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        AppCompatDelegate.getDefaultNightMode()
 
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
@@ -94,6 +96,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 

@@ -49,10 +49,7 @@
     <string name="terms_of_use">Terms of uses</string>
     <string name="licence">Licence</string>
     <string name="about_the_app">About the App</string>
-
-
-
-
+    <string name="changed_mode">changed mode:</string>
 
 
 </resources>
