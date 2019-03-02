@@ -77,7 +77,7 @@
                 android:textSize="14sp" android:textStyle="bold|italic"
                 android:textColor="@color/colorAccent"
                 android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/switchMode" android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/buttonMode" android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -88,15 +88,14 @@
                 android:background="@color/colorSecondaryText"
                 app:layout_constraintTop_toBottomOf="@+id/textView_Select_Mode"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
-        <Switch
-                android:text="@string/changed_mode"
+        <ImageButton
+                android:src="@drawable/ic_day_and_night"
                 android:layout_width="0dp"
                 android:layout_height="51dp"
-                android:id="@+id/switchMode"
+                android:id="@+id/buttonMode"
                 android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_About_the_App"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="74dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="74dp"
-        />
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"/>
 
         <TextView
                 android:text="@string/about_the_app"

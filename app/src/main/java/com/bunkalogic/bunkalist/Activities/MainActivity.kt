@@ -8,7 +8,9 @@ import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import android.view.MenuItem
 import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 /**
@@ -23,8 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        AppCompatDelegate.getDefaultNightMode()
-
+        //isLightOrDark()
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
 
@@ -97,8 +98,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
+    //private fun isLightOrDark(){
+    //    val defaultUser = preferences.userMode
+    //    val user= preferences.editUserMode(defaultUser)
+    //    user.let {
+    //        AppCompatDelegate.getDefaultNightMode()
+    //    }
+    //}
 
 
 
