@@ -27,7 +27,13 @@ class UserSharedPreferences(context: Context){
     get() = prefsUser.getBoolean("service_status", false)
     set(value) = prefsUser.edit().putBoolean("service_status", value).apply()
 
+    var mode: Int
+        get() = prefsUser.getInt("day", 0)
+        set(value) = prefsUser.edit().putInt("day", value).apply()
 
+    fun editCurrentUser(){
+        prefsUser.edit().apply()
+    }
 
 
     fun deleteAll(){

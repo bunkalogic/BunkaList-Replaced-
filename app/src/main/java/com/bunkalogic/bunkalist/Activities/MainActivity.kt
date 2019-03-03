@@ -1,13 +1,14 @@
 package com.bunkalogic.bunkalist.Activities
 
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import android.view.MenuItem
 import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -17,15 +18,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-
     private var prevBottomSelected: MenuItem? = null
+
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //isLightOrDark()
+        whatIsMode()
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
+
 
     }
 
@@ -95,6 +101,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    // Check if the user has chosen some theme mode in the ModeDayOrNightActivity
+    private fun whatIsMode(){
+        val mode_light = 1
+        val mode_dark = 2
+        val mode_custom = 3
+        if (preferences.mode == mode_light){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        if (preferences.mode == mode_dark){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        if (preferences.mode == mode_custom){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+        }
+        AppCompatDelegate.getDefaultNightMode()
+
+    }
+
+
+
+
 
     //private fun isLightOrDark(){
     //    val defaultUser = preferences.userMode

@@ -41,49 +41,15 @@ class SettingsFragment : Fragment() {
         _view =  inflater.inflate(R.layout.fragment_settings, container, false)
         clicksListeners()
 
-
-
-
         return _view
     }
 
 
 
+    // function that contain the clickListener of elements of the graphical interface
     private fun clicksListeners(){
 
-        // Todo : changed for button what do go to ActivityModeDayOrNight
-        //_view.switchMode.setOnCheckedChangeListener { buttonView, _ ->
-        //    if(buttonView.isChecked){
-        //        switchMode.textOn
-        //        preferences.editUserMode(true)
-        //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        //        startActivity(intentFor<MainActivity>().noAnimation())
-        //    }else{
-        //        switchMode.textOff
-        //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        //        startActivity(intentFor<MainActivity>().noAnimation())
-        //    }
-        //    preferences.editUserMode(false)
-        //}
-        //_view.switchMode.setOnClickListener {
-        //    switchMode.isChecked = preferences.switchState
-        //    preferences.switchState = true
-        //    if (preferences.switchState){
-        //        switchMode.textOn
-        //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        //        startActivity(intentFor<MainActivity>().noAnimation())
-        //    }else{
-        //        switchMode.textOff
-        //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        //        startActivity(intentFor<MainActivity>().noAnimation())
-        //    }
-        //}
         _view.buttonMode.setOnClickListener { startActivity(intentFor<ModeDayOrNightActivity>()) }
-
-
-
-
-
 
 
         _view.buttonSignOut.setOnClickListener {
