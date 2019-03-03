@@ -51,6 +51,8 @@
     <string name="about_the_app">About the App</string>
     <string name="changed_mode_light">Mode: Light</string>
     <string name="changed_mode_dark">Mode: Dark</string>
+    <string name="changed_mode_custom">Mode: Light/Dark</string>
+
 
 
 </resources>

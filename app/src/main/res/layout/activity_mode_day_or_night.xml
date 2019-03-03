@@ -5,6 +5,52 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activities.ModeDayOrNightActivity">
+        tools:context=".Activities.OtherActivities.ModeDayOrNightActivity" android:id="@+id/constraintLayout">
+
+    <include android:id="@+id/toolbar"
+             layout="@layout/toolbar"/>
+
+    <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
+            app:layout_constraintHorizontal_bias="0.398" app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.03" android:layout_marginTop="32dp">
+
+
+            <RadioButton
+                    android:text="@string/changed_mode_light"
+                    android:textColor="@color/colorPrimaryText"
+                    android:background="@color/colorSecondaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioButtonLight" android:layout_weight="1"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            <RadioButton
+                    android:text="@string/changed_mode_dark"
+                    android:textColor="@color/colorPrimaryText"
+                    android:background="@color/colorSecondaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioButtonDark" android:layout_weight="1"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/radioButtonLight"/>
+            <RadioButton
+                    android:text="@string/changed_mode_custom"
+                    android:textColor="@color/colorPrimaryText"
+                    android:background="@color/colorSecondaryText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioButtonCustom" android:layout_weight="1"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/radioButtonDark"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+
+    </RadioGroup>
 
 </android.support.constraint.ConstraintLayout>

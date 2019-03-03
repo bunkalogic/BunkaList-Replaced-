@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.Activities.MainActivity
+import com.bunkalogic.bunkalist.Activities.OtherActivities.ModeDayOrNightActivity
+import com.bunkalogic.bunkalist.Activities.OtherActivities.ToolbarActivity
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.UserSharedPreferences
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
@@ -76,6 +78,7 @@ class SettingsFragment : Fragment() {
         //        startActivity(intentFor<MainActivity>().noAnimation())
         //    }
         //}
+        _view.buttonMode.setOnClickListener { startActivity(intentFor<ModeDayOrNightActivity>()) }
 
 
 

@@ -13,12 +13,17 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activities.ModeDayOrNightActivity">
+        <activity android:name=".Activities.OtherActivities.ToolbarActivity">
+        </activity>
+        <activity android:name=".Activities.OtherActivities.ModeDayOrNightActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".Activities.MainActivity"/>
         </activity>
         <activity android:name=".Activities.NewUser.NewUserActivity">
         </activity>
         <activity
-                android:name=".Activities.MainEmptyActivity"
+                android:name=".Activities.OtherActivities.MainEmptyActivity"
                 android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

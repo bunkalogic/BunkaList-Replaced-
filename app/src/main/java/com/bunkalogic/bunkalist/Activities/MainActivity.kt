@@ -1,16 +1,14 @@
 package com.bunkalogic.bunkalist.Activities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatDelegate
+import android.support.v7.app.AppCompatActivity
 import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import android.view.MenuItem
 import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 /**
