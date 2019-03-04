@@ -52,7 +52,7 @@
     <string name="changed_mode_light">Mode: Light</string>
     <string name="changed_mode_dark">Mode: Dark</string>
     <string name="changed_mode_custom">Mode: Light/Dark</string>
-
+    <string name="sign_out">Sign Out</string>
 
 
 </resources>

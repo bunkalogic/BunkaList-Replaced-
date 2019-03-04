@@ -1,8 +1,9 @@
-package com.bunkalogic.bunkalist.Activities.OtherActivities
+package com.bunkalogic.bunkalist.Activities.SettingsActivities
 
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatDelegate
+import com.bunkalogic.bunkalist.Activities.OtherActivities.ToolbarActivity
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import kotlinx.android.synthetic.main.activity_mode_day_or_night.*

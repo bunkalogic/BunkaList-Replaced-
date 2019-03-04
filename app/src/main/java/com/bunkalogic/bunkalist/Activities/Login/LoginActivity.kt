@@ -3,7 +3,7 @@ package com.bunkalogic.bunkalist.Activities.Login
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.bunkalogic.bunkalist.Activities.MainActivity
+import com.bunkalogic.bunkalist.Activities.BaseActivity
 import com.bunkalogic.bunkalist.Activities.NewUser.NewUserActivity
 import com.bunkalogic.bunkalist.Others.isValidEmail
 import com.bunkalogic.bunkalist.Others.isValidPassword
@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             startActivity(intentFor<NewUserActivity>().newTask().clearTask())
             toast(R.string.welcome_new_user)
         }else{
-            startActivity(intentFor<MainActivity>().newTask().clearTask())
+            startActivity(intentFor<BaseActivity>().newTask().clearTask())
         }
 
     }
@@ -93,7 +93,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             if (mGoogleApiClient.isConnected){
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient)
             }
-            startActivity(intentFor<MainActivity>().newTask().clearTask())
+            startActivity(intentFor<BaseActivity>().newTask().clearTask())
         }
     }
 

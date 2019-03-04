@@ -16,13 +16,9 @@ import kotlinx.android.synthetic.main.activity_main.*
  *  Created by @author Naim Dridi on 18/02/19
  */
 
-class MainActivity : AppCompatActivity() {
+class BaseActivity : AppCompatActivity() {
 
     private var prevBottomSelected: MenuItem? = null
-
-
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,22 +115,5 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.getDefaultNightMode()
 
     }
-
-
-
-
-
-    //private fun isLightOrDark(){
-    //    val defaultUser = preferences.userMode
-    //    val user= preferences.editUserMode(defaultUser)
-    //    user.let {
-    //        AppCompatDelegate.getDefaultNightMode()
-    //    }
-    //}
-
-
-
-
-
 
 }

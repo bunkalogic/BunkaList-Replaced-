@@ -13,12 +13,17 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activities.OtherActivities.ToolbarActivity">
-        </activity>
-        <activity android:name=".Activities.OtherActivities.ModeDayOrNightActivity">
+        <activity android:name=".Activities.SettingsActivities.EditProfileActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".Activities.MainActivity"/>
+                    android:value=".Activities.BaseActivity"/>
+        </activity>
+        <activity android:name=".Activities.OtherActivities.ToolbarActivity">
+        </activity>
+        <activity android:name=".Activities.SettingsActivities.ModeDayOrNightActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".Activities.BaseActivity"/>
         </activity>
         <activity android:name=".Activities.NewUser.NewUserActivity">
         </activity>
@@ -37,7 +42,7 @@
         </activity>
         <activity android:name=".Activities.Login.LoginActivity">
         </activity>
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.BaseActivity">
         </activity>
     </application>
 
