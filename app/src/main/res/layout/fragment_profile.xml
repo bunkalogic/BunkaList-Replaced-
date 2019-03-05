@@ -1,14 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".Fragments.ProfileFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                tools:context=".Fragments.ProfileFragment">
 
-    <TextView
-            android:layout_width="165dp"
-            android:layout_height="63dp"
-            android:textSize="40sp"
-            android:text="Profile"/>
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:background="@color/colorPrimary"/>
 
-</FrameLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_marginLeft="20dp"
+                  android:layout_marginRight="20dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+            <ImageView
+                    android:id="@+id/userImageProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:elevation="1dp"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="85dp"
+                        app:contentPaddingTop="15dp"
+                        app:contentPaddingRight="15dp"
+                        app:contentPaddingLeft="15dp"
+                        app:contentPaddingBottom="15dp"
+                        app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="2"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:id="@+id/userNameProfile"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="25sp"
+                                android:layout_marginTop="60dp"
+                                android:layout_gravity="center_horizontal"/>
+
+                        <android.support.constraint.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="80dp">
+
+                            <TextView
+                                    android:id="@+id/numberMovie"
+                                    android:text="Movies views: ???"
+                                    android:textStyle="italic|bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" android:layout_marginEnd="32dp"
+                                    app:layout_constraintEnd_toStartOf="@+id/numberManga"
+                                    android:layout_marginBottom="8dp"
+                                    app:layout_constraintBottom_toTopOf="@+id/numberSeries"
+                                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+                                    app:layout_constraintHorizontal_bias="0.0"/>
+
+                            <TextView
+                                    android:id="@+id/numberSeries"
+                                    android:text="Series views: ???"
+                                    android:textStyle="italic|bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toStartOf="@+id/numberAnime"
+                                    android:layout_marginEnd="64dp" android:layout_marginBottom="16dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
+                                    app:layout_constraintHorizontal_bias="1.0"/>
+
+                            <TextView
+                                    android:id="@+id/numberAnime"
+                                    android:text="Anime views: ???"
+                                    android:textStyle="italic|bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_marginTop="8dp"
+                                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintVertical_bias="0.822" android:layout_marginEnd="32dp"/>
+                            <TextView
+                                    android:id="@+id/numberManga"
+                                    android:text="Manga reads: ???"
+                                    android:textStyle="italic|bold"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                                    android:layout_marginEnd="32dp"
+                                    android:layout_marginTop="8dp"
+                                    app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+                                    app:layout_constraintBottom_toTopOf="@+id/numberAnime"
+                                    android:layout_marginStart="8dp"
+                                    app:layout_constraintStart_toStartOf="@+id/numberAnime"/>
+
+
+                        </android.support.constraint.ConstraintLayout>
+
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:weightSum="2"
+                                      android:layout_marginTop="20dp"
+                                      android:orientation="horizontal">
+
+                            <LinearLayout
+                                    android:layout_width="84dp"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_gravity="center_horizontal">
+
+                                <TextView android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_gravity="center_horizontal"
+                                          android:text="Follows: ???"
+                                          android:textSize="16sp"
+                                          android:textStyle="bold"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                    android:layout_width="84dp"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_gravity="center_horizontal">
+
+                                <TextView android:layout_width="wrap_content"
+                                          android:layout_height="wrap_content"
+                                          android:layout_gravity="center_horizontal"
+                                          android:text="Followers: ???"
+                                          android:textSize="16sp"
+                                          android:textStyle="bold"/>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

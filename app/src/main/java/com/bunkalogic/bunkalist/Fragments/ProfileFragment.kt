@@ -6,8 +6,13 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.bunkalogic.bunkalist.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 /**
  *  Created by @author Naim Dridi on 25/02/19
@@ -16,10 +21,41 @@ import com.bunkalogic.bunkalist.R
 
 class ProfileFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private lateinit var _view: View
+
+    private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private lateinit var currentUser: FirebaseUser
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        _view = inflater.inflate(R.layout.fragment_profile, container, false)
+        setUpCurrentUser()
+        setUpCurrentUserUI()
+
+        return _view
+    }
+
+    // Initializing the currentUser
+    private fun setUpCurrentUser(){
+        currentUser = mAuth.currentUser!!
+    }
+
+    private fun setUpCurrentUserUI(){
+
+        _view.userNameProfile.text = currentUser.displayName
+
+        //val imageProfile = currentUser.photoUrl
+
+
+        Glide.with(this)
+            .load(R.drawable.imagepro)
+            .apply(RequestOptions.circleCropTransform()
+                .override(150, 150))
+            .into(_view.userImageProfile)
+
+
+
+
     }
 
 
