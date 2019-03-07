@@ -200,18 +200,23 @@
                                                                   android:layout_height="wrap_content"
                                                                   android:id="@+id/guideline"
                                                                   android:orientation="vertical"
-                                                                  app:layout_constraintGuide_percent="0.5013624"/>
+                                                                  app:layout_constraintGuide_percent="0.50"/>
                             <TextView
                                     android:text="@string/name_view_movie"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
                                     android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-                                    android:layout_marginStart="8dp" android:layout_marginTop="32dp"
+                                    android:layout_marginStart="8dp" android:layout_marginTop="50dp"
                                     app:layout_constraintTop_toTopOf="parent" android:textStyle="bold|italic"
-                                    android:textAllCaps="true" android:textAlignment="center"
                                     android:textColor="@color/colorAccent" android:textSize="16sp"
-                                    android:background="@drawable/edittext_rounded" android:padding="4dp"
-                                    android:id="@+id/textView6"/>
+                                    android:padding="4dp"
+                                    android:id="@+id/textView6" app:layout_constraintHorizontal_bias="0.0"/>
+                            <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0.7dp"
+                                    android:background="@color/colorSecondaryText"
+                                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
                             <Button
                                     android:text="@string/btn_list_all_movies"
                                     android:layout_width="0dp"
@@ -223,7 +228,9 @@
                                     app:layout_constraintEnd_toStartOf="@+id/guideline" android:layout_marginEnd="8dp"
                                     android:padding="2dp" android:layout_marginTop="8dp"
                                     android:layout_marginBottom="8dp"
-                                    app:layout_constraintBottom_toTopOf="@+id/guideline2" android:textStyle="italic"/>
+                                    app:layout_constraintBottom_toTopOf="@+id/guideline2" android:textStyle="italic"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                            />
                             <Button
                                     android:text="@string/btn_top_movie"
                                     android:layout_width="0dp"
@@ -241,23 +248,29 @@
                             <android.support.constraint.Guideline android:layout_width="wrap_content"
                                                                   android:layout_height="wrap_content"
                                                                   android:id="@+id/guideline2"
-                                                                  app:layout_constraintGuide_begin="134dp"
+                                                                  app:layout_constraintGuide_begin="150dp"
                                                                   android:orientation="horizontal"/>
                             <TextView
                                     android:text="@string/name_view_series"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:textStyle="bold|italic"
-                                    android:textAllCaps="true" android:textAlignment="center"
                                     android:textColor="@color/colorAccent" android:textSize="16sp"
-                                    android:background="@drawable/edittext_rounded" android:padding="4dp"
+                                    android:padding="4dp"
                                     android:id="@+id/textViewNameSeries"
                                     android:layout_marginEnd="8dp"
                                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                                     app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
                                     app:layout_constraintTop_toTopOf="@+id/guideline2"
-                                    app:layout_constraintHorizontal_bias="0.0"
-                            />
+                                    app:layout_constraintHorizontal_bias="0.0"/>
+
+                            <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0.7dp"
+                                    android:background="@color/colorSecondaryText"
+                                    app:layout_constraintTop_toBottomOf="@+id/textViewNameSeries"
+                                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
                             <Button
                                     android:text="@string/btn_list_all_series"
                                     android:layout_width="0dp"
@@ -269,9 +282,11 @@
                                     app:layout_constraintEnd_toStartOf="@+id/guideline" android:layout_marginEnd="8dp"
                                     android:textStyle="italic"
                                     android:background="@drawable/button_rounded_transparent_color"
-                                    android:padding="2dp" app:layout_constraintHorizontal_bias="1.0"
+                                    android:padding="2dp"
                                     android:layout_marginBottom="8dp"
-                                    app:layout_constraintBottom_toTopOf="@+id/guideline3"/>
+                                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintVertical_bias="0.062"/>
                             <Button
                                     android:text="@string/btn_top_series"
                                     android:layout_width="0dp"
@@ -284,14 +299,16 @@
                                     android:layout_marginStart="8dp"
                                     android:textStyle="italic"
                                     android:background="@drawable/button_rounded_transparent_color"
-                                    android:padding="2dp" app:layout_constraintHorizontal_bias="0.0"
+                                    android:padding="2dp"
                                     android:layout_marginBottom="8dp"
-                                    app:layout_constraintBottom_toTopOf="@+id/guideline3"/>
+                                    app:layout_constraintBottom_toTopOf="@+id/guideline3"
+                                    app:layout_constraintHorizontal_bias="0.0"
+                                    app:layout_constraintVertical_bias="0.062"/>
 
                             <android.support.constraint.Guideline android:layout_width="wrap_content"
                                                                   android:layout_height="wrap_content"
                                                                   android:id="@+id/guideline3"
-                                                                  app:layout_constraintGuide_begin="252dp"
+                                                                  app:layout_constraintGuide_begin="250dp"
                                                                   android:orientation="horizontal"/>
 
                             <TextView
@@ -299,16 +316,21 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:textStyle="bold|italic"
-                                    android:textAllCaps="true" android:textAlignment="center"
                                     android:textColor="@color/colorAccent" android:textSize="16sp"
-                                    android:background="@drawable/edittext_rounded" android:padding="4dp"
+                                    android:padding="4dp"
                                     android:id="@+id/textViewNameAnime"
                                     android:layout_marginTop="8dp"
                                     app:layout_constraintTop_toTopOf="@+id/guideline3" android:layout_marginEnd="8dp"
                                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.0"
-                            />
+                                    app:layout_constraintHorizontal_bias="0.0"/>
+
+                            <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0.7dp"
+                                    android:background="@color/colorSecondaryText"
+                                    app:layout_constraintTop_toBottomOf="@+id/textViewNameAnime"
+                                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 
                             <Button
                                     android:text="@string/btn_list_all_anime"
@@ -341,9 +363,8 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:textStyle="bold|italic"
-                                    android:textAllCaps="true" android:textAlignment="center"
                                     android:textColor="@color/colorAccent" android:textSize="16sp"
-                                    android:background="@drawable/edittext_rounded" android:padding="4dp"
+                                    android:padding="4dp"
                                     android:id="@+id/textViewNameManga"
                                     android:layout_marginEnd="8dp"
                                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
@@ -352,10 +373,18 @@
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintHorizontal_bias="0.0"
                                     app:layout_constraintVertical_bias="0.0"/>
+
+                            <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="0.7dp"
+                                    android:background="@color/colorSecondaryText"
+                                    app:layout_constraintTop_toBottomOf="@+id/textViewNameManga"
+                                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+
                             <android.support.constraint.Guideline android:layout_width="wrap_content"
                                                                   android:layout_height="wrap_content"
                                                                   android:id="@+id/guideline4"
-                                                                  app:layout_constraintGuide_begin="359dp"
+                                                                  app:layout_constraintGuide_begin="350dp"
                                                                   android:orientation="horizontal"/>
                             <Button
                                     android:text="@string/btn_list_all_manga"
