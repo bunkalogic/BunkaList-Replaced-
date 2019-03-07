@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonApplyChanges" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
+                android:background="@drawable/button_rounded_transparent_color"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
                 android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_Select_Mode"
                 android:text="@string/edit_profile" app:layout_constraintHorizontal_bias="0.0"/>
@@ -75,6 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="51dp"
                 android:id="@+id/buttonMode"
+                android:background="@drawable/button_rounded_transparent_color"
                 android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_About_the_App"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
@@ -124,6 +126,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/buttonSignOut"
+                android:background="@drawable/button_rounded_transparent_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintStart_toStartOf="parent"

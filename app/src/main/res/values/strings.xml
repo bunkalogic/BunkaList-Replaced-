@@ -42,7 +42,7 @@
     <string name="btn_nav_settings">Settings</string>
 
 
-    <!-- ProfileFragments -->
+    <!-- SettingsFragments -->
     <string name="edit_profile">Edit your Profile</string>
     <string name="apply_changes">Apply the changes</string>
     <string name="mode_light_dark">Select Mode Day/Night</string>
@@ -53,6 +53,21 @@
     <string name="changed_mode_dark">Mode: Dark</string>
     <string name="changed_mode_custom">Mode: Light/Dark</string>
     <string name="sign_out">Sign Out</string>
+
+
+    <!-- ProfileFragments -->
+    <string name="name_view_movie">List User Movie</string>
+    <string name="btn_top_movie">Your Top Movies</string>
+    <string name="btn_list_all_movies">Your List Movies</string>
+    <string name="name_view_series">List User Series </string>
+    <string name="btn_top_series">Your Top Series</string>
+    <string name="btn_list_all_series">Your List Series</string>
+    <string name="name_view_anime">List User Anime</string>
+    <string name="btn_top_anime">Your Top Anime</string>
+    <string name="btn_list_all_anime">Your List Anime</string>
+    <string name="name_view_manga">List User Manga</string>
+    <string name="btn_top_manga">Your Top Manga</string>
+    <string name="btn_list_all_manga">Your List Manga</string>
 
 
 </resources>
