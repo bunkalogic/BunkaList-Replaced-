@@ -9,6 +9,7 @@ import com.bunkalogic.bunkalist.Others.isValidEmail
 import com.bunkalogic.bunkalist.Others.isValidPassword
 import com.bunkalogic.bunkalist.Others.validate
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -62,7 +63,8 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     // This function checks if the user has a profile picture, there by determining if it is a new user
     private fun isNewUser(){
         val username = mAuth.currentUser!!.displayName
-
+        val userId = mAuth.currentUser!!.uid
+        preferences.userId = userId
         if (username == null){
             startActivity(intentFor<NewUserActivity>().newTask().clearTask())
             toast(R.string.welcome_new_user)

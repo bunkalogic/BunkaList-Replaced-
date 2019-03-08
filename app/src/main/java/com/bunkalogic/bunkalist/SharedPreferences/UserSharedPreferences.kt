@@ -10,22 +10,10 @@ class UserSharedPreferences(context: Context){
 
     private val prefsUser = context.getSharedPreferences(fileUser, Context.MODE_PRIVATE)
 
+    var userId: String?
+    get() = prefsUser.getString("userId", "")
+    set(value) = prefsUser.edit().putString("userId",value).apply()
 
-
-    var userMode: Boolean = prefsUser.getBoolean("switchKey", false)
-
-
-
-
-    //fun editUserMode(mode: Boolean){
-    //    userMode = mode
-    //    prefsUser.edit().commit()
-    //
-    //}
-
-    var switchState: Boolean
-    get() = prefsUser.getBoolean("service_status", false)
-    set(value) = prefsUser.edit().putBoolean("service_status", value).apply()
 
     var mode: Int
         get() = prefsUser.getInt("day", 0)

@@ -64,7 +64,9 @@ class EditProfileActivity : AppCompatActivity() {
             val imageProfile = imageViewProfile.image.toString()
 
 
-            if (username.isNotEmpty() && imageProfile.isNotEmpty()){
+            if (username.isNotEmpty() || imageProfile.isNotEmpty()){
+                preferences.imageProfilePath
+                preferences.editCurrentUser()
                 saveProfileNameAndImageProfile(username, imageProfile)
                 toast(R.string.add_correct_username_and_image_profile)
             }
@@ -131,7 +133,6 @@ class EditProfileActivity : AppCompatActivity() {
                     imageViewProfile.setImageURI(selectImage)
                     val path=  selectImage.path
                     preferences.imageProfilePath = path
-                    preferences.editCurrentUser()
                 }
             }
         }

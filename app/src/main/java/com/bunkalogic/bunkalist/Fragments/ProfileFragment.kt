@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -44,14 +45,16 @@ class ProfileFragment : Fragment() {
 
         _view.userNameProfile.text = currentUser.displayName
 
-        //val imageProfile = currentUser.photoUrl
+
+        preferences.imageProfilePath?.let {
+            Glide.with(this)
+                .load(preferences.imageProfilePath)
+                .apply(RequestOptions.circleCropTransform()
+                    .override(150, 150))
+                .into(_view.userImageProfile)
+        }
 
 
-        Glide.with(this)
-            .load(R.drawable.imagepro)
-            .apply(RequestOptions.circleCropTransform()
-                .override(150, 150))
-            .into(_view.userImageProfile)
 
 
 
