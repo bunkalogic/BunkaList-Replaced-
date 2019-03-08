@@ -52,12 +52,6 @@ class ProfileFragment : Fragment() {
                     .override(150, 150))
                 .into(_view.userImageProfile)
 
-
-
-
-
-
-
     }
 
 

@@ -36,7 +36,7 @@
     <!-- Button Navigation Menu -->
 
     <string name="btn_nav_timeline">Timeline</string>
-    <string name="btn_nav_chat">Chat</string>
+    <string name="btn_nav_top">Tops and Review</string>
     <string name="btn_nav_search">Search</string>
     <string name="btn_nav_profile">Profile</string>
     <string name="btn_nav_settings">Settings</string>

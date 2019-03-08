@@ -9,10 +9,10 @@
         app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/bottom_nav_chat"
+            android:id="@+id/bottom_nav_top_and_review"
             android:enabled="true"
-            android:icon="@drawable/ic_nav_chat"
-            android:title="@string/btn_nav_chat"
+            android:icon="@drawable/ic_nav_top"
+            android:title="@string/btn_nav_top"
             app:showAsAction="ifRoom"/>
 
     <item

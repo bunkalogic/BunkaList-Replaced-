@@ -35,7 +35,7 @@ class BaseActivity : AppCompatActivity() {
     private fun getPagerAdapter(): PagerAdapter{
         val adapter = PagerAdapter(supportFragmentManager)
         adapter.addFragment(TimeLineFragment())
-        adapter.addFragment(ChatFragment())
+        adapter.addFragment(TopsAndReviewFragment())
         adapter.addFragment(SearchFragment())
         adapter.addFragment(ProfileFragment())
         adapter.addFragment(SettingsFragment())
@@ -78,7 +78,7 @@ class BaseActivity : AppCompatActivity() {
                     viewPager.currentItem = 0; true
                 }
 
-                R.id.bottom_nav_chat -> {
+                R.id.bottom_nav_top_and_review -> {
                     viewPager.currentItem = 1; true
                 }
 

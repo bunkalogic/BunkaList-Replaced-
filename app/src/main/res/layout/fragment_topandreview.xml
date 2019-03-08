@@ -4,7 +4,7 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".Fragments.ChatFragment">
+             tools:context=".Fragments.TopsAndReviewFragment">
 
     <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerChat"
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_fab_new_chat"
+            android:src="@drawable/ic_fab_new_timeline"
             app:rippleColor="@color/colorAccentLight"
             android:focusable="true"
             android:clickable="true"/>

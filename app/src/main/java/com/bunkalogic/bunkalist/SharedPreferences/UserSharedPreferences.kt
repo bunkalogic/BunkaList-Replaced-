@@ -1,7 +1,6 @@
 package com.bunkalogic.bunkalist.SharedPreferences
 
 import android.content.Context
-import android.content.SharedPreferences
 
 
 class UserSharedPreferences(context: Context){
