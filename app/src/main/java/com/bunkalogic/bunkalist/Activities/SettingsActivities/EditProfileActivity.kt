@@ -30,8 +30,6 @@ class EditProfileActivity : AppCompatActivity() {
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
 
-    private lateinit var imageUser: Uri
-
     private val requestImageProfile = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {

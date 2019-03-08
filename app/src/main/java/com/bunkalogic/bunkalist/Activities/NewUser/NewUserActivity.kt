@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.BaseActivity
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -48,32 +49,11 @@ class NewUserActivity : AppCompatActivity() {
         currentUser = mAuth.currentUser!!
     }
 
-    //private fun setUpUserDB(){
-    //    userDBRef = store.collection("users")
-    //}
 
-    //private fun saveNewUsernameAndImageProfile(user: UserProfile){
-    //    val newUserProfile = HashMap<String, Any>()
-    //    newUserProfile["userId"] = user.userId
-    //    newUserProfile["ProfileImgURL"] = user.profileImgURL
-    //
-    //    userDBRef.add(newUserProfile).addOnCompleteListener {
-    //        this.toast(R.string.add_correct_username_and_image_profile)
-    //    }.addOnFailureListener {
-    //        this.toast(R.string.error_new_user)
-    //    }
-    //
-    //
-    //
-    //}
-
-
-
-    // TODO: Changing the username and profile picture of the currentUser, the image is not saved
-   private fun saveProfileNameAndImageProfile(userName: String, image: String){
+   private fun saveProfileNameAndImageProfile(userName: String, image: Uri){
        val userProfile = UserProfileChangeRequest.Builder()
            .setDisplayName(userName)
-           .setPhotoUri(Uri.parse(image))
+           .setPhotoUri(image)
            .build()
 
        currentUser.updateProfile(userProfile).addOnCompleteListener(this){task ->
@@ -104,13 +84,17 @@ class NewUserActivity : AppCompatActivity() {
 
         buttonGoTo.setOnClickListener {
             val username = editTextUserName.text.toString()
-            val imageProfile = imageButtonProfile.image.toString()
+            val imageUser: Uri = Uri.EMPTY
+            val imageProfile = imageUser
+            imageButtonProfile.setImageURI(imageUser)
 
 
 
-            if (username.isEmpty() && imageProfile.isEmpty()){
+            if (username.isEmpty()){
                 toast(R.string.error_new_user)
             }else{
+                preferences.imageProfilePath
+                preferences.editCurrentUser()
                 saveProfileNameAndImageProfile(username, imageProfile)
                 startActivity(intentFor<BaseActivity>().clearTask().newTask())
             }
@@ -156,6 +140,8 @@ class NewUserActivity : AppCompatActivity() {
                 requestImageProfile ->{
                      val selectImage = data!!.data
                     imageButtonProfile.setImageURI(selectImage)
+                    val path=  selectImage!!.toString()
+                    preferences.imageProfilePath = path
                 }
             }
         }
