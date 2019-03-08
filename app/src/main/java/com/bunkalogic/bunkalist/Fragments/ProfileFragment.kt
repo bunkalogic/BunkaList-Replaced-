@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Fragments
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -45,14 +46,12 @@ class ProfileFragment : Fragment() {
 
         _view.userNameProfile.text = currentUser.displayName
 
-
-        preferences.imageProfilePath?.let {
             Glide.with(this)
                 .load(preferences.imageProfilePath)
                 .apply(RequestOptions.circleCropTransform()
                     .override(150, 150))
                 .into(_view.userImageProfile)
-        }
+
 
 
 

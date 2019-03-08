@@ -30,6 +30,8 @@ class EditProfileActivity : AppCompatActivity() {
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
 
+    private lateinit var imageUser: Uri
+
     private val requestImageProfile = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,10 +63,12 @@ class EditProfileActivity : AppCompatActivity() {
 
         buttonApplyChanges.setOnClickListener {
             val username = edit_Text_Username.text.toString()
-            val imageProfile = imageViewProfile.image.toString()
+            val imageUser: Uri = Uri.EMPTY
+            val imageProfile = imageUser
+            imageViewProfile.setImageURI(imageUser)
 
 
-            if (username.isNotEmpty() || imageProfile.isNotEmpty()){
+            if (username.isNotEmpty()){
                 preferences.imageProfilePath
                 preferences.editCurrentUser()
                 saveProfileNameAndImageProfile(username, imageProfile)
@@ -74,10 +78,10 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveProfileNameAndImageProfile(userName: String, image: String){
+    private fun saveProfileNameAndImageProfile(userName: String, image: Uri){
         val userProfile = UserProfileChangeRequest.Builder()
             .setDisplayName(userName)
-            .setPhotoUri(Uri.parse(image))
+            .setPhotoUri(image)
             .build()
 
         currentUser.updateProfile(userProfile).addOnCompleteListener(this){task ->
@@ -131,7 +135,7 @@ class EditProfileActivity : AppCompatActivity() {
                 requestImageProfile -> {
                     val selectImage = data!!.data
                     imageViewProfile.setImageURI(selectImage)
-                    val path=  selectImage.path
+                    val path=  selectImage!!.toString()
                     preferences.imageProfilePath = path
                 }
             }
