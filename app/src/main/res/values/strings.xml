@@ -69,5 +69,9 @@
     <string name="btn_top_manga">Your Top Manga</string>
     <string name="btn_list_all_manga">Your List Manga</string>
 
+    <!-- ItemTimeLine -->
+    <string name="item_timeline_chapter">Ch: </string>
+    <string name="item_timeline_season">Season: </string>
+
 
 </resources>
