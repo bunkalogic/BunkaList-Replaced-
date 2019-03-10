@@ -72,6 +72,7 @@
     <!-- ItemTimeLine -->
     <string name="item_timeline_chapter">Ch: </string>
     <string name="item_timeline_season">Season: </string>
+    <string name="checkbox_is_spoiler">Is Spoiler</string>
 
 
 </resources>

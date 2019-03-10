@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent">
+
+    <MultiAutoCompleteTextView
+            android:layout_width="203dp"
+            android:layout_height="28dp"
+            android:id="@+id/multiAutoCompleteTextViewOeuvre"
+            android:background="@drawable/edittext_rounded"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginTop="28dp" app:layout_constraintTop_toTopOf="parent"
+            android:textStyle="italic" android:hint="Name of the movie, series, anime" android:textSize="14sp"
+            android:layout_marginEnd="4dp" app:layout_constraintEnd_toStartOf="@+id/checkBoxIsSpoiler"/>
+    <EditText
+            android:layout_width="114dp"
+            android:layout_height="35dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextSelectSeason"
+            android:background="@drawable/edittext_rounded"
+            android:layout_marginStart="64dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/multiAutoCompleteTextViewOeuvre" android:textStyle="italic"
+            android:hint="Season"/>
+    <EditText
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:background="@drawable/edittext_rounded"
+            android:hint="Chapter" android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/multiAutoCompleteTextViewOeuvre"
+            app:layout_constraintStart_toEndOf="@+id/editTextSelectSeason" android:layout_marginStart="4dp"
+            app:layout_constraintHorizontal_bias="0.241"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editTextContent"
+            android:background="@drawable/edittext_rounded"
+            app:layout_constraintStart_toStartOf="@+id/editTextSelectSeason" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/editText2" android:layout_marginEnd="8dp"
+            android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/editTextSelectSeason"
+            android:hint="Discuss what you liked about the chapter" android:padding="4dp"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBoxIsSpoiler" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="56dp"
+            android:layout_marginTop="28dp" app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/checkbox_is_spoiler" android:textStyle="italic"/>
+    <Button
+            android:text="Send your Opinion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSendTimeline" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/editTextContent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/button_rounded_transparent_color"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.406"/>
+
+</android.support.constraint.ConstraintLayout>
