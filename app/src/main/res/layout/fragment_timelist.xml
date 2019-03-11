@@ -18,7 +18,7 @@
            android:layout_height="wrap_content"
            android:layout_margin="12dp"
            android:layout_gravity="end|bottom"
-           android:src="@drawable/ic_fab_new_chat"
+           app:srcCompat="@drawable/ic_fab_new_chat"
            app:rippleColor="@color/colorAccentLight"
            android:focusable="true"
            android:clickable="true"/>

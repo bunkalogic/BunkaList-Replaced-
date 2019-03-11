@@ -4,6 +4,8 @@ import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.EditText
 import java.util.regex.Pattern
 
@@ -41,3 +43,5 @@ fun Activity.isValidEmail(email: String): Boolean{
     val pattern = Patterns.EMAIL_ADDRESS
     return pattern.matcher(email).matches()
 }
+
+fun ViewGroup.inflateM(layoutId: Int) = LayoutInflater.from(context).inflate(layoutId, this, false)!!
