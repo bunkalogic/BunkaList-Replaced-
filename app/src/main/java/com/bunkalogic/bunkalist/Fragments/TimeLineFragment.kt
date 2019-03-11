@@ -56,7 +56,7 @@ class TimeLineFragment : Fragment() {
         setUpFab()
 
         subscribeToTimelineMessage()
-        suscribeToNewMessageTimeLine()
+        subscribeToNewMessageTimeLine()
 
         return _view
     }
@@ -124,7 +124,7 @@ class TimeLineFragment : Fragment() {
     }
 
     // Using RxAndroid to make the minimum calls to the database
-    private fun suscribeToNewMessageTimeLine(){
+    private fun subscribeToNewMessageTimeLine(){
         tlmessageBusListener = RxBus.listen(NewTimeLineEvent::class.java).subscribe {
             saveTimelistMessage(it.message)
         }
