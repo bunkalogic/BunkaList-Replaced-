@@ -76,10 +76,6 @@ class NewUserActivity : AppCompatActivity() {
 
         imageButtonProfile.setOnClickListener {
             checkPermissionStorage()
-            val image = imageButtonProfile.image
-            Glide.with(this).load(image)
-                .apply(RequestOptions.circleCropTransform().override(150, 150))
-                .into(this.imageButtonProfile)
         }
 
         buttonGoTo.setOnClickListener {
@@ -90,14 +86,15 @@ class NewUserActivity : AppCompatActivity() {
 
 
 
-            if (username.isEmpty()){
-                toast(R.string.error_new_user)
-            }else{
+            if (username.isNotEmpty()){
                 preferences.imageProfilePath
                 preferences.editCurrentUser()
                 saveProfileNameAndImageProfile(username, imageProfile)
                 startActivity(intentFor<BaseActivity>().clearTask().newTask())
+            }else{
+                toast(R.string.error_new_user)
             }
+
         }
     }
 

@@ -4,7 +4,7 @@
     <item android:drawable="@color/colorPrimary"/>
 
     <item>
-        <bitmap android:src="@drawable/ic_splash_screen"
+        <bitmap android:src="@drawable/ic_launcher_splash"
         android:gravity="center"/>
 
     </item>
