@@ -23,7 +23,6 @@
 
             <RadioButton
                     android:text="@string/changed_mode_light"
-                    android:textColor="@color/colorPrimaryText"
                     android:background="@drawable/button_rounded_transparent_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonLight" android:layout_weight="1"
@@ -31,7 +30,6 @@
                     app:layout_constraintTop_toTopOf="parent"/>
             <RadioButton
                     android:text="@string/changed_mode_dark"
-                    android:textColor="@color/colorPrimaryText"
                     android:background="@drawable/button_rounded_transparent_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonDark" android:layout_weight="1"
@@ -40,7 +38,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/radioButtonLight"/>
             <RadioButton
                     android:text="@string/changed_mode_custom"
-                    android:textColor="@color/colorPrimaryText"
                     android:background="@drawable/button_rounded_transparent_color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonCustom" android:layout_weight="1"

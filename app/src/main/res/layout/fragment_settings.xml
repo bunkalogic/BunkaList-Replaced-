@@ -74,8 +74,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_Select_Mode"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
         <ImageButton
-                android:src="@drawable/ic_day_and_night"
-                android:tint="@color/colorPrimaryText"
+                app:srcCompat="@drawable/ic_day_and_night"
                 android:layout_width="0dp"
                 android:layout_height="51dp"
                 android:id="@+id/buttonMode"

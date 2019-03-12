@@ -8,11 +8,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Others.inflateM
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.TimelineMessage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_timeline_item.view.*
 import java.text.SimpleDateFormat
 
 class TimelineMessageAdapter(private val items: List<TimelineMessage>): RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
 
+    private lateinit var currentUser: FirebaseUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflateM(R.layout.fragment_timeline_item))
 
@@ -26,10 +29,12 @@ class TimelineMessageAdapter(private val items: List<TimelineMessage>): Recycler
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
       fun bind(tlmessage: TimelineMessage){
           itemView.textViewUsername.text = tlmessage.username
-          itemView.textViewDate.text = SimpleDateFormat("h ,EEE, MMM, yy").format(tlmessage.sentAt)
+          itemView.textViewDate.text = SimpleDateFormat("h:mm -EEE/MMM/yy").format(tlmessage.sentAt)
           itemView.textViewOeuvreName.text = tlmessage.oeuvreName
-          itemView.textViewSeason.text = tlmessage.numSeason.toString()
-          itemView.textViewCapsNumbers.text = tlmessage.numChapter.toString()
+          val season = tlmessage.numSeason
+          itemView.textViewSeason.text = "Season: $season"
+          val episode = tlmessage.numChapter
+          itemView.textViewCapsNumbers.text = "Episode: $episode"
           itemView.textViewContent.text = tlmessage.content
           //itemView.textViewNumberPositive.text = tlmessage.numPositive.toString()
           //itemView.textViewNumberNegative.text = tlmessage.numNegative.toString()
