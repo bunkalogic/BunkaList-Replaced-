@@ -61,13 +61,15 @@ class EditProfileActivity : AppCompatActivity() {
 
         buttonApplyChanges.setOnClickListener {
             val username = edit_Text_Username.text.toString()
+            preferences.userName = username
             val imageUser: Uri = Uri.EMPTY
             val imageProfile = imageUser
             imageViewProfile.setImageURI(imageUser)
 
 
             if (username.isNotEmpty()){
-                preferences.imageProfilePath
+                //TODO: To be able to take the route of the image and be able to reload it
+                preferences.imageProfilePath = currentUser.photoUrl.toString()
                 preferences.editCurrentUser()
                 saveProfileNameAndImageProfile(username, imageProfile)
                 toast(R.string.add_correct_username_and_image_profile)

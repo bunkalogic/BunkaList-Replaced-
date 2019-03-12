@@ -12,6 +12,7 @@ import com.bunkalogic.bunkalist.Adapters.TimelineMessageAdapter
 import com.bunkalogic.bunkalist.Dialog.TimeLineDialog
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.NewTimeLineEvent
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.fragment_timeline_item.*
+import kotlinx.android.synthetic.main.fragment_timeline_item.view.*
 import kotlinx.android.synthetic.main.fragment_timelist.view.*
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
@@ -84,10 +87,14 @@ class TimeLineFragment : Fragment() {
     //instantiating the currentUser
     private fun setUpCurrentUser(){
         currentUser = mAuth.currentUser!!
+        preferences.userName = currentUser.displayName
     }
 
     private fun setUpFab(){
-        _view.fabTimeline.setOnClickListener { TimeLineDialog().show(fragmentManager, "") }
+
+        _view.fabTimeline.setOnClickListener {
+            TimeLineDialog().show(fragmentManager, "")
+        }
     }
 
     // implementing the adapter in the recyclerView

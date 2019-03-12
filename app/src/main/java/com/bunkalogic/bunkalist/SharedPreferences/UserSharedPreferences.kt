@@ -13,6 +13,10 @@ class UserSharedPreferences(context: Context){
     get() = prefsUser.getString("userId", "")
     set(value) = prefsUser.edit().putString("userId",value).apply()
 
+    var userName: String?
+        get() = prefsUser.getString("userName", "")
+        set(value) = prefsUser.edit().putString("userName",value).apply()
+
 
     var mode: Int
         get() = prefsUser.getInt("day", 0)

@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat
 
 class TimelineMessageAdapter(private val items: List<TimelineMessage>): RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
 
-    private lateinit var currentUser: FirebaseUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(parent.inflateM(R.layout.fragment_timeline_item))
 
