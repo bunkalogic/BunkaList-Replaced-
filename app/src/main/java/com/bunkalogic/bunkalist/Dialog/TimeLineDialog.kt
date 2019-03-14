@@ -34,24 +34,27 @@ class TimeLineDialog : DialogFragment(){
         val view = activity!!.layoutInflater.inflate(R.layout.dialog_timeline, null)
 
 
-        return AlertDialog.Builder(context!!)
+        return AlertDialog
+            .Builder(context!!)
             .setTitle(R.string.dialog_timeline)
-            .setView(view).setPositiveButton(getString(R.string.send_opinion)) { _, _ ->
+            .setView(view)
+            .setPositiveButton(getString(R.string.send_opinion)) { _, _ ->
                 // TODO: Pick up the username and add it to the timeline_item
-                val username = currentUser.displayName!!
+
                 val textNameOeuvre = view.multiAutoCompleteTextViewOeuvre.text.toString()
                 val textSeason = view.editTextSelectSeason.text.toString()
                 val textChapter = view.editTextChapter.text.toString()
                 val textContent = view.editTextContent.text.toString()
+
+
+
                 if(textContent.isNotEmpty()){
-                    val userId = currentUser.uid
-                    val imgURL = currentUser.photoUrl?.toString() ?: run { "" }
-                    val tlmessage = TimelineMessage(userId, username, imgURL, Date(), textNameOeuvre, textSeason, textChapter, textContent)
+
+                    val imgURL = currentUser.photoUrl?.toString() ?:run { "" }
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, imgURL, Date(), textNameOeuvre, textSeason, textChapter, textContent)
+
                     RxBus.publish(NewTimeLineEvent(tlmessage))
                 }
-
-
-
             }.setNegativeButton(getString(R.string.dialog_cancel_timeline)){ _, _ ->
                 toast("Pressed Cancel")
             }
