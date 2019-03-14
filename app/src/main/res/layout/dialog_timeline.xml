@@ -14,7 +14,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/textViewUsername"/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewTheusername"/>
     <EditText
             android:layout_width="70dp"
             android:layout_height="35dp"
@@ -63,7 +63,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="18dp"
-            android:id="@+id/textViewUsername"
+            android:id="@+id/textViewTheusername"
             android:textSize="18sp" android:textStyle="bold"
             android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
