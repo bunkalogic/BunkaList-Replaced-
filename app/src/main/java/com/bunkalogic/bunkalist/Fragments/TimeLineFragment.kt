@@ -8,10 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bunkalogic.bunkalist.Adapters.TimelineAdapter
+import com.bunkalogic.bunkalist.Adapters.TimelineMessageAdapter
 import com.bunkalogic.bunkalist.Dialog.TimeLineDialog
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.NewTimeLineEvent
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -21,8 +22,13 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_timeline.view.*
+import kotlinx.android.synthetic.main.fragment_timeline_item.*
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
+
+
+
+
 
 
 /**
@@ -36,7 +42,7 @@ class TimeLineFragment : Fragment() {
 
 
     private val timelineList: ArrayList<TimelineMessage> = ArrayList()
-    private lateinit var adapter: TimelineAdapter
+    private lateinit var adapter: TimelineMessageAdapter
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var currentUser: FirebaseUser
@@ -49,7 +55,7 @@ class TimeLineFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        adapter.startListening()
+        //adapter.startListening()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,17 +79,7 @@ class TimeLineFragment : Fragment() {
 
     // Creating the new instance in the database
     private fun saveTimelistMessage(messagetl: TimelineMessage){
-        val newMessageTimeLine = HashMap<String, Any>()
-        newMessageTimeLine["userId"] = messagetl.userId
-        newMessageTimeLine["user"] = messagetl.username
-        newMessageTimeLine["profileImageURL"] = messagetl.profileImageUrl
-        newMessageTimeLine["sentAt"] = messagetl.sentAt
-        newMessageTimeLine["oeuvreName"] = messagetl.oeuvreName
-        newMessageTimeLine["numSeason"] = messagetl.numSeason
-        newMessageTimeLine["numChapter"] = messagetl.numChapter
-        newMessageTimeLine["content"] = messagetl.content
-
-        timelineDBRef.add(newMessageTimeLine)
+        timelineDBRef.add(messagetl)
             .addOnCompleteListener {
                 toast("Message Added!")
             }
@@ -103,6 +99,18 @@ class TimeLineFragment : Fragment() {
         }
     }
 
+    private fun setUsernameinRecyclerView(){
+        var username : String?
+
+        if (preferences.userId == currentUser.uid){
+
+            username = currentUser.displayName
+            textViewUsername.text = username
+        }
+    }
+
+
+
     // implementing the adapter in the recyclerView
     private fun setUpRecyclerView(){
         val layoutManager = LinearLayoutManager(context)
@@ -113,7 +121,7 @@ class TimeLineFragment : Fragment() {
         val options = FirestoreRecyclerOptions.Builder<TimelineMessage>()
             .setQuery(query, TimelineMessage::class.java)
             .build()
-        adapter = TimelineAdapter(options, currentUser.uid)
+        adapter = TimelineMessageAdapter(timelineList)
 
 
         _view.recyclerTimeline.setHasFixedSize(true)
@@ -121,13 +129,11 @@ class TimeLineFragment : Fragment() {
         _view.recyclerTimeline.itemAnimator = DefaultItemAnimator()
         _view.recyclerTimeline.adapter = adapter
 
-
-
-
     }
 
     private fun subscribeToTimelineMessage(){
         tlmessageSubscription = timelineDBRef
+            .orderBy("sentAt", Query.Direction.DESCENDING)
             .addSnapshotListener(object: java.util.EventListener, EventListener<QuerySnapshot>{
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?){
                     exception?.let {
@@ -156,7 +162,7 @@ class TimeLineFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        adapter.stopListening()
+        //adapter.stopListening()
     }
 
     override fun onDestroyView() {

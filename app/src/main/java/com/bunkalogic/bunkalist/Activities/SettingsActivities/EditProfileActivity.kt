@@ -53,10 +53,6 @@ class EditProfileActivity : AppCompatActivity() {
 
         imageViewProfile.setOnClickListener {
             checkPermissionStorage()
-            val image = imageViewProfile.image
-            Glide.with(this).load(image)
-                .apply(RequestOptions.circleCropTransform().override(150, 150))
-                .into(this.imageViewProfile)
         }
 
         buttonApplyChanges.setOnClickListener {
@@ -134,7 +130,10 @@ class EditProfileActivity : AppCompatActivity() {
             when (requestCode) {
                 requestImageProfile -> {
                     val selectImage = data!!.data
-                    imageViewProfile.setImageURI(selectImage)
+                    Glide.with(this).load(selectImage)
+                        .apply(RequestOptions.circleCropTransform().override(290, 290))
+                        .into(this.imageViewProfile)
+
                     val path=  selectImage!!.toString()
                     preferences.imageProfilePath = path
                 }

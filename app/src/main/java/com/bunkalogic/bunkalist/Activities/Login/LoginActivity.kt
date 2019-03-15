@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
     }
 
-    // This function checks if the user has a profile picture, there by determining if it is a new user
+    // This function checks if the user has a profile username, there by determining if it is a new user
     private fun isNewUser(){
         val username = mAuth.currentUser!!.displayName
         val userId = mAuth.currentUser!!.uid

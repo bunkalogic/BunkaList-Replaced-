@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
             Glide.with(this)
                 .load(preferences.imageProfilePath)
                 .apply(RequestOptions.circleCropTransform()
-                    .override(150, 150))
+                    .override(160, 160))
                 .into(_view.userImageProfile)
 
     }

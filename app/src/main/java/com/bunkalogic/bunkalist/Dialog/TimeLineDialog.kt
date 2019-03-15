@@ -39,17 +39,13 @@ class TimeLineDialog : DialogFragment(){
             .setTitle(R.string.dialog_timeline)
             .setView(view)
             .setPositiveButton(getString(R.string.send_opinion)) { _, _ ->
-                // TODO: Pick up the username and add it to the timeline_item
 
                 val textNameOeuvre = view.multiAutoCompleteTextViewOeuvre.text.toString()
                 val textSeason = view.editTextSelectSeason.text.toString()
                 val textChapter = view.editTextChapter.text.toString()
                 val textContent = view.editTextContent.text.toString()
 
-
-
                 if(textContent.isNotEmpty()){
-
                     val imgURL = currentUser.photoUrl?.toString() ?:run { "" }
                     val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, imgURL, Date(), textNameOeuvre, textSeason, textChapter, textContent)
 
