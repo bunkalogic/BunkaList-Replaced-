@@ -53,10 +53,7 @@ class TimeLineFragment : Fragment() {
     private var tlmessageSubscription: ListenerRegistration? = null
     private lateinit var tlmessageBusListener: Disposable
 
-    override fun onStart() {
-        super.onStart()
-        //adapter.startListening()
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -96,16 +93,6 @@ class TimeLineFragment : Fragment() {
 
         _view.fabTimeline.setOnClickListener {
             TimeLineDialog().show(fragmentManager, "")
-        }
-    }
-
-    private fun setUsernameinRecyclerView(){
-        var username : String?
-
-        if (preferences.userId == currentUser.uid){
-
-            username = currentUser.displayName
-            textViewUsername.text = username
         }
     }
 
@@ -158,11 +145,6 @@ class TimeLineFragment : Fragment() {
         tlmessageBusListener = RxBus.listen(NewTimeLineEvent::class.java).subscribe {
             saveTimelistMessage(it.message)
         }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        //adapter.stopListening()
     }
 
     override fun onDestroyView() {

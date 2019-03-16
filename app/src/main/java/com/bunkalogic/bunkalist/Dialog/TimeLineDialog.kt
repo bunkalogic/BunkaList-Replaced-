@@ -46,8 +46,8 @@ class TimeLineDialog : DialogFragment(){
                 val textContent = view.editTextContent.text.toString()
 
                 if(textContent.isNotEmpty()){
-                    val imgURL = currentUser.photoUrl?.toString() ?:run { "" }
-                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, imgURL, Date(), textNameOeuvre, textSeason, textChapter, textContent)
+
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent)
 
                     RxBus.publish(NewTimeLineEvent(tlmessage))
                 }

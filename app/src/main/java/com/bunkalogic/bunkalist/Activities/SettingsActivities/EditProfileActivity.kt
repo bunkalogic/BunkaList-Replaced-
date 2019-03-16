@@ -3,9 +3,12 @@ package com.bunkalogic.bunkalist.Activities.SettingsActivities
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.BaseActivity
@@ -14,6 +17,8 @@ import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -22,6 +27,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_edit_profile.*
 import org.jetbrains.anko.*
+import java.util.*
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -30,6 +36,11 @@ class EditProfileActivity : AppCompatActivity() {
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
 
+    private val storage: FirebaseStorage by lazy { FirebaseStorage.getInstance() }
+    private val storageRef: StorageReference = storage.reference
+
+
+    private var selectedPhotoUri: Uri? = null
     private val requestImageProfile = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,27 +60,18 @@ class EditProfileActivity : AppCompatActivity() {
         currentUser = mAuth.currentUser!!
     }
 
+
+
     private fun clicksListeners(){
 
         imageViewProfile.setOnClickListener {
-            checkPermissionStorage()
+            checkPermissionStorageLocal()
         }
 
         buttonApplyChanges.setOnClickListener {
-            val username = edit_Text_Username.text.toString()
-            preferences.userName = username
-            val imageUser: Uri = Uri.EMPTY
-            val imageProfile = imageUser
-            imageViewProfile.setImageURI(imageUser)
+            uploadedImageinStorage()
+            toast(R.string.add_correct_username_and_image_profile)
 
-
-            if (username.isNotEmpty()){
-                //TODO: To be able to take the route of the image and be able to reload it
-                preferences.imageProfilePath = currentUser.photoUrl.toString()
-                preferences.editCurrentUser()
-                saveProfileNameAndImageProfile(username, imageProfile)
-                toast(R.string.add_correct_username_and_image_profile)
-            }
 
         }
     }
@@ -91,6 +93,35 @@ class EditProfileActivity : AppCompatActivity() {
 
     }
 
+    // Collect the selected image and upload it to Firebase Storage and Save the image in currentUser.photoUrl
+    private fun uploadedImageinStorage(){
+        if (selectedPhotoUri != null){
+            val filename = UUID.randomUUID().toString()
+           val fbStorageRef = storageRef.child("IMAGES/$filename")
+            fbStorageRef.putFile(selectedPhotoUri!!).addOnSuccessListener {
+
+                toast("Image Profile Uploaded")
+                imageViewProfile.setImageBitmap(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_person_black_24dp))
+
+                fbStorageRef.downloadUrl.addOnSuccessListener {
+                    val username = edit_Text_Username.text.toString()
+                    preferences.userName = username
+                    imageViewProfile.setImageURI(selectedPhotoUri)
+                    Log.d("EditProfileActivity", "Progress: $it")
+                    saveProfileNameAndImageProfile(username, it)
+
+                }
+            }.addOnFailureListener {
+                toast("Failure")
+            }.addOnProgressListener {
+                val progress = 100.0 * it.bytesTransferred / it.totalByteCount
+                Log.d("EditProfileActivity", "Progress: $progress")
+            }
+
+
+        }
+    }
+
 
     // Try the default App of the gallery
     private fun getGallery(){
@@ -101,7 +132,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     // asking for permissions
-    private fun checkPermissionStorage() {
+    private fun checkPermissionStorageLocal() {
         Dexter.withActivity(this)
             .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
             .withListener(object: PermissionListener {
@@ -129,13 +160,11 @@ class EditProfileActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 requestImageProfile -> {
-                    val selectImage = data!!.data
-                    Glide.with(this).load(selectImage)
+                    selectedPhotoUri = data!!.data
+                    Glide.with(this).load(selectedPhotoUri)
                         .apply(RequestOptions.circleCropTransform().override(290, 290))
                         .into(this.imageViewProfile)
 
-                    val path=  selectImage!!.toString()
-                    preferences.imageProfilePath = path
                 }
             }
         }

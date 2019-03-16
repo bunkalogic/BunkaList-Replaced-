@@ -26,7 +26,7 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val tlmessage = TimelineMessageList[position]
-        // falta implementar  que si el numSeason y el numEpisode estan vacios no mostrar nada
+
         holder.username.text = tlmessage.username
         holder.oeuvreName.text = tlmessage.oeuvreName
         holder.sentAt.text = SimpleDateFormat("h:mm -EEE/MMM/yy").format(tlmessage.sentAt)
@@ -36,15 +36,19 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
 
         // Here I check if the numSeason is empty then it does not show anything
         if (holder.numSeason.text.isNotEmpty()){
+
             val season = tlmessage.numSeason
             holder.numSeason.text = "Season: $season"
+
         }else{
             holder.numSeason.text = null
         }
         // Here I check if the numEpisode is empty then it does not show anything
         if (holder.numEpisode.text.isNotEmpty()){
+
             val episode = tlmessage.numEpisode
             holder.numEpisode.text = "Episode: $episode"
+
         }else{
             holder.numEpisode.text = null
         }

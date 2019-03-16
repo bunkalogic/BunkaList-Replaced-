@@ -47,7 +47,7 @@ class ProfileFragment : Fragment() {
         _view.userNameProfile.text = currentUser.displayName
 
             Glide.with(this)
-                .load(preferences.imageProfilePath)
+                .load(currentUser.photoUrl)
                 .apply(RequestOptions.circleCropTransform()
                     .override(160, 160))
                 .into(_view.userImageProfile)
