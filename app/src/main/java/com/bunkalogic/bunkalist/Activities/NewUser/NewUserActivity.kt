@@ -159,6 +159,7 @@ class NewUserActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 requestNewImageProfile -> {
+                    //TODO: The app crasher after choosing an image in the gallery
                     selectedPhotoUri = data!!.data
                     Glide.with(this).load(selectedPhotoUri)
                         .apply(RequestOptions.circleCropTransform().override(290, 290))

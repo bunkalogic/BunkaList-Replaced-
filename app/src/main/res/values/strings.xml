@@ -70,12 +70,17 @@
     <string name="btn_list_all_manga">Your List Manga</string>
 
     <!-- ItemTimeLine -->
-    <string name="item_timeline_chapter">Ch: </string>
+    <string name="item_timeline_chapter">Episode: </string>
     <string name="item_timeline_season">Season: </string>
+
+
+    <!-- ItemTimeLineDialog -->
     <string name="checkbox_is_spoiler">Is Spoiler</string>
     <string name="dialog_timeline">Comment your opinion</string>
     <string name="send_opinion">Send</string>
     <string name="dialog_cancel_timeline">Cancel</string>
-
+    <string name="hint_name_oeuvre">Name of the movie, series, anime and manga</string>
+    <string name="hint_dialog_timeline_season">Season</string>
+    <string name="hint_dialog_timeline_chapter">Episode</string>
 
 </resources>

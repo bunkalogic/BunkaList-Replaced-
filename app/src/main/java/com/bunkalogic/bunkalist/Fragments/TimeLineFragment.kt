@@ -12,7 +12,6 @@ import com.bunkalogic.bunkalist.Adapters.TimelineMessageAdapter
 import com.bunkalogic.bunkalist.Dialog.TimeLineDialog
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.NewTimeLineEvent
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -22,7 +21,6 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_timeline.view.*
-import kotlinx.android.synthetic.main.fragment_timeline_item.*
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 

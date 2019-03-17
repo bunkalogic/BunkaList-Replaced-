@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.TimelineMessage
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 
 class TimelineMessageAdapter(private val TimelineMessageList: MutableList<TimelineMessage>) : RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
@@ -29,7 +32,7 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
 
         holder.username.text = tlmessage.username
         holder.oeuvreName.text = tlmessage.oeuvreName
-        holder.sentAt.text = SimpleDateFormat("h:mm -EEE/MMM/yy").format(tlmessage.sentAt)
+        holder.sentAt.text = SimpleDateFormat("h:mm EEE,MMM").format(tlmessage.sentAt)
         holder.numSeason.text = tlmessage.numSeason
         holder.numEpisode.text = tlmessage.numEpisode
         holder.content.text = tlmessage.content
@@ -69,6 +72,42 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
                 .into(holder.userImage)
 
         }
+        // If you click imagePositive that adds +1
+        holder.imagePositive.setOnClickListener {
+            holder.numPositive.text = "+" + 1
+            if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){
+                val store = FirebaseFirestore.getInstance()
+                var numPositiveRef = store.collection("timelineMessage").document("userId")
+
+                numPositiveRef.update("numPositive", "+1").addOnSuccessListener {
+                    Log.d("TimelineMessageAdapter", "successfully updated!")
+
+                }.addOnFailureListener {
+                    Log.d("TimelineMessageAdapter", "Error updating document")
+                }
+            }else{
+                Log.d("TimelineMessageAdapter", "Error")
+            }
+        }
+        // If you click imageNegative that adds -1
+        holder.imageNegative.setOnClickListener {
+            holder.numNegative.text = "-" + 1
+            if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){
+                val store = FirebaseFirestore.getInstance()
+                var numNegativeRef = store.collection("timelineMessage").document("userId")
+
+                numNegativeRef.update("numNegative", "-1").addOnSuccessListener {
+                    Log.d("TimelineMessageAdapter", "successfully updated negative!")
+
+                }.addOnFailureListener {
+                    Log.d("TimelineMessageAdapter", "Error updating document")
+                }
+            }else{
+                Log.d("TimelineMessageAdapter", "Error")
+            }
+        }
+
+
     }
 
 
@@ -80,6 +119,11 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
         internal var numSeason: TextView
         internal var numEpisode: TextView
         internal var content: TextView
+        internal var numPositive: TextView
+        internal var numNegative: TextView
+        internal var imagePositive: ImageView
+        internal var imageNegative: ImageView
+
 
         init {
             username = view.findViewById(R.id.textViewUsername)
@@ -89,6 +133,10 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
             numSeason = view.findViewById(R.id.textViewSeason)
             numEpisode = view.findViewById(R.id.textViewCapsNumbers)
             content = view.findViewById(R.id.textViewContent)
+            numPositive = view.findViewById(R.id.textViewNumberPositive)
+            numNegative = view.findViewById(R.id.textViewNumberNegative)
+            imagePositive = view.findViewById(R.id.imageViewPositive)
+            imageNegative = view.findViewById(R.id.imageViewNegative)
         }
 
     }
