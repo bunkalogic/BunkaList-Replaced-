@@ -82,5 +82,6 @@
     <string name="hint_name_oeuvre">Name of the movie, series, anime and manga</string>
     <string name="hint_dialog_timeline_season">Season</string>
     <string name="hint_dialog_timeline_chapter">Episode</string>
+    <string name="hint_edit_text_content_dialog_timeline">Comment your opinion of an episode</string>
 
 </resources>

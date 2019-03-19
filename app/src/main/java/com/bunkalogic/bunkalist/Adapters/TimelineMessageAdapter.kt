@@ -72,6 +72,7 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
                 .into(holder.userImage)
 
         }
+        // TODO: get it saved in the database for every click that is
         // If you click imagePositive that adds +1
         holder.imagePositive.setOnClickListener {
             holder.numPositive.text = "+" + 1
@@ -79,7 +80,7 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
                 val store = FirebaseFirestore.getInstance()
                 var numPositiveRef = store.collection("timelineMessage").document("userId")
 
-                numPositiveRef.update("numPositive", "+1").addOnSuccessListener {
+                numPositiveRef.update("numPositive", +1).addOnSuccessListener {
                     Log.d("TimelineMessageAdapter", "successfully updated!")
 
                 }.addOnFailureListener {

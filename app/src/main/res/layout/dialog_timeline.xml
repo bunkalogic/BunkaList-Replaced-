@@ -58,7 +58,7 @@
                 android:maxLength="240"
                 android:id="@+id/editTextContent"
                 android:background="@drawable/edittext_rounded"
-                android:hint="Discuss what you liked about the chapter"/>
+                android:hint="@string/hint_edit_text_content_dialog_timeline"/>
 
     </android.support.design.widget.TextInputLayout>
 
