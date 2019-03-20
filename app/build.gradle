@@ -6,6 +6,11 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.gms.google-services'
 
+def MOVIES_SESION_ID = '"' + sesionIDMovieDatatbase + '"'?: '"ERROR"'
+def MOVIES_REQUEST_API = '"' + movieandseriesApiRequestID + '"'?: '"ERROR"'
+def STRING = 'String'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -17,6 +22,15 @@ android {
         versionName "0.6.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        each {
+            type -> type.buildConfigField STRING, 'movieandseriesApiRequestID', MOVIES_REQUEST_API
+                type.buildConfigField STRING, 'sesionIDMovieDatatbase', MOVIES_SESION_ID
+
+        }
+        manifestPlaceholders = [
+                MOVIES_REQUEST_API : MOVIES_REQUEST_API,
+                MOVIES_SESION_ID : MOVIES_SESION_ID
+        ]
     }
     buildTypes {
         release {
@@ -55,7 +69,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
 
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-auth:16.2.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
