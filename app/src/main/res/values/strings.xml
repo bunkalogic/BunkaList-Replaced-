@@ -83,5 +83,6 @@
     <string name="hint_dialog_timeline_season">Season</string>
     <string name="hint_dialog_timeline_chapter">Episode</string>
     <string name="hint_edit_text_content_dialog_timeline">Comment your opinion of an episode</string>
+    <string name="fragment_search">Search Movies , Series , Anime</string>
 
 </resources>

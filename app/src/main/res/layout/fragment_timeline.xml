@@ -6,7 +6,7 @@
              tools:context=".Fragments.TimeLineFragment">
 
    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerTimeline"
+        android:id="@+id/recyclerSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"

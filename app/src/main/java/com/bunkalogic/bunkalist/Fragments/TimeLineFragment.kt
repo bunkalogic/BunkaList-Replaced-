@@ -109,10 +109,10 @@ class TimeLineFragment : Fragment() {
         adapter = TimelineMessageAdapter(timelineList)
 
 
-        _view.recyclerTimeline.setHasFixedSize(true)
-        _view.recyclerTimeline.layoutManager = layoutManager
-        _view.recyclerTimeline.itemAnimator = DefaultItemAnimator()
-        _view.recyclerTimeline.adapter = adapter
+        _view.recyclerSearch.setHasFixedSize(true)
+        _view.recyclerSearch.layoutManager = layoutManager
+        _view.recyclerSearch.itemAnimator = DefaultItemAnimator()
+        _view.recyclerSearch.adapter = adapter
 
     }
 
