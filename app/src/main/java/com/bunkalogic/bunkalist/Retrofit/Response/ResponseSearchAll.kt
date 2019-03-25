@@ -4,14 +4,14 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-class ResponseSearchMovies {
+class ResponseSearchAll {
 
     @SerializedName("page")
     @Expose
     var page: Int? = null
     @SerializedName("results")
     @Expose
-    var results: List<ResultSearchMovies>? = null
+    var results: List<ResultSearchAll>? = null
     @SerializedName("total_results")
     @Expose
     var totalResults: Int? = null
@@ -32,7 +32,7 @@ class ResponseSearchMovies {
      * @param page
      * @param totalPages
      */
-    constructor(page: Int?, results: List<ResultSearchMovies>, totalResults: Int?, totalPages: Int?) : super() {
+    constructor(page: Int?, results: List<ResultSearchAll>, totalResults: Int?, totalPages: Int?) : super() {
         this.page = page
         this.results = results
         this.totalResults = totalResults

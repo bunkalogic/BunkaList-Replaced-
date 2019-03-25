@@ -1,13 +1,22 @@
 package com.bunkalogic.bunkalist.Retrofit
 
-import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchMovies
+import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
+import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
+import com.bunkalogic.bunkalist.data.DataModelUrl
+import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 interface MoviesOrSeriesAndAnimeService {
 
-    @get:GET("/search/movie")
-    val SearchMovies: Call<List<ResponseSearchMovies>>
+    // https://api.themoviedb.org/3/search/multi?api_key=7bcf40aff5d7be80e294d763234a6930&language=en-US&query=cowboy%20bebop&page=1&include_adult=false
 
+    @GET("search/multi")
+    fun getSearchAll(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("query")query: String
+    ): Call<ResponseSearchAll>
 }
