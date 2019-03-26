@@ -1,9 +1,6 @@
 package com.bunkalogic.bunkalist.Retrofit
 
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
-import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
-import com.bunkalogic.bunkalist.data.DataModelUrl
-import io.reactivex.Observable
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,6 +14,8 @@ interface MoviesOrSeriesAndAnimeService {
     fun getSearchAll(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
-        @Query("query")query: String
+        @Query("query")query: String,
+        @Query("page") page: Int,
+        @Query("include_adult")include_adult: Boolean
     ): Call<ResponseSearchAll>
 }

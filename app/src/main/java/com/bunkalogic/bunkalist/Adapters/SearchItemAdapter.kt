@@ -3,17 +3,19 @@ package com.bunkalogic.bunkalist.Adapters
 import android.content.Context
 import android.support.v7.widget.DialogTitle
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils.split
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 
-class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResponseSearchAll>?): RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
+
+class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,47 +31,52 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resp
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            mValues!![position]
-
-            holder.textViewTitle.text = holder.mItem.name
-            holder.textViewDateReleast.text = holder.mItem.firstAirDate
-            holder.textViewDescription.text = holder.mItem.overview
-
-            val photo = holder.mItem.posterPath
-            if (photo != ""){
-                Glide.with(ctx)
-                    .load(photo)
-                    .override(95, 140)
-                    .into(holder.imageViewPoster)
-            }
-
-
-
+            holder.bind(mValues!![position])
     }
 
-   //fun setData(title: List<ResultSearchAll>){
-   //    this.mValues = title
-   //    notifyDataSetChanged()
-   //}
+   fun setData(title: List<ResultSearchAll>){
+       this.mValues = title
+       notifyDataSetChanged()
+   }
 
 
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-        val imageViewPoster: ImageView
-        val textViewTitle: TextView
-        val textViewDateReleast :TextView
-        val textViewDescription: TextView
-        // TODO probar a cambiar el mValues por un ResultSearchAll
-        lateinit var mItem : ResultSearchAll
+        val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPoster)
+        val textViewTitle: TextView = mView.findViewById(R.id.textViewTitle)
+        val textViewDateReleast :TextView = mView.findViewById(R.id.textViewDateReleast)
+        val textViewDescription: TextView = mView.findViewById(R.id.textViewDescription)
+
+
         //TODO: this value will be collected the rating of my database
         //val textViewRating: TextView
 
-        init {
-            imageViewPoster = mView.findViewById(R.id.imageViewPoster)
-            textViewTitle = mView.findViewById(R.id.textViewTitle)
-            textViewDateReleast = mView.findViewById(R.id.textViewDateReleast)
-            textViewDescription = mView.findViewById(R.id.textViewDescription)
+        fun bind(mItem : ResultSearchAll){
+
+            textViewTitle.text = mItem.title
+            if (textViewTitle.text.isEmpty()){
+                textViewTitle.text = mItem.name
+            }
+
+            textViewDateReleast.text = mItem.releaseDate
+            if (textViewDateReleast.text.isEmpty()){
+                textViewDateReleast.text = mItem.firstAirDate!!.split("-")[0]
+            }else{
+                textViewDateReleast.text = mItem.releaseDate!!.split("-")[0]
+            }
+
+
+            textViewDescription.text = mItem.overview
+
+            val photo = mItem.posterPath
+
+                Glide.with(ctx)
+                    .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH + photo)
+                    .centerCrop()
+                    .into(imageViewPoster)
+
+
         }
+
+
     }
-
-
 }

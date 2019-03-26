@@ -20,7 +20,7 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
 
 
     fun getQuery(title: String){
-        searchRepository.moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY, LANGUAGE, title)
+        //searchRepository.moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY, title)
     }
 
 

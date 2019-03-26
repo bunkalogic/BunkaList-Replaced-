@@ -6,48 +6,63 @@ import com.google.gson.annotations.SerializedName
 
 class ResultSearchAll {
 
-    @SerializedName("poster_path")
+    @SerializedName("original_name")
     @Expose
-    var posterPath: String? = null
-    @SerializedName("popularity")
-    @Expose
-    var popularity: Int? = null
+    var originalName: String? = null
     @SerializedName("id")
     @Expose
     var id: Int? = null
-    @SerializedName("overview")
-    @Expose
-    var overview: String? = null
-    @SerializedName("backdrop_path")
-    @Expose
-    var backdropPath: String? = null
-    @SerializedName("vote_average")
-    @Expose
-    var voteAverage: Int? = null
     @SerializedName("media_type")
     @Expose
     var mediaType: String? = null
+    @SerializedName("name")
+    @Expose
+    var name: String? = null
+    @SerializedName("vote_count")
+    @Expose
+    var voteCount: Int? = null
+    @SerializedName("vote_average")
+    @Expose
+    var voteAverage: Double? = null
+    @SerializedName("poster_path")
+    @Expose
+    var posterPath: String? = null
     @SerializedName("first_air_date")
     @Expose
     var firstAirDate: String? = null
-    @SerializedName("origin_country")
+    @SerializedName("popularity")
     @Expose
-    var originCountry: List<String>? = null
+    var popularity: Double? = null
     @SerializedName("genre_ids")
     @Expose
     var genreIds: List<Int>? = null
     @SerializedName("original_language")
     @Expose
     var originalLanguage: String? = null
-    @SerializedName("vote_count")
+    @SerializedName("backdrop_path")
     @Expose
-    var voteCount: Int? = null
-    @SerializedName("name")
+    var backdropPath: Any? = null
+    @SerializedName("overview")
     @Expose
-    var name: String? = null
-    @SerializedName("original_name")
+    var overview: String? = null
+    @SerializedName("origin_country")
     @Expose
-    var originalName: String? = null
+    var originCountry: List<String>? = null
+    @SerializedName("video")
+    @Expose
+    var video: Boolean? = null
+    @SerializedName("title")
+    @Expose
+    var title: String? = null
+    @SerializedName("original_title")
+    @Expose
+    var originalTitle: String? = null
+    @SerializedName("adult")
+    @Expose
+    var adult: Boolean? = null
+    @SerializedName("release_date")
+    @Expose
+    var releaseDate: String? = null
 
     /**
      * No args constructor for use in serialization
@@ -60,48 +75,63 @@ class ResultSearchAll {
      * @param genreIds
      * @param originalName
      * @param originalLanguage
+     * @param adult
      * @param backdropPath
      * @param voteCount
      * @param mediaType
      * @param id
+     * @param title
+     * @param releaseDate
      * @param originCountry
      * @param overview
      * @param name
      * @param posterPath
+     * @param originalTitle
      * @param firstAirDate
      * @param voteAverage
+     * @param video
      * @param popularity
      */
     constructor(
-        posterPath: String,
-        popularity: Int?,
+        originalName: String,
         id: Int?,
-        overview: String,
-        backdropPath: String,
-        voteAverage: Int?,
         mediaType: String,
+        name: String,
+        voteCount: Int?,
+        voteAverage: Double?,
+        posterPath: String,
         firstAirDate: String,
-        originCountry: List<String>,
+        popularity: Double?,
         genreIds: List<Int>,
         originalLanguage: String,
-        voteCount: Int?,
-        name: String,
-        originalName: String
+        backdropPath: Any,
+        overview: String,
+        originCountry: List<String>,
+        video: Boolean?,
+        title: String,
+        originalTitle: String,
+        adult: Boolean?,
+        releaseDate: String
     ) : super() {
-        this.posterPath = posterPath
-        this.popularity = popularity
+        this.originalName = originalName
         this.id = id
-        this.overview = overview
-        this.backdropPath = backdropPath
-        this.voteAverage = voteAverage
         this.mediaType = mediaType
+        this.name = name
+        this.voteCount = voteCount
+        this.voteAverage = voteAverage
+        this.posterPath = posterPath
         this.firstAirDate = firstAirDate
-        this.originCountry = originCountry
+        this.popularity = popularity
         this.genreIds = genreIds
         this.originalLanguage = originalLanguage
-        this.voteCount = voteCount
-        this.name = name
-        this.originalName = originalName
+        this.backdropPath = backdropPath
+        this.overview = overview
+        this.originCountry = originCountry
+        this.video = video
+        this.title = title
+        this.originalTitle = originalTitle
+        this.adult = adult
+        this.releaseDate = releaseDate
     }
 
 }

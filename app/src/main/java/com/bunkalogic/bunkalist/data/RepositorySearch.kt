@@ -29,24 +29,24 @@ class RepositorySearch internal constructor() {
         val data = MutableLiveData<ResponseSearchAll>()
 
 
-        val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY, LANGUAGE, "")
+        //val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY,"")
 
-        call.enqueue(object : Callback<ResponseSearchAll>{
-            override fun onFailure(call: Call<ResponseSearchAll>, t: Throwable) {
-                Log.d("RepositorySearch", "Error connection")
-            }
+      // call.enqueue(object : Callback<ResponseSearchAll>{
+      //     override fun onFailure(call: Call<ResponseSearchAll>, t: Throwable) {
+      //         Log.d("RepositorySearch", "Error connection")
+      //     }
 
-            override fun onResponse(call: Call<ResponseSearchAll>, response: Response<ResponseSearchAll>) {
-                if (response.isSuccessful){
-                    data.value = response.body()
+      //     override fun onResponse(call: Call<ResponseSearchAll>, response: Response<ResponseSearchAll>) {
+      //         if (response.isSuccessful){
+      //             data.value = response.body()
 
-                }else{
-                    Log.d("RepositorySearch", "Something has gone wrong")
-                }
+      //         }else{
+      //             Log.d("RepositorySearch", "Something has gone wrong")
+      //         }
 
-            }
+      //     }
 
-        })
+      // })
 
         return getAll()
     }
