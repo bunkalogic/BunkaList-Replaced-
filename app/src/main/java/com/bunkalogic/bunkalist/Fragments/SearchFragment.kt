@@ -66,7 +66,7 @@ class SearchFragment : Fragment() {
 
 
 
-    fun getSearchAll(callback: OnGetMoviesCallback) {
+    private fun getSearchAll(callback: OnGetMoviesCallback) {
         searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
         val title = editTextSearch.text.toString()
 
@@ -80,7 +80,11 @@ class SearchFragment : Fragment() {
             getSearchAll(object: OnGetMoviesCallback{
                 override fun onSuccess(all: List<ResultSearchAll>) {
                     Log.d("FragmentSearch", "On success data")
-                    adapter.setData(all)
+                    if (all.isEmpty()){
+                        toast("Please search again")
+                    }else{
+                        adapter.setData(all)
+                    }
                 }
 
                 override fun onError() {
