@@ -59,7 +59,7 @@
     <string name="name_view_movie">List User Movie</string>
     <string name="btn_top_movie">Your Top Movies</string>
     <string name="btn_list_all_movies">Your List Movies</string>
-    <string name="name_view_series">List User Series </string>
+    <string name="name_view_series">List User Series</string>
     <string name="btn_top_series">Your Top Series</string>
     <string name="btn_list_all_series">Your List Series</string>
     <string name="name_view_anime">List User Anime</string>
@@ -70,8 +70,8 @@
     <string name="btn_list_all_manga">Your List Manga</string>
 
     <!-- ItemTimeLine -->
-    <string name="item_timeline_chapter">Episode: </string>
-    <string name="item_timeline_season">Season: </string>
+    <string name="item_timeline_chapter">Episode:</string>
+    <string name="item_timeline_season">Season:</string>
 
 
     <!-- ItemTimeLineDialog -->
@@ -83,7 +83,16 @@
     <string name="hint_dialog_timeline_season">Season</string>
     <string name="hint_dialog_timeline_chapter">Episode</string>
     <string name="hint_edit_text_content_dialog_timeline">Comment your opinion of an episode</string>
+
+    <!-- SearchFragment -->
     <string name="fragment_search">Search Movies, Series, Anime</string>
     <string name="text_view_get_full_details_search_item">See all the details</string>
+
+    <!-- SearchFragmentItemDetails -->
+    <string name="search_item_details_original_title">Original Title :</string>
+    <string name="search_item_details_director">Director :</string>
+    <string name="search_item_details_status">Status :</string>
+    <string name="btn_search_item_details_your_list">Add in your List</string>
+    <string name="searchItemDetailsrating">Rating:</string>
 
 </resources>

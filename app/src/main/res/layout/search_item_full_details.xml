@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ImageView
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:id="@+id/imageViewBackDrop"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTitleDetails" android:textStyle="bold"
+            android:textSize="30sp"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewBackDrop"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="2dp"
+            app:layout_constraintStart_toEndOf="@+id/imageViewItemSearchDetailsPoster" android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.85"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDateRelease" android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewTitleDetails"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTitleDetails" android:layout_marginEnd="8dp"
+            android:textStyle="bold" app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetails" android:layout_marginTop="8dp"/>
+    <ImageView
+            android:layout_width="135dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageViewItemSearchDetailsPoster"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewDateRelease"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="@string/search_item_details_original_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewItemSearchDetailsPoster"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewItemSearchDetailsPoster" android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp" android:textStyle="bold"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTitleOriginal" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewItemSearchDetailsPoster" app:layout_constraintStart_toEndOf="@+id/textView7"
+            android:layout_marginStart="8dp" android:textStyle="italic"
+            android:textSize="16sp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView7" android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView7" android:layout_marginEnd="8dp"
+            android:text="@string/search_item_details_director" android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.428"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewsearchItemdetailsNameDirector"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleOriginal" android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTitleOriginal"
+            app:layout_constraintStart_toEndOf="@+id/textView9" android:layout_marginStart="8dp"
+            android:textStyle="italic" android:textSize="16sp"/>
+    <TextView
+            android:text="@string/search_item_details_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11" app:layout_constraintStart_toStartOf="@+id/textViewDateRelease"
+            app:layout_constraintEnd_toEndOf="@+id/textViewDateRelease" android:textStyle="bold"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textViewDateRelease"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSearchItemDetailsStatus"
+            android:textStyle="italic" android:textSize="16sp" app:layout_constraintEnd_toEndOf="@+id/textView11"
+            app:layout_constraintStart_toStartOf="@+id/textView11" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView11"/>
+    <Button
+            android:text="@string/btn_search_item_details_your_list"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/buttonSearchItemDetailsAddInYourList" app:layout_constraintStart_toStartOf="@+id/textView9"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewsearchItemdetailsNameDirector"
+            android:layout_marginEnd="8dp" android:textAllCaps="false"
+            android:background="@drawable/button_rounded_transparent_color"
+            app:layout_constraintHorizontal_bias="0.104" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewsearchItemdetailsNameDirector"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_fragment_search_list"
+            android:id="@+id/imageViewSearchDetailsAddYourTop"
+            app:layout_constraintStart_toStartOf="@+id/textViewSearchItemDetailsStatus"
+            app:layout_constraintEnd_toEndOf="@+id/textViewSearchItemDetailsStatus" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSearchItemDetailsStatus"/>
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSearchDetailsAllDescription" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:padding="4dp" android:textSize="18sp"
+            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:textStyle="italic"
+            android:textAlignment="center"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSearchItemDetailsAddInYourList"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_star_orange_rating_24dp"
+            android:id="@+id/imageView7"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewBackDrop" android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/textViewTitleDetails"/>
+    <TextView
+            android:text="@string/searchItemDetailsrating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewSearchItemDetailsRate"
+            android:textSize="18sp" android:textColor="@color/colorAccentDark" android:textStyle="bold|italic"
+            app:layout_constraintTop_toTopOf="@+id/imageView7"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView7" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView7"
+            android:background="@drawable/button_rounded_transparent_color"/>
+
+
+</android.support.constraint.ConstraintLayout>

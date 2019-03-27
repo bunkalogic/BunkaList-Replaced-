@@ -13,14 +13,16 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Activities.DetailsActivities.SearchItemDetailsActivity">
+        </activity>
+
         <meta-data
                 android:name=".com.movies.requestApi"
-                android:value="{$MOVIES_REQUEST_API}"
-        />
+                android:value="{$MOVIES_REQUEST_API}"/>
         <meta-data
                 android:name=".com.movies.sesionID"
-                android:value="{$MOVIES_SESION_ID}"
-        />
+                android:value="{$MOVIES_SESION_ID}"/>
+
         <activity android:name=".Activities.SettingsActivities.EditProfileActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
