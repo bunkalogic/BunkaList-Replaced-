@@ -65,6 +65,7 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
             }
 
 
+
             textViewDescription.text = mItem.overview
 
             val photo = mItem.posterPath
@@ -73,8 +74,6 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
                     .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH + photo)
                     .centerCrop()
                     .into(imageViewPoster)
-
-
         }
 
 

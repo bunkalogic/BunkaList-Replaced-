@@ -13,9 +13,9 @@ interface MoviesOrSeriesAndAnimeService {
     @GET("search/multi")
     fun getSearchAll(
         @Query("api_key") apiKey: String,
-        @Query("language") language: String,
-        @Query("query")query: String,
-        @Query("page") page: Int,
-        @Query("include_adult")include_adult: Boolean
+        //@Query("language") language: String,
+        @Query("query")query: String
+        //@Query("page") page: Int,
+        //@Query("include_adult")include_adult: Boolean
     ): Call<ResponseSearchAll>
 }

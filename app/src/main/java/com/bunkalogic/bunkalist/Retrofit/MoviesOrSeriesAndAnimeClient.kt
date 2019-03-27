@@ -14,16 +14,10 @@ class MoviesOrSeriesAndAnimeClient {
     private val retrofit: Retrofit
 
     init {
-        //val okHttpClientBuilder = OkHttpClient.Builder()
-        //okHttpClientBuilder.addInterceptor(AuthInterceptor())
-        //val client = okHttpClientBuilder.build()
-
-
 
         retrofit = Retrofit.Builder()
             .baseUrl(Constans.API_MOVIE_SERIES_ANIME_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            //.client(client)
             .build()
         moviesOrSeriesAndAnimeService = retrofit.create(MoviesOrSeriesAndAnimeService::class.java)
     }
