@@ -14,6 +14,7 @@
     <color name="colorBottomNavigationBar">#b0bec5</color>
     <color name="colorDivider">#757575</color>
     <color name="colorLauncher">#673AB7</color>
+    <color name="colorItemTimeline">#313135</color>
 
 
 </resources>
