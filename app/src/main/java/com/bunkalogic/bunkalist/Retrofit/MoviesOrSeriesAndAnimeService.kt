@@ -1,9 +1,12 @@
 package com.bunkalogic.bunkalist.Retrofit
 
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
+import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Path
 
 
 interface MoviesOrSeriesAndAnimeService {
@@ -18,4 +21,20 @@ interface MoviesOrSeriesAndAnimeService {
         //@Query("page") page: Int,
         //@Query("include_adult")include_adult: Boolean
     ): Call<ResponseSearchAll>
+
+
+    @GET("movie/{movie_id}")
+    fun getMovie(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String
+        //@Query("language") language: String
+    ): Call<Movie>
+
+
+    @GET("tv/{tv_id}")
+    fun getSeries(
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String
+        //@Query("language") language: String
+    ): Call<Series>
 }

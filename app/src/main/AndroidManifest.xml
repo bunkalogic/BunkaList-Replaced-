@@ -14,6 +14,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".Activities.DetailsActivities.SearchItemDetailsActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".Activities.BaseActivity"/>
         </activity>
 
         <meta-data

@@ -8,7 +8,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 
 
-interface OnGetMoviesCallback {
+interface OnGetSearchCallback {
 
     fun onSuccess(all: List<ResultSearchAll>)
 

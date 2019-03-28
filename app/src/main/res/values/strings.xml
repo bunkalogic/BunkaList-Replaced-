@@ -94,5 +94,6 @@
     <string name="search_item_details_status">Status :</string>
     <string name="btn_search_item_details_your_list">Add in your List</string>
     <string name="searchItemDetailsrating">Rating:</string>
+    <string name="search_item_not_have_tittle">Not title</string>
 
 </resources>

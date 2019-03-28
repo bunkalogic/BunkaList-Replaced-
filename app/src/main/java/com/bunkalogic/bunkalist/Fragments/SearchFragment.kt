@@ -13,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bunkalogic.bunkalist.Adapters.SearchItemAdapter
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.Retrofit.OnGetMoviesCallback
+import com.bunkalogic.bunkalist.Retrofit.OnGetSearchCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import com.bunkalogic.bunkalist.data.ViewModelSearch
 import com.google.firebase.auth.FirebaseAuth
@@ -66,7 +66,7 @@ class SearchFragment : Fragment() {
 
 
 
-    private fun getSearchAll(callback: OnGetMoviesCallback) {
+    private fun getSearchAll(callback: OnGetSearchCallback) {
         searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
         val title = editTextSearch.text.toString()
 
@@ -77,7 +77,7 @@ class SearchFragment : Fragment() {
     private fun onClick(){
 
         _view.imageViewSearch.setOnClickListener {
-            getSearchAll(object: OnGetMoviesCallback{
+            getSearchAll(object: OnGetSearchCallback{
                 override fun onSuccess(all: List<ResultSearchAll>) {
                     Log.d("FragmentSearch", "On success data")
                     if (all.isEmpty()){
