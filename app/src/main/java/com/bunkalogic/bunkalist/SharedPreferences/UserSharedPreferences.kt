@@ -26,6 +26,16 @@ class UserSharedPreferences(context: Context){
     get() = prefsUser.getString("profilePath", "")
     set(value) = prefsUser.edit().putString("profilePath", value).apply()
 
+    var itemName: String?
+        get() = prefsUser.getString("itemName", "")
+        set(value) = prefsUser.edit().putString("itemName",value).apply()
+
+
+    var itemID: Int
+        get() = prefsUser.getInt("itemId", 0)
+        set(value) = prefsUser.edit().putInt("itemId", value).apply()
+
+
     fun editCurrentUser(){
         prefsUser.edit().apply()
     }

@@ -1,10 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.content.Intent
-import android.support.v7.widget.DialogTitle
 import android.support.v7.widget.RecyclerView
-import android.text.TextUtils.split
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.SearchItemDetailsActivity
+import com.bunkalogic.bunkalist.Dialog.AddListDialog
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivity
+import android.support.v7.app.AppCompatActivity
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 
 
 class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
@@ -50,9 +49,7 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
         private val textViewDateReleast :TextView = mView.findViewById(R.id.textViewDateReleast)
         private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescription)
         private val textViewSeeDetails: TextView = mView.findViewById(R.id.textViewGetFullDetails)
-
-        //TODO: this value will be collected the rating of my database
-        //val textViewRating: TextView
+        private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyList)
 
         fun bind(mItem : ResultSearchAll){
 
@@ -91,7 +88,14 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
                     "id" to id,
                     "type" to type
                 ))
+            }
 
+
+            imageViewRating.setOnClickListener {
+                preferences.itemID = id!!
+                mItem.title = preferences.itemName
+                val manager = (ctx as AppCompatActivity).supportFragmentManager
+                AddListDialog().show(manager, "")
             }
         }
     }
