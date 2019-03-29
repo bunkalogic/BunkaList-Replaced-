@@ -12,6 +12,7 @@ import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.data.ViewModelSearch
+import com.bunkalogic.bunkalist.db.Status
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.search_item_full_details.*
@@ -24,7 +25,6 @@ class SearchItemDetailsActivity : AppCompatActivity() {
 
     private lateinit var toolbar: android.support.v7.widget.Toolbar
 
-
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
 
@@ -33,6 +33,7 @@ class SearchItemDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         //instantiate the ViewModel
         searchViewModel = ViewModelProviders.of(this).get(ViewModelSearch::class.java)

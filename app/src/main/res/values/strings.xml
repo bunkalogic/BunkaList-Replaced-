@@ -96,4 +96,15 @@
     <string name="searchItemDetailsrating">Rating:</string>
     <string name="search_item_not_have_tittle">Not title</string>
 
+
+    <!-- SearchFragmentItemDetails -->
+    <string name="dialogAddList">Set Status: </string>
+    <string name="dialog_add_list_what_type">What type ?</string>
+    <string name="dialog_add_list_text_view_arguments">What note do you give as a History?</string>
+    <string name="dialog_add_list_text_view_character">What note do you give as a Characters?</string>
+    <string name="dialog_add_list_text_view_band_sound">What note do you give as a Soundtrack?</string>
+    <string name="dialog_add_list_text_view_effects">What note do you give as a Photography / Animation?</string>
+    <string name="dialog_add_list_text_view_Enjoyment">What note do you give as a Enjoyment?</string>
+
+
 </resources>

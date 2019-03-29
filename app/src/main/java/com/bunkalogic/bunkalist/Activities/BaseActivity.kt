@@ -27,8 +27,6 @@ class BaseActivity : AppCompatActivity() {
         whatIsMode()
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
-
-
     }
 
     // Collect all fragment implements in the adapter

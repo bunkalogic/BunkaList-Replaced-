@@ -13,12 +13,6 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activities.DetailsActivities.SearchItemDetailsActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".Activities.BaseActivity"/>
-        </activity>
-
         <meta-data
                 android:name=".com.movies.requestApi"
                 android:value="{$MOVIES_REQUEST_API}"/>
@@ -26,6 +20,11 @@
                 android:name=".com.movies.sesionID"
                 android:value="{$MOVIES_SESION_ID}"/>
 
+        <activity android:name=".Activities.DetailsActivities.SearchItemDetailsActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".Activities.BaseActivity"/>
+        </activity>
         <activity android:name=".Activities.SettingsActivities.EditProfileActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -55,7 +54,7 @@
         </activity>
         <activity android:name=".Activities.Login.LoginActivity">
         </activity>
-        <activity android:name=".Activities.BaseActivity">
+        <activity android:name=".Activities.BaseActivity" android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 
