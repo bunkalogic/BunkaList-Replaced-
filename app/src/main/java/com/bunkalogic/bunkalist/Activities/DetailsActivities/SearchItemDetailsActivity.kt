@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
+import com.bunkalogic.bunkalist.Dialog.AddListDialog
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
@@ -12,10 +13,10 @@ import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.data.ViewModelSearch
-import com.bunkalogic.bunkalist.db.Status
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.search_item_full_details.*
+import org.jetbrains.anko.activityManager
 import org.jetbrains.anko.toast
 
 
@@ -39,11 +40,18 @@ class SearchItemDetailsActivity : AppCompatActivity() {
         searchViewModel = ViewModelProviders.of(this).get(ViewModelSearch::class.java)
         setUpCurrentUser()
         isMovieOrSerie()
+        onClick()
     }
 
     // Initializing the currentUser
     private fun setUpCurrentUser(){
         currentUser = mAuth.currentUser!!
+    }
+
+    private fun onClick(){
+        buttonSearchItemDetailsAddInYourList.setOnClickListener {
+            AddListDialog().show(supportFragmentManager, "")
+        }
     }
 
     private fun isMovieOrSerie(){

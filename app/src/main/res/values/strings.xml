@@ -97,7 +97,7 @@
     <string name="search_item_not_have_tittle">Not title</string>
 
 
-    <!-- SearchFragmentItemDetails -->
+    <!-- SearchFragmentItemDetailsDialog -->
     <string name="dialog_add_list_title">Add in your list </string>
     <string name="dialog_add_list_add_positive_button">Added in list</string>
     <string name="dialog_add_list_add_negative_button">Cancel</string>
@@ -108,6 +108,20 @@
     <string name="dialog_add_list_text_view_band_sound">What note do you give as a Soundtrack?</string>
     <string name="dialog_add_list_text_view_effects">What note do you give as a Photography / Animation?</string>
     <string name="dialog_add_list_text_view_Enjoyment">What note do you give as a Enjoyment?</string>
+
+    <string-array name="status">
+        <item>Complete</item>
+        <item>Watching</item>
+        <item>Waiting for out</item>
+        <item>On pause</item>
+        <item>Dropped</item>
+    </string-array>
+
+    <string-array name="type">
+        <item>Movie</item>
+        <item>Series</item>
+        <item>Anime</item>
+    </string-array>
 
 
 </resources>
