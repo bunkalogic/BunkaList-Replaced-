@@ -13,6 +13,9 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Activities.UserProfileActivities.ProfileListActivity">
+        </activity>
+
         <meta-data
                 android:name=".com.movies.requestApi"
                 android:value="{$MOVIES_REQUEST_API}"/>
@@ -51,7 +54,9 @@
         </activity>
         <activity android:name=".Activities.Login.LoginActivity">
         </activity>
-        <activity android:name=".Activities.BaseActivity" android:windowSoftInputMode="adjustPan">
+        <activity
+                android:name=".Activities.BaseActivity"
+                android:windowSoftInputMode="adjustPan">
         </activity>
     </application>
 

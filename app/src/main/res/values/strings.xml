@@ -57,8 +57,8 @@
 
     <!-- ProfileFragments -->
     <string name="name_view_movie">List User Movie</string>
-    <string name="btn_top_movie">Your Top Movies</string>
-    <string name="btn_list_all_movies">Your List Movies</string>
+    <string name="btn_top_movie">Your Tops</string>
+    <string name="btn_list_all_movies">Your Lists</string>
     <string name="name_view_series">List User Series</string>
     <string name="btn_top_series">Your Top Series</string>
     <string name="btn_list_all_series">Your List Series</string>
@@ -98,10 +98,10 @@
 
 
     <!-- SearchFragmentItemDetailsDialog -->
-    <string name="dialog_add_list_title">Add in your list </string>
+    <string name="dialog_add_list_title">Add in your list</string>
     <string name="dialog_add_list_add_positive_button">Added in list</string>
     <string name="dialog_add_list_add_negative_button">Cancel</string>
-    <string name="dialogAddList">Set Status: </string>
+    <string name="dialogAddList">Set Status:</string>
     <string name="dialog_add_list_what_type">What type ?</string>
     <string name="dialog_add_list_text_view_arguments">What note do you give as a History?</string>
     <string name="dialog_add_list_text_view_character">What note do you give as a Characters?</string>
@@ -122,6 +122,9 @@
         <item>Series</item>
         <item>Anime</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
