@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.bunkalogic.bunkalist.Activities.DetailsActivities.SearchItemDetailsActivity
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemDetailsActivity
 import com.bunkalogic.bunkalist.Dialog.AddListDialog
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
@@ -82,11 +82,15 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
             // is responsible for collecting the id and type to load after depending on whether it is a movie or series
             val id = mItem.id
             val type = mItem.mediaType
+            val title = mItem.title
+            val name = mItem.name
 
             textViewSeeDetails.setOnClickListener {
-                ctx.startActivity(ctx.intentFor<SearchItemDetailsActivity>(
+                ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
                     "id" to id,
-                    "type" to type
+                    "type" to type,
+                    "title" to title,
+                    "name" to name
                 ))
             }
 

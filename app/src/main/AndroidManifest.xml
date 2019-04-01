@@ -20,10 +20,7 @@
                 android:name=".com.movies.sesionID"
                 android:value="{$MOVIES_SESION_ID}"/>
 
-        <activity android:name=".Activities.DetailsActivities.SearchItemDetailsActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".Activities.BaseActivity"/>
+        <activity android:name=".Activities.DetailsActivities.ItemDetailsActivity">
         </activity>
         <activity android:name=".Activities.SettingsActivities.EditProfileActivity">
             <meta-data

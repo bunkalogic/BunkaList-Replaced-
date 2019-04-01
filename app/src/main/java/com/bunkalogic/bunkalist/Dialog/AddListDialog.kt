@@ -16,6 +16,7 @@ import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.dialog_add_list.view.*
+import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
 class AddListDialog : DialogFragment(){
@@ -77,7 +78,8 @@ class AddListDialog : DialogFragment(){
 
 
 
-        return AlertDialog.Builder(context!!)
+        return AlertDialog
+            .Builder(context!!)
             .setTitle(getString(R.string.dialog_add_list_title))
             .setView(view)
             .setPositiveButton(getString(R.string.dialog_add_list_add_positive_button)) {_, _ ->
@@ -85,16 +87,16 @@ class AddListDialog : DialogFragment(){
 
                 val season = view.editTextDialogAddListSeason.text.toString()
                 val episode = view.editTextDialogAddListEpisode.text.toString()
-                var ratingHistory = view.ratingBarHistory.rating
-                var ratingCharacter = view.ratingBarCharacter.rating
-                var ratingEffects = view.ratingBarEffects.rating
-                var ratingSoundtrack = view.ratingBarSoundtrack.rating
-                var ratingEnjoyment = view.ratingBarEnjoyment.rating
+                val ratingHistory = view.ratingBarHistory.rating
+                val ratingCharacter = view.ratingBarCharacter.rating
+                val ratingEffects = view.ratingBarEffects.rating
+                val ratingSoundtrack = view.ratingBarSoundtrack.rating
+                val ratingEnjoyment = view.ratingBarEnjoyment.rating
 
                 // we add all the results
                 var resultFinalRate = ratingHistory + ratingCharacter + ratingEffects + ratingSoundtrack + ratingEnjoyment
                 // we divide to get the average
-                var result = resultFinalRate / 5
+                val result = resultFinalRate / 5
                 Log.d("AddListDialog", "Result final rate = $result")
 
                 val itemRating = ItemListRating(
@@ -114,8 +116,8 @@ class AddListDialog : DialogFragment(){
                 )
                 RxBus.publish(NewListRating(itemRating))
 
-
-            }.setNegativeButton(getString(R.string.dialog_add_list_add_negative_button)){_, _ ->
+            }
+            .setNegativeButton(getString(R.string.dialog_add_list_add_negative_button)){_, _ ->
                 Log.d("AddListDialog", "cancel")
             }
             .create()

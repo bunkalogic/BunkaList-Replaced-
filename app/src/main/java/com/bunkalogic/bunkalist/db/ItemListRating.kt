@@ -4,6 +4,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 class ItemListRating{
+
     var userId: String? = null
     var status: Int? = null
     var oeuvreId: Int? = null
@@ -84,6 +85,11 @@ class ItemListRating{
         result["status"] = status!!
         result["oeuvreId"] = oeuvreId!!
         result["addDate"] = addDate
+        result["historyRate"] = historyRate!!
+        result["characterRate"] = characterRate!!
+        result["effectsRate"] = effectsRate!!
+        result["soundtrackRate"] = soundtrackRate!!
+        result["enjoymentRate"] = enjoymentRate!!
         result["finalRate"] = finalRate!!
         result["seasonNumber"] = seasonNumber!!
         result["episodeNumber"] = episodeNumber!!
