@@ -18,6 +18,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.data.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
+import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
@@ -126,16 +127,16 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun addToNewItemRating(){
-        itemRatingBusListener = RxBus.listen(ItemListRating::class.java).subscribe {
-            saveItemRatingList(it)
-            Log.d("FragmentSearch", "$it")
-        }
-    }
+   private fun addToNewItemRating() {
+       itemRatingBusListener = RxBus.listen(NewListRating::class.java).subscribe {
+           saveItemRatingList(it.itemListRating)
+           Log.d("FragmentSearch", "${it.itemListRating}")
+       }
+   }
 
-    override fun onDestroyView() {
-        itemRatingBusListener.dispose()
-        itemRatingSubscription?.remove()
-        super.onDestroyView()
-    }
+   override fun onDestroyView() {
+       itemRatingBusListener.dispose()
+       itemRatingSubscription?.remove()
+       super.onDestroyView()
+   }
 }

@@ -15,6 +15,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.data.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
+import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -49,7 +50,6 @@ class ItemDetailsActivity : AppCompatActivity() {
         setUpCurrentUser()
         isMovieOrSerie()
         onClick()
-        //subcribeToRating()
         addToNewItemRating()
     }
 
@@ -202,12 +202,12 @@ class ItemDetailsActivity : AppCompatActivity() {
         searchViewModel.getSeriesAndAnime(extrasIdSeries, callback)
     }
 
-    // Creating the name instance in the database
-    private fun setUpAddListDB(){
-        addItemListDBRef = store.collection("RatingList")
-    }
+     //Creating the name instance in the database
+    private fun setUpAddListDB() {
+         addItemListDBRef = store.collection("RatingList")
+     }
 
-    // Creating the new instance in the database
+     //Creating the new instance in the database
     private fun saveItemRatingList(itemListRating: ItemListRating){
         addItemListDBRef.add(itemListRating)
             .addOnCompleteListener {
@@ -240,17 +240,17 @@ class ItemDetailsActivity : AppCompatActivity() {
    //        })
    //}
 
-    private fun addToNewItemRating(){
-        itemRatingBusListener = RxBus.listen(ItemListRating::class.java).subscribe {
-            saveItemRatingList(it)
-        }
-    }
+   private fun addToNewItemRating(){
+       itemRatingBusListener = RxBus.listen(NewListRating::class.java).subscribe {
+           saveItemRatingList(it.itemListRating)
+       }
+   }
 
-    override fun onDestroy() {
-        itemRatingBusListener.dispose()
-        itemRatingSubscription?.remove()
-        super.onDestroy()
-    }
+   override fun onDestroy() {
+       itemRatingBusListener.dispose()
+       itemRatingSubscription?.remove()
+       super.onDestroy()
+   }
 
 
 }

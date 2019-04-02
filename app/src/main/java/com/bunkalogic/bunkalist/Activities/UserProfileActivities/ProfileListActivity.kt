@@ -16,8 +16,9 @@ class ProfileListActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        onClick()
         setUpFragment()
+        onClick()
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -34,7 +35,7 @@ class ProfileListActivity : AppCompatActivity() {
     private fun setUpFragment(){
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.containerList, ListProfileFragment.newInstance())
+            .add(R.id.containerList, ListProfileFragment())
             .commit()
 
     }

@@ -6,7 +6,7 @@
              tools:context=".Fragments.ListProfileFragment">
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/AllList"
+            android:id="@+id/recyclerAllList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager">
