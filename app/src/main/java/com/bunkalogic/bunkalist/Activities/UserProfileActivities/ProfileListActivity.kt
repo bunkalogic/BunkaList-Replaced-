@@ -3,6 +3,7 @@ package com.bunkalogic.bunkalist.Activities.UserProfileActivities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.util.Log
 import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
 import com.bunkalogic.bunkalist.R
 import kotlinx.android.synthetic.main.activity_profile_list.*
@@ -35,13 +36,15 @@ class ProfileListActivity : AppCompatActivity() {
 
     private fun setUpTablayout(){
         val tabLayoutFilter = findViewById<TabLayout>(R.id.tabLayoutFilter)
-        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_all))
+
         tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_movie))
         tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_serie))
         tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_anime))
+        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_all))
+
         tabLayoutFilter.tabGravity = TabLayout.GRAVITY_FILL
 
-        val Adapter = ListTabProfileAdapter(this, supportFragmentManager, tabLayoutFilter.tabCount)
+        val Adapter = ListTabProfileAdapter(supportFragmentManager, tabLayoutFilter.tabCount)
         viewPagerFilter.adapter = Adapter
 
         viewPagerFilter.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayoutFilter))
@@ -56,7 +59,9 @@ class ProfileListActivity : AppCompatActivity() {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                viewPagerFilter.currentItem = tab!!.position
+                var position = tab!!.position
+                viewPagerFilter.currentItem = position
+                Log.d("ProfileListActivity", "$position")
             }
 
         })

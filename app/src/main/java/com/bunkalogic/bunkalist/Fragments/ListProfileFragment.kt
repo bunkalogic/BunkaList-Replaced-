@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,7 @@ class ListProfileFragment : Fragment() {
 
     private lateinit var _view: View
 
-    private var typeList = 3
+    private var typeList = 0
 
     private val listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
@@ -42,15 +43,24 @@ class ListProfileFragment : Fragment() {
     private var itemRatingSubscription: ListenerRegistration? = null
     private lateinit var itemRatingBusListener: Disposable
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            typeList = it.getInt(Constans.TYPE_LIST)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view =  inflater.inflate(R.layout.fragment_list_profile, container, false)
         setUpAddListDB()
         setUpCurrentUser()
 
+        getListOeuvre()
         setUpRecycler()
 
-        getListOeuvre()
+
         addToNewItemRating()
 
         return _view
@@ -87,24 +97,21 @@ class ListProfileFragment : Fragment() {
         adapter = ProfileListAdapter(context!!, listProfileitem)
 
         _view.recyclerAllList.setHasFixedSize(true)
-        _view.recyclerAllList.layoutManager = layoutManager
-        _view.recyclerAllList.itemAnimator = DefaultItemAnimator()
+        _view.recyclerAllList.layoutManager = layoutManager as RecyclerView.LayoutManager?
+        _view.recyclerAllList.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
         _view.recyclerAllList.adapter = adapter
     }
 
     private fun getListOeuvre(){
 
-        if (typeList == Constans.ALL_LIST){
-            subscribeToProfileAllList()
-        }
         if (typeList == Constans.MOVIE_LIST){
             subscribeToProfileListMovie()
-        }
-        if (typeList == Constans.SERIE_LIST){
+        }else if (typeList == Constans.SERIE_LIST){
             subscribeToProfileListSeries()
-        }
-        if (typeList == Constans.ANIME_LIST){
+        }else if (typeList == Constans.ANIME_LIST){
             subscribeToProfileListAnime()
+        }else if (typeList == Constans.ALL_LIST){
+            subscribeToProfileAllList()
         }
 
     }

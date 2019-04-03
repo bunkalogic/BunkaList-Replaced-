@@ -25,9 +25,6 @@ import java.text.SimpleDateFormat
 class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
 
     var searchViewModelSearch: ViewModelSearch? = null
-    val MovieID = 1
-    val SerieID = 2
-    val AnimeID = 3
 
 
     init {
@@ -55,7 +52,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             val type = listRating.typeOeuvre
             val idItem = listRating.oeuvreId
 
-            if (type == MovieID){
+            if (type == Constans.MOVIE_LIST){
                 searchViewModelSearch!!.getMovie(idItem!!,object : OnGetMovieCallback{
                     override fun onSuccess(movie: Movie) {
                         holder.title.text = movie.title
@@ -65,7 +62,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                         Glide.with(ctx)
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + movie.posterPath)
-                            .override(80, 120)
+                            .override(90, 125)
                             .into(holder.imagePoster)
                     }
 
@@ -74,7 +71,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                     }
 
                 })
-            }else{
+            }else if (type == Constans.SERIE_LIST){
                 searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object : OnGetSeriesCallback{
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
@@ -84,7 +81,26 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                         Glide.with(ctx)
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + series.posterPath)
-                            .override(80, 120)
+                            .override(90, 125)
+                            .into(holder.imagePoster)
+                    }
+
+                    override fun onError() {
+                        Log.d("ProfileListAdapter", "Error Movie try Again")
+                    }
+
+                })
+            }else if (type == Constans.ANIME_LIST){
+                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object : OnGetSeriesCallback{
+                    override fun onSuccess(series: Series) {
+                        holder.title.text = series.name
+                        holder.dateRelease.text = series.firstAirDate?.split("-")?.get(0) ?: series.firstAirDate
+                        holder.description.text = series.overview
+                        holder.globalRating.text = series.voteAverage.toString()
+
+                        Glide.with(ctx)
+                            .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + series.posterPath)
+                            .override(90, 125)
                             .into(holder.imagePoster)
                     }
 
