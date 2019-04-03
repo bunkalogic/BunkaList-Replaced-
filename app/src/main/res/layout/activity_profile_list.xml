@@ -10,13 +10,23 @@
     <include android:id="@+id/toolbar"
              layout="@layout/toolbar"/>
 
-    <FrameLayout
-            android:id="@+id/containerList"
+    <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayoutFilter"
             android:layout_width="match_parent"
-            android:layout_height="668dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent">
-    </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar"
+            android:background="?attr/colorPrimaryDark"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayoutFilter">
+
+    </android.support.v4.view.ViewPager>
 
     <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabFilter"

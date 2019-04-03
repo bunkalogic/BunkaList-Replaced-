@@ -16,6 +16,7 @@
     <color name="colorLauncher">#673AB7</color>
     <color name="colorItemTimeline">#34343A</color>
     <color name="colorStarRating">#FF6D00</color>
+    <color name="colorPrimaryDarkSecond">#4A148C</color>
 
 
 </resources>

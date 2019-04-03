@@ -2,7 +2,8 @@ package com.bunkalogic.bunkalist.Activities.UserProfileActivities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
+import android.support.design.widget.TabLayout
+import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
 import com.bunkalogic.bunkalist.R
 import kotlinx.android.synthetic.main.activity_profile_list.*
 
@@ -16,7 +17,7 @@ class ProfileListActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        setUpFragment()
+        setUpTablayout()
         onClick()
 
     }
@@ -32,13 +33,42 @@ class ProfileListActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpFragment(){
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.containerList, ListProfileFragment())
-            .commit()
+    private fun setUpTablayout(){
+        val tabLayoutFilter = findViewById<TabLayout>(R.id.tabLayoutFilter)
+        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_all))
+        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_movie))
+        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_serie))
+        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_anime))
+        tabLayoutFilter.tabGravity = TabLayout.GRAVITY_FILL
+
+        val Adapter = ListTabProfileAdapter(this, supportFragmentManager, tabLayoutFilter.tabCount)
+        viewPagerFilter.adapter = Adapter
+
+        viewPagerFilter.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayoutFilter))
+
+        tabLayoutFilter.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                viewPagerFilter.currentItem = tab!!.position
+            }
+
+        })
 
     }
+
+
+
+
+
+
+
 
 
 }

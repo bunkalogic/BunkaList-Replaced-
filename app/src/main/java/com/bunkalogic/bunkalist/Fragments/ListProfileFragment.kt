@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
+import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +27,8 @@ import org.jetbrains.anko.support.v4.toast
 class ListProfileFragment : Fragment() {
 
     private lateinit var _view: View
+
+    private var typeList = 3
 
     private val listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
@@ -46,7 +50,7 @@ class ListProfileFragment : Fragment() {
 
         setUpRecycler()
 
-        subscribeToProfileList()
+        getListOeuvre()
         addToNewItemRating()
 
         return _view
@@ -79,6 +83,7 @@ class ListProfileFragment : Fragment() {
     private fun setUpRecycler(){
         val layoutManager = LinearLayoutManager(context)
 
+
         adapter = ProfileListAdapter(context!!, listProfileitem)
 
         _view.recyclerAllList.setHasFixedSize(true)
@@ -87,8 +92,26 @@ class ListProfileFragment : Fragment() {
         _view.recyclerAllList.adapter = adapter
     }
 
-    private fun subscribeToProfileList(){
+    private fun getListOeuvre(){
+
+        if (typeList == Constans.ALL_LIST){
+            subscribeToProfileAllList()
+        }
+        if (typeList == Constans.MOVIE_LIST){
+            subscribeToProfileListMovie()
+        }
+        if (typeList == Constans.SERIE_LIST){
+            subscribeToProfileListSeries()
+        }
+        if (typeList == Constans.ANIME_LIST){
+            subscribeToProfileListAnime()
+        }
+
+    }
+
+    private fun subscribeToProfileAllList(){
         itemRatingSubscription = addItemListDBRef
+            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
@@ -103,8 +126,75 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.addAll(itemRating)
                         adapter.notifyDataSetChanged()
                     }
+                }
 
+            })
+    }
 
+    private fun subscribeToProfileListMovie(){
+        itemRatingSubscription = addItemListDBRef
+            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+            .whereEqualTo("typeOeuvre", Constans.MOVIE_LIST)
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+
+    private fun subscribeToProfileListSeries(){
+        itemRatingSubscription = addItemListDBRef
+            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+            .whereEqualTo("typeOeuvre", Constans.SERIE_LIST)
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+
+    private fun subscribeToProfileListAnime(){
+        itemRatingSubscription = addItemListDBRef
+            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+            .whereEqualTo("typeOeuvre", Constans.ANIME_LIST)
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
+                        adapter.notifyDataSetChanged()
+                    }
                 }
 
             })
@@ -128,20 +218,13 @@ class ListProfileFragment : Fragment() {
         super.onDestroyView()
     }
 
-    //companion object {
-    //    /**
-    //     * Use this factory method to create a new instance of
-    //     * this fragment using the provided parameters.
-    //     *
-    //     * @return A new instance of fragment ListProfileFragment.
-    //     */
-    //    // TODO: Rename and change types and number of parameters
-    //    @JvmStatic
-    //    fun newInstance() =
-    //        ListProfileFragment().apply {
-    //            arguments = Bundle().apply {
-//
-    //            }
-    //        }
-    //}
+    companion object {
+        @JvmStatic
+        fun newInstance(typeList: Int) =
+            ListProfileFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(Constans.TYPE_LIST, typeList)
+                }
+            }
+    }
 }

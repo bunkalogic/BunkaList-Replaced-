@@ -15,4 +15,13 @@ object Constans{
 
     val sessionId = BuildConfig.sesionIDMovieDatatbase
 
+    val TYPE_LIST = "LIST_TYPE"
+    val MOVIE_LIST = 0
+    val SERIE_LIST = 1
+    val ANIME_LIST = 2
+    val ALL_LIST = 3
+
+
+
+
 }
