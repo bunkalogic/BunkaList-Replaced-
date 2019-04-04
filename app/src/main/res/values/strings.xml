@@ -72,6 +72,7 @@
     <!-- ItemTimeLine -->
     <string name="item_timeline_chapter">Episode:</string>
     <string name="item_timeline_season">Season:</string>
+    <string name="timeline_message_is_spoiler">is Spoiler, click to see the text</string>
 
 
     <!-- ItemTimeLineDialog -->
@@ -128,6 +129,12 @@
     <string name="profile_list_activity_tab_movie">Movie</string>
     <string name="profile_list_activity_tab_serie">Series</string>
     <string name="profile_list_activity_tab_anime">Anime</string>
+
+    <!-- ReviewDialog -->
+    <string name="dialog_review_title">Review Extensive</string>
+    <string name="dialog_review_your_title">Title the your Review</string>
+    <string name="dialog_review">Comment your opinion on a Oeuvre in details</string>
+    <string name="dialog_review_positive_button">Post Review</string>
 
 
 

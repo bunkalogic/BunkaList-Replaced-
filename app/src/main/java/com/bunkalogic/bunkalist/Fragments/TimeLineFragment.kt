@@ -106,7 +106,7 @@ class TimeLineFragment : Fragment() {
         val options = FirestoreRecyclerOptions.Builder<TimelineMessage>()
             .setQuery(query, TimelineMessage::class.java)
             .build()
-        adapter = TimelineMessageAdapter(timelineList)
+        adapter = TimelineMessageAdapter(context!!,timelineList)
 
 
         _view.recyclerTimeline.setHasFixedSize(true)

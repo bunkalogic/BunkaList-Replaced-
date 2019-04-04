@@ -1,5 +1,6 @@
 package com.bunkalogic.bunkalist.Adapters
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 
-class TimelineMessageAdapter(private val TimelineMessageList: MutableList<TimelineMessage>) : RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
+class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: MutableList<TimelineMessage>) : RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_timeline_item, parent, false)
@@ -35,7 +37,19 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
         holder.sentAt.text = SimpleDateFormat("h:mm EEE,MMM").format(tlmessage.sentAt)
         holder.numSeason.text = tlmessage.numSeason
         holder.numEpisode.text = tlmessage.numEpisode
-        holder.content.text = tlmessage.content
+
+        // if isSpoiler is true, delete the message if it is false.
+        if (tlmessage.isSpoiler == true){
+            holder.content.text = ctx.getString(R.string.timeline_message_is_spoiler)
+        }else{
+            holder.content.text = tlmessage.content
+        }
+
+        holder.content.setOnClickListener {
+            holder.content.text = tlmessage.content
+        }
+
+
 
         // Here I check if the numSeason is empty then it does not show anything
         if (holder.numSeason.text.isNotEmpty()){
@@ -107,6 +121,7 @@ class TimelineMessageAdapter(private val TimelineMessageList: MutableList<Timeli
                 Log.d("TimelineMessageAdapter", "Error")
             }
         }
+
 
 
     }

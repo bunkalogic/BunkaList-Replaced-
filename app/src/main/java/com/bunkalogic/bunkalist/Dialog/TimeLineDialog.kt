@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.dialog_timeline.*
 import kotlinx.android.synthetic.main.dialog_timeline.view.*
 import kotlinx.android.synthetic.main.fragment_timeline_item.*
 import kotlinx.android.synthetic.main.fragment_timeline_item.view.*
+import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
@@ -44,11 +45,11 @@ class TimeLineDialog : DialogFragment(){
                 val textSeason = view.editTextSelectSeason.text.toString()
                 val textChapter = view.editTextChapter.text.toString()
                 val textContent = view.editTextContent.text.toString()
-
+                val isSpoiler = view.checkBoxIsSpoiler.isChecked
 
                 if(textContent.isNotEmpty()){
 
-                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent, "0" ,"0" )
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent, "0" ,"0", isSpoiler  )
 
                     RxBus.publish(NewTimeLineEvent(tlmessage))
                 }

@@ -50,6 +50,7 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
         private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescription)
         private val textViewSeeDetails: TextView = mView.findViewById(R.id.textViewGetFullDetails)
         private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyList)
+        private val textViewRating: TextView = mView.findViewById(R.id.textViewRating)
 
         fun bind(mItem : ResultSearchAll){
 
@@ -70,6 +71,7 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
 
 
             // It is responsible for loading the poster of the movies and series
+            textViewRating.text = mItem.voteAverage.toString()
             textViewDescription.text = mItem.overview
 
             val photo = mItem.posterPath

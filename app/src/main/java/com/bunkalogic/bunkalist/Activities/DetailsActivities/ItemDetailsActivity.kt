@@ -220,25 +220,6 @@ class ItemDetailsActivity : AppCompatActivity() {
             }
     }
 
-   //private fun subcribeToRating(){
-   //    itemRatingSubscription = addItemListDBRef
-   //        .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
-   //            override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
-   //                exception?.let {
-   //                    toast("Expection")
-   //                    return
-   //                }
-
-   //                snapshot?.let {
-   //                    val ItemRating = it.toObjects(ItemListRating::class.java)
-   //                    Log.d("SearchItemDetailsAct", "$ItemRating")
-   //                    saveItemRatingList(ItemRating as ItemListRating)
-   //                    toast("Added in list")
-   //                }
-   //            }
-
-   //        })
-   //}
 
    private fun addToNewItemRating(){
        itemRatingBusListener = RxBus.listen(NewListRating::class.java).subscribe {

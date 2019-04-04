@@ -14,6 +14,7 @@ class TimelineMessage{
     var content: String? = null
     var numPositive: String? = null
     var numNegative: String? = null
+    var isSpoiler: Boolean? = false
 
     constructor(){}
 
@@ -27,7 +28,8 @@ class TimelineMessage{
         numEpisode: String,
         content: String,
         numPositive: String,
-        numNegative: String
+        numNegative: String,
+        isSpoiler: Boolean
     ) {
         this.userId = userId
         this.username = username
@@ -39,6 +41,7 @@ class TimelineMessage{
         this.content = content
         this.numPositive = numPositive
         this.numNegative = numNegative
+        this.isSpoiler = isSpoiler
     }
 
     constructor(
@@ -50,7 +53,8 @@ class TimelineMessage{
         numEpisode: String,
         content: String,
         numPositive: String,
-        numNegative: String
+        numNegative: String,
+        isSpoiler: Boolean
     ) {
         this.username = username
         this.profileImageUrl = profileImageUrl
@@ -61,6 +65,7 @@ class TimelineMessage{
         this.content = content
         this.numPositive = numPositive
         this.numNegative = numNegative
+        this.isSpoiler = isSpoiler
     }
 
     fun toMap(): Map<String, Any>{
@@ -75,7 +80,7 @@ class TimelineMessage{
         result["content"] = content!!
         result["numPositive"] = numPositive!!
         result["numNegative"] = numNegative!!
-
+        result["isSpoiler"] = isSpoiler!!
         return result
     }
 

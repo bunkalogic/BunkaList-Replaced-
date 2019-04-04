@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemDetailsActivity
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
@@ -20,6 +21,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.data.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
+import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 
 class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
@@ -51,7 +53,10 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
             val type = listRating.typeOeuvre
             val idItem = listRating.oeuvreId
+            val mediaTypeTV = "tv"
+            val mediaTypeMovie = "movie"
 
+            // check which value has type to load movie or series or anime
             if (type == Constans.MOVIE_LIST){
                 searchViewModelSearch!!.getMovie(idItem!!,object : OnGetMovieCallback{
                     override fun onSuccess(movie: Movie) {
@@ -64,6 +69,20 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + movie.posterPath)
                             .override(90, 125)
                             .into(holder.imagePoster)
+
+                        val name = movie.title
+
+
+                        // is responsible for collecting the data to load in the ItemDetailsActivity
+                        holder.getFullDetails.setOnClickListener {
+                            ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
+                                "id" to idItem,
+                                "type" to mediaTypeMovie,
+                                "name" to name
+                            ))
+                        }
+
+
                     }
 
                     override fun onError() {
@@ -83,6 +102,18 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + series.posterPath)
                             .override(90, 125)
                             .into(holder.imagePoster)
+
+                        val name = series.name
+
+
+                        // is responsible for collecting the data to load in the ItemDetailsActivity
+                        holder.getFullDetails.setOnClickListener {
+                            ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
+                                "id" to idItem,
+                                "type" to mediaTypeTV,
+                                "name" to name
+                            ))
+                        }
                     }
 
                     override fun onError() {
@@ -102,6 +133,20 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + series.posterPath)
                             .override(90, 125)
                             .into(holder.imagePoster)
+
+
+                        val name = series.name
+
+                        // is responsible for collecting the data to load in the ItemDetailsActivity
+                        holder.getFullDetails.setOnClickListener {
+                            ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
+                                "id" to idItem,
+                                "type" to mediaTypeTV,
+                                "name" to name
+                            ))
+                        }
+
+
                     }
 
                     override fun onError() {
@@ -109,8 +154,9 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                     }
 
                 })
-            }
 
+
+            }
     }
 
     override fun getItemCount(): Int {

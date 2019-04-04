@@ -116,6 +116,7 @@ class ListProfileFragment : Fragment() {
 
     }
 
+    // This is responsible for giving me the full list
     private fun subscribeToProfileAllList(){
         itemRatingSubscription = addItemListDBRef
             .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
@@ -137,7 +138,7 @@ class ListProfileFragment : Fragment() {
 
             })
     }
-
+    // just give me the movies
     private fun subscribeToProfileListMovie(){
         itemRatingSubscription = addItemListDBRef
             .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
@@ -160,7 +161,7 @@ class ListProfileFragment : Fragment() {
 
             })
     }
-
+    // just give me the series
     private fun subscribeToProfileListSeries(){
         itemRatingSubscription = addItemListDBRef
             .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
@@ -183,7 +184,7 @@ class ListProfileFragment : Fragment() {
 
             })
     }
-
+    // just give me the anime
     private fun subscribeToProfileListAnime(){
         itemRatingSubscription = addItemListDBRef
             .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId

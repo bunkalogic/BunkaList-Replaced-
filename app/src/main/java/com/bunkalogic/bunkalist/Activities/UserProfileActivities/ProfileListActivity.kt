@@ -17,7 +17,9 @@ class ProfileListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile_list)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar!!.title = getString(R.string.btn_list_all_movies)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         setUpTablayout()
         onClick()
 
@@ -29,9 +31,7 @@ class ProfileListActivity : AppCompatActivity() {
     }
 
     private fun onClick(){
-        fabFilter.setOnClickListener {
-
-        }
+        fabFilter.hide()
     }
 
     private fun setUpTablayout(){

@@ -7,19 +7,19 @@
              tools:context=".Fragments.TopsAndReviewFragment">
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerChat"
+            android:id="@+id/recyclerReviews"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             android:clipToPadding="false"/>
 
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabNewChat"
+            android:id="@+id/fabNewReviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_fab_new_timeline"
+            app:srcCompat="@drawable/ic_fab_new_timeline"
             app:rippleColor="@color/colorAccentLight"
             android:focusable="true"
             android:clickable="true"/>
