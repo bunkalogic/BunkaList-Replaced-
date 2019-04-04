@@ -17,14 +17,14 @@
             android:layout_height="wrap_content">
 
         <ImageView
-                android:layout_width="145dp"
-                android:layout_height="145dp"
-                android:background="@drawable/ic_splash_screen"
+                android:layout_width="121dp"
+                android:layout_height="106dp"
+                android:background="@mipmap/ic_launcher"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/imageViewBackDrop"
         />
@@ -39,7 +39,8 @@
                 android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageViewBackDrop"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-                android:textAlignment="center"  android:textStyle="bold|italic"/>
+                android:textAlignment="center" android:textStyle="bold|italic"
+                app:layout_constraintVertical_bias="0.07999998" android:fontFamily="sans-serif-thin"/>
 
         <EditText
                 android:id="@+id/editTextEmailSignUp"

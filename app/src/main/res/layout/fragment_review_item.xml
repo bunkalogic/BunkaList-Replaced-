@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+        <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                     android:layout_height="wrap_content">
+
+
+            <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/imageViewUserImageReview"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textViewTitleReview"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewTitleReview" android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="24dp"
+                    android:textSize="20sp" android:textAlignment="center"
+                    android:textStyle="bold|italic"
+            />
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView12" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleReview"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewUserImageReview" android:layout_marginStart="8dp"
+                    android:text="@string/fragment_review_item" android:textStyle="italic"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewUsernameReview" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleReview"
+                    app:layout_constraintStart_toEndOf="@+id/textView12" android:layout_marginStart="8dp"
+                    android:textStyle="bold|italic"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView14" android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewUsernameReview"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewUserImageReview"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:textStyle="italic" android:textAlignment="textStart"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewDateReview" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleReview" android:textStyle="italic"/>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

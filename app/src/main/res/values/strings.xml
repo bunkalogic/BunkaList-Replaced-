@@ -135,7 +135,8 @@
     <string name="dialog_review_your_title">Title the your Review</string>
     <string name="dialog_review">Comment your opinion on a Oeuvre in details</string>
     <string name="dialog_review_positive_button">Post Review</string>
-
+    <string name="fragment_review_item">Write by</string>
+    <string name="fragment_review_content_spoiler">This review contains a spoiler, click if you are not worried about the spoiler</string>
 
 
 </resources>
