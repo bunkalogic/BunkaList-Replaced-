@@ -31,7 +31,7 @@ class ReviewAdapter(val ctx: Context, private val reviewList : MutableList<NewRe
 
         holder.titleReview.text = reviewItem.titleReview
         holder.usernameReview.text = reviewItem.username
-        holder.dateOnReview.text = SimpleDateFormat("h:mm EEE,MMM,YYY").format(reviewItem.sentAt)
+        holder.dateOnReview.text = SimpleDateFormat("h:mm EEE MMM YYY").format(reviewItem.sentAt)
 
         if (reviewItem.isSpoiler == true){
 
@@ -71,7 +71,7 @@ class ReviewAdapter(val ctx: Context, private val reviewList : MutableList<NewRe
             titleReview = view.findViewById(R.id.textViewTitleReview)
             usernameReview = view.findViewById(R.id.textViewUsernameReview)
             dateOnReview = view.findViewById(R.id.textViewDateReview)
-            contentReview = view.findViewById(R.id.editTextContentReview)
+            contentReview = view.findViewById(R.id.textViewContentReview)
             imageUser = view.findViewById(R.id.imageViewUserImageReview)
         }
 

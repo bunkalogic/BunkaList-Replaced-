@@ -6,9 +6,11 @@ import com.bunkalogic.bunkalist.Retrofit.*
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
+import com.bunkalogic.bunkalist.Retrofit.Response.TrailerResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class RepositorySearch internal constructor() {
     internal var moviesOrSeriesAndAnimeClient: MoviesOrSeriesAndAnimeClient
@@ -22,7 +24,7 @@ class RepositorySearch internal constructor() {
     }
 
     fun getAll(title: String, callback: OnGetSearchCallback){
-        val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY, title)
+        val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY,Locale.getDefault().toString(), title)
 
         call.enqueue(object : Callback<ResponseSearchAll>{
 
@@ -48,7 +50,7 @@ class RepositorySearch internal constructor() {
     }
 
     fun getMovie(Id: Int, callback: OnGetMovieCallback){
-        val call = moviesOrSeriesAndAnimeService.getMovie(Id, Constans.API_KEY)
+        val call = moviesOrSeriesAndAnimeService.getMovie(Id, Constans.API_KEY, Locale.getDefault().toString())
 
         call.enqueue(object : Callback<Movie>{
             override fun onFailure(call: Call<Movie>, t: Throwable) {
@@ -75,7 +77,7 @@ class RepositorySearch internal constructor() {
     }
 
     fun getSeries(Id: Int, callback: OnGetSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getSeries(Id, Constans.API_KEY)
+        val call = moviesOrSeriesAndAnimeService.getSeries(Id, Constans.API_KEY, Locale.getDefault().toString())
 
         call.enqueue(object : Callback<Series>{
             override fun onFailure(call: Call<Series>, t: Throwable) {
@@ -95,6 +97,63 @@ class RepositorySearch internal constructor() {
                     }
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series")
+                }
+            }
+
+        })
+    }
+
+
+    fun getTrailerMovie(Id: Int, callback: OnGetTrailersCallback){
+        val call = moviesOrSeriesAndAnimeService.getTrailersMovies(Id, Constans.API_KEY)
+
+        call.enqueue(object : Callback<TrailerResponse>{
+            override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection TrailerMovie")
+            }
+
+            override fun onResponse(call: Call<TrailerResponse>, response: Response<TrailerResponse>) {
+                if (response.isSuccessful){
+                    val trailerResponse : TrailerResponse = response.body()!!
+
+                    if (trailerResponse != null){
+                        callback.onSuccess(trailerResponse.trailers!!)
+                    }else{
+                        Log.d("RepositorySearch", "Something has gone wrong Movies trailers")
+                        callback.onError()
+                    }
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Trailers")
+                }
+            }
+
+        })
+    }
+
+
+
+    fun getTrailerSerieOrAnime(Id: Int, callback: OnGetTrailersCallback){
+        val call = moviesOrSeriesAndAnimeService.getTrailersSeries(Id, Constans.API_KEY)
+
+        call.enqueue(object : Callback<TrailerResponse>{
+            override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Trailer Series")
+            }
+
+            override fun onResponse(call: Call<TrailerResponse>, response: Response<TrailerResponse>) {
+                if (response.isSuccessful){
+                    val trailerResponse : TrailerResponse = response.body()!!
+
+                    if (trailerResponse != null){
+                        callback.onSuccess(trailerResponse.trailers!!)
+                    }else{
+                        Log.d("RepositorySearch", "Something has gone wrong Series Trailers")
+                        callback.onError()
+                    }
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series Trailers")
                 }
             }
 

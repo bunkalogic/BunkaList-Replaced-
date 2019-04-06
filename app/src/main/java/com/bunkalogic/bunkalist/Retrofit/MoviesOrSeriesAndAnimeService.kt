@@ -7,6 +7,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Path
+import com.bunkalogic.bunkalist.Retrofit.Response.TrailerResponse
+
+
 
 
 interface MoviesOrSeriesAndAnimeService {
@@ -16,7 +19,7 @@ interface MoviesOrSeriesAndAnimeService {
     @GET("search/multi")
     fun getSearchAll(
         @Query("api_key") apiKey: String,
-        //@Query("language") language: String,
+        @Query("language") language: String,
         @Query("query")query: String
         //@Query("page") page: Int,
         //@Query("include_adult")include_adult: Boolean
@@ -26,15 +29,31 @@ interface MoviesOrSeriesAndAnimeService {
     @GET("movie/{movie_id}")
     fun getMovie(
         @Path("movie_id") id: Int,
-        @Query("api_key") apiKey: String
-        //@Query("language") language: String
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
     ): Call<Movie>
 
 
     @GET("tv/{tv_id}")
     fun getSeries(
         @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<Series>
+
+    @GET("movie/{movie_id}/videos")
+    fun getTrailersMovies(
+        @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String
         //@Query("language") language: String
-    ): Call<Series>
+    ): Call<TrailerResponse>
+
+    @GET("tv/{tv_id}/videos")
+    fun getTrailersSeries(
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String
+        //@Query("language") language: String
+    ): Call<TrailerResponse>
+
+
 }

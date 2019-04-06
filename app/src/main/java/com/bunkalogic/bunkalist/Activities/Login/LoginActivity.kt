@@ -9,7 +9,11 @@ import com.bunkalogic.bunkalist.Others.isValidEmail
 import com.bunkalogic.bunkalist.Others.isValidPassword
 import com.bunkalogic.bunkalist.Others.validate
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.bunkalogic.bunkalist.db.DataUsers
+import com.bunkalogic.bunkalist.db.UserComplete
+import com.bunkalogic.bunkalist.db.Users
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -34,7 +38,9 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private val mGoogleApiClient: GoogleApiClient by lazy { getGoogleApiClient() }
 
-    private  val RC_GOOGLE_SIGN_IN = 99
+    private val RC_GOOGLE_SIGN_IN = 99
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +71,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         val username = mAuth.currentUser!!.displayName
         val userId = mAuth.currentUser!!.uid
         preferences.userId = userId
+        preferences.userName = username
         if (username == null){
             startActivity(intentFor<NewUserActivity>().newTask().clearTask())
             toast(R.string.welcome_new_user)
@@ -73,6 +80,8 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         }
 
     }
+
+
 
 
     // Function to collect the Api from Google+
@@ -111,6 +120,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             }else{
                 toast("Please make sure all the data is correct")
             }
+
 
         }
 

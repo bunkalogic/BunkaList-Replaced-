@@ -96,6 +96,9 @@
     <string name="btn_search_item_details_your_list">Add in your List</string>
     <string name="searchItemDetailsrating">Rating:</string>
     <string name="search_item_not_have_tittle">Not title</string>
+    <string name="search_item_full_details_trailers">Trailers</string>
+    <string name="search_item_details_summary_label">Summary</string>
+
 
 
     <!-- SearchFragmentItemDetailsDialog -->
@@ -137,6 +140,7 @@
     <string name="dialog_review_positive_button">Post Review</string>
     <string name="fragment_review_item">Write by</string>
     <string name="fragment_review_content_spoiler">This review contains a spoiler, click if you are not worried about the spoiler</string>
+
 
 
 </resources>

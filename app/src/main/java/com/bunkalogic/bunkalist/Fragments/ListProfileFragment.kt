@@ -31,7 +31,7 @@ class ListProfileFragment : Fragment() {
 
     private var typeList = 0
 
-    private val listProfileitem: ArrayList<ItemListRating> = ArrayList()
+    private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
