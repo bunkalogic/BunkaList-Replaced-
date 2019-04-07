@@ -4,25 +4,14 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
-import android.util.EventLog
-import android.util.Log
-import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import android.view.MenuItem
+import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
-import com.bunkalogic.bunkalist.db.DataUsers
-import com.bunkalogic.bunkalist.db.UserComplete
-import com.bunkalogic.bunkalist.db.Users
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.EventListener
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
-import java.util.*
 
 
 /**
@@ -35,18 +24,18 @@ class BaseActivity : AppCompatActivity() {
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
-
-    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var addUserDBRef: CollectionReference
-
-    private var addUserSubscription: ListenerRegistration? = null
-    private lateinit var addUserBusListener: Disposable
-
-    private var userList: ArrayList<UserComplete> = ArrayList()
-
-    private var listFollow : ArrayList<Users> = ArrayList()
-
-    private var listFollowers : ArrayList<Users> = ArrayList()
+//
+    //private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
+    //private lateinit var addUserDBRef: CollectionReference
+//
+    //private var addUserSubscription: ListenerRegistration? = null
+    //private lateinit var addUserBusListener: Disposable
+//
+    //private var userList: ArrayList<UserComplete> = ArrayList()
+//
+    //private var listFollow : ArrayList<Users> = ArrayList()
+//
+    //private var listFollowers : ArrayList<Users> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,10 +45,10 @@ class BaseActivity : AppCompatActivity() {
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
         setUpCurrentUser()
-        getNewUserData()
-        setUpAddUserDB()
-        addUserInDatabase()
-        addToNewUserInDataBase()
+        //getNewUserData()
+        //setUpAddUserDB()
+        //addUserInDatabase()
+        //addToNewUserInDataBase()
 
     }
 
@@ -69,21 +58,21 @@ class BaseActivity : AppCompatActivity() {
     }
 
 
-    // Creating the name instance in the database
-    private fun setUpAddUserDB(){
-        addUserDBRef = store.collection("UserData")
-    }
-
-    // Creating the new instance in the database
-    private fun saveUserData(user : UserComplete){
-        addUserDBRef.add(user)
-            .addOnCompleteListener {
-                Log.d("FragmentSearch", "User added on firestore")
-            }
-            .addOnFailureListener {
-                Log.d("FragmentSearch", "User error not added on firestore")
-            }
-    }
+    //// Creating the name instance in the database
+    //private fun setUpAddUserDB(){
+    //    addUserDBRef = store.collection("UserData")
+    //}
+//
+    //// Creating the new instance in the database
+    //private fun saveUserData(user : UserComplete){
+    //    addUserDBRef.add(user)
+    //        .addOnCompleteListener {
+    //            Log.d("FragmentSearch", "User added on firestore")
+    //        }
+    //        .addOnFailureListener {
+    //            Log.d("FragmentSearch", "User error not added on firestore")
+    //        }
+    //}
 
 
 
@@ -173,51 +162,51 @@ class BaseActivity : AppCompatActivity() {
     }
 
     //TODO: Add user data to the database
-    private fun getNewUserData(){
-        val userId = preferences.userId
-        val userName = preferences.userName
-        val userPhoto = currentUser.photoUrl
-
-        if(userName.isNullOrEmpty()){
-            val userComplete = UserComplete(userId, "", "", listFollow, listFollowers)
-            RxBus.publish(DataUsers(userComplete))
-        }else{
-            val userComplete = UserComplete(userId, userName, userPhoto.toString(), listFollow, listFollowers)
-            RxBus.publish(DataUsers(userComplete))
-        }
-
-
-    }
-
-    private fun addUserInDatabase(){
-        addUserSubscription = addUserDBRef
-            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
-                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
-                    exception?.let {
-                        Log.d("BaseActivity", "exception")
-                        return
-                    }
-                    snapshot?.let {
-                        userList.clear()
-                        val user = it.toObjects(UserComplete::class.java)
-                        userList.addAll(user)
-                    }
-                }
-
-            })
-    }
-
-    private fun addToNewUserInDataBase(){
-        addUserBusListener = RxBus.listen(DataUsers::class.java).subscribe {
-            saveUserData(it.userData)
-        }
-    }
-
-    override fun onDestroy() {
-        addUserBusListener.dispose()
-        addUserSubscription?.remove()
-        super.onDestroy()
-    }
+    //private fun getNewUserData(){
+    //    val userId = preferences.userId
+    //    val userName = preferences.userName
+    //    val userPhoto = currentUser.photoUrl
+//
+    //    if(userName.isNullOrEmpty()){
+    //        val userComplete = UserComplete(userId, "", "", listFollow, listFollowers)
+    //        RxBus.publish(DataUsers(userComplete))
+    //    }else{
+    //        val userComplete = UserComplete(userId, userName, userPhoto.toString(), listFollow, listFollowers)
+    //        RxBus.publish(DataUsers(userComplete))
+    //    }
+//
+//
+    //}
+//
+    //private fun addUserInDatabase(){
+    //    addUserSubscription = addUserDBRef
+    //        .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+    //            override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+    //                exception?.let {
+    //                    Log.d("BaseActivity", "exception")
+    //                    return
+    //                }
+    //                snapshot?.let {
+    //                    userList.clear()
+    //                    val user = it.toObjects(UserComplete::class.java)
+    //                    userList.addAll(user)
+    //                }
+    //            }
+//
+    //        })
+    //}
+//
+    //private fun addToNewUserInDataBase(){
+    //    addUserBusListener = RxBus.listen(DataUsers::class.java).subscribe {
+    //        saveUserData(it.userData)
+    //    }
+    //}
+//
+    //override fun onDestroy() {
+    //    addUserBusListener.dispose()
+    //    addUserSubscription?.remove()
+    //    super.onDestroy()
+    //}
 
 
 }

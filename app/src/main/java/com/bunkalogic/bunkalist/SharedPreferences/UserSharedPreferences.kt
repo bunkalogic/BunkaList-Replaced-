@@ -31,6 +31,23 @@ class UserSharedPreferences(context: Context){
         set(value) = prefsUser.edit().putString("itemName",value).apply()
 
 
+    var sizeAll: Int
+        get() = prefsUser.getInt("itemId", 0)
+        set(value) = prefsUser.edit().putInt("itemId", value).apply()
+
+    var sizeMovies: Int
+        get() = prefsUser.getInt("itemId", 0)
+        set(value) = prefsUser.edit().putInt("itemId", value).apply()
+
+    var sizeSeries: Int
+        get() = prefsUser.getInt("itemId", 0)
+        set(value) = prefsUser.edit().putInt("itemId", value).apply()
+
+    var sizeAnime: Int
+        get() = prefsUser.getInt("itemId", 0)
+        set(value) = prefsUser.edit().putInt("itemId", value).apply()
+
+
     var itemID: Int
         get() = prefsUser.getInt("itemId", 0)
         set(value) = prefsUser.edit().putInt("itemId", value).apply()

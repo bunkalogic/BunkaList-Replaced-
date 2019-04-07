@@ -99,6 +99,14 @@ class AddListDialog : DialogFragment(){
                 val result = resultFinalRate / 5
                 Log.d("AddListDialog", "Result final rate = $result")
 
+                if (typeInt == 0){
+                    preferences.sizeMovies + 1
+                }else if (typeInt == 1){
+                    preferences.sizeSeries + 1
+                }else if (typeInt == 2){
+                    preferences.sizeAnime + 1
+                }
+
                 val itemRating = ItemListRating(
                     currentUser.uid,
                     statusInt,

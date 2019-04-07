@@ -29,7 +29,7 @@
 
 
             <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
+                          android:layout_height="match_parent"
                           android:orientation="vertical"
                           android:layout_marginLeft="20dp"
                           android:layout_marginRight="20dp">
@@ -131,7 +131,7 @@
 
                                 <TextView
                                         android:id="@+id/numberMovie"
-                                        android:text="Movies views: ???"
+                                        android:text="Movies views: "
                                         android:textStyle="italic|bold"
                                         android:textSize="14sp"
                                         android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
 
                                 <TextView
                                         android:id="@+id/numberSeries"
-                                        android:text="Series views: ???"
+                                        android:text="Series views: "
                                         android:textStyle="italic|bold"
                                         android:textSize="14sp"
                                         android:layout_width="wrap_content"
@@ -162,7 +162,7 @@
 
                                 <TextView
                                         android:id="@+id/numberAnime"
-                                        android:text="Anime views: ???"
+                                        android:text="Anime views: "
                                         android:textStyle="italic|bold"
                                         android:textSize="14sp"
                                         android:layout_width="wrap_content"
@@ -210,6 +210,25 @@
                                     android:padding="2dp"
                                     android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
                                     android:textAllCaps="false"/>
+
+                            <android.support.v7.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    android:id="@+id/recyclerProfileAll"
+                                    app:layout_constraintTop_toBottomOf="@+id/textView6" android:layout_marginTop="8dp">
+
+                            </android.support.v7.widget.RecyclerView>
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/textView6"
+                                    app:layout_constraintTop_toBottomOf="@+id/buttonListAll"
+                                    app:layout_constraintStart_toStartOf="@+id/buttonListAll"
+                                    android:layout_marginStart="8dp" android:layout_marginTop="24dp"
+                                    android:textStyle="bold|italic" android:text="@string/fragment_profile"/>
 
 
                         </android.support.constraint.ConstraintLayout>

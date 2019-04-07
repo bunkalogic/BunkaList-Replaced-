@@ -40,7 +40,6 @@ class ProfileListActivity : AppCompatActivity() {
         tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_movie))
         tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_serie))
         tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_anime))
-        tabLayoutFilter.addTab(tabLayoutFilter.newTab().setText(R.string.profile_list_activity_tab_all))
 
         tabLayoutFilter.tabGravity = TabLayout.GRAVITY_FILL
 

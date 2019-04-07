@@ -21,8 +21,16 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.data.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import org.jetbrains.anko.intentFor
+import java.lang.Exception
 import java.text.SimpleDateFormat
+import com.bumptech.glide.util.Util.getSnapshot
+import com.google.firebase.firestore.Query
+
 
 class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
 
@@ -31,6 +39,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
     init {
         searchViewModelSearch = ViewModelProviders.of(ctx as FragmentActivity).get(ViewModelSearch::class.java)
+
 
     }
 
@@ -154,8 +163,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                     }
 
                 })
-
-
             }
     }
 

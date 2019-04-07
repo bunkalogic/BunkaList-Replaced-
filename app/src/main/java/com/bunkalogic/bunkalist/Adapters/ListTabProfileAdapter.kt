@@ -21,11 +21,7 @@ class ListTabProfileAdapter(fm: FragmentManager, private var totalTabs: Int): Fr
                 ListProfileFragment.newInstance(Constans.SERIE_LIST)
             }
 
-            2 ->{
-                ListProfileFragment.newInstance(Constans.ANIME_LIST)
-            }
-
-            else -> ListProfileFragment.newInstance(Constans.ALL_LIST)
+            else -> ListProfileFragment.newInstance(Constans.ANIME_LIST)
         }
     }
 

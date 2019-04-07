@@ -38,10 +38,6 @@ class ListProfileFragment : Fragment() {
     private lateinit var currentUser: FirebaseUser
 
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var addItemListDBRef: CollectionReference
-
-    private var itemRatingSubscription: ListenerRegistration? = null
-    private lateinit var itemRatingBusListener: Disposable
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,36 +50,14 @@ class ListProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view =  inflater.inflate(R.layout.fragment_list_profile, container, false)
-        setUpAddListDB()
         setUpCurrentUser()
 
         getListOeuvre()
         setUpRecycler()
 
-
-        addToNewItemRating()
-
         return _view
     }
 
-
-    // Creating the name instance in the database
-    private fun setUpAddListDB(){
-        addItemListDBRef = store.collection("RatingList")
-    }
-
-    // Creating the new instance in the database
-    private fun saveItemRatingList(itemListRating: ItemListRating){
-        addItemListDBRef.add(itemListRating)
-            .addOnCompleteListener {
-                toast("Add in your list")
-                Log.d("ListProfileFragment", "itemRating added on firestore")
-            }
-            .addOnFailureListener {
-                toast("Fail add in your list")
-                Log.d("ListProfileFragment", "itemRating error not added on firestore")
-            }
-    }
 
     // Initializing the currentUser
     private fun setUpCurrentUser(){
@@ -110,38 +84,14 @@ class ListProfileFragment : Fragment() {
             subscribeToProfileListSeries()
         }else if (typeList == Constans.ANIME_LIST){
             subscribeToProfileListAnime()
-        }else if (typeList == Constans.ALL_LIST){
-            subscribeToProfileAllList()
         }
 
     }
 
-    // This is responsible for giving me the full list
-    private fun subscribeToProfileAllList(){
-        itemRatingSubscription = addItemListDBRef
-            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
-            .orderBy("finalRate", Query.Direction.DESCENDING)
-            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
-                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
-                    exception?.let {
-                        Log.d("ListProfileFragment", "exception")
-                        return
-                    }
 
-                    snapshot?.let {
-                        listProfileitem.clear()
-                        val itemRating = it.toObjects(ItemListRating::class.java)
-                        listProfileitem.addAll(itemRating)
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-
-            })
-    }
     // just give me the movies
     private fun subscribeToProfileListMovie(){
-        itemRatingSubscription = addItemListDBRef
-            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+        store.collection("RatingList")
             .whereEqualTo("typeOeuvre", Constans.MOVIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -163,8 +113,7 @@ class ListProfileFragment : Fragment() {
     }
     // just give me the series
     private fun subscribeToProfileListSeries(){
-        itemRatingSubscription = addItemListDBRef
-            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+        store.collection("RatingList")
             .whereEqualTo("typeOeuvre", Constans.SERIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -186,8 +135,7 @@ class ListProfileFragment : Fragment() {
     }
     // just give me the anime
     private fun subscribeToProfileListAnime(){
-        itemRatingSubscription = addItemListDBRef
-            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+        store.collection("RatingList")
             .whereEqualTo("typeOeuvre", Constans.ANIME_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -206,24 +154,6 @@ class ListProfileFragment : Fragment() {
                 }
 
             })
-    }
-
-
-
-
-
-
-
-    private fun addToNewItemRating(){
-        itemRatingBusListener = RxBus.listen(NewListRating::class.java).subscribe {
-            saveItemRatingList(it.itemListRating)
-        }
-    }
-
-    override fun onDestroyView() {
-        itemRatingBusListener.dispose()
-        itemRatingSubscription?.remove()
-        super.onDestroyView()
     }
 
     companion object {
