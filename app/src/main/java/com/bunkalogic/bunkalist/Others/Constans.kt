@@ -23,7 +23,7 @@ object Constans{
     val MOVIE_LIST = 0
     val SERIE_LIST = 1
     val ANIME_LIST = 2
-    val ALL_LIST = 3
+    val TOP_LIST = 3
 
 
 

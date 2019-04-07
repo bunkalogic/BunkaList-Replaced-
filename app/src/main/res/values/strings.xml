@@ -99,6 +99,8 @@
     <string name="search_item_not_have_tittle">Not title</string>
     <string name="search_item_full_details_trailers">Trailers</string>
     <string name="search_item_details_summary_label">Summary</string>
+    <string name="activity_full_details">Genres :</string>
+    <string name="activity_full_details_date">Date Release :</string>
 
 
 

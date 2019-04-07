@@ -1,5 +1,6 @@
 package com.bunkalogic.bunkalist.Retrofit
 
+import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
@@ -54,6 +55,19 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("api_key") apiKey: String
         //@Query("language") language: String
     ): Call<TrailerResponse>
+
+    @GET("genre/movie/list")
+    fun getGenresMovie(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<GenresResponse>
+
+    @GET("genre/tv/list")
+    fun getGenresTV(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<GenresResponse>
+
 
 
 }

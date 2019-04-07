@@ -1,11 +1,8 @@
-package com.bunkalogic.bunkalist.data
+package com.bunkalogic.bunkalist.ViewModel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
-import com.bunkalogic.bunkalist.Retrofit.OnGetSearchCallback
-import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
-import com.bunkalogic.bunkalist.Retrofit.OnGetTrailersCallback
+import com.bunkalogic.bunkalist.Retrofit.*
 
 class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
 
@@ -33,6 +30,14 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
 
     fun getTrailersSeries(Id: Int, callback: OnGetTrailersCallback){
         searchRepository.getTrailerSerieOrAnime(Id, callback)
+    }
+
+    fun getGenresMovies(callback: OnGetGenresCallback){
+        searchRepository.getGenresMovies(callback)
+    }
+
+    fun getGenresSeries(callback: OnGetGenresCallback){
+        searchRepository.getGenresSeries(callback)
     }
 
 

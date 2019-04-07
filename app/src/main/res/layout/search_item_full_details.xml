@@ -12,7 +12,7 @@
     <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="300dp"
             android:fitsSystemWindows="true"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -70,15 +70,14 @@
                     android:id="@+id/textViewDetailsGenres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:alpha="0.7"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonSearchItemDetailsAddInYourList" />
+                    app:layout_constraintTop_toBottomOf="@+id/buttonSearchItemDetailsAddInYourList"
+                    android:textStyle="bold|italic" android:textSize="18sp"/>
 
             <TextView
                     android:id="@+id/textViewSearchDetailsAllDescription"
@@ -129,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:alpha="0.7"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -183,6 +182,24 @@
                     app:layout_constraintTop_toTopOf="@+id/textViewDetailsRating"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewDetailsRating"
                     android:background="@drawable/ic_star_orange_rating_24dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewLabelGenres"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5" android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@+id/textViewDetailsGenres" android:layout_marginStart="8dp"
+                    android:text="@string/activity_full_details" android:textSize="18sp" android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewDetailsGenres" android:layout_marginBottom="8dp"
+                    android:visibility="invisible"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewLabelDate"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDetailsGenres"
+                    app:layout_constraintStart_toStartOf="@+id/textViewDateRelease" android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp" app:layout_constraintBottom_toTopOf="@+id/textViewDateRelease"
+                    android:text="@string/activity_full_details_date" android:textSize="18sp"
+                    android:textStyle="bold|italic" android:visibility="invisible"/>
 
 
         </android.support.constraint.ConstraintLayout>

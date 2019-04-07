@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.TimelineMessage
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
@@ -86,6 +87,8 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
                 .into(holder.userImage)
 
         }
+
+        
         // TODO: get it saved in the database for every click that is
         // If you click imagePositive that adds +1
         holder.imagePositive.setOnClickListener {

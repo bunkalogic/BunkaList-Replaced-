@@ -84,6 +84,8 @@ class ListProfileFragment : Fragment() {
             subscribeToProfileListSeries()
         }else if (typeList == Constans.ANIME_LIST){
             subscribeToProfileListAnime()
+        }else if (typeList == Constans.TOP_LIST){
+            subscribeTopFavs()
         }
 
     }
@@ -105,6 +107,7 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
+                        preferences.sizeMovies = listProfileitem.size
                         adapter.notifyDataSetChanged()
                     }
                 }
@@ -127,6 +130,7 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
+                        preferences.sizeSeries = listProfileitem.size
                         adapter.notifyDataSetChanged()
                     }
                 }
@@ -149,6 +153,30 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
+                        preferences.sizeAnime = listProfileitem.size
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+
+    // just give me the anime
+    private fun subscribeTopFavs(){
+        store.collection("RatingList")
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
+                        preferences.sizeAnime = listProfileitem.size
                         adapter.notifyDataSetChanged()
                     }
                 }

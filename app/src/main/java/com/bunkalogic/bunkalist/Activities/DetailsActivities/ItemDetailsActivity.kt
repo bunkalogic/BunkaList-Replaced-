@@ -16,7 +16,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.Retrofit.Response.Trailer
 import com.bunkalogic.bunkalist.RxBus.RxBus
-import com.bunkalogic.bunkalist.data.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
@@ -29,11 +29,17 @@ import com.bumptech.glide.request.RequestOptions
 import android.content.Intent
 import android.net.Uri
 import android.widget.ImageView
+import com.bunkalogic.bunkalist.Retrofit.Response.Genre
+import android.text.TextUtils
+import com.bunkalogic.bunkalist.Retrofit.OnGetGenresCallback
+
+
 
 
 class ItemDetailsActivity : AppCompatActivity() {
 
     private lateinit var searchViewModel: ViewModelSearch
+
 
     private lateinit var toolbar: android.support.v7.widget.Toolbar
 
@@ -45,6 +51,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     private var itemRatingSubscription: ListenerRegistration? = null
     private lateinit var itemRatingBusListener: Disposable
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setContentView(R.layout.search_item_full_details)
@@ -117,10 +124,16 @@ class ItemDetailsActivity : AppCompatActivity() {
         getMovieContentForID(object: OnGetMovieCallback{
             override fun onSuccess(movie: Movie) {
                 textViewTitleDetails.text = movie.title
+
+                textViewLabelDate.visibility = View.VISIBLE
                 textViewDateRelease.text = movie.releaseDate
+
+                summaryLabel.visibility = View.VISIBLE
                 textViewSearchDetailsAllDescription.text = movie.overview
                 textViewDetailsRating.text = movie.voteAverage.toString()
-                //Todo: Implement the list of genres
+
+                textViewLabelGenres.visibility = View.VISIBLE
+                ListGenresMovies(movie)
 
                 val imageBackground = movie.backdropPath
                 val imagePoster = movie.posterPath
@@ -194,10 +207,17 @@ class ItemDetailsActivity : AppCompatActivity() {
             getSeriesContentForID(object : OnGetSeriesCallback{
                 override fun onSuccess(series: Series) {
                     textViewTitleDetails.text = series.name
+
+                    textViewLabelDate.visibility = View.VISIBLE
                     textViewDateRelease.text = series.firstAirDate
+
+                    summaryLabel.visibility = View.VISIBLE
                     textViewSearchDetailsAllDescription.text = series.overview
+
                     textViewDetailsRating.text = series.voteAverage.toString()
-                    //Todo: Implement the list of genres
+
+
+                    ListGenresSeriesAndAnime(series)
 
                     val imageBackground = series.backdropPath
                     val imagePoster = series.posterPath
@@ -252,6 +272,51 @@ class ItemDetailsActivity : AppCompatActivity() {
 
             override fun onError() {
                 trailersLabel.visibility = View.GONE
+            }
+
+        })
+    }
+
+
+    // Is responsible for collecting the list of movies genres
+    private fun ListGenresMovies(movie: Movie){
+        searchViewModel.getGenresMovies(object : OnGetGenresCallback{
+            override fun onSuccess(genres: List<Genre>) {
+                if (movie.genres != null){
+                    val currentGenres: ArrayList<String> = ArrayList()
+                    for (genre in movie.genres!!) {
+                        currentGenres.add(genre.name!!)
+                    }
+                    textViewLabelGenres.visibility = View.VISIBLE
+                    textViewDetailsGenres.text = TextUtils.join(" - ", currentGenres)
+                }
+            }
+
+            override fun onError() {
+                Log.d("SearchItemDetailsAct", "Error Connection")
+                textViewLabelGenres.visibility = View.GONE
+            }
+
+        })
+    }
+
+    // Is responsible for collecting the list of series genres
+    private fun ListGenresSeriesAndAnime(series: Series){
+        searchViewModel.getGenresMovies(object : OnGetGenresCallback{
+            override fun onSuccess(genres: List<Genre>) {
+                if (series.genres != null){
+                    val currentGenres: ArrayList<String> = ArrayList()
+                    for (genre in series.genres!!) {
+                        currentGenres.add(genre.name!!)
+                    }
+                    textViewLabelGenres.visibility = View.VISIBLE
+                    textViewDetailsGenres.text = TextUtils.join(" - ", currentGenres)
+                }
+            }
+
+            override fun onError() {
+                Log.d("SearchItemDetailsAct", "Error Connection")
+                textViewLabelGenres.visibility = View.GONE
             }
 
         })

@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.UserProfileActivities.ProfileListActivity
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
+import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
@@ -146,7 +147,7 @@ class ProfileFragment : Fragment() {
 
     fun onClick(){
         _view.buttonListAll.setOnClickListener { startActivity(intentFor<ProfileListActivity>()) }
-
+        //_view.buttonTopFavsAll.setOnClickListener { ListProfileFragment.newInstance(Constans.TOP_LIST) }
     }
 
     private fun addToNewItemRating(){

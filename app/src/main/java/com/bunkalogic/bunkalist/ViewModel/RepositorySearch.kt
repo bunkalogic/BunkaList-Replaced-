@@ -1,8 +1,9 @@
-package com.bunkalogic.bunkalist.data
+package com.bunkalogic.bunkalist.ViewModel
 
 import android.util.Log
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.Retrofit.*
+import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
@@ -154,6 +155,62 @@ class RepositorySearch internal constructor() {
                     }
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series Trailers")
+                }
+            }
+
+        })
+    }
+
+
+    fun getGenresMovies(callback: OnGetGenresCallback){
+        val call = moviesOrSeriesAndAnimeService.getGenresMovie(Constans.API_KEY, Locale.getDefault().toString())
+
+        call.enqueue(object : Callback<GenresResponse>{
+            override fun onFailure(call: Call<GenresResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Genres")
+            }
+
+            override fun onResponse(call: Call<GenresResponse>, response: Response<GenresResponse>) {
+                if (response.isSuccessful){
+                    val genresResponse : GenresResponse = response.body()!!
+
+                    if (genresResponse != null){
+                        callback.onSuccess(genresResponse.genres!!)
+                    }else{
+                        Log.d("RepositorySearch", "Something has gone wrong Genres Movies")
+                        callback.onError()
+                    }
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Genres Movies")
+                }
+            }
+
+        })
+    }
+
+
+    fun getGenresSeries(callback: OnGetGenresCallback){
+        val call = moviesOrSeriesAndAnimeService.getGenresTV(Constans.API_KEY, Locale.getDefault().toString())
+
+        call.enqueue(object : Callback<GenresResponse>{
+            override fun onFailure(call: Call<GenresResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Genres")
+            }
+
+            override fun onResponse(call: Call<GenresResponse>, response: Response<GenresResponse>) {
+                if (response.isSuccessful){
+                    val genresResponse : GenresResponse = response.body()!!
+
+                    if (genresResponse != null){
+                        callback.onSuccess(genresResponse.genres!!)
+                    }else{
+                        Log.d("RepositorySearch", "Something has gone wrong Genres Movies")
+                        callback.onError()
+                    }
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Genres Movies")
                 }
             }
 

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.util.Log
 import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
+import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import kotlinx.android.synthetic.main.activity_profile_list.*
 
@@ -20,6 +22,7 @@ class ProfileListActivity : AppCompatActivity() {
         supportActionBar!!.title = getString(R.string.btn_list_all_movies)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+
         setUpTablayout()
         onClick()
 
@@ -33,6 +36,7 @@ class ProfileListActivity : AppCompatActivity() {
     private fun onClick(){
         fabFilter.hide()
     }
+
 
     private fun setUpTablayout(){
         val tabLayoutFilter = findViewById<TabLayout>(R.id.tabLayoutFilter)

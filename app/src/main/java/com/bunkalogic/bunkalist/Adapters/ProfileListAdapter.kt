@@ -18,18 +18,11 @@ import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
 import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
-import com.bunkalogic.bunkalist.data.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import org.jetbrains.anko.intentFor
-import java.lang.Exception
 import java.text.SimpleDateFormat
-import com.bumptech.glide.util.Util.getSnapshot
-import com.google.firebase.firestore.Query
+
 
 
 class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
@@ -71,12 +64,11 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                     override fun onSuccess(movie: Movie) {
                         holder.title.text = movie.title
                         holder.dateRelease.text = movie.releaseDate?.split("-")?.get(0) ?: movie.releaseDate
-                        holder.description.text = movie.overview
+                        //holder.description.text = movie.overview
                         holder.globalRating.text = movie.voteAverage.toString()
 
                         Glide.with(ctx)
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + movie.posterPath)
-                            .override(90, 125)
                             .into(holder.imagePoster)
 
                         val name = movie.title
@@ -104,12 +96,11 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
                         holder.dateRelease.text = series.firstAirDate?.split("-")?.get(0) ?: series.firstAirDate
-                        holder.description.text = series.overview
+                        //holder.description.text = series.overview
                         holder.globalRating.text = series.voteAverage.toString()
 
                         Glide.with(ctx)
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + series.posterPath)
-                            .override(90, 125)
                             .into(holder.imagePoster)
 
                         val name = series.name
@@ -135,12 +126,11 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
                         holder.dateRelease.text = series.firstAirDate?.split("-")?.get(0) ?: series.firstAirDate
-                        holder.description.text = series.overview
+                        //holder.description.text = series.overview
                         holder.globalRating.text = series.voteAverage.toString()
 
                         Glide.with(ctx)
                             .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + series.posterPath)
-                            .override(90, 125)
                             .into(holder.imagePoster)
 
 
@@ -174,7 +164,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
     inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
         internal var title: TextView
         internal var dateRelease: TextView
-        internal var description: TextView
         internal var globalRating: TextView
         internal var getFullDetails: TextView
         internal var numPosition: TextView
@@ -186,7 +175,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
         init {
             title = view.findViewById(R.id.textViewTitleListProfile)
             dateRelease = view.findViewById(R.id.textViewDateReleastListProfile)
-            description = view.findViewById(R.id.textViewDescriptionListProfile)
             globalRating = view.findViewById(R.id.textViewRatingListProfile)
             getFullDetails = view.findViewById(R.id.textViewGetFullDetailsListProfile)
             numPosition = view.findViewById(R.id.textViewListProfileNumberPosition)
