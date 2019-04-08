@@ -39,6 +39,7 @@ import org.jetbrains.anko.support.v4.toast
 class ProfileFragment : Fragment() {
 
     private lateinit var _view: View
+    val userToken = 1
 
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
@@ -97,6 +98,7 @@ class ProfileFragment : Fragment() {
     private fun subscribeToProfileAllList(){
         itemRatingSubscription = addItemListDBRef
             .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+            .limit(15)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot> {
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
                     exception?.let {
@@ -109,6 +111,7 @@ class ProfileFragment : Fragment() {
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
                         adapter.notifyDataSetChanged()
+                        _view.recyclerProfileAll.smoothScrollToPosition(0)
 
                     }
                 }
@@ -134,8 +137,7 @@ class ProfileFragment : Fragment() {
 
             Glide.with(this)
                 .load(currentUser.photoUrl)
-                .apply(RequestOptions.circleCropTransform()
-                    .override(160, 160))
+                .override(160, 160)
                 .into(_view.userImageProfile)
 
 
@@ -144,6 +146,15 @@ class ProfileFragment : Fragment() {
         _view.numberAnime.text = "Anime views: " + preferences.sizeAnime
 
     }
+
+    //private fun setUpOtherUser(username: String, userPhoto: String){
+    //    _view.userNameProfile.text = username
+//
+    //    Glide.with(this)
+    //        .load(userPhoto)
+    //        .override(160, 160)
+    //        .into(_view.userImageProfile)
+    //}
 
     fun onClick(){
         _view.buttonListAll.setOnClickListener { startActivity(intentFor<ProfileListActivity>()) }
@@ -156,11 +167,29 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    //companion object {
+    //    @JvmStatic
+    //    fun newInstance(userId: String, username: String, userPhoto: String){
+    //        ProfileFragment().apply {
+    //            arguments = Bundle().apply {
+    //                putString(Constans.USER_PROFILE, userId)
+    //                putString(Constans.USER_PROFILE, username)
+    //                putString(Constans.USER_PROFILE, userPhoto)
+    //            }
+    //
+    //        }
+    //    }
+    //}
+
+
+
     override fun onDestroyView() {
         itemRatingBusListener.dispose()
         itemRatingSubscription?.remove()
         super.onDestroyView()
     }
+
+
 
 
 }

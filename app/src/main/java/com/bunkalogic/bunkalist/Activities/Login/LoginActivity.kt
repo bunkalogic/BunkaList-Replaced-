@@ -26,6 +26,7 @@ import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.toast
+import java.util.*
 
 /**
  *  Created by @author Naim Dridi on 20/02/19
@@ -46,6 +47,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        mAuth.setLanguageCode(Locale.getDefault().language)
         clickListeners()
     }
 

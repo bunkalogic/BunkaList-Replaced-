@@ -13,6 +13,8 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Activities.UserProfileActivities.OtherUserProfile">
+        </activity>
         <activity android:name=".Activities.UserProfileActivities.ProfileListActivity">
         </activity>
 

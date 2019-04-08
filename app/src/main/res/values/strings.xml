@@ -73,7 +73,8 @@
     <!-- ItemTimeLine -->
     <string name="item_timeline_chapter">Episode:</string>
     <string name="item_timeline_season">Season:</string>
-    <string name="timeline_message_is_spoiler">is Spoiler, click to see the text</string>
+    <string name="timeline_message_is_spoiler">[ Is Spoiler, long click on the text if you do not mind the Spoiler ]
+    </string>
 
 
     <!-- ItemTimeLineDialog -->
@@ -101,7 +102,6 @@
     <string name="search_item_details_summary_label">Summary</string>
     <string name="activity_full_details">Genres :</string>
     <string name="activity_full_details_date">Date Release :</string>
-
 
 
     <!-- SearchFragmentItemDetailsDialog -->
@@ -142,8 +142,9 @@
     <string name="dialog_review">Comment your opinion on a Oeuvre in details</string>
     <string name="dialog_review_positive_button">Post Review</string>
     <string name="fragment_review_item">Write by</string>
-    <string name="fragment_review_content_spoiler">This review contains a spoiler, click if you are not worried about the spoiler</string>
-
+    <string name="fragment_review_content_spoiler">This review contains a spoiler, click if you are not worried about
+        the spoiler
+    </string>
 
 
 </resources>

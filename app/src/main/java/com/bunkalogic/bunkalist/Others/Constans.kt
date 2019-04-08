@@ -25,6 +25,8 @@ object Constans{
     val ANIME_LIST = 2
     val TOP_LIST = 3
 
+    val USER_PROFILE = "userProfileNewInstance"
+
 
 
 

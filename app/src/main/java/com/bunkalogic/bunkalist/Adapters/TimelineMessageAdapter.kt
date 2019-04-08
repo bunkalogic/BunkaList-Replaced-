@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
+import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,12 +11,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bunkalogic.bunkalist.Activities.UserProfileActivities.OtherUserProfile
+import com.bunkalogic.bunkalist.Others.SolutionCounters
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.TimelineMessage
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import org.jetbrains.anko.colorAttr
+import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
+import java.util.*
 
 class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: MutableList<TimelineMessage>) : RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
 
@@ -33,21 +38,24 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val tlmessage = TimelineMessageList[position]
 
+
         holder.username.text = tlmessage.username
         holder.oeuvreName.text = tlmessage.oeuvreName
-        holder.sentAt.text = SimpleDateFormat("h:mm EEE,MMM").format(tlmessage.sentAt)
+        holder.sentAt.text = SimpleDateFormat("h:mm EEE,MMM", Locale.getDefault()).format(tlmessage.sentAt)
         holder.numSeason.text = tlmessage.numSeason
         holder.numEpisode.text = tlmessage.numEpisode
 
         // if isSpoiler is true, delete the message if it is false.
         if (tlmessage.isSpoiler == true){
             holder.content.text = ctx.getString(R.string.timeline_message_is_spoiler)
+            holder.content.setTypeface(null , Typeface.BOLD_ITALIC)
         }else{
             holder.content.text = tlmessage.content
         }
 
-        holder.content.setOnClickListener {
+        holder.content.setOnLongClickListener {
             holder.content.text = tlmessage.content
+            true
         }
 
 
@@ -74,59 +82,62 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
         if (tlmessage.profileImageUrl.isEmpty()){
             Glide.with(holder.itemView)
                 .load(R.drawable.ic_person_black_24dp)
-                .apply(
-                    RequestOptions.circleCropTransform()
-                        .override(40, 40))
+                .override(60, 60)
                 .into(holder.userImage)
         }else{
             Glide.with(holder.itemView)
                 .load(tlmessage.profileImageUrl)
-                .apply(
-                    RequestOptions.circleCropTransform()
-                        .override(40, 40))
+                .override(60, 60)
                 .into(holder.userImage)
 
+        }
+
+        val userId = tlmessage.userId
+        val username = tlmessage.username
+        val userPhoto = tlmessage.profileImageUrl
+
+        holder.userImage.setOnClickListener {
+            ctx.startActivity(ctx.intentFor<OtherUserProfile>(
+                "userId" to userId,
+                "username" to username,
+                "userPhoto" to userPhoto
+            ))
+        }
+
+
+
+        holder.imagePositive.setOnClickListener {
+            Glide.with(ctx)
+                .load(R.drawable.ic_item_timeline_positive)
+                .into(holder.imagePositive)
+
+            holder.numPositive.text = "" + 1
         }
 
         
         // TODO: get it saved in the database for every click that is
         // If you click imagePositive that adds +1
-        holder.imagePositive.setOnClickListener {
-            holder.numPositive.text = "+" + 1
-            if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){
-                val store = FirebaseFirestore.getInstance()
-                var numPositiveRef = store.collection("timelineMessage").document("userId")
-
-                numPositiveRef.update("numPositive", +1).addOnSuccessListener {
-                    Log.d("TimelineMessageAdapter", "successfully updated!")
-
-                }.addOnFailureListener {
-                    Log.d("TimelineMessageAdapter", "Error updating document")
-                }
-            }else{
-                Log.d("TimelineMessageAdapter", "Error")
-            }
-        }
-        // If you click imageNegative that adds -1
-        holder.imageNegative.setOnClickListener {
-            holder.numNegative.text = "-" + 1
-            if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){
-                val store = FirebaseFirestore.getInstance()
-                var numNegativeRef = store.collection("timelineMessage").document("userId")
-
-                numNegativeRef.update("numNegative", "-1").addOnSuccessListener {
-                    Log.d("TimelineMessageAdapter", "successfully updated negative!")
-
-                }.addOnFailureListener {
-                    Log.d("TimelineMessageAdapter", "Error updating document")
-                }
-            }else{
-                Log.d("TimelineMessageAdapter", "Error")
-            }
-        }
-
-
-
+        //holder.imagePositive.setOnClickListener {
+        //    if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){
+        //        val store = FirebaseFirestore.getInstance()
+        //        var numPositiveRef = store.collection("timelineMessage").document("numPositive")
+        //        SolutionCounters().Shard(0)
+        //        SolutionCounters().Counter(0)
+        //        SolutionCounters().createCounter(numPositiveRef, 0)
+        //        SolutionCounters().incrementCounter(numPositiveRef, + 1)
+        //        val count = SolutionCounters().getCount(numPositiveRef)
+        //        holder.numPositive.text = count.toString()
+        //    }
+        //}
+        //// If you click imageNegative that adds -1
+        //holder.imageNegative.setOnClickListener {
+        //    holder.numNegative.text = "-" + 1
+        //    if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){
+        //        val store = FirebaseFirestore.getInstance()
+        //        var numNegativeRef = store.collection("timelineMessage").document("userId")
+//
+        //    }
+        //}
     }
 
 
@@ -139,9 +150,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
         internal var numEpisode: TextView
         internal var content: TextView
         internal var numPositive: TextView
-        internal var numNegative: TextView
         internal var imagePositive: ImageView
-        internal var imageNegative: ImageView
 
 
         init {
@@ -153,10 +162,10 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             numEpisode = view.findViewById(R.id.textViewCapsNumbers)
             content = view.findViewById(R.id.textViewContent)
             numPositive = view.findViewById(R.id.textViewNumberPositive)
-            numNegative = view.findViewById(R.id.textViewNumberNegative)
             imagePositive = view.findViewById(R.id.imageViewPositive)
-            imageNegative = view.findViewById(R.id.imageViewNegative)
         }
 
     }
+
+
 }

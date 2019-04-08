@@ -13,7 +13,7 @@
     <ImageButton
             android:layout_width="96dp"
             android:layout_height="88dp"
-            android:src="@drawable/ic_add_a_photo"
+            app:srcCompat="@drawable/ic_add_a_photo"
             android:id="@+id/imageViewProfile"
             android:background="@drawable/rounded_corners"
             android:layout_marginBottom="32dp"
