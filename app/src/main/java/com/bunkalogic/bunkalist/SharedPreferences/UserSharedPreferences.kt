@@ -52,6 +52,14 @@ class UserSharedPreferences(context: Context){
         get() = prefsUser.getInt("itemId", 0)
         set(value) = prefsUser.edit().putInt("itemId", value).apply()
 
+    var OtherUserId: String?
+        get() = prefsUser.getString("OtherUserId", "")
+        set(value) = prefsUser.edit().putString("OtherUserId",value).apply()
+
+    var OtherUsername: String?
+        get() = prefsUser.getString("OtherUsername", "")
+        set(value) = prefsUser.edit().putString("OtherUsername",value).apply()
+
 
     fun editCurrentUser(){
         prefsUser.edit().apply()
@@ -60,5 +68,9 @@ class UserSharedPreferences(context: Context){
 
     fun deleteAll(){
         prefsUser.edit().clear().apply()
+    }
+    fun deleteOtherUser(){
+        prefsUser.edit().remove("OtherUserId").apply()
+        prefsUser.edit().remove("OtherUsername").apply()
     }
 }

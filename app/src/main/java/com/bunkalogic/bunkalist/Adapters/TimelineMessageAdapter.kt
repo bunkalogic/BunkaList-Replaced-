@@ -17,6 +17,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import org.jetbrains.anko.colorAttr
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
@@ -111,11 +112,26 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
                 .load(R.drawable.ic_item_timeline_positive)
                 .into(holder.imagePositive)
 
-            holder.numPositive.text = "" + 1
+
+            // TODO: Invalid collection reference. Collection references must have an odd number of segments
+            val ref = FirebaseFirestore.getInstance()
+                .collection("Data")
+                .document("Users")
+                .collection("$userId")
+                .document("$username")
+                .collection("timelineMessage")
+                .document("numPositive")
+            Log.d("AdapterTimeLine", "${ref.path}")
+
+
+            SolutionCounters().createCounter(ref, 0)
+            SolutionCounters().incrementCounter(ref, 0)
+            val countTotal = SolutionCounters().getCount(ref).toString()
+            holder.numPositive.text = "+$countTotal"
         }
 
         
-        // TODO: get it saved in the database for every click that is
+
         // If you click imagePositive that adds +1
         //holder.imagePositive.setOnClickListener {
         //    if (FirebaseAuth.getInstance().currentUser!!.uid == FirebaseAuth.getInstance().uid){

@@ -11,13 +11,8 @@ class SolutionCounters {
 
     private val db: FirebaseFirestore? = null
 
-    // [START counter_classes]
-    // counters/${ID}
-    inner class Counter(internal var numShards: Int)
 
-    // counters/${ID}/shards/${NUM}
-    inner class Shard(internal var count: Int)
-    // [END counter_classes]
+
 
     // [START create_counter]
     fun createCounter(ref: DocumentReference, numShards: Int): Task<Void> {
@@ -28,11 +23,11 @@ class SolutionCounters {
                     throw task.exception!!
                 }
 
-                val tasks: ArrayList<Task<Void>> = ArrayList()
+                val tasks = arrayListOf<Task<Void>>()
 
                 // Initialize each shard with count=0
                 for (i in 0 until numShards) {
-                    val makeShard = ref.collection("numPositive")
+                    val makeShard = ref.collection("shards")
                         .document(i.toString())
                         .set(Shard(0))
 
@@ -47,33 +42,24 @@ class SolutionCounters {
     // [START increment_counter]
     fun incrementCounter(ref: DocumentReference, numShards: Int): Task<Void> {
         val shardId = Math.floor(Math.random() * numShards).toInt()
-        val shardRef = ref.collection("").document(shardId.toString())
+        val shardRef = ref.collection("shards").document(shardId.toString())
 
-        return db!!.runTransaction { transaction ->
-            val shard = transaction.get(shardRef).toObject(Shard::class.java)
-            shard!!.count += 1
-
-            transaction.set(shardRef, shard!!)
-            null
-        }
+        return shardRef.update("count", FieldValue.increment(1))
     }
     // [END increment_counter]
 
     // [START get_count]
     fun getCount(ref: DocumentReference): Task<Int> {
         // Sum the count of each shard in the subcollection
-        return ref.collection("shards").get()
-            .continueWith(object : Continuation<QuerySnapshot, Int> {
-                @Throws(Exception::class)
-                override fun then(@NonNull task: Task<QuerySnapshot>): Int? {
-                    var count = 0
-                    for (snap in task.result!!) {
-                        val shard = snap.toObject(Shard::class.java)
-                        count += shard.count
-                    }
-                    return count
+        return ref.collection("").get()
+            .continueWith { task ->
+                var count = 0
+                for (snap in task.result!!) {
+                    val shard = snap.toObject(Shard::class.java)
+                    count += shard.count
                 }
-            })
+                count
+            }
     }
     // [END get_count]
 

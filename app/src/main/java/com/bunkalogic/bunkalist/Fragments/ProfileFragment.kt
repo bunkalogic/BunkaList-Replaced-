@@ -78,7 +78,7 @@ class ProfileFragment : Fragment() {
 
     // Creating the name instance in the database
     private fun setUpAddListDB(){
-        addItemListDBRef = store.collection("RatingList")
+        addItemListDBRef = store.collection("Data/Users/${preferences.userId}/${preferences.userName}/RatingList")
     }
 
     // Creating the new instance in the database
@@ -97,7 +97,7 @@ class ProfileFragment : Fragment() {
     // This is responsible for giving me the full list
     private fun subscribeToProfileAllList(){
         itemRatingSubscription = addItemListDBRef
-            .whereEqualTo("userId", preferences.userId) // Here filter the list getting only item with an equal value preferences.userId
+            .orderBy("addDate", Query.Direction.DESCENDING)
             .limit(15)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot> {
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {

@@ -8,6 +8,7 @@ import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
 import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import kotlinx.android.synthetic.main.activity_profile_list.*
 
 class ProfileListActivity : AppCompatActivity() {

@@ -12,6 +12,7 @@ import com.bunkalogic.bunkalist.Adapters.TimelineMessageAdapter
 import com.bunkalogic.bunkalist.Dialog.TimeLineDialog
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.NewTimeLineEvent
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -68,8 +69,9 @@ class TimeLineFragment : Fragment() {
         return _view
     }
 
+    // root : Users/uid/username
     private fun setUpTimeLineDB(){
-        timelineDBRef = store.collection("timelineMessage")
+        timelineDBRef = store.collection("Data/Users/${preferences.userId}/${preferences.userName}/timelineMessage")
     }
 
     // Creating the new instance in the database

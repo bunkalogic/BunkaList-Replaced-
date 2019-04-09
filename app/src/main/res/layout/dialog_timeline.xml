@@ -8,6 +8,8 @@
     <MultiAutoCompleteTextView
             android:layout_width="200dp"
             android:layout_height="30dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHint="@color/colorPrimaryText"
             android:id="@+id/multiAutoCompleteTextViewOeuvre"
             android:background="@drawable/edittext_rounded"
             android:textStyle="italic" android:hint="@string/hint_name_oeuvre" android:textSize="14sp"
@@ -19,6 +21,8 @@
             android:layout_width="70dp"
             android:layout_height="35dp"
             android:inputType="number"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHint="@color/colorPrimaryText"
             android:ems="10"
             android:id="@+id/editTextSelectSeason"
             android:background="@drawable/edittext_rounded"
@@ -31,6 +35,8 @@
     <EditText
             android:layout_width="75dp"
             android:layout_height="35dp"
+            android:textColor="@color/colorPrimaryText"
+            android:textColorHint="@color/colorPrimaryText"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/editTextChapter"
@@ -53,6 +59,8 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryText"
+                android:textColorHint="@color/colorPrimaryText"
                 android:inputType="textMultiLine"
                 android:maxLines="7"
                 android:maxLength="240"

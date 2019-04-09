@@ -32,8 +32,7 @@ import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
 import com.bunkalogic.bunkalist.Retrofit.OnGetGenresCallback
-
-
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 
 
 class ItemDetailsActivity : AppCompatActivity() {
@@ -64,7 +63,6 @@ class ItemDetailsActivity : AppCompatActivity() {
         setUpCurrentUser()
         isMovieOrSerie()
         onClick()
-        addToNewItemRating()
     }
 
     // You can select the title of the toolbar
@@ -116,6 +114,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     // is responsible for collecting the Id of the film and filling the function of the ViewModel
     private fun getMovieContentForID(callback: OnGetMovieCallback){
         val extrasIdMovies = intent.extras.getInt("id")
+        preferences.itemID = extrasIdMovies
         Log.d("SearchItemDetailsActMov", "Id: $extrasIdMovies")
         searchViewModel.getMovie(extrasIdMovies, callback)
     }
@@ -199,6 +198,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     // is responsible for collecting the Id of the series and filling the function of the ViewModel
     private fun getSeriesContentForID(callback: OnGetSeriesCallback){
         val extrasIdSeries = intent.extras.getInt("id")
+        preferences.itemID = extrasIdSeries
         Log.d("SearchItemDetailsActTV", "Id: $extrasIdSeries")
         searchViewModel.getSeriesAndAnime(extrasIdSeries, callback)
     }
@@ -331,34 +331,9 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     //Creating the name instance in the database
     private fun setUpAddListDB() {
-         addItemListDBRef = store.collection("RatingList")
+         addItemListDBRef = store.collection("Data/Users/${preferences.userId}/${preferences.userName}/RatingList")
      }
 
-     //Creating the new instance in the database
-    private fun saveItemRatingList(itemListRating: ItemListRating){
-        addItemListDBRef.add(itemListRating)
-            .addOnCompleteListener {
-                toast("Add in your list")
-                Log.d("SearchItemDetailsAct", "itemRating added on firestore")
-            }
-            .addOnFailureListener {
-                toast("Fail add in your list")
-                Log.d("SearchItemDetailsAct", "itemRating error not added on firestore")
-            }
-    }
-
-
-   private fun addToNewItemRating(){
-       itemRatingBusListener = RxBus.listen(NewListRating::class.java).subscribe {
-           saveItemRatingList(it.itemListRating)
-       }
-   }
-
-   override fun onDestroy() {
-       itemRatingBusListener.dispose()
-       itemRatingSubscription?.remove()
-       super.onDestroy()
-   }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

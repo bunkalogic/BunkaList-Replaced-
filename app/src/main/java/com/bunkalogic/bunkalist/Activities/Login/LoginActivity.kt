@@ -106,6 +106,10 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             if (mGoogleApiClient.isConnected){
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient)
             }
+            val username = mAuth.currentUser!!.displayName
+            val userId = mAuth.currentUser!!.uid
+            preferences.userId = userId
+            preferences.userName = username
             startActivity(intentFor<BaseActivity>().newTask().clearTask())
         }
     }

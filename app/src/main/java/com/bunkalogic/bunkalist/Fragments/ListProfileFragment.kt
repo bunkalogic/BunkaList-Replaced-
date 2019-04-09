@@ -52,7 +52,7 @@ class ListProfileFragment : Fragment() {
         _view =  inflater.inflate(R.layout.fragment_list_profile, container, false)
         setUpCurrentUser()
 
-        getListOeuvre()
+        whatUserIs()
         setUpRecycler()
 
         return _view
@@ -76,24 +76,30 @@ class ListProfileFragment : Fragment() {
         _view.recyclerAllList.adapter = adapter
     }
 
-    private fun getListOeuvre(){
+    private fun whatUserIs(){
+        if (preferences.OtherUserId!! == ""){
+            getListOeuvre(preferences.userId!!, preferences.userName!!)
+        }else{
+            getListOeuvre(preferences.OtherUserId!!, preferences.OtherUsername!!)
+        }
+    }
+
+    private fun getListOeuvre(userId: String, username: String){
 
         if (typeList == Constans.MOVIE_LIST){
-            subscribeToProfileListMovie()
+            subscribeToProfileListMovie(userId, username)
         }else if (typeList == Constans.SERIE_LIST){
-            subscribeToProfileListSeries()
+            subscribeToProfileListSeries(userId, username)
         }else if (typeList == Constans.ANIME_LIST){
-            subscribeToProfileListAnime()
-        }else if (typeList == Constans.TOP_LIST){
-            subscribeTopFavs()
+            subscribeToProfileListAnime(userId, username)
         }
 
     }
 
 
     // just give me the movies
-    private fun subscribeToProfileListMovie(){
-        store.collection("RatingList")
+    private fun subscribeToProfileListMovie(userId: String, username: String){
+        store.collection("Data/Users/$userId/$username/RatingList")
             .whereEqualTo("typeOeuvre", Constans.MOVIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -115,8 +121,8 @@ class ListProfileFragment : Fragment() {
             })
     }
     // just give me the series
-    private fun subscribeToProfileListSeries(){
-        store.collection("RatingList")
+    private fun subscribeToProfileListSeries(userId: String, username: String){
+        store.collection("Data/Users/$userId/$username/RatingList")
             .whereEqualTo("typeOeuvre", Constans.SERIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -138,8 +144,8 @@ class ListProfileFragment : Fragment() {
             })
     }
     // just give me the anime
-    private fun subscribeToProfileListAnime(){
-        store.collection("RatingList")
+    private fun subscribeToProfileListAnime(userId: String, username: String){
+        store.collection("Data/Users/$userId/$username/RatingList")
             .whereEqualTo("typeOeuvre", Constans.ANIME_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -161,28 +167,6 @@ class ListProfileFragment : Fragment() {
             })
     }
 
-    // just give me the anime
-    private fun subscribeTopFavs(){
-        store.collection("RatingList")
-            .orderBy("finalRate", Query.Direction.DESCENDING)
-            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
-                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
-                    exception?.let {
-                        Log.d("ListProfileFragment", "exception")
-                        return
-                    }
-
-                    snapshot?.let {
-                        listProfileitem.clear()
-                        val itemRating = it.toObjects(ItemListRating::class.java)
-                        listProfileitem.addAll(itemRating)
-                        preferences.sizeAnime = listProfileitem.size
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-
-            })
-    }
 
     companion object {
         @JvmStatic
@@ -192,5 +176,12 @@ class ListProfileFragment : Fragment() {
                     putInt(Constans.TYPE_LIST, typeList)
                 }
             }
+    }
+
+
+
+    override fun onDestroyView() {
+        preferences.deleteOtherUser()
+        super.onDestroyView()
     }
 }

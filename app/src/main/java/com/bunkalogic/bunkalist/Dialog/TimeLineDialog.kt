@@ -49,7 +49,7 @@ class TimeLineDialog : DialogFragment(){
 
                 if(textContent.isNotEmpty()){
 
-                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent, "0" ,"0", isSpoiler  )
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
 
                     RxBus.publish(NewTimeLineEvent(tlmessage))
                 }
