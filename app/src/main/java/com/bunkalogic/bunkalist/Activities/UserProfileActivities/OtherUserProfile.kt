@@ -1,21 +1,23 @@
 package com.bunkalogic.bunkalist.Activities.UserProfileActivities
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.View
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
-import com.bunkalogic.bunkalist.Fragments.ProfileFragment
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.bunkalogic.bunkalist.db.DataUsers
 import com.bunkalogic.bunkalist.db.ItemListRating
+import com.bunkalogic.bunkalist.db.Users
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.support.v4.intentFor
 
 class OtherUserProfile : AppCompatActivity() {
 
@@ -24,23 +26,31 @@ class OtherUserProfile : AppCompatActivity() {
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
 
+    //Variables with otherUser's data
+    private val userId = intent.extras?.getString("userId")
+    private val username = intent.extras?.getString("username")
+    private val userPhoto = intent.extras?.getString("userPhoto")
+
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other_user_profile)
+        // we instantiated the toolbar
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         setUpOtherProfile()
+
+        clicksListeners()
         setUpRecycler()
+
         subscribeToProfileListOther()
     }
 
     private fun setUpOtherProfile(){
-        val userId = intent.extras?.getString("userId")
-        val username = intent.extras?.getString("username")
-        val userPhoto = intent.extras?.getString("userPhoto")
          supportActionBar!!.title = username
 
         userNameProfile.text = username
@@ -49,6 +59,20 @@ class OtherUserProfile : AppCompatActivity() {
             .load(userPhoto)
             .override(130, 130)
             .into(userImageProfile)
+
+
+    }
+
+    private fun clicksListeners(){
+
+        if (preferences.userId == userId){
+            buttonFollows.visibility = View.GONE
+        }
+
+        buttonFollows.setOnClickListener {
+           val follow = Users(userId!!, username!!, userPhoto!!)
+            RxBus.publish(DataUsers(follow))
+        }
 
         buttonListAll.setOnClickListener {
             preferences.OtherUserId = userId
@@ -69,9 +93,10 @@ class OtherUserProfile : AppCompatActivity() {
         recyclerOtherProfile.adapter = adapter
     }
 
+
+
     // just give me the list for other list
     private fun subscribeToProfileListOther() {
-        val userId = intent.extras?.getString("userId")
 
         store.collection("RatingList")
             .whereEqualTo("userId", userId)
@@ -94,7 +119,6 @@ class OtherUserProfile : AppCompatActivity() {
 
             })
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         preferences.deleteOtherUser()

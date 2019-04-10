@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListFollowsActivity
 import com.bunkalogic.bunkalist.Activities.UserProfileActivities.ProfileListActivity
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
 import com.bunkalogic.bunkalist.Others.Constans
@@ -159,6 +160,10 @@ class ProfileFragment : Fragment() {
     fun onClick(){
         _view.buttonListAll.setOnClickListener { startActivity(intentFor<ProfileListActivity>()) }
         //_view.buttonTopFavsAll.setOnClickListener { ListProfileFragment.newInstance(Constans.TOP_LIST) }
+
+        _view.textViewFollows.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("follow" to 1)) }
+
+        _view.textViewFollowers.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("followers" to 2)) }
     }
 
     private fun addToNewItemRating(){

@@ -27,6 +27,11 @@ object Constans{
 
     val USER_PROFILE = "userProfileNewInstance"
 
+    val USER_FOLLOW = "USER_FOLLOW"
+
+    val USER_LIST_FOLLOWS = 1
+    val USER_LIST_FOLLOWERS = 2
+
 
 
 

@@ -145,6 +145,10 @@
     <string name="fragment_review_content_spoiler">This review contains a spoiler, click if you are not worried about
         the spoiler
     </string>
+    <string name="activity_other_user_profile">Follow</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
