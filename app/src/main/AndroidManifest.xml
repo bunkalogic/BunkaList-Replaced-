@@ -13,11 +13,14 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activities.DetailsActivities.ListFollowsActivity">
+        <activity android:name=".Activities.DetailsActivities.ListFollowsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".Activities.UserProfileActivities.OtherUserProfile">
+        <activity android:name=".Activities.UserProfileActivities.OtherUserProfile"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".Activities.UserProfileActivities.ProfileListActivity">
+        <activity android:name=".Activities.UserProfileActivities.ProfileListActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <meta-data
@@ -27,21 +30,25 @@
                 android:name=".com.movies.sesionID"
                 android:value="{$MOVIES_SESION_ID}"/>
 
-        <activity android:name=".Activities.DetailsActivities.ItemDetailsActivity">
+        <activity android:name=".Activities.DetailsActivities.ItemDetailsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".Activities.SettingsActivities.EditProfileActivity">
+        <activity android:name=".Activities.SettingsActivities.EditProfileActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".Activities.BaseActivity"/>
         </activity>
         <activity android:name=".Activities.OtherActivities.ToolbarActivity">
         </activity>
-        <activity android:name=".Activities.SettingsActivities.ModeDayOrNightActivity">
+        <activity android:name=".Activities.SettingsActivities.ModeDayOrNightActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".Activities.BaseActivity"/>
         </activity>
-        <activity android:name=".Activities.NewUser.NewUserActivity">
+        <activity android:name=".Activities.NewUser.NewUserActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".Activities.OtherActivities.MainEmptyActivity"

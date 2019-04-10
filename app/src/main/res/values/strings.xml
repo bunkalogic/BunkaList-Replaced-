@@ -149,6 +149,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="toolbar_title_home">Start</string>
+    <string name="timeline_tab_layout">Global</string>
+    <string name="timeline_tab_layout_personal">Follows</string>
 
 
 </resources>

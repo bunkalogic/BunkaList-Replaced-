@@ -1,32 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:background="@color/colorSecondaryText"
              android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".Fragments.TimeLineFragment">
 
-   <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerTimeline"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:clipToPadding="false"/>
+
+   <android.support.design.widget.TabLayout android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="?attr/colorPrimaryDark"
+                                            android:minHeight="?attr/actionBarSize"
+                                            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                                            android:id="@+id/tabLayout"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent">
+
+   </android.support.design.widget.TabLayout>
+
+
+   <android.support.v4.view.ViewPager
+           android:id="@+id/timelineViewPager"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintHorizontal_bias="1.0"
+           app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+      <android.support.v7.widget.RecyclerView
+              android:id="@+id/recyclerTimeline"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:scrollbars="vertical"
+              android:clipToPadding="false"/>
+
+   </android.support.v4.view.ViewPager>
 
    <android.support.design.widget.FloatingActionButton
            android:id="@+id/fabTimeline"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:layout_margin="12dp"
-           android:layout_gravity="end|bottom"
            app:srcCompat="@drawable/ic_fab_new_chat"
            app:rippleColor="@color/colorAccentLight"
            android:focusable="true"
-           android:clickable="true"/>
+           android:clickable="true" android:layout_marginEnd="16dp"
+           app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="16dp"
+           app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-
-
-
-
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

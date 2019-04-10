@@ -2,14 +2,20 @@ package com.bunkalogic.bunkalist.Fragments
 
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bunkalogic.bunkalist.Adapters.TimeLineTabAdapter
 import com.bunkalogic.bunkalist.Adapters.TimelineMessageAdapter
 import com.bunkalogic.bunkalist.Dialog.TimeLineDialog
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
@@ -21,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_profile_list.*
 import kotlinx.android.synthetic.main.fragment_timeline.view.*
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
@@ -39,6 +46,7 @@ class TimeLineFragment : Fragment() {
 
     private lateinit var _view: View
 
+    private var typeList = 0
 
     private val timelineList: ArrayList<TimelineMessage> = ArrayList()
     private lateinit var adapter: TimelineMessageAdapter
@@ -53,6 +61,13 @@ class TimeLineFragment : Fragment() {
     private lateinit var tlmessageBusListener: Disposable
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            typeList = it.getInt(Constans.personal)
+        }
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -60,10 +75,11 @@ class TimeLineFragment : Fragment() {
         setUpTimeLineDB()
         setUpCurrentUser()
 
+        setUpTabLayout()
         setUpRecyclerView()
         setUpFab()
 
-        subscribeToTimelineMessage()
+        isGlobalOrPersonal()
         subscribeToNewMessageTimeLine()
 
         return _view
@@ -71,7 +87,7 @@ class TimeLineFragment : Fragment() {
 
     // root : Users/uid/username
     private fun setUpTimeLineDB(){
-        timelineDBRef = store.collection("Data/Users/${preferences.userId}/${preferences.userName}/timelineMessage")
+        timelineDBRef = store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /timelineMessage")
     }
 
     // Creating the new instance in the database
@@ -93,6 +109,51 @@ class TimeLineFragment : Fragment() {
 
         _view.fabTimeline.setOnClickListener {
             TimeLineDialog().show(fragmentManager, "")
+        }
+    }
+
+    private fun setUpTabLayout(){
+        val tabLayoutTimeline = _view.tabLayout
+
+
+        tabLayoutTimeline.addTab(tabLayoutTimeline.newTab().setText(R.string.timeline_tab_layout))
+        tabLayoutTimeline.addTab(tabLayoutTimeline.newTab().setText(R.string.timeline_tab_layout_personal))
+
+        tabLayoutTimeline.tabGravity = TabLayout.GRAVITY_FILL
+
+        val adapter = TimeLineTabAdapter(fragmentManager!!, tabLayoutTimeline.tabCount)
+
+        _view.timelineViewPager.adapter = adapter
+
+
+        _view.timelineViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayoutTimeline))
+
+        tabLayoutTimeline.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+            override fun onTabReselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                var position = tab!!.position
+                _view.timelineViewPager.currentItem = position
+                Log.d("TimelineMessage", "$position")
+            }
+
+        })
+
+
+    }
+
+    private fun isGlobalOrPersonal(){
+        // TODO: Separar dialog, database, subscribeToNewMessageTimeLine
+        if (typeList == Constans.TIMELINE_GLOBAL){
+            subscribeToTimelineMessageGlobal()
+        }else if (typeList == Constans.TIMELINE_PERSONAL){
+            subscribeToTimelineMessagePersonal()
         }
     }
 
@@ -118,13 +179,35 @@ class TimeLineFragment : Fragment() {
 
     }
 
-    private fun subscribeToTimelineMessage(){
+    private fun subscribeToTimelineMessagePersonal(){
         tlmessageSubscription = timelineDBRef
             .orderBy("sentAt", Query.Direction.DESCENDING)
             .addSnapshotListener(object: java.util.EventListener, EventListener<QuerySnapshot>{
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?){
                     exception?.let {
-                        toast("Exeception!")
+                        Log.d("TimelineMessage", "Exception")
+                        return
+                    }
+                    snapshot?.let {
+                        timelineList.clear()
+                        val message = it.toObjects(TimelineMessage::class.java)
+                        timelineList.addAll(message)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+
+
+    }
+
+    private fun subscribeToTimelineMessageGlobal(){
+        store.collection("Data/User/TimelineGlobal")
+            .orderBy("sentAt", Query.Direction.DESCENDING)
+            .addSnapshotListener(object: java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?){
+                    exception?.let {
+                        Log.d("TimelineMessage", "Exception")
                         return
                     }
                     snapshot?.let {
@@ -145,6 +228,17 @@ class TimeLineFragment : Fragment() {
         tlmessageBusListener = RxBus.listen(NewTimeLineEvent::class.java).subscribe {
             saveTimelistMessage(it.message)
         }
+    }
+
+
+    companion object {
+        @JvmStatic
+        fun newInstance(typeList: Int) =
+            ListFollowFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(Constans.personal, typeList)
+                }
+            }
     }
 
     override fun onDestroyView() {

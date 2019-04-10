@@ -19,6 +19,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.jetbrains.anko.support.v4.toast
@@ -40,6 +41,8 @@ class SearchFragment : Fragment() {
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
+
+    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -70,12 +73,6 @@ class SearchFragment : Fragment() {
 
        _view.recyclerSearch.adapter = adapter
    }
-
-
-
-
-
-
 
     private fun getSearchAll(callback: OnGetSearchCallback) {
         searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)

@@ -9,9 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bunkalogic.bunkalist.Activities.UserProfileActivities.OtherUserProfile
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.db.UserComplete
 import com.bunkalogic.bunkalist.db.Users
+import org.jetbrains.anko.intentFor
 
 class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<Users>) : RecyclerView.Adapter<SearchItemUserAdapter.ViewHolder>(){
 
@@ -42,6 +43,18 @@ class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<
                 .apply(RequestOptions.circleCropTransform().override(60, 60))
                 .into(holder.userPhoto)
         }
+        val userId = userItem.userId
+        val username = userItem.username
+        val userPhoto = userItem.userPhoto
+
+        holder.userPhoto.setOnClickListener {
+            ctx.startActivity(ctx.intentFor<OtherUserProfile>(
+                "userId" to userId,
+                "username" to username,
+                "userPhoto" to userPhoto
+            ))
+        }
+
     }
 
     fun setDataUsername(user: MutableList<Users>){

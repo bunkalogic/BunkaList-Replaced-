@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import org.jetbrains.anko.support.v4.intentFor
@@ -79,7 +80,7 @@ class ProfileFragment : Fragment() {
 
     // Creating the name instance in the database
     private fun setUpAddListDB(){
-        addItemListDBRef = store.collection("Data/Users/${preferences.userId}/${preferences.userName}/RatingList")
+        addItemListDBRef = store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /RatingList")
     }
 
     // Creating the new instance in the database

@@ -19,18 +19,27 @@ object Constans{
 
     val sessionId = BuildConfig.sesionIDMovieDatatbase
 
+    // list fragment
     val TYPE_LIST = "LIST_TYPE"
     val MOVIE_LIST = 0
     val SERIE_LIST = 1
     val ANIME_LIST = 2
     val TOP_LIST = 3
 
+    // fragment follows
     val USER_PROFILE = "userProfileNewInstance"
 
     val USER_FOLLOW = "USER_FOLLOW"
 
     val USER_LIST_FOLLOWS = 1
     val USER_LIST_FOLLOWERS = 2
+
+
+    // fragment timeline
+    val personal = "Personal"
+
+    val TIMELINE_GLOBAL = 1
+    val TIMELINE_PERSONAL = 2
 
 
 

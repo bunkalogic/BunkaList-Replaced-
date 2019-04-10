@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +63,7 @@ class TopsAndReviewFragment : Fragment() {
     }
 
     private fun setUpReviewDB(){
-        reviewDBRef= store.collection("Data/Users/${preferences.userId}/${preferences.userName}/ReviewExt")
+        reviewDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /ReviewExt")
     }
 
     // Creating the new instance in the database
@@ -103,7 +104,7 @@ class TopsAndReviewFragment : Fragment() {
 
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
                     exception?.let {
-                        toast("Exception review!")
+                        Log.d("ReviewFragment", "Exception review!")
                     }
                     snapshot?.let {
                         reviewList.clear()

@@ -3,6 +3,7 @@ package com.bunkalogic.bunkalist.Activities.DetailsActivities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Fragments.ListFollowFragment
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 
 class ListFollowsActivity : AppCompatActivity() {
@@ -27,7 +28,7 @@ class ListFollowsActivity : AppCompatActivity() {
         val followersExtras = intent.extras.getInt("followers")
 
         if (followsExtras == follows){
-            ListFollowFragment
+            ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWS)
         }
     }
 

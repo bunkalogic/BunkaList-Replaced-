@@ -26,10 +26,7 @@ class OtherUserProfile : AppCompatActivity() {
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
 
-    //Variables with otherUser's data
-    private val userId = intent.extras?.getString("userId")
-    private val username = intent.extras?.getString("username")
-    private val userPhoto = intent.extras?.getString("userPhoto")
+
 
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
 
@@ -51,6 +48,9 @@ class OtherUserProfile : AppCompatActivity() {
     }
 
     private fun setUpOtherProfile(){
+        val username = intent.extras?.getString("username")
+        val userPhoto = intent.extras?.getString("userPhoto")
+
          supportActionBar!!.title = username
 
         userNameProfile.text = username
@@ -64,6 +64,10 @@ class OtherUserProfile : AppCompatActivity() {
     }
 
     private fun clicksListeners(){
+
+        val userId = intent.extras?.getString("userId")
+        val username = intent.extras?.getString("username")
+        val userPhoto = intent.extras?.getString("userPhoto")
 
         if (preferences.userId == userId){
             buttonFollows.visibility = View.GONE
@@ -97,6 +101,8 @@ class OtherUserProfile : AppCompatActivity() {
 
     // just give me the list for other list
     private fun subscribeToProfileListOther() {
+        val userId = intent.extras?.getString("userId")
+
 
         store.collection("RatingList")
             .whereEqualTo("userId", userId)

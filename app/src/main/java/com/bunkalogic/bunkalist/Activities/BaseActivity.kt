@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
+import android.view.View
+import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.R
@@ -24,18 +26,6 @@ class BaseActivity : AppCompatActivity() {
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
-//
-    //private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
-    //private lateinit var addUserDBRef: CollectionReference
-//
-    //private var addUserSubscription: ListenerRegistration? = null
-    //private lateinit var addUserBusListener: Disposable
-//
-    //private var userList: ArrayList<UserComplete> = ArrayList()
-//
-    //private var listFollow : ArrayList<Users> = ArrayList()
-//
-    //private var listFollowers : ArrayList<Users> = ArrayList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,10 +35,8 @@ class BaseActivity : AppCompatActivity() {
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
         setUpCurrentUser()
-        //getNewUserData()
-        //setUpAddUserDB()
-        //addUserInDatabase()
-        //addToNewUserInDataBase()
+        getUserPhoto()
+
 
     }
 
@@ -58,21 +46,17 @@ class BaseActivity : AppCompatActivity() {
     }
 
 
-    //// Creating the name instance in the database
-    //private fun setUpAddUserDB(){
-    //    addUserDBRef = store.collection("UserData")
-    //}
-//
-    //// Creating the new instance in the database
-    //private fun saveUserData(user : UserComplete){
-    //    addUserDBRef.add(user)
-    //        .addOnCompleteListener {
-    //            Log.d("FragmentSearch", "User added on firestore")
-    //        }
-    //        .addOnFailureListener {
-    //            Log.d("FragmentSearch", "User error not added on firestore")
-    //        }
-    //}
+    private fun getUserPhoto(){
+        supportActionBar!!.hide()
+       if (currentUser.photoUrl != null){
+           Glide.with(this)
+               .load(currentUser.photoUrl)
+               .into(imageViewToolbarPhoto)
+       }
+    }
+
+
+
 
 
 
@@ -120,23 +104,35 @@ class BaseActivity : AppCompatActivity() {
         btn_nav_View.setOnNavigationItemSelectedListener {Item ->
             when(Item.itemId){
                 R.id.bottom_nav_timeline -> {
-                    viewPager.currentItem = 0; true
+                    viewPager.currentItem = 0;
+                    toolbar_base.visibility = View.VISIBLE
+                    true
                 }
 
                 R.id.bottom_nav_top_and_review -> {
-                    viewPager.currentItem = 1; true
+                    viewPager.currentItem = 1;
+                    toolbar_base.visibility = View.VISIBLE
+                    true
                 }
 
                 R.id.bottom_nav_search -> {
-                    viewPager.currentItem = 2; true
+
+                    viewPager.currentItem = 2;
+                    toolbar_base.visibility = View.GONE
+                    true
+
                 }
 
                 R.id.bottom_nav_profile -> {
-                    viewPager.currentItem = 3; true
+                    viewPager.currentItem = 3;
+                    toolbar_base.visibility = View.GONE
+                    true
                 }
 
                 R.id.bottom_nav_settings -> {
-                    viewPager.currentItem = 4; true
+                    viewPager.currentItem = 4;
+                    toolbar_base.visibility = View.VISIBLE
+                    true
                 }
                 else -> false
             }
@@ -160,53 +156,4 @@ class BaseActivity : AppCompatActivity() {
         AppCompatDelegate.getDefaultNightMode()
 
     }
-
-    //TODO: Add user data to the database
-    //private fun getNewUserData(){
-    //    val userId = preferences.userId
-    //    val userName = preferences.userName
-    //    val userPhoto = currentUser.photoUrl
-//
-    //    if(userName.isNullOrEmpty()){
-    //        val userComplete = UserComplete(userId, "", "", listFollow, listFollowers)
-    //        RxBus.publish(DataUsers(userComplete))
-    //    }else{
-    //        val userComplete = UserComplete(userId, userName, userPhoto.toString(), listFollow, listFollowers)
-    //        RxBus.publish(DataUsers(userComplete))
-    //    }
-//
-//
-    //}
-//
-    //private fun addUserInDatabase(){
-    //    addUserSubscription = addUserDBRef
-    //        .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
-    //            override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
-    //                exception?.let {
-    //                    Log.d("BaseActivity", "exception")
-    //                    return
-    //                }
-    //                snapshot?.let {
-    //                    userList.clear()
-    //                    val user = it.toObjects(UserComplete::class.java)
-    //                    userList.addAll(user)
-    //                }
-    //            }
-//
-    //        })
-    //}
-//
-    //private fun addToNewUserInDataBase(){
-    //    addUserBusListener = RxBus.listen(DataUsers::class.java).subscribe {
-    //        saveUserData(it.userData)
-    //    }
-    //}
-//
-    //override fun onDestroy() {
-    //    addUserBusListener.dispose()
-    //    addUserSubscription?.remove()
-    //    super.onDestroy()
-    //}
-
-
 }

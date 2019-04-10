@@ -114,20 +114,19 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
 
 
             // TODO: Invalid collection reference. Collection references must have an odd number of segments
-            val ref = FirebaseFirestore.getInstance()
-                .collection("Data")
-                .document("Users")
-                .collection("$userId")
-                .document("$username")
-                .collection("timelineMessage")
-                .document("numPositive")
-            Log.d("AdapterTimeLine", "${ref.path}")
+           //val ref = FirebaseFirestore.getInstance()
+           //    .collection("Data")
+           //    .document("Users")
+           //    .collection("$userId")
+           //    .document("$username")
+           //    .collection("timelineMessage")
+           //Log.d("AdapterTimeLine", "${ref.path}")
 
 
-            SolutionCounters().createCounter(ref, 0)
-            SolutionCounters().incrementCounter(ref, 0)
-            val countTotal = SolutionCounters().getCount(ref).toString()
-            holder.numPositive.text = "+$countTotal"
+           //SolutionCounters().createCounter(ref, 0)
+           //SolutionCounters().incrementCounter(ref, 0)
+           //val countTotal = SolutionCounters().getCount(ref).toString()
+           //holder.numPositive.text = "+$countTotal"
         }
 
         
