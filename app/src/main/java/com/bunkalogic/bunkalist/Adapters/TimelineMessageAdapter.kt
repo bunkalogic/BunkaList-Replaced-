@@ -105,6 +105,8 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             ))
         }
 
+        // TODO: implement the answers within the timeline messages
+
 
 
         holder.imagePositive.setOnClickListener {

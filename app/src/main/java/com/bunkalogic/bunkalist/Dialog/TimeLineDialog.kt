@@ -9,6 +9,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.NewTimeLineEvent
+import com.bunkalogic.bunkalist.db.NewTimeLineEventGlobal
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -46,13 +47,27 @@ class TimeLineDialog : DialogFragment(){
                 val textChapter = view.editTextChapter.text.toString()
                 val textContent = view.editTextContent.text.toString()
                 val isSpoiler = view.checkBoxIsSpoiler.isChecked
+                val isPersonal = view.checkBoxIsPersonal.isChecked
 
-                if(textContent.isNotEmpty()){
+                if (isPersonal){
+                    if(textContent.isNotEmpty()){
 
-                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
+                        val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
 
-                    RxBus.publish(NewTimeLineEvent(tlmessage))
+                        RxBus.publish(NewTimeLineEvent(tlmessage))
+                    }else{
+                        toast("Write your opinion")
+                    }
+                }else{
+                    if(textContent.isNotEmpty()){
+
+                        val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
+
+                        RxBus.publish(NewTimeLineEventGlobal(tlmessage))
+                    }
                 }
+
+
             }.setNegativeButton(getString(R.string.dialog_cancel_timeline)){ _, _ ->
                 toast("Pressed Cancel")
             }

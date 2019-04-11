@@ -3,6 +3,7 @@ package com.bunkalogic.bunkalist.Adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import com.bunkalogic.bunkalist.Fragments.TimeLineFragment
 import com.bunkalogic.bunkalist.Others.Constans
 import kotlinx.coroutines.channels.consumesAll

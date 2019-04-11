@@ -6,7 +6,7 @@
                                              android:layout_height="match_parent">
 
     <MultiAutoCompleteTextView
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="30dp"
             android:textColor="@color/colorPrimaryText"
             android:textColorHint="@color/colorPrimaryText"
@@ -18,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent"/>
     <EditText
-            android:layout_width="70dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:inputType="number"
             android:textColor="@color/colorPrimaryText"
@@ -29,11 +29,12 @@
             android:textStyle="italic"
             android:hint="@string/hint_dialog_timeline_season"
             android:layout_marginStart="4dp"
-            app:layout_constraintStart_toStartOf="@+id/multiAutoCompleteTextViewOeuvre" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/editTextChapter" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/multiAutoCompleteTextViewOeuvre"/>
+            app:layout_constraintStart_toStartOf="@+id/multiAutoCompleteTextViewOeuvre"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/multiAutoCompleteTextViewOeuvre" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"/>
     <EditText
-            android:layout_width="75dp"
+            android:layout_width="0dp"
             android:layout_height="35dp"
             android:textColor="@color/colorPrimaryText"
             android:textColorHint="@color/colorPrimaryText"
@@ -44,7 +45,8 @@
             android:hint="@string/hint_dialog_timeline_chapter"
             android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/multiAutoCompleteTextViewOeuvre"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="@+id/multiAutoCompleteTextViewOeuvre"/>
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="@+id/multiAutoCompleteTextViewOeuvre"
+            android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="@+id/guideline3"/>
     <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -72,13 +74,25 @@
 
 
     <CheckBox
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/checkBoxIsSpoiler"
             android:text="@string/checkbox_is_spoiler" android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="@+id/editTextChapter"
-            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/editTextSelectSeason"
+            app:layout_constraintStart_toStartOf="@+id/editTextSelectSeason"
             android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSelectSeason"/>
+            app:layout_constraintTop_toBottomOf="@+id/editTextSelectSeason" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"/>
+    <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                          android:id="@+id/guideline3"
+                                          android:orientation="vertical"
+                                          app:layout_constraintGuide_percent="0.5"/>
+    <CheckBox
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBoxIsPersonal" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline3" android:layout_marginStart="8dp"
+            android:text="@string/dialog_timeline_checkbox_only_followers" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/editTextChapter"/>
 
 </android.support.constraint.ConstraintLayout>

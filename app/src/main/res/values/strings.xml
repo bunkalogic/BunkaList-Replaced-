@@ -75,6 +75,11 @@
     <string name="item_timeline_season">Season:</string>
     <string name="timeline_message_is_spoiler">[ Is Spoiler, long click on the text if you do not mind the Spoiler ]
     </string>
+    <string name="toolbar_title_home">Home</string>
+    <string name="timeline_tab_layout">Global</string>
+    <string name="timeline_tab_layout_personal">Follows</string>
+
+
 
 
     <!-- ItemTimeLineDialog -->
@@ -86,6 +91,7 @@
     <string name="hint_dialog_timeline_season">Season</string>
     <string name="hint_dialog_timeline_chapter">Episode</string>
     <string name="hint_edit_text_content_dialog_timeline">Comment your opinion of an episode</string>
+    <string name="dialog_timeline_checkbox_only_followers">Only for your followers</string>
 
     <!-- SearchFragment -->
     <string name="fragment_search">Search Movies, Series, Anime</string>
@@ -147,11 +153,8 @@
     </string>
     <string name="activity_other_user_profile">Follow</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="toolbar_title_home">Start</string>
-    <string name="timeline_tab_layout">Global</string>
-    <string name="timeline_tab_layout_personal">Follows</string>
+
+
 
 
 </resources>

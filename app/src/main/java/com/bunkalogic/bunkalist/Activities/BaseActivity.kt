@@ -9,6 +9,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.PagerAdapter
 import com.bunkalogic.bunkalist.Fragments.*
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.firebase.auth.FirebaseAuth
@@ -35,7 +36,6 @@ class BaseActivity : AppCompatActivity() {
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
         setUpCurrentUser()
-        getUserPhoto()
 
 
     }
@@ -44,20 +44,6 @@ class BaseActivity : AppCompatActivity() {
     private fun setUpCurrentUser(){
         currentUser = mAuth.currentUser!!
     }
-
-
-    private fun getUserPhoto(){
-        supportActionBar!!.hide()
-       if (currentUser.photoUrl != null){
-           Glide.with(this)
-               .load(currentUser.photoUrl)
-               .into(imageViewToolbarPhoto)
-       }
-    }
-
-
-
-
 
 
     // Collect all fragment implements in the adapter
@@ -104,35 +90,25 @@ class BaseActivity : AppCompatActivity() {
         btn_nav_View.setOnNavigationItemSelectedListener {Item ->
             when(Item.itemId){
                 R.id.bottom_nav_timeline -> {
-                    viewPager.currentItem = 0;
-                    toolbar_base.visibility = View.VISIBLE
-                    true
+                    viewPager.currentItem = 0;true
                 }
 
                 R.id.bottom_nav_top_and_review -> {
-                    viewPager.currentItem = 1;
-                    toolbar_base.visibility = View.VISIBLE
-                    true
+                    viewPager.currentItem = 1;true
                 }
 
                 R.id.bottom_nav_search -> {
 
-                    viewPager.currentItem = 2;
-                    toolbar_base.visibility = View.GONE
-                    true
+                    viewPager.currentItem = 2;true
 
                 }
 
                 R.id.bottom_nav_profile -> {
-                    viewPager.currentItem = 3;
-                    toolbar_base.visibility = View.GONE
-                    true
+                    viewPager.currentItem = 3;true
                 }
 
                 R.id.bottom_nav_settings -> {
-                    viewPager.currentItem = 4;
-                    toolbar_base.visibility = View.VISIBLE
-                    true
+                    viewPager.currentItem = 4;true
                 }
                 else -> false
             }
