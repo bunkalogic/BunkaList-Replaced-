@@ -39,17 +39,18 @@ class ListFollowFragment : Fragment() {
 
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var followDBRef: CollectionReference
+    private lateinit var followersDBRef: CollectionReference
 
     private var followSubscription: ListenerRegistration? = null
     //private lateinit var followBusListener: Disposable
 
 
-    //override fun onCreate(savedInstanceState: Bundle?) {
-    //    super.onCreate(savedInstanceState)
-    //    arguments?.let {
-    //        typeList = it.getInt(Constans.USER_FOLLOW)
-    //    }
-    //}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            typeList = it.getInt(Constans.USER_FOLLOW)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -57,9 +58,9 @@ class ListFollowFragment : Fragment() {
         setUpFollowsDB()
         setUpCurrentUser()
 
-        subscribeToUserFollows()
-
         setUpRecyclerView()
+
+        isFollowOrFollowers()
 
 
         //subscribeToNewUserFollows()
@@ -69,6 +70,10 @@ class ListFollowFragment : Fragment() {
 
     private fun setUpFollowsDB(){
         followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /Follows")
+    }
+
+    private fun setUpFollowersDB(){
+        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /Followers")
     }
 
     // Creating the new instance in the database
@@ -98,6 +103,15 @@ class ListFollowFragment : Fragment() {
         _view.RecyclerFollow.adapter = adapter
     }
 
+    // is responsible for checking if it is an instance of follow or is a followers instance
+    private fun isFollowOrFollowers(){
+        if (typeList == Constans.USER_LIST_FOLLOWS){
+            subscribeToUserFollows()
+        }else if (typeList == Constans.USER_LIST_FOLLOWERS){
+            subscribeToUserFollowers()
+        }
+    }
+
     private fun subscribeToUserFollows(){
         followDBRef
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -110,12 +124,35 @@ class ListFollowFragment : Fragment() {
                         userList.clear()
                         val users = it.toObjects(Users::class.java)
                         userList.addAll(users)
+                        preferences.follows = it.size()
                         adapter.notifyDataSetChanged()
                     }
                 }
 
             })
     }
+
+    private fun subscribeToUserFollowers(){
+        followersDBRef
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListFollowFragment", "Exception")
+                    }
+
+                    snapshot?.let {
+                        userList.clear()
+                        val users = it.toObjects(Users::class.java)
+                        userList.addAll(users)
+                        preferences.followers = it.size()
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+
+
 
 
     //// Using RxAndroid to make the minimum calls to the database
@@ -126,15 +163,15 @@ class ListFollowFragment : Fragment() {
     //}
 
 
-    //companion object {
-    //    @JvmStatic
-    //    fun newInstance(typeList: Int) =
-    //        ListFollowFragment().apply {
-    //            arguments = Bundle().apply {
-    //                putInt(Constans.USER_FOLLOW, typeList)
-    //            }
-    //        }
-    //}
+    companion object {
+        @JvmStatic
+        fun newInstance(typeList: Int) =
+            ListFollowFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(Constans.USER_FOLLOW, typeList)
+                }
+            }
+    }
 
 
     override fun onDestroyView() {

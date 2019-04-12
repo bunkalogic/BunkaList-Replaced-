@@ -9,6 +9,8 @@ class UserSharedPreferences(context: Context){
 
     private val prefsUser = context.getSharedPreferences(fileUser, Context.MODE_PRIVATE)
 
+
+    // data current user
     var userId: String?
     get() = prefsUser.getString("userId", "")
     set(value) = prefsUser.edit().putString("userId",value).apply()
@@ -26,31 +28,41 @@ class UserSharedPreferences(context: Context){
     get() = prefsUser.getString("profilePath", "")
     set(value) = prefsUser.edit().putString("profilePath", value).apply()
 
+    // data movie, series and anime
+
     var itemName: String?
         get() = prefsUser.getString("itemName", "")
         set(value) = prefsUser.edit().putString("itemName",value).apply()
 
-
-    var sizeAll: Int
-        get() = prefsUser.getInt("itemId", 0)
-        set(value) = prefsUser.edit().putInt("itemId", value).apply()
-
-    var sizeMovies: Int
-        get() = prefsUser.getInt("itemId", 0)
-        set(value) = prefsUser.edit().putInt("itemId", value).apply()
-
-    var sizeSeries: Int
-        get() = prefsUser.getInt("itemId", 0)
-        set(value) = prefsUser.edit().putInt("itemId", value).apply()
-
-    var sizeAnime: Int
-        get() = prefsUser.getInt("itemId", 0)
-        set(value) = prefsUser.edit().putInt("itemId", value).apply()
-
-
     var itemID: Int
         get() = prefsUser.getInt("itemId", 0)
         set(value) = prefsUser.edit().putInt("itemId", value).apply()
+
+    // follow and followers
+
+    var follows: Int
+        get() = prefsUser.getInt("follows", 0)
+        set(value) = prefsUser.edit().putInt("follows", value).apply()
+
+    var followers: Int
+        get() = prefsUser.getInt("followers", 0)
+        set(value) = prefsUser.edit().putInt("followers", value).apply()
+
+    // data profile list
+    var sizeMovies: Int
+        get() = prefsUser.getInt("totalMovies", 0)
+        set(value) = prefsUser.edit().putInt("totalMovies", value).apply()
+
+    var sizeSeries: Int
+        get() = prefsUser.getInt("totalSeries", 0)
+        set(value) = prefsUser.edit().putInt("totalSeries", value).apply()
+
+    var sizeAnime: Int
+        get() = prefsUser.getInt("totalAnime", 0)
+        set(value) = prefsUser.edit().putInt("totalAnime", value).apply()
+
+
+    // other data user
 
     var OtherUserId: String?
         get() = prefsUser.getString("OtherUserId", "")

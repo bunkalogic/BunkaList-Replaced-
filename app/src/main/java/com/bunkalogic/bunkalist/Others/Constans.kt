@@ -24,7 +24,14 @@ object Constans{
     val MOVIE_LIST = 0
     val SERIE_LIST = 1
     val ANIME_LIST = 2
-    val TOP_LIST = 3
+
+    // top fragment
+
+    val TYPE_TOP = "TOP_TYPE"
+    val MOVIE_TOP = 3
+    val SERIE_TOP = 4
+    val ANIME_TOP = 5
+
 
     // fragment follows
     val USER_PROFILE = "userProfileNewInstance"

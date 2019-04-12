@@ -28,12 +28,11 @@ class ListFollowsActivity : AppCompatActivity() {
         val followersExtras = intent.extras.getInt("followers")
 
         if (followsExtras == follows){
-            //ListFollowFragment()//.newInstance(Constans.USER_LIST_FOLLOWS)
-            val f = ListFollowFragment()
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.contentFollow, f)
-                .commit()
+            supportActionBar!!.title = getString(R.string.fragment_profile_follow_list)
+            ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWS)
+        }else if (followersExtras == followers){
+            supportActionBar!!.title = getString(R.string.fragment_profile_followers_list)
+            ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWERS)
         }
     }
 

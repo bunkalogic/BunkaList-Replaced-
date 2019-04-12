@@ -30,6 +30,8 @@ class OtherUserProfile : AppCompatActivity() {
     private lateinit var followDBRef: CollectionReference
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
 
+    private lateinit var followersDBRef: CollectionReference
+
     private var followSubscription: ListenerRegistration? = null
     private lateinit var followBusListener: Disposable
 
@@ -44,6 +46,7 @@ class OtherUserProfile : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         setUpFollowsDB()
+        setUpFollowersDB()
         setUpOtherProfile()
 
         clicksListeners()
@@ -83,6 +86,25 @@ class OtherUserProfile : AppCompatActivity() {
             }
     }
 
+    private fun setUpFollowersDB(){
+        val userId = intent.extras?.getString("userId")
+        val username = intent.extras?.getString("username")
+
+
+        followersDBRef= store.collection("Data/Users/$userId / $username /Followers")
+    }
+
+    // Creating the new instance in the database
+    private fun saveFollowersUsers(user: Users){
+        followersDBRef.add(user)
+            .addOnCompleteListener {
+                Log.d("ListFollowFragment", " User Added! ")
+            }
+            .addOnFailureListener {
+                Log.d("ListFollowFragment", " Error try Again ")
+            }
+    }
+
 
 
 
@@ -100,6 +122,8 @@ class OtherUserProfile : AppCompatActivity() {
         buttonFollows.setOnClickListener {
            val follow = Users(userId!!, username!!, userPhoto!!)
             saveUsers(follow)
+            val followers = Users(preferences.userId!!, preferences.userName!!, preferences.imageProfilePath!!)
+            saveFollowersUsers(followers)
         }
 
         buttonListAll.setOnClickListener {

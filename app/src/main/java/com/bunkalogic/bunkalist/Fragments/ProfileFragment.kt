@@ -113,7 +113,7 @@ class ProfileFragment : Fragment() {
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
                         adapter.notifyDataSetChanged()
-                        _view.recyclerProfileAll.smoothScrollToPosition(0)
+
 
                     }
                 }
@@ -147,6 +147,9 @@ class ProfileFragment : Fragment() {
         _view.numberSeries.text = "Series views: " + preferences.sizeSeries
         _view.numberAnime.text = "Anime views: " + preferences.sizeAnime
 
+        _view.textViewFollowsNumbers.text = preferences.follows.toString()
+        _view.textViewFollowersNumbers.text = preferences.followers.toString()
+
     }
 
     //private fun setUpOtherUser(username: String, userPhoto: String){
@@ -159,12 +162,12 @@ class ProfileFragment : Fragment() {
     //}
 
     fun onClick(){
-        _view.buttonListAll.setOnClickListener { startActivity(intentFor<ProfileListActivity>()) }
-        //_view.buttonTopFavsAll.setOnClickListener { ListProfileFragment.newInstance(Constans.TOP_LIST) }
+        _view.buttonListAll.setOnClickListener { startActivity(intentFor<ProfileListActivity>("list" to 1)) }
+        _view.buttonTopFavsAll.setOnClickListener { startActivity(intentFor<ProfileListActivity>("top" to 2)) }
 
         _view.textViewFollows.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("follow" to 1)) }
 
-        //_view.textViewFollowers.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("followers" to 2)) }
+        _view.textViewFollowers.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("followers" to 2)) }
     }
 
     private fun addToNewItemRating(){

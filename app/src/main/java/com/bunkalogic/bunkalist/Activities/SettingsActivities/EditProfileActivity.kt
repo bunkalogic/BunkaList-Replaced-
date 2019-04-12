@@ -107,6 +107,7 @@ class EditProfileActivity : AppCompatActivity() {
                     val username = edit_Text_Username.text.toString()
                     preferences.userName = username
                     imageViewProfile.setImageURI(selectedPhotoUri)
+                    preferences.imageProfilePath = it.toString()
                     Log.d("EditProfileActivity", "Progress: $it")
                     saveProfileNameAndImageProfile(username, it)
 

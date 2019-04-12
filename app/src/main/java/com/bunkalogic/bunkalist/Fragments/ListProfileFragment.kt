@@ -92,6 +92,12 @@ class ListProfileFragment : Fragment() {
             subscribeToProfileListSeries(userId, username)
         }else if (typeList == Constans.ANIME_LIST){
             subscribeToProfileListAnime(userId, username)
+        }else if (typeList == Constans.MOVIE_TOP){
+            subscribeToProfileTopMovie(userId, username)
+        }else if (typeList == Constans.SERIE_TOP){
+            subscribeToProfileTopSeries(userId, username)
+        }else if (typeList == Constans.ANIME_TOP){
+            subscribeToProfileTopAnime(userId, username)
         }
 
     }
@@ -113,7 +119,7 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
-                        preferences.sizeMovies = listProfileitem.size
+                        preferences.sizeMovies = it.size()
                         adapter.notifyDataSetChanged()
                     }
                 }
@@ -136,7 +142,7 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
-                        preferences.sizeSeries = listProfileitem.size
+                        preferences.sizeSeries = it.size()
                         adapter.notifyDataSetChanged()
                     }
                 }
@@ -159,7 +165,77 @@ class ListProfileFragment : Fragment() {
                         listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
-                        preferences.sizeAnime = listProfileitem.size
+                        preferences.sizeAnime = it.size()
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+
+    // just give me the movies top 10
+    private fun subscribeToProfileTopMovie(userId: String, username: String){
+        store.collection("Data/Users/ $userId / $username /RatingList")
+            .whereEqualTo("typeOeuvre", Constans.MOVIE_LIST)
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .limit(10)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+    // just give me the series top 10
+    private fun subscribeToProfileTopSeries(userId: String, username: String){
+        store.collection("Data/Users/ $userId / $username /RatingList")
+            .whereEqualTo("typeOeuvre", Constans.SERIE_LIST)
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .limit(10)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+
+            })
+    }
+    // just give me the anime top 10
+    private fun subscribeToProfileTopAnime(userId: String, username: String){
+        store.collection("Data/Users/ $userId / $username /RatingList")
+            .whereEqualTo("typeOeuvre", Constans.ANIME_LIST)
+            .orderBy("finalRate", Query.Direction.DESCENDING)
+            .limit(10)
+            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
+                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
+                    exception?.let {
+                        Log.d("ListProfileFragment", "exception")
+                        return
+                    }
+
+                    snapshot?.let {
+                        listProfileitem.clear()
+                        val itemRating = it.toObjects(ItemListRating::class.java)
+                        listProfileitem.addAll(itemRating)
                         adapter.notifyDataSetChanged()
                     }
                 }

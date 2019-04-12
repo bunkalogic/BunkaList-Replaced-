@@ -69,6 +69,9 @@
     <string name="btn_top_manga">Your Top Manga</string>
     <string name="btn_list_all_manga">Your List Manga</string>
     <string name="fragment_profile">Recently added:</string>
+    <string name="fragment_profile_follow_list">people that you follow</string>
+    <string name="fragment_profile_followers_list">People who follow you</string>
+
 
     <!-- ItemTimeLine -->
     <string name="item_timeline_chapter">Episode:</string>
