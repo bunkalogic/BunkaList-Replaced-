@@ -331,7 +331,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     //Creating the name instance in the database
     private fun setUpAddListDB() {
-         addItemListDBRef = store.collection("Data/Users/${preferences.userId}/${preferences.userName}/RatingList")
+         addItemListDBRef = store.collection("Data/Users/ ${preferences.userId} / ${preferences.userName} /RatingList")
      }
 
 

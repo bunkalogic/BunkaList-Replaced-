@@ -1,28 +1,21 @@
 package com.bunkalogic.bunkalist.Fragments
 
 
-import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.bunkalogic.bunkalist.Adapters.TimeLineTabAdapter
 import com.bunkalogic.bunkalist.Adapters.TimelineMessageAdapter
 import com.bunkalogic.bunkalist.Dialog.TimeLineDialog
-import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
-import com.bunkalogic.bunkalist.db.NewTimeLineEvent
 import com.bunkalogic.bunkalist.db.NewTimeLineEventGlobal
 import com.bunkalogic.bunkalist.db.TimelineMessage
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -31,11 +24,6 @@ import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_timeline.view.*
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-
-
-
 
 
 /**
@@ -69,32 +57,31 @@ class TimeLineFragment : Fragment() {
     private lateinit var tlmessageGlobalBusListener: Disposable
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            typeList = it.getInt(Constans.personal)
-        }
+   //override fun onCreate(savedInstanceState: Bundle?) {
+   //    super.onCreate(savedInstanceState)
+   //    arguments?.let {
+   //        typeList = it.getInt(Constans.personal)
+   //    }
 
-    }
+   //}
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_timeline, container, false)
-        // invisible layout tab until you can implement it correctly
-        _view.tabLayout.visibility = View.GONE
-
-        setUpCurrentUser()
         setUpTimeLineGlobalDB()
+        setUpCurrentUser()
         //setUpTimeLineDB()
         //setUpTabLayout()
         setUpFab()
         //setUpRecyclerView()
         setUpRecyclerViewGlobal()
 
+        subscribeToTimelineMessageGlobal()
+        subscribeToNewMessageTimeLineGlobal()
+
 
         //isGlobalOrPersonal()
-        subscribeToNewMessageTimeLineGlobal()
         //subscribeToNewMessageTimeLine()
 
         return _view
@@ -227,12 +214,12 @@ class TimeLineFragment : Fragment() {
     private fun setUpRecyclerViewGlobal(){
         val layoutManager = LinearLayoutManager(context)
 
-        adapterGlobal = TimelineMessageAdapter(context!!,timelineList)
+        adapterGlobal = TimelineMessageAdapter(context!!,timelineListGlobal)
 
 
         _view.recyclerTimeline.setHasFixedSize(true)
-        _view.recyclerTimeline.layoutManager = layoutManager as RecyclerView.LayoutManager?
-        _view.recyclerTimeline.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        _view.recyclerTimeline.layoutManager = layoutManager
+        _view.recyclerTimeline.itemAnimator = DefaultItemAnimator()
         _view.recyclerTimeline.adapter = adapterGlobal
 
     }
@@ -296,15 +283,15 @@ class TimeLineFragment : Fragment() {
     }
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance(typeList: Int) =
-            TimeLineFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(Constans.personal, typeList)
-                }
-            }
-    }
+    //companion object {
+    //    @JvmStatic
+    //    fun newInstance(typeList: Int) =
+    //        TimeLineFragment().apply {
+    //            arguments = Bundle().apply {
+    //                putInt(Constans.personal, typeList)
+    //            }
+    //        }
+    //}
 
     override fun onDestroyView() {
         tlmessageGlobalBusListener.dispose()

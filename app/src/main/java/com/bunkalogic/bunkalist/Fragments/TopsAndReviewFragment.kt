@@ -14,7 +14,6 @@ import com.bunkalogic.bunkalist.Dialog.ReviewDialog
 
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.NewReview
 import com.bunkalogic.bunkalist.db.NewReviewEvent
 import com.google.firebase.auth.FirebaseAuth
@@ -63,7 +62,7 @@ class TopsAndReviewFragment : Fragment() {
     }
 
     private fun setUpReviewDB(){
-        reviewDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /ReviewExt")
+        reviewDBRef= store.collection("Data/Users/ReviewExt")
     }
 
     // Creating the new instance in the database

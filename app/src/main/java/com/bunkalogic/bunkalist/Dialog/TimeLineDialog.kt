@@ -47,25 +47,34 @@ class TimeLineDialog : DialogFragment(){
                 val textChapter = view.editTextChapter.text.toString()
                 val textContent = view.editTextContent.text.toString()
                 val isSpoiler = view.checkBoxIsSpoiler.isChecked
-                val isPersonal = view.checkBoxIsPersonal.isChecked
+                //val isPersonal = view.checkBoxIsPersonal.isChecked
+                view.checkBoxIsPersonal.visibility = View.GONE
 
-                if (isPersonal){
-                    if(textContent.isNotEmpty()){
 
-                        val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
+                if(textContent.isNotEmpty()){
 
-                        RxBus.publish(NewTimeLineEvent(tlmessage))
-                    }else{
-                        toast("Write your opinion")
-                    }
-                }else{
-                    if(textContent.isNotEmpty()){
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
 
-                        val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
-
-                        RxBus.publish(NewTimeLineEventGlobal(tlmessage))
-                    }
+                    RxBus.publish(NewTimeLineEventGlobal(tlmessage))
                 }
+
+                //if (isPersonal){
+                //    if(textContent.isNotEmpty()){
+//
+                //        val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
+//
+                //        RxBus.publish(NewTimeLineEvent(tlmessage))
+                //    }else{
+                //        toast("Write your opinion")
+                //    }
+                //}else{
+                //    if(textContent.isNotEmpty()){
+//
+                //        val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
+//
+                //        RxBus.publish(NewTimeLineEventGlobal(tlmessage))
+                //    }
+                //}
 
 
             }.setNegativeButton(getString(R.string.dialog_cancel_timeline)){ _, _ ->

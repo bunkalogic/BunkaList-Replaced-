@@ -8,6 +8,7 @@ import com.bunkalogic.bunkalist.Fragments.TimeLineFragment
 import com.bunkalogic.bunkalist.Others.Constans
 import kotlinx.coroutines.channels.consumesAll
 
+/**
 class TimeLineTabAdapter(fm: FragmentManager, private var totalTabs: Int): FragmentPagerAdapter(fm){
 
     override fun getItem(position: Int): Fragment {
@@ -25,3 +26,4 @@ class TimeLineTabAdapter(fm: FragmentManager, private var totalTabs: Int): Fragm
     }
 
 }
+        **/

@@ -41,25 +41,28 @@ class ListFollowFragment : Fragment() {
     private lateinit var followDBRef: CollectionReference
 
     private var followSubscription: ListenerRegistration? = null
-    private lateinit var followBusListener: Disposable
+    //private lateinit var followBusListener: Disposable
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            typeList = it.getInt(Constans.USER_FOLLOW)
-        }
-    }
+    //override fun onCreate(savedInstanceState: Bundle?) {
+    //    super.onCreate(savedInstanceState)
+    //    arguments?.let {
+    //        typeList = it.getInt(Constans.USER_FOLLOW)
+    //    }
+    //}
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_list_follow, container, false)
         setUpFollowsDB()
         setUpCurrentUser()
-        setUpRecyclerView()
 
         subscribeToUserFollows()
-        subscribeToNewUserFollows()
+
+        setUpRecyclerView()
+
+
+        //subscribeToNewUserFollows()
 
         return _view
     }
@@ -69,13 +72,15 @@ class ListFollowFragment : Fragment() {
     }
 
     // Creating the new instance in the database
-    private fun saveReview(user: Users){
-        followDBRef.add(user)
-            .addOnCompleteListener {
-                toast("Review Added!")
-            }
-            .addOnFailureListener { toast("Error try Again") }
-    }
+    //private fun saveUsers(user: Users){
+    //    followDBRef.add(user)
+    //        .addOnCompleteListener {
+    //            Log.d("ListFollowFragment", " User Added! ")
+    //        }
+    //        .addOnFailureListener {
+    //            Log.d("ListFollowFragment", " Error try Again ")
+    //        }
+    //}
 
 
     // Initializing the currentUser
@@ -94,7 +99,7 @@ class ListFollowFragment : Fragment() {
     }
 
     private fun subscribeToUserFollows(){
-        followSubscription = followDBRef
+        followDBRef
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
                     exception?.let {
@@ -113,28 +118,28 @@ class ListFollowFragment : Fragment() {
     }
 
 
-    // Using RxAndroid to make the minimum calls to the database
-    private fun subscribeToNewUserFollows(){
-        followBusListener = RxBus.listen(DataUsers::class.java).subscribe {
-            saveReview(it.userData)
-        }
-    }
+    //// Using RxAndroid to make the minimum calls to the database
+    //private fun subscribeToNewUserFollows(){
+    //    followBusListener = RxBus.listen(DataUsers::class.java).subscribe {
+    //        saveUsers(it.userData)
+    //    }
+    //}
 
 
-    companion object {
-        @JvmStatic
-        fun newInstance(typeList: Int) =
-            ListFollowFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(Constans.USER_FOLLOW, typeList)
-                }
-            }
-    }
+    //companion object {
+    //    @JvmStatic
+    //    fun newInstance(typeList: Int) =
+    //        ListFollowFragment().apply {
+    //            arguments = Bundle().apply {
+    //                putInt(Constans.USER_FOLLOW, typeList)
+    //            }
+    //        }
+    //}
 
 
     override fun onDestroyView() {
-        followBusListener.dispose()
-        followSubscription?.remove()
+        //followBusListener.dispose()
+        //followSubscription?.remove()
         super.onDestroyView()
     }
 

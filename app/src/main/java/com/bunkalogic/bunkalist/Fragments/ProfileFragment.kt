@@ -164,7 +164,7 @@ class ProfileFragment : Fragment() {
 
         _view.textViewFollows.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("follow" to 1)) }
 
-        _view.textViewFollowers.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("followers" to 2)) }
+        //_view.textViewFollowers.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("followers" to 2)) }
     }
 
     private fun addToNewItemRating(){

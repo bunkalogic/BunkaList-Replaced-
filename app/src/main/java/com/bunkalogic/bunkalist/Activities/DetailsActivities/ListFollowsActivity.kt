@@ -28,7 +28,12 @@ class ListFollowsActivity : AppCompatActivity() {
         val followersExtras = intent.extras.getInt("followers")
 
         if (followsExtras == follows){
-            ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWS)
+            //ListFollowFragment()//.newInstance(Constans.USER_LIST_FOLLOWS)
+            val f = ListFollowFragment()
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.contentFollow, f)
+                .commit()
         }
     }
 

@@ -30,17 +30,17 @@ class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<
     override fun onBindViewHolder(holder: SearchItemUserAdapter.ViewHolder, position: Int) {
         val userItem = userList[position]
 
-        holder.Username.text = userItem.username
+
 
         if (userItem.userPhoto!!.isEmpty()){
             Glide.with(holder.itemView)
                 .load(R.drawable.ic_person_black_24dp)
-                .apply(RequestOptions.circleCropTransform().override(60, 60))
+                .override(60, 60)
                 .into(holder.userPhoto)
         }else{
             Glide.with(holder.itemView)
                 .load(userItem.userPhoto)
-                .apply(RequestOptions.circleCropTransform().override(60, 60))
+                .override(60, 60)
                 .into(holder.userPhoto)
         }
         val userId = userItem.userId
@@ -55,12 +55,10 @@ class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<
             ))
         }
 
+        holder.Username.text = userItem.username
+
     }
 
-    fun setDataUsername(user: MutableList<Users>){
-        this.userList = user
-        notifyDataSetChanged()
-    }
 
     inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
         internal var Username : TextView

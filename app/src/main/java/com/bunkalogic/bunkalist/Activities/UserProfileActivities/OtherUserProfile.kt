@@ -16,6 +16,7 @@ import com.bunkalogic.bunkalist.db.DataUsers
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.bunkalogic.bunkalist.db.Users
 import com.google.firebase.firestore.*
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
 import org.jetbrains.anko.intentFor
 
@@ -26,9 +27,12 @@ class OtherUserProfile : AppCompatActivity() {
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
 
-
-
+    private lateinit var followDBRef: CollectionReference
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    private var followSubscription: ListenerRegistration? = null
+    private lateinit var followBusListener: Disposable
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,12 +43,14 @@ class OtherUserProfile : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
+        setUpFollowsDB()
         setUpOtherProfile()
 
         clicksListeners()
         setUpRecycler()
 
         subscribeToProfileListOther()
+        //subscribeToNewUserFollows()
     }
 
     private fun setUpOtherProfile(){
@@ -59,9 +65,27 @@ class OtherUserProfile : AppCompatActivity() {
             .load(userPhoto)
             .override(130, 130)
             .into(userImageProfile)
-
-
     }
+
+
+    private fun setUpFollowsDB(){
+        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /Follows")
+    }
+
+    // Creating the new instance in the database
+    private fun saveUsers(user: Users){
+        followDBRef.add(user)
+            .addOnCompleteListener {
+                Log.d("ListFollowFragment", " User Added! ")
+            }
+            .addOnFailureListener {
+                Log.d("ListFollowFragment", " Error try Again ")
+            }
+    }
+
+
+
+
 
     private fun clicksListeners(){
 
@@ -75,7 +99,7 @@ class OtherUserProfile : AppCompatActivity() {
 
         buttonFollows.setOnClickListener {
            val follow = Users(userId!!, username!!, userPhoto!!)
-            RxBus.publish(DataUsers(follow))
+            saveUsers(follow)
         }
 
         buttonListAll.setOnClickListener {
@@ -102,10 +126,10 @@ class OtherUserProfile : AppCompatActivity() {
     // just give me the list for other list
     private fun subscribeToProfileListOther() {
         val userId = intent.extras?.getString("userId")
+        val username = intent.extras?.getString("username")
 
 
-        store.collection("RatingList")
-            .whereEqualTo("userId", userId)
+        store.collection("Data/Users/ $userId / $username /RatingList")
             .orderBy("addDate", Query.Direction.DESCENDING)
             .limit(10)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot> {
@@ -125,6 +149,8 @@ class OtherUserProfile : AppCompatActivity() {
 
             })
     }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         preferences.deleteOtherUser()
