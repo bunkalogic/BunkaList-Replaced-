@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,6 @@ class ListFollowFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_list_follow, container, false)
-        setUpFollowsDB()
         setUpCurrentUser()
 
         setUpRecyclerView()
@@ -73,7 +73,7 @@ class ListFollowFragment : Fragment() {
     }
 
     private fun setUpFollowersDB(){
-        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /Followers")
+        followersDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /Followers")
     }
 
     // Creating the new instance in the database
@@ -99,15 +99,17 @@ class ListFollowFragment : Fragment() {
 
         _view.RecyclerFollow.setHasFixedSize(true)
         _view.RecyclerFollow.layoutManager = layoutManager
-        _view.RecyclerFollow.itemAnimator = DefaultItemAnimator()
+        _view.RecyclerFollow.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
         _view.RecyclerFollow.adapter = adapter
     }
 
     // is responsible for checking if it is an instance of follow or is a followers instance
     private fun isFollowOrFollowers(){
         if (typeList == Constans.USER_LIST_FOLLOWS){
+            setUpFollowsDB()
             subscribeToUserFollows()
         }else if (typeList == Constans.USER_LIST_FOLLOWERS){
+            setUpFollowersDB()
             subscribeToUserFollowers()
         }
     }

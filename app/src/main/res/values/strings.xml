@@ -81,8 +81,7 @@
     <string name="toolbar_title_home">Home</string>
     <string name="timeline_tab_layout">Global</string>
     <string name="timeline_tab_layout_personal">Follows</string>
-
-
+    <string name="timeline_chat_hint_answer">Answer this comment</string>
 
 
     <!-- ItemTimeLineDialog -->
@@ -155,9 +154,6 @@
         the spoiler
     </string>
     <string name="activity_other_user_profile">Follow</string>
-
-
-
 
 
 </resources>

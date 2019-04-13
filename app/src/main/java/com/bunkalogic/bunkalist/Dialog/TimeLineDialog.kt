@@ -49,11 +49,12 @@ class TimeLineDialog : DialogFragment(){
                 val isSpoiler = view.checkBoxIsSpoiler.isChecked
                 //val isPersonal = view.checkBoxIsPersonal.isChecked
                 view.checkBoxIsPersonal.visibility = View.GONE
+                val token = UUID.randomUUID().toString()
 
 
                 if(textContent.isNotEmpty()){
 
-                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler)
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler, token)
 
                     RxBus.publish(NewTimeLineEventGlobal(tlmessage))
                 }

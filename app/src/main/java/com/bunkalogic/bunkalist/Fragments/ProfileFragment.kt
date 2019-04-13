@@ -113,6 +113,7 @@ class ProfileFragment : Fragment() {
                         val itemRating = it.toObjects(ItemListRating::class.java)
                         listProfileitem.addAll(itemRating)
                         adapter.notifyDataSetChanged()
+                        _view.recyclerProfileAll.smoothScrollToPosition(0)
 
 
                     }

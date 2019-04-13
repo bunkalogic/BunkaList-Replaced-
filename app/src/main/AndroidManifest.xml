@@ -13,6 +13,8 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".Activities.DetailsActivities.ItemTimelineChatActivity">
+        </activity>
         <activity android:name=".Activities.DetailsActivities.ListFollowsActivity">
         </activity>
         <activity android:name=".Activities.UserProfileActivities.OtherUserProfile">
@@ -43,8 +45,7 @@
         </activity>
         <activity android:name=".Activities.NewUser.NewUserActivity">
         </activity>
-        <activity
-                android:name=".Activities.OtherActivities.MainEmptyActivity">
+        <activity android:name=".Activities.OtherActivities.MainEmptyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

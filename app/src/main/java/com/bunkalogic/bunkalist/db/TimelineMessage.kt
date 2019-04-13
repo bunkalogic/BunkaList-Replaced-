@@ -14,6 +14,7 @@ class TimelineMessage{
     var content: String? = null
     var numPositive: String? = null
     var isSpoiler: Boolean? = false
+    var tokenId: String? = null
 
     constructor(){}
 
@@ -27,7 +28,8 @@ class TimelineMessage{
         numEpisode: String,
         content: String,
         numPositive: String,
-        isSpoiler: Boolean
+        isSpoiler: Boolean,
+        tokenId: String
     ) {
         this.userId = userId
         this.username = username
@@ -39,6 +41,7 @@ class TimelineMessage{
         this.content = content
         this.numPositive = numPositive
         this.isSpoiler = isSpoiler
+        this.tokenId = tokenId
     }
 
 
@@ -55,6 +58,7 @@ class TimelineMessage{
         result["content"] = content!!
         result["numPositive"] = numPositive!!
         result["isSpoiler"] = isSpoiler!!
+        result["tokenId"] = tokenId!!
         return result
     }
 

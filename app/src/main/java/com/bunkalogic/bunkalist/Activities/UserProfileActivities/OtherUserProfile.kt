@@ -91,7 +91,7 @@ class OtherUserProfile : AppCompatActivity() {
         val username = intent.extras?.getString("username")
 
 
-        followersDBRef= store.collection("Data/Users/$userId / $username /Followers")
+        followersDBRef= store.collection("Data/Users/$userId/ $username /Followers")
     }
 
     // Creating the new instance in the database

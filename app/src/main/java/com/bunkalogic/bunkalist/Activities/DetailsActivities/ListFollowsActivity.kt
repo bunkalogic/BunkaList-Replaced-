@@ -29,10 +29,17 @@ class ListFollowsActivity : AppCompatActivity() {
 
         if (followsExtras == follows){
             supportActionBar!!.title = getString(R.string.fragment_profile_follow_list)
-            ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWS)
+            val fragmentFollow = ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWS)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFollow, fragmentFollow)
+                .commit()
+
         }else if (followersExtras == followers){
             supportActionBar!!.title = getString(R.string.fragment_profile_followers_list)
-            ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWERS)
+            val fragmentFollowers = ListFollowFragment.newInstance(Constans.USER_LIST_FOLLOWERS)
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.contentFollow, fragmentFollowers)
+                .commit()
         }
     }
 

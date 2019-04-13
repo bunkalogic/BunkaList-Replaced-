@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemTimelineChatActivity
 import com.bunkalogic.bunkalist.Activities.UserProfileActivities.OtherUserProfile
 import com.bunkalogic.bunkalist.Others.SolutionCounters
 import com.bunkalogic.bunkalist.R
@@ -42,7 +43,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
 
         holder.username.text = tlmessage.username
         holder.oeuvreName.text = tlmessage.oeuvreName
-        holder.sentAt.text = SimpleDateFormat("h:mm EEE,MMM", Locale.getDefault()).format(tlmessage.sentAt)
+        holder.sentAt.text = SimpleDateFormat("h:mm EEE / MMM", Locale.getDefault()).format(tlmessage.sentAt)
         holder.numSeason.text = tlmessage.numSeason
         holder.numEpisode.text = tlmessage.numEpisode
 
@@ -96,6 +97,14 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
         val userId = tlmessage.userId
         val username = tlmessage.username
         val userPhoto = tlmessage.profileImageUrl
+        val ouevreTitle = tlmessage.oeuvreName
+        val content = tlmessage.content
+        val token = tlmessage.tokenId
+        val dateAt = SimpleDateFormat("h:mm EEE,MMM", Locale.getDefault()).format(tlmessage.sentAt)
+        val numSeason = tlmessage.numSeason
+        val numEpisode = tlmessage.numEpisode
+
+
 
         holder.userImage.setOnClickListener {
             ctx.startActivity(ctx.intentFor<OtherUserProfile>(
@@ -105,7 +114,21 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             ))
         }
 
-        // TODO: implement the answers within the timeline messages
+        holder.imageViewChat.setOnClickListener {
+            ctx.startActivity(ctx.intentFor<ItemTimelineChatActivity>(
+                "userId" to userId,
+                "username" to username,
+                "userPhoto" to userPhoto,
+                "content" to content,
+                "token" to token,
+                "dateAt" to dateAt,
+                "numSeason" to numSeason,
+                "numEpisode" to numEpisode,
+                "title" to ouevreTitle
+            ))
+        }
+
+
 
 
 
@@ -168,6 +191,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
         internal var content: TextView
         internal var numPositive: TextView
         internal var imagePositive: ImageView
+        internal var imageViewChat: ImageView
 
 
         init {
@@ -180,6 +204,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             content = view.findViewById(R.id.textViewContent)
             numPositive = view.findViewById(R.id.textViewNumberPositive)
             imagePositive = view.findViewById(R.id.imageViewPositive)
+            imageViewChat = view.findViewById(R.id.imageViewTimelineChat)
         }
 
     }
