@@ -19,6 +19,7 @@ import com.google.firebase.firestore.*
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.support.v4.intentFor
 
 class OtherUserProfile : AppCompatActivity() {
 
@@ -72,7 +73,7 @@ class OtherUserProfile : AppCompatActivity() {
 
 
     private fun setUpFollowsDB(){
-        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userName} /Follows")
+        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userIdDatabase} /Follows")
     }
 
     // Creating the new instance in the database
@@ -128,8 +129,13 @@ class OtherUserProfile : AppCompatActivity() {
 
         buttonListAll.setOnClickListener {
             preferences.OtherUserId = userId
-            preferences.OtherUsername = username
-            startActivity(intentFor<ProfileListActivity>())
+            preferences.OtherUserIdBatabase = "@${preferences.OtherUserIdBatabase}"
+            startActivity(intentFor<ProfileListActivity>("list" to 1))
+        }
+        buttonTopFavsAll.setOnClickListener {
+            preferences.OtherUserId = userId
+            preferences.OtherUserIdBatabase = "@${preferences.OtherUserIdBatabase}"
+            startActivity(intentFor<ProfileListActivity>("top" to 2))
         }
     }
 
@@ -153,7 +159,7 @@ class OtherUserProfile : AppCompatActivity() {
         val username = intent.extras?.getString("username")
 
 
-        store.collection("Data/Users/ $userId / $username /RatingList")
+        store.collection("Data/Users/ $userId / ${preferences.OtherUserIdBatabase} /RatingList")
             .orderBy("addDate", Query.Direction.DESCENDING)
             .limit(10)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot> {

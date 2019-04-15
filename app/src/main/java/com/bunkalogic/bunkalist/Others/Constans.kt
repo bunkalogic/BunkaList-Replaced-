@@ -49,6 +49,9 @@ object Constans{
     val TIMELINE_PERSONAL = 2
 
 
+    val ADMOB = "ca-app-pub-6667428027256827~7372710211"
+
+
 
 
 }

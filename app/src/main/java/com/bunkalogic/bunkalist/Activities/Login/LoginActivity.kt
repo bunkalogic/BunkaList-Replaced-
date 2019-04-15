@@ -74,6 +74,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         val userId = mAuth.currentUser!!.uid
         preferences.userId = userId
         preferences.userName = username
+        preferences.userIdDatabase = "@$userId"
         if (username == null){
             startActivity(intentFor<NewUserActivity>().newTask().clearTask())
             toast(R.string.welcome_new_user)
@@ -110,6 +111,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             val userId = mAuth.currentUser!!.uid
             preferences.userId = userId
             preferences.userName = username
+            preferences.userIdDatabase = "@$userId"
             startActivity(intentFor<BaseActivity>().newTask().clearTask())
         }
     }

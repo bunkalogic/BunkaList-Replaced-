@@ -15,6 +15,13 @@ class UserSharedPreferences(context: Context){
     get() = prefsUser.getString("userId", "")
     set(value) = prefsUser.edit().putString("userId",value).apply()
 
+
+    var userIdDatabase: String?
+        get() = prefsUser.getString("userIdDatabase", "")
+        set(value) = prefsUser.edit().putString("userIdDatabase",value).apply()
+
+
+
     var userName: String?
         get() = prefsUser.getString("userName", "")
         set(value) = prefsUser.edit().putString("userName",value).apply()
@@ -68,7 +75,7 @@ class UserSharedPreferences(context: Context){
         get() = prefsUser.getString("OtherUserId", "")
         set(value) = prefsUser.edit().putString("OtherUserId",value).apply()
 
-    var OtherUsername: String?
+    var OtherUserIdBatabase: String?
         get() = prefsUser.getString("OtherUsername", "")
         set(value) = prefsUser.edit().putString("OtherUsername",value).apply()
 

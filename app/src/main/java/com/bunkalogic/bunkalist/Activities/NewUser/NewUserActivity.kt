@@ -43,7 +43,7 @@ class NewUserActivity : AppCompatActivity() {
     private val storageRef: StorageReference = storage.reference
 
 
-    private var selectedPhotoUri: Uri? = null
+    private lateinit var selectedPhotoUri: Uri
     private val requestNewImageProfile = 20
 
 
@@ -82,7 +82,7 @@ class NewUserActivity : AppCompatActivity() {
         if (selectedPhotoUri != null){
             val filename = UUID.randomUUID().toString()
             val fbStorageRef = storageRef.child("IMAGES/$filename")
-            fbStorageRef.putFile(selectedPhotoUri!!).addOnSuccessListener {
+            fbStorageRef.putFile(selectedPhotoUri).addOnSuccessListener {
 
                 toast("Image Profile Uploaded")
                 imageNewProfile.setImageBitmap(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_person_black_24dp))
@@ -162,7 +162,7 @@ class NewUserActivity : AppCompatActivity() {
                     //TODO: The app crasher after choosing an image in the gallery
                     selectedPhotoUri = data!!.data
                     Glide.with(this).load(selectedPhotoUri)
-                        .apply(RequestOptions.circleCropTransform().override(290, 290))
+                        .override(290, 290)
                         .into(this.imageNewProfile)
                 }
             }

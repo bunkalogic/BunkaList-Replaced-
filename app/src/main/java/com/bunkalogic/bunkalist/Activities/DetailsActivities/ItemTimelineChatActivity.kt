@@ -8,7 +8,9 @@ import android.util.Log
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.TimelineChatAdapter
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.db.TimelineChat
+import com.bunkalogic.bunkalist.db.TimelineChatEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -140,6 +142,7 @@ class ItemTimelineChatActivity : AppCompatActivity() {
                         chatList.addAll(message)
                         adapter.notifyDataSetChanged()
                         recyclerTimelineChat.smoothScrollToPosition(chatList.size)
+                        RxBus.publish(TimelineChatEvent(chatList.size))
                     }
                 }
 

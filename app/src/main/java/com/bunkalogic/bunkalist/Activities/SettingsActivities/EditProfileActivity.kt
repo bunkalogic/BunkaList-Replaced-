@@ -70,7 +70,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         buttonApplyChanges.setOnClickListener {
             uploadedImageinStorage()
-            toast(R.string.add_correct_username_and_image_profile)
+
 
 
         }
@@ -100,7 +100,6 @@ class EditProfileActivity : AppCompatActivity() {
            val fbStorageRef = storageRef.child("IMAGES/$filename")
             fbStorageRef.putFile(selectedPhotoUri!!).addOnSuccessListener {
 
-                toast("Image Profile Uploaded")
                 imageViewProfile.setImageBitmap(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_person_black_24dp))
 
                 fbStorageRef.downloadUrl.addOnSuccessListener {

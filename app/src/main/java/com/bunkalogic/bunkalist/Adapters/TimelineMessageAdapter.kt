@@ -15,16 +15,24 @@ import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemTimelineChatAct
 import com.bunkalogic.bunkalist.Activities.UserProfileActivities.OtherUserProfile
 import com.bunkalogic.bunkalist.Others.SolutionCounters
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.RxBus.RxBus
+import com.bunkalogic.bunkalist.db.TimelineChatEvent
 import com.bunkalogic.bunkalist.db.TimelineMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import io.reactivex.disposables.Disposable
 import org.jetbrains.anko.colorAttr
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.util.*
 
 class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: MutableList<TimelineMessage>) : RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
+
+    lateinit var countBusListener: Disposable
+
+
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -114,6 +122,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             ))
         }
 
+
         holder.imageViewChat.setOnClickListener {
             ctx.startActivity(ctx.intentFor<ItemTimelineChatActivity>(
                 "userId" to userId,
@@ -126,17 +135,23 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
                 "numEpisode" to numEpisode,
                 "title" to ouevreTitle
             ))
+            countBusListener = RxBus.listen(TimelineChatEvent::class.java).subscribe {
+                if (holder.numPositive.text.isEmpty()){
+                    holder.numPositive.text = it.size.toString()
+                }
+            }
+
         }
 
 
 
 
 
-        holder.imagePositive.setOnClickListener {
-            Glide.with(ctx)
-                .load(R.drawable.ic_item_timeline_positive)
-                .into(holder.imagePositive)
-
+        //holder.imagePositive.setOnClickListener {
+        //    Glide.with(ctx)
+        //        .load(R.drawable.ic_item_timeline_positive)
+        //        .into(holder.imagePositive)
+//
 
             // TODO: Invalid collection reference. Collection references must have an odd number of segments
            //val ref = FirebaseFirestore.getInstance()
@@ -152,7 +167,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
            //SolutionCounters().incrementCounter(ref, 0)
            //val countTotal = SolutionCounters().getCount(ref).toString()
            //holder.numPositive.text = "+$countTotal"
-        }
+        //}
 
         
 
@@ -190,7 +205,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
         internal var numEpisode: TextView
         internal var content: TextView
         internal var numPositive: TextView
-        internal var imagePositive: ImageView
+        //internal var imagePositive: ImageView
         internal var imageViewChat: ImageView
 
 
@@ -203,7 +218,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             numEpisode = view.findViewById(R.id.textViewCapsNumbers)
             content = view.findViewById(R.id.textViewContent)
             numPositive = view.findViewById(R.id.textViewNumberPositive)
-            imagePositive = view.findViewById(R.id.imageViewPositive)
+            //imagePositive = view.findViewById(R.id.imageViewPositive)
             imageViewChat = view.findViewById(R.id.imageViewTimelineChat)
         }
 

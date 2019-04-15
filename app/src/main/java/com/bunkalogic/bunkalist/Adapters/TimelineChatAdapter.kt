@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bunkalogic.bunkalist.Activities.UserProfileActivities.OtherUserProfile
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.TimelineChat
+import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +45,17 @@ class TimelineChatAdapter(val ctx : Context, private val TimelineChatList: Mutab
                 .load(itemChat.profileImageUrl)
                 .override(60, 60)
                 .into(holder.userImage)
+        }
+        val userId = itemChat.userId
+        val username = itemChat.username
+        val userPhoto = itemChat.profileImageUrl
+
+        holder.userImage.setOnClickListener {
+            ctx.startActivity(ctx.intentFor<OtherUserProfile>(
+                "userId" to userId,
+                "username" to username,
+                "userPhoto" to userPhoto
+            ))
         }
 
     }
