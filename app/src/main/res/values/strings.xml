@@ -18,13 +18,10 @@
     <string name="email_reset_to_password_failed">Please make sure the email address is correct</string>
     <string name="user_confirm_email">User must confirm email first</string>
     <string name="login_error">An unexpected error occurred, please try again</string>
-    <string name="confirm_email_send">An email has been sent to you. Please confirm before sing in</string>
+    <string name="confirm_email_send">An email has been sent to you. Please confirm before sign in</string>
     <string name="signUp_data_incorrect">Please make sure all the data is correct</string>
     <string name="add_correct_username_and_image_profile">Your username and your image profile have been added
         correctly
-    </string>
-    <string name="welcome_for_my_app">Welcome to the Social Network with the complete database of anime, series
-        and movies.
     </string>
 
     <!-- New User view -->
@@ -49,25 +46,25 @@
     <string name="terms_of_use">Terms of uses</string>
     <string name="licence">Licence</string>
     <string name="about_the_app">About the App</string>
-    <string name="changed_mode_light">Mode: Light</string>
-    <string name="changed_mode_dark">Mode: Dark</string>
-    <string name="changed_mode_custom">Mode: Light/Dark</string>
+    <string name="changed_mode_light">Mode: Day</string>
+    <string name="changed_mode_dark">Mode: Night</string>
+    <string name="changed_mode_custom">Mode: Day/Night</string>
     <string name="sign_out">Sign Out</string>
 
 
     <!-- ProfileFragments -->
-    <string name="name_view_movie">List User Movie</string>
+    <string name="name_view_movie" translatable="false">List User Movie</string>
     <string name="btn_top_movie">Your Tops</string>
     <string name="btn_list_all_movies">Your Lists</string>
-    <string name="name_view_series">List User Series</string>
-    <string name="btn_top_series">Your Top Series</string>
-    <string name="btn_list_all_series">Your List Series</string>
-    <string name="name_view_anime">List User Anime</string>
-    <string name="btn_top_anime">Your Top Anime</string>
-    <string name="btn_list_all_anime">Your List Anime</string>
-    <string name="name_view_manga">List User Manga</string>
-    <string name="btn_top_manga">Your Top Manga</string>
-    <string name="btn_list_all_manga">Your List Manga</string>
+    <string name="name_view_series" translatable="false">List User Series</string>
+    <string name="btn_top_series" translatable="false">Your Top Series</string>
+    <string name="btn_list_all_series" translatable="false">Your List Series</string>
+    <string name="name_view_anime" translatable="false">List User Anime</string>
+    <string name="btn_top_anime" translatable="false">Your Top Anime</string>
+    <string name="btn_list_all_anime" translatable="false">Your List Anime</string>
+    <string name="name_view_manga" translatable="false">List User Manga</string>
+    <string name="btn_top_manga" translatable="false">Your Top Manga</string>
+    <string name="btn_list_all_manga" translatable="false">Your List Manga</string>
     <string name="fragment_profile">Recently added:</string>
     <string name="fragment_profile_follow_list">people that you follow</string>
     <string name="fragment_profile_followers_list">People who follow you</string>
@@ -78,9 +75,9 @@
     <string name="item_timeline_season">Season:</string>
     <string name="timeline_message_is_spoiler">[ Is Spoiler, long click on the text if you do not mind the Spoiler ]
     </string>
-    <string name="toolbar_title_home">Home</string>
-    <string name="timeline_tab_layout">Global</string>
-    <string name="timeline_tab_layout_personal">Follows</string>
+    <string name="toolbar_title_home" translatable="false">Home</string>
+    <string name="timeline_tab_layout" translatable="false">Global</string>
+    <string name="timeline_tab_layout_personal" translatable="false">Follows</string>
     <string name="timeline_chat_hint_answer">Answer this comment</string>
 
 
@@ -100,12 +97,12 @@
     <string name="text_view_get_full_details_search_item">See all the details</string>
 
     <!-- SearchFragmentItemDetails -->
-    <string name="search_item_details_original_title">Original Title :</string>
-    <string name="search_item_details_director">Director :</string>
-    <string name="search_item_details_status">Status :</string>
+    <string name="search_item_details_original_title" translatable="false">Original Title :</string>
+    <string name="search_item_details_director" translatable="false">Director :</string>
+    <string name="search_item_details_status" translatable="false">Status :</string>
     <string name="btn_search_item_details_your_list">Add in your List</string>
     <string name="searchItemDetailsrating">Rating:</string>
-    <string name="search_item_not_have_tittle">Not title</string>
+    <string name="search_item_not_have_tittle" translatable="false">Not title</string>
     <string name="search_item_full_details_trailers">Trailers</string>
     <string name="search_item_details_summary_label">Summary</string>
     <string name="activity_full_details">Genres :</string>
@@ -123,6 +120,9 @@
     <string name="dialog_add_list_text_view_band_sound">What note do you give as a Soundtrack?</string>
     <string name="dialog_add_list_text_view_effects">What note do you give as a Photography / Animation?</string>
     <string name="dialog_add_list_text_view_Enjoyment">What note do you give as a Enjoyment?</string>
+    <string name="dialog_add_the_list_alert">Alert chooses the type of work that is correct so that everything is
+        displayed correctly in your lists
+    </string>
 
     <string-array name="status">
         <item>Complete</item>
