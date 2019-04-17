@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:background="@drawable/bg_gradient_splash"
+                                             android:layout_height="match_parent">
+
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@mipmap/ic_launcher_foreground"
+            android:id="@+id/imageView6" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.498"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="@+id/guideline6"/>
+
+
+    <ImageView
+            android:src="@drawable/themoviedblogo"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:id="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintHorizontal_bias="0.52" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:text="@string/activity_login_db_notice" android:textAlignment="center"
+            android:textSize="14sp" android:textStyle="italic"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:textColor="@color/colorPrimaryTextDark"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/imageView"
+    />
+
+    <TextView
+            android:text="BunkaList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="30sp" android:fontFamily="sans-serif-thin"
+            android:textColor="@color/colorAccentDark"
+            android:textAllCaps="false" android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/imageView6" app:layout_constraintStart_toStartOf="@+id/imageView6"
+            app:layout_constraintTop_toBottomOf="@+id/imageView6"/>
+
+
+    <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                          android:id="@+id/guideline6"
+                                          android:orientation="horizontal"
+                                          app:layout_constraintGuide_percent="0.22"/>
+</android.support.constraint.ConstraintLayout>

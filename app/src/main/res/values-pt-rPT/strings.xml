@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BunkaList</string>
+    <string name="login_email">O email</string>
+    <string name="login_username">Nome de usuário</string>
+    <string name="login_password">Senha</string>
+    <string name="login_confirm_password">Confirme a Senha</string>
+    <string name="login_sign_in">Assinar em</string>
+    <string name="login_sign_up">crie sua conta</string>
+    <string name="login_reset_password">Resetar minha senha</string>
+    <string name="login_sign_in_google">Faça login no Google</string>
+    <string name="login_forgot_password">eu esqueci minha senha</string>
+    <string name="login_create_account">Criar uma nova conta</string>
+    <string name="go_to_login">Voltar para o Login</string>
+    <string name="select_image_user">selecione o perfil da imagem</string>
+    <string name="email_reset_to_password">E-mail foi enviado para redefinir sua senha</string>
+    <string name="email_reset_to_password_failed">Por favor, verifique se o endereço de e-mail está correto</string>
+    <string name="user_confirm_email">O usuário deve confirmar o email primeiro</string>
+    <string name="login_error">Ocorreu um erro inesperado, por favor tente novamente</string>
+    <string name="confirm_email_send">Um email foi enviado para você. Por favor, confirme antes de entrar</string>
+    <string name="signUp_data_incorrect">Por favor, certifique-se de que todos os dados estão corretos</string>
+    <string name="add_correct_username_and_image_profile">Seu nome de usuário e seu perfil de imagem foram adicionados
+        corretamente
+    </string>
+    <string name="welcome_new_user">Bem vindo novo usuário</string>
+    <string name="btn_go_toActivity">ao lado de</string>
+    <string name="error_new_user">Por favor, tente novamente</string>
+    <string name="accept_the_permissions">Aceite a permissão</string>
+    <string name="btn_nav_timeline">Timeline</string>
+    <string name="btn_nav_top">topos e revisão</string>
+    <string name="btn_nav_search">Procurar</string>
+    <string name="btn_nav_profile">Perfil</string>
+    <string name="btn_nav_settings">Definições</string>
+    <string name="edit_profile">Edite seu perfil</string>
+    <string name="apply_changes">Aplique as mudanças</string>
+    <string name="mode_light_dark">Selecione o modo dia / noite</string>
+    <string name="terms_of_use">Termos de uso</string>
+    <string name="licence">Licença</string>
+    <string name="about_the_app">Sobre o aplicativo</string>
+    <string name="changed_mode_light">Modo: dia</string>
+    <string name="changed_mode_dark">Modo: noite</string>
+    <string name="changed_mode_custom">Modo: dia / noite</string>
+    <string name="sign_out">Sair</string>
+    <string name="btn_top_movie">Seus tops</string>
+    <string name="btn_list_all_movies">Suas listas</string>
+    <string name="fragment_profile">Adicionado recentemente:</string>
+    <string name="fragment_profile_follow_list">pessoas que você segue</string>
+    <string name="fragment_profile_followers_list">Pessoas que seguem você</string>
+    <string name="item_timeline_chapter">Episódio:</string>
+    <string name="item_timeline_season">Temporada:</string>
+    <string name="timeline_message_is_spoiler">[Spoiler, clique longo no texto, se você não se importa com o Spoiler]
+    </string>
+    <string name="timeline_chat_hint_answer">Responda este comentário</string>
+    <string name="checkbox_is_spoiler">É spoiler</string>
+    <string name="dialog_timeline">Comente sua opinião</string>
+    <string name="send_opinion">Mandar</string>
+    <string name="dialog_cancel_timeline">Cancelar</string>
+    <string name="hint_name_oeuvre">Nome do filme, série, anime</string>
+    <string name="hint_dialog_timeline_season">Temporada</string>
+    <string name="hint_dialog_timeline_chapter">Episódio</string>
+    <string name="hint_edit_text_content_dialog_timeline">Comente sua opinião sobre um episódio</string>
+    <string name="dialog_timeline_checkbox_only_followers">Somente para seus seguidores</string>
+    <string name="fragment_search">Pesquisa Filmes, Série, Anime</string>
+    <string name="text_view_get_full_details_search_item">Veja todos os detalhes</string>
+    <string name="btn_search_item_details_your_list">Adicione na sua lista</string>
+    <string name="searchItemDetailsrating">Avaliação:</string>
+    <string name="search_item_full_details_trailers">trechos de um filme</string>
+    <string name="search_item_details_summary_label">Resumo</string>
+    <string name="activity_full_details">Gêneros:</string>
+    <string name="activity_full_details_date">Data de lançamento:</string>
+    <string name="dialog_add_list_title">Adicione na sua lista</string>
+    <string name="dialog_add_list_add_positive_button">Adicionado na lista</string>
+    <string name="dialog_add_list_add_negative_button">Cancelar</string>
+    <string name="dialogAddList">Definir status:</string>
+    <string name="dialog_add_list_what_type">que tipo</string>
+    <string name="dialog_add_list_text_view_arguments">Que nota você dá como História?</string>
+    <string name="dialog_add_list_text_view_character">Que nota você dá como um personagem?</string>
+    <string name="dialog_add_list_text_view_band_sound">Que nota você dá como trilha sonora?</string>
+    <string name="dialog_add_list_text_view_effects">Que nota você dá como Fotografia / Animação?</string>
+    <string name="dialog_add_list_text_view_Enjoyment">Que nota você dá como Prazer?</string>
+    <string name="dialog_add_the_list_alert">Alerta escolhe o tipo de obra que está correto para que tudo seja exibido
+        corretamente em suas listas
+    </string>
+    <string name="profile_list_activity_tab_all">All</string>
+    <string name="profile_list_activity_tab_movie">filme</string>
+    <string name="profile_list_activity_tab_serie">Series</string>
+    <string name="profile_list_activity_tab_anime">Anime</string>
+    <string name="dialog_review_title">Avaliação Extensive</string>
+    <string name="dialog_review_your_title">Título do seu comentário</string>
+    <string name="dialog_review">Comente sua opinião em uma obra em detalhes</string>
+    <string name="dialog_review_positive_button">Publicar comentário</string>
+    <string name="fragment_review_item">Escreva por</string>
+    <string name="fragment_review_content_spoiler">Esta revisão contém um spoiler, clique se você não está preocupado
+        com o spoiler
+    </string>
+    <string name="activity_other_user_profile">Segue</string>
+    <string name="activity_login_db_notice">This product uses the TMDb API but is not endorsed or certified by TMDb.
+    </string>
+    <string name="activity_licence">This application uses open source components. You can find the source code and
+        license information of these open source projects
+    </string>
+</resources>

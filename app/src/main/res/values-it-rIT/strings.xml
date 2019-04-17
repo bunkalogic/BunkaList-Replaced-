@@ -94,4 +94,9 @@
     <string name="dialog_add_the_list_alert">Alert sceglie il tipo di opera che è corretta in modo che tutto sia
         visualizzato correttamente nei tuoi elenchi
     </string>
+    <string name="activity_login_db_notice">This product uses the TMDb API but is not endorsed or certified by TMDb.
+    </string>
+    <string name="activity_licence">This application uses open source components. You can find the source code and
+        license information of these open source projects
+    </string>
 </resources>

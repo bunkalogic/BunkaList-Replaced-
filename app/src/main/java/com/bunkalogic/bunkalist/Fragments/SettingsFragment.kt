@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.LicenseActivity
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.Activities.SettingsActivities.EditProfileActivity
 import com.bunkalogic.bunkalist.Activities.SettingsActivities.ModeDayOrNightActivity
@@ -51,6 +52,10 @@ class SettingsFragment : Fragment() {
             preferences.deleteAll()
             mAuth.signOut()
             startActivity(intentFor<LoginActivity>().newTask().clearTask())
+        }
+
+        _view.textViewLicence.setOnClickListener {
+            startActivity(intentFor<LicenseActivity>())
         }
     }
 

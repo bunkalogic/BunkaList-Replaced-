@@ -154,6 +154,11 @@
         the spoiler
     </string>
     <string name="activity_other_user_profile">Follow</string>
+    <string name="activity_login_db_notice">This product uses the TMDb API but is not endorsed or certified by TMDb.
+    </string>
+    <string name="activity_licence">This application uses open source components. You can find the source code and
+        license information of these open source projects.
+    </string>
 
 
 </resources>
