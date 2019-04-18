@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.bunkalogic.bunkalist">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.bunkalogic.bunkalist">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -14,6 +15,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.DetailsActivities.TermsAndPrivacyActivity">
+        </activity>
         <activity android:name=".Activities.DetailsActivities.LicenseActivity">
         </activity>
         <activity android:name=".Activities.DetailsActivities.ItemTimelineChatActivity">
@@ -48,8 +51,9 @@
         </activity>
         <activity android:name=".Activities.NewUser.NewUserActivity">
         </activity>
-        <activity android:name=".Activities.OtherActivities.MainEmptyActivity"
-        android:theme="@style/AppTheme.Launcher">
+        <activity
+                android:name=".Activities.OtherActivities.MainEmptyActivity"
+                android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

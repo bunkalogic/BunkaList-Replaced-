@@ -28,6 +28,7 @@ import org.jetbrains.anko.toast
 import com.bumptech.glide.request.RequestOptions
 import android.content.Intent
 import android.net.Uri
+import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
@@ -40,7 +41,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     private lateinit var searchViewModel: ViewModelSearch
 
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: Toolbar
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -71,8 +72,8 @@ class ItemDetailsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val extrasTitle = intent.extras.getString("title")
-        val extrasName = intent.extras.getString("name")
+        val extrasTitle = intent.extras?.getString("title")
+        val extrasName = intent.extras?.getString("name")
 
         if (extrasTitle == null){
             supportActionBar!!.title = extrasName
@@ -99,7 +100,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     // check if it is a series or a film and around it loads a function or another
     private fun isMovieOrSerie(){
         val type = "tv"
-        val extrasType = intent.extras.getString("type")
+        val extrasType = intent.extras?.getString("type")
         Log.d("SearchItemDetailsAct", "type: $extrasType")
 
         if (extrasType == type){
@@ -113,8 +114,8 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // is responsible for collecting the Id of the film and filling the function of the ViewModel
     private fun getMovieContentForID(callback: OnGetMovieCallback){
-        val extrasIdMovies = intent.extras.getInt("id")
-        preferences.itemID = extrasIdMovies
+        val extrasIdMovies = intent.extras?.getInt("id")
+        preferences.itemID = extrasIdMovies!!
         Log.d("SearchItemDetailsActMov", "Id: $extrasIdMovies")
         searchViewModel.getMovie(extrasIdMovies, callback)
     }
@@ -159,8 +160,8 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // is responsible for collecting the Id of the film and filling the function of the ViewModel
     private fun getMovieTrailersContentForID(callback: OnGetTrailersCallback){
-        val extrasIdMovies = intent.extras.getInt("id")
-        searchViewModel.getTrailersMovies(extrasIdMovies, callback)
+        val extrasIdMovies = intent.extras?.getInt("id")
+        searchViewModel.getTrailersMovies(extrasIdMovies!!, callback)
     }
 
     // is responsible for collecting the key to create the YouTube URL and show the video image
@@ -197,8 +198,8 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // is responsible for collecting the Id of the series and filling the function of the ViewModel
     private fun getSeriesContentForID(callback: OnGetSeriesCallback){
-        val extrasIdSeries = intent.extras.getInt("id")
-        preferences.itemID = extrasIdSeries
+        val extrasIdSeries = intent.extras?.getInt("id")
+        preferences.itemID = extrasIdSeries!!
         Log.d("SearchItemDetailsActTV", "Id: $extrasIdSeries")
         searchViewModel.getSeriesAndAnime(extrasIdSeries, callback)
     }
@@ -243,8 +244,8 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // is responsible for collecting the Id of the series and filling the function of the ViewModel
     private fun getSeriesTrailersContentForID(callback: OnGetTrailersCallback){
-        val extrasIdSeries = intent.extras.getInt("id")
-        searchViewModel.getTrailersSeries(extrasIdSeries, callback)
+        val extrasIdSeries = intent.extras?.getInt("id")
+        searchViewModel.getTrailersSeries(extrasIdSeries!!, callback)
     }
 
     // is responsible for collecting the key to create the YouTube URL and show the video image

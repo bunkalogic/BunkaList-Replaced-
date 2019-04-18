@@ -42,8 +42,8 @@ class ProfileListActivity : AppCompatActivity() {
     }
 
     private fun isListOrTop(){
-        val list = intent.extras.getInt("list")
-        val top = intent.extras.getInt("top")
+        val list = intent.extras?.getInt("list")
+        val top = intent.extras?.getInt("top")
 
         if (list == clickList){
             supportActionBar!!.title = getString(R.string.btn_list_all_movies)

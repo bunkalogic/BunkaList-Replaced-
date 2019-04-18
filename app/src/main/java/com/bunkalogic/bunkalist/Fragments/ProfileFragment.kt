@@ -130,7 +130,7 @@ class ProfileFragment : Fragment() {
 
         _view.recyclerProfileAll.setHasFixedSize(true)
         _view.recyclerProfileAll.layoutManager = layoutManager
-        _view.recyclerProfileAll.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        _view.recyclerProfileAll.itemAnimator = DefaultItemAnimator()
         _view.recyclerProfileAll.adapter = adapter
     }
 

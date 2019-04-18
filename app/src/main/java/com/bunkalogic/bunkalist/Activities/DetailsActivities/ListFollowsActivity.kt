@@ -24,8 +24,8 @@ class ListFollowsActivity : AppCompatActivity() {
     }
 
     private fun isFollowOrFollowers(){
-        val followsExtras = intent.extras.getInt("follow")
-        val followersExtras = intent.extras.getInt("followers")
+        val followsExtras = intent.extras?.getInt("follow")
+        val followersExtras = intent.extras?.getInt("followers")
 
         if (followsExtras == follows){
             supportActionBar!!.title = getString(R.string.fragment_profile_follow_list)

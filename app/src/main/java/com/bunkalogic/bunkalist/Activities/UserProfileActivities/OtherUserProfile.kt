@@ -146,8 +146,8 @@ class OtherUserProfile : AppCompatActivity() {
         adapter = ProfileListAdapter(this, listProfileitem)
 
         recyclerOtherProfile.setHasFixedSize(true)
-        recyclerOtherProfile.layoutManager = layoutManager as RecyclerView.LayoutManager?
-        recyclerOtherProfile.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        recyclerOtherProfile.layoutManager = layoutManager
+        recyclerOtherProfile.itemAnimator = DefaultItemAnimator()
         recyclerOtherProfile.adapter = adapter
     }
 
@@ -156,7 +156,6 @@ class OtherUserProfile : AppCompatActivity() {
     // just give me the list for other list
     private fun subscribeToProfileListOther() {
         val userId = intent.extras?.getString("userId")
-        val username = intent.extras?.getString("username")
 
 
         store.collection("Data/Users/ $userId / ${preferences.OtherUserIdBatabase} /RatingList")

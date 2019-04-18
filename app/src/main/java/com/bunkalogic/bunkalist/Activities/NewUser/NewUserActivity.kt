@@ -79,32 +79,30 @@ class NewUserActivity : AppCompatActivity() {
 
     // Collect the selected image and upload it to Firebase Storage and Save the image in currentUser.photoUrl
     private fun uploadedImageinStorage(){
-        if (selectedPhotoUri != null){
-            val filename = UUID.randomUUID().toString()
-            val fbStorageRef = storageRef.child("IMAGES/$filename")
-            fbStorageRef.putFile(selectedPhotoUri).addOnSuccessListener {
+        val filename = UUID.randomUUID().toString()
+        val fbStorageRef = storageRef.child("IMAGES/$filename")
+        fbStorageRef.putFile(selectedPhotoUri).addOnSuccessListener {
 
-                toast("Image Profile Uploaded")
-                imageNewProfile.setImageBitmap(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_person_black_24dp))
+            toast("Image Profile Uploaded")
+            imageNewProfile.setImageBitmap(BitmapFactory.decodeResource(applicationContext.resources, R.drawable.ic_person_black_24dp))
 
-                fbStorageRef.downloadUrl.addOnSuccessListener {
-                    val username = editTextUserName.text.toString()
-                    preferences.userName = username
-                    imageNewProfile.setImageURI(selectedPhotoUri)
-                    Log.d("NewUserActivity", "Progress: $it")
-                    saveProfileNameAndImageProfile(username, it)
-                }
-
-            }.addOnFailureListener {
-                toast("Failure")
-
-            }.addOnProgressListener {
-                val progress = 100.0 * it.bytesTransferred / it.totalByteCount
-                Log.d("EditProfileActivity", "Progress: $progress")
+            fbStorageRef.downloadUrl.addOnSuccessListener {
+                val username = editTextUserName.text.toString()
+                preferences.userName = username
+                imageNewProfile.setImageURI(selectedPhotoUri)
+                Log.d("NewUserActivity", "Progress: $it")
+                saveProfileNameAndImageProfile(username, it)
             }
 
+        }.addOnFailureListener {
+            toast("Failure")
 
+        }.addOnProgressListener {
+            val progress = 100.0 * it.bytesTransferred / it.totalByteCount
+            Log.d("EditProfileActivity", "Progress: $progress")
         }
+
+
     }
 
 
@@ -160,7 +158,7 @@ class NewUserActivity : AppCompatActivity() {
             when (requestCode) {
                 requestNewImageProfile -> {
                     //TODO: The app crasher after choosing an image in the gallery
-                    selectedPhotoUri = data!!.data
+                    selectedPhotoUri = data!!.data!!
                     Glide.with(this).load(selectedPhotoUri)
                         .override(290, 290)
                         .into(this.imageNewProfile)

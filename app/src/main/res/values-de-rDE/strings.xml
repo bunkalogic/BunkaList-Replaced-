@@ -98,4 +98,9 @@
     <string name="activity_licence">This application uses open source components. You can find the source code and
         license information of these open source projects
     </string>
+    <string name="sign_up_terms_anduse">"I accept the Privacy Policy and consent to the proccesing of my personal information in accordance with it."</string>
+
+    <string name="sign_up_accept_terms_and_use">Bitte akzeptieren Sie die Nutzungsbedingungen und die
+        Datenschutzbestimmungen, um fortzufahren
+    </string>
 </resources>

@@ -63,12 +63,7 @@ class RepositorySearch internal constructor() {
                 if (response.isSuccessful){
                     val movieResponse: Movie = response.body()!!
 
-                    if (movieResponse != null){
-                        callback.onSuccess(movieResponse)
-                    }else{
-                        Log.d("RepositorySearch", "Something has gone wrong Movies")
-                        callback.onError()
-                    }
+                    callback.onSuccess(movieResponse)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies")
                 }
@@ -118,12 +113,7 @@ class RepositorySearch internal constructor() {
                 if (response.isSuccessful){
                     val trailerResponse : TrailerResponse = response.body()!!
 
-                    if (trailerResponse != null){
-                        callback.onSuccess(trailerResponse.trailers!!)
-                    }else{
-                        Log.d("RepositorySearch", "Something has gone wrong Movies trailers")
-                        callback.onError()
-                    }
+                    callback.onSuccess(trailerResponse.trailers!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Trailers")
                 }
@@ -147,12 +137,7 @@ class RepositorySearch internal constructor() {
                 if (response.isSuccessful){
                     val trailerResponse : TrailerResponse = response.body()!!
 
-                    if (trailerResponse != null){
-                        callback.onSuccess(trailerResponse.trailers!!)
-                    }else{
-                        Log.d("RepositorySearch", "Something has gone wrong Series Trailers")
-                        callback.onError()
-                    }
+                    callback.onSuccess(trailerResponse.trailers!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series Trailers")
                 }
@@ -175,12 +160,7 @@ class RepositorySearch internal constructor() {
                 if (response.isSuccessful){
                     val genresResponse : GenresResponse = response.body()!!
 
-                    if (genresResponse != null){
-                        callback.onSuccess(genresResponse.genres!!)
-                    }else{
-                        Log.d("RepositorySearch", "Something has gone wrong Genres Movies")
-                        callback.onError()
-                    }
+                    callback.onSuccess(genresResponse.genres!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Genres Movies")
                 }
@@ -203,12 +183,7 @@ class RepositorySearch internal constructor() {
                 if (response.isSuccessful){
                     val genresResponse : GenresResponse = response.body()!!
 
-                    if (genresResponse != null){
-                        callback.onSuccess(genresResponse.genres!!)
-                    }else{
-                        Log.d("RepositorySearch", "Something has gone wrong Genres Movies")
-                        callback.onError()
-                    }
+                    callback.onSuccess(genresResponse.genres!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Genres Movies")
                 }

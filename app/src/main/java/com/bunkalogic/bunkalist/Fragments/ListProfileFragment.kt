@@ -71,8 +71,8 @@ class ListProfileFragment : Fragment() {
         adapter = ProfileListAdapter(context!!, listProfileitem)
 
         _view.recyclerAllList.setHasFixedSize(true)
-        _view.recyclerAllList.layoutManager = layoutManager as RecyclerView.LayoutManager?
-        _view.recyclerAllList.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        _view.recyclerAllList.layoutManager = layoutManager
+        _view.recyclerAllList.itemAnimator = DefaultItemAnimator()
         _view.recyclerAllList.adapter = adapter
     }
 

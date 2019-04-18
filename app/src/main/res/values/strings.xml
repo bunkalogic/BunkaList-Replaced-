@@ -43,7 +43,7 @@
     <string name="edit_profile">Edit your Profile</string>
     <string name="apply_changes">Apply the changes</string>
     <string name="mode_light_dark">Select Mode Day/Night</string>
-    <string name="terms_of_use">Terms of uses</string>
+    <string name="terms_of_use">Terms of uses and Privacy Policy</string>
     <string name="licence">Licence</string>
     <string name="about_the_app">About the App</string>
     <string name="changed_mode_light">Mode: Day</string>
@@ -158,6 +158,10 @@
     </string>
     <string name="activity_licence">This application uses open source components. You can find the source code and
         license information of these open source projects.
+    </string>
+    <string name="sign_up_terms_anduse">"I accept the Privacy Policy and consent to the proccesing of my personal information in accordance with it."</string>
+    <string name="sign_up_accept_terms_and_use">"Please accept the terms and conditions of use, policy of Privacy
+        to continue"
     </string>
 
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.LicenseActivity
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.TermsAndPrivacyActivity
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.Activities.SettingsActivities.EditProfileActivity
 import com.bunkalogic.bunkalist.Activities.SettingsActivities.ModeDayOrNightActivity
@@ -56,6 +57,10 @@ class SettingsFragment : Fragment() {
 
         _view.textViewLicence.setOnClickListener {
             startActivity(intentFor<LicenseActivity>())
+        }
+
+        _view.textView_Terms_use.setOnClickListener {
+            startActivity(intentFor<TermsAndPrivacyActivity>())
         }
     }
 
