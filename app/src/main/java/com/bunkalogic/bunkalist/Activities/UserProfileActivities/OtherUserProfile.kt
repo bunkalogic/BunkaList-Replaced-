@@ -15,6 +15,8 @@ import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.DataUsers
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.bunkalogic.bunkalist.db.Users
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.firebase.firestore.*
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
@@ -24,6 +26,7 @@ import org.jetbrains.anko.support.v4.intentFor
 class OtherUserProfile : AppCompatActivity() {
 
     private lateinit var toolbar: android.support.v7.widget.Toolbar
+    lateinit var mAdView : AdView
 
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
@@ -45,6 +48,7 @@ class OtherUserProfile : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        addBannerAds()
 
         setUpFollowsDB()
         setUpFollowersDB()
@@ -55,6 +59,16 @@ class OtherUserProfile : AppCompatActivity() {
 
         subscribeToProfileListOther()
         //subscribeToNewUserFollows()
+    }
+
+
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = findViewById(R.id.adViewBannerActivityOtherUser)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
     }
 
     private fun setUpOtherProfile(){

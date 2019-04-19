@@ -146,7 +146,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/trailersLabel">
+                    app:layout_constraintTop_toBottomOf="@+id/trailersLabel"
+                    app:layout_constraintBottom_toTopOf="@+id/adViewBannerItemDetails">
 
                 <LinearLayout
                         android:id="@+id/LinearTrailers"
@@ -202,11 +203,23 @@
                     android:text="@string/activity_full_details_date" android:textSize="18sp"
                     android:textStyle="bold|italic" android:visibility="invisible"/>
 
+            <com.google.android.gms.ads.AdView
+                    xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adViewBannerItemDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="ca-app-pub-6667428027256827/9098146428"
+                    android:layout_marginBottom="8dp"
+                    ads:layout_constraintBottom_toBottomOf="parent" ads:layout_constraintEnd_toEndOf="parent"
+                    ads:layout_constraintStart_toStartOf="parent">
+            </com.google.android.gms.ads.AdView>
+
+
+
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-
 
 </android.support.design.widget.CoordinatorLayout>

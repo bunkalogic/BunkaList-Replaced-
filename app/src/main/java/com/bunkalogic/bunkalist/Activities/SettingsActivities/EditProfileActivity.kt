@@ -14,6 +14,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.BaseActivity
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -32,6 +34,7 @@ import java.util.*
 class EditProfileActivity : AppCompatActivity() {
 
     private lateinit var toolbar: android.support.v7.widget.Toolbar
+    lateinit var mAdView : AdView
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -49,9 +52,19 @@ class EditProfileActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        addBannerAds()
         setUpCurrentUser()
         clicksListeners()
 
+    }
+
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = findViewById(R.id.adViewBannerActivityEditProfile)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
     }
 
 

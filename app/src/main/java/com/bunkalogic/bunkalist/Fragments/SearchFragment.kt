@@ -17,6 +17,8 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.OnGetSearchCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,6 +36,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var _view: View
     private lateinit var adapter: SearchItemAdapter
+    lateinit var mAdView : AdView
 
 
     private lateinit var searchViewModel: ViewModelSearch
@@ -42,17 +45,26 @@ class SearchFragment : Fragment() {
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
 
-    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_search, container, false)
+        addBannerAds()
         setUpCurrentUser()
         setUpAdapterSearch()
         onClick()
 
         return _view
+    }
+
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = _view.findViewById(R.id.adViewBannerFragmentSearch)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
     }
 
 

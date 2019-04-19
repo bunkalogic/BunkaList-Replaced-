@@ -39,8 +39,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearch"/>
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearch"
+            app:layout_constraintBottom_toTopOf="@+id/adViewBannerFragmentSearch"/>
+
+
+    <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adViewBannerFragmentSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-6667428027256827/8072005219"
+            ads:layout_constraintBottom_toBottomOf="parent" ads:layout_constraintStart_toStartOf="parent"
+            ads:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="8dp">
+    </com.google.android.gms.ads.AdView>
 
 
 </android.support.constraint.ConstraintLayout>

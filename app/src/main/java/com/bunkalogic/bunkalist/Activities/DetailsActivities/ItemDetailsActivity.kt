@@ -34,6 +34,8 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
 import com.bunkalogic.bunkalist.Retrofit.OnGetGenresCallback
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 
 
 class ItemDetailsActivity : AppCompatActivity() {
@@ -42,6 +44,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
 
     private lateinit var toolbar: Toolbar
+    lateinit var mAdView : AdView
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -57,6 +60,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.search_item_full_details)
         super.onCreate(savedInstanceState)
         setUpToolbarTitle()
+        addBannerAds()
 
         //instantiate the ViewModel
         searchViewModel = ViewModelProviders.of(this).get(ViewModelSearch::class.java)
@@ -65,6 +69,16 @@ class ItemDetailsActivity : AppCompatActivity() {
         isMovieOrSerie()
         onClick()
     }
+
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = findViewById(R.id.adViewBannerItemDetails)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
+    }
+
 
     // You can select the title of the toolbar
     private fun setUpToolbarTitle(){

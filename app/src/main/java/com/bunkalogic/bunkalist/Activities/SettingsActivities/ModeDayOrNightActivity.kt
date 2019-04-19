@@ -4,8 +4,12 @@ package com.bunkalogic.bunkalist.Activities.SettingsActivities
 import android.os.Bundle
 import android.support.v7.app.AppCompatDelegate
 import com.bunkalogic.bunkalist.Activities.OtherActivities.ToolbarActivity
+import com.bunkalogic.bunkalist.BuildConfig
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_mode_day_or_night.*
 
 
@@ -21,14 +25,28 @@ class ModeDayOrNightActivity : ToolbarActivity() {
     private val MODE_NIGHT = 2
     private val MODE_CUSTOM = 3
 
+    lateinit var mAdView : AdView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mode_day_or_night)
+        //Instantiate the toolbar
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        addBannerAds()
         //onRadioButtonClicked()
         clicksListener()
+    }
+
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = findViewById(R.id.adViewBannerActivityMode)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
     }
 
 

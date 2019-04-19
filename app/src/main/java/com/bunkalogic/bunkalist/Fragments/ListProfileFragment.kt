@@ -17,6 +17,8 @@ import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.bunkalogic.bunkalist.db.NewListRating
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -28,6 +30,8 @@ import org.jetbrains.anko.support.v4.toast
 class ListProfileFragment : Fragment() {
 
     private lateinit var _view: View
+
+    lateinit var mAdView : AdView
 
     private var typeList = 0
 
@@ -50,12 +54,22 @@ class ListProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view =  inflater.inflate(R.layout.fragment_list_profile, container, false)
+        addBannerAds()
         setUpCurrentUser()
 
         whatUserIs()
         setUpRecycler()
 
         return _view
+    }
+
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = _view.findViewById(R.id.adViewBannerFragmentList)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
     }
 
 
