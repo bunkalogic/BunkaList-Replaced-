@@ -158,7 +158,7 @@ class OtherUserProfile : AppCompatActivity() {
         val userId = intent.extras?.getString("userId")
 
 
-        store.collection("Data/Users/ $userId / ${preferences.OtherUserIdBatabase} /RatingList")
+        store.collection("Users/$userId/RatingList")
             .orderBy("addDate", Query.Direction.DESCENDING)
             .limit(10)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot> {

@@ -80,7 +80,7 @@ class ProfileFragment : Fragment() {
 
     // Creating the name instance in the database
     private fun setUpAddListDB(){
-        addItemListDBRef = store.collection("Data/Users/${preferences.userId}/ ${preferences.userIdDatabase} /RatingList")
+        addItemListDBRef = store.collection("Users/${preferences.userId}/RatingList")
     }
 
     // Creating the new instance in the database

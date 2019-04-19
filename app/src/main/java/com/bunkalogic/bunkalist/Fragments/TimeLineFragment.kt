@@ -103,7 +103,7 @@ class TimeLineFragment : Fragment() {
 
     // root : Users/uid/username
     private fun setUpTimeLineGlobalDB(){
-        timelineGlobalDBRef = store.collection("Data/Users/timelineMessageGlobal")
+        timelineGlobalDBRef = store.collection("Data/Content/timelineMessageGlobal")
     }
 
     // Creating the new instance in the database

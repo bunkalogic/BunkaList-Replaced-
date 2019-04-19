@@ -78,35 +78,35 @@ class ListProfileFragment : Fragment() {
 
     private fun whatUserIs(){
         if (preferences.OtherUserId.isNullOrEmpty()){
-            getListOeuvre(preferences.userId!!, preferences.userIdDatabase!!)
+            getListOeuvre(preferences.userId!!)
         }else{
-            getListOeuvre(preferences.OtherUserId!!, preferences.OtherUserIdBatabase!!)
+            getListOeuvre(preferences.OtherUserId!!)
         }
     }
 
-    private fun getListOeuvre(userId: String, username: String){
+    private fun getListOeuvre(userId: String){
 
         if (typeList == Constans.MOVIE_LIST){
-            subscribeToProfileListMovie(userId, username)
+            subscribeToProfileListMovie(userId)
         }else if (typeList == Constans.SERIE_LIST){
-            subscribeToProfileListSeries(userId, username)
+            subscribeToProfileListSeries(userId)
         }else if (typeList == Constans.ANIME_LIST){
-            subscribeToProfileListAnime(userId, username)
+            subscribeToProfileListAnime(userId)
         }else if (typeList == Constans.MOVIE_TOP){
-            subscribeToProfileTopMovie(userId, username)
+            subscribeToProfileTopMovie(userId)
         }else if (typeList == Constans.SERIE_TOP){
-            subscribeToProfileTopSeries(userId, username)
+            subscribeToProfileTopSeries(userId)
         }else if (typeList == Constans.ANIME_TOP){
-            subscribeToProfileTopAnime(userId, username)
+            subscribeToProfileTopAnime(userId)
         }
 
     }
 
 
     // just give me the movies
-    private fun subscribeToProfileListMovie(userId: String, username: String){
-        Log.d("ListProfileFragment", "$userId and $username")
-        store.collection("Data/Users/$userId/ $username /RatingList")
+    private fun subscribeToProfileListMovie(userId: String){
+        Log.d("ListProfileFragment", "$userId")
+        store.collection("Users/$userId/RatingList")
             .whereEqualTo("typeOeuvre", Constans.MOVIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -128,8 +128,8 @@ class ListProfileFragment : Fragment() {
             })
     }
     // just give me the series
-    private fun subscribeToProfileListSeries(userId: String, username: String){
-        store.collection("Data/Users/$userId/ $username /RatingList")
+    private fun subscribeToProfileListSeries(userId: String){
+        store.collection("Users/$userId/RatingList")
             .whereEqualTo("typeOeuvre", Constans.SERIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -151,8 +151,8 @@ class ListProfileFragment : Fragment() {
             })
     }
     // just give me the anime
-    private fun subscribeToProfileListAnime(userId: String, username: String){
-        store.collection("Data/Users/$userId/ $username /RatingList")
+    private fun subscribeToProfileListAnime(userId: String){
+        store.collection("Users/$userId/RatingList")
             .whereEqualTo("typeOeuvre", Constans.ANIME_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
@@ -175,8 +175,8 @@ class ListProfileFragment : Fragment() {
     }
 
     // just give me the movies top 10
-    private fun subscribeToProfileTopMovie(userId: String, username: String){
-        store.collection("Data/Users/$userId/ $username /RatingList")
+    private fun subscribeToProfileTopMovie(userId: String){
+        store.collection("Users/$userId/RatingList")
             .whereEqualTo("typeOeuvre", Constans.MOVIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .limit(10)
@@ -198,8 +198,8 @@ class ListProfileFragment : Fragment() {
             })
     }
     // just give me the series top 10
-    private fun subscribeToProfileTopSeries(userId: String, username: String){
-        store.collection("Data/Users/$userId/ $username /RatingList")
+    private fun subscribeToProfileTopSeries(userId: String){
+        store.collection("Users/$userId/RatingList")
             .whereEqualTo("typeOeuvre", Constans.SERIE_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .limit(10)
@@ -221,8 +221,8 @@ class ListProfileFragment : Fragment() {
             })
     }
     // just give me the anime top 10
-    private fun subscribeToProfileTopAnime(userId: String, username: String){
-        store.collection("Data/Users/$userId/ $username /RatingList")
+    private fun subscribeToProfileTopAnime(userId: String){
+        store.collection("Users/$userId/RatingList")
             .whereEqualTo("typeOeuvre", Constans.ANIME_LIST)
             .orderBy("finalRate", Query.Direction.DESCENDING)
             .limit(10)

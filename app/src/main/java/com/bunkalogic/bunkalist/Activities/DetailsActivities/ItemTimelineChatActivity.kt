@@ -55,7 +55,7 @@ class ItemTimelineChatActivity : AppCompatActivity() {
 
     private fun setUpTimelineChatDB(){
         val extrasToken = intent.extras?.getString("token")
-        timelineChatDBRef = store.collection("Data/Users/timelineMessageGlobal/Chat/$extrasToken")
+        timelineChatDBRef = store.collection("Data/Content/timelineMessageGlobal/Chat/$extrasToken")
     }
 
     private fun saveMessageChat(message: TimelineChat){

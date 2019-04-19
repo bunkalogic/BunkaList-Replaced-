@@ -90,7 +90,7 @@
                     app:layout_constraintStart_toEndOf="@+id/imageViewPoster" android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp" android:text="@string/text_view_get_full_details_search_item"
                     android:textStyle="bold|italic" android:textAlignment="center" android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryLight"/>
+                    android:textColor="@color/colorPrimaryLight" android:textSize="12sp"/>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>

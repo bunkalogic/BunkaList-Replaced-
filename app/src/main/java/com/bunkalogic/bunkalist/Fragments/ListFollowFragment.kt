@@ -69,11 +69,11 @@ class ListFollowFragment : Fragment() {
     }
 
     private fun setUpFollowsDB(){
-        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userIdDatabase} /Follows")
+        followDBRef= store.collection("Users/${preferences.userId}/Follows")
     }
 
     private fun setUpFollowersDB(){
-        followersDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userIdDatabase} /Followers")
+        followersDBRef= store.collection("Users/${preferences.userId}/Followers")
     }
 
     // Creating the new instance in the database

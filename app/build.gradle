@@ -10,6 +10,7 @@ apply plugin: 'kotlin-kapt'
 
 def MOVIES_SESION_ID = '"' + sesionIDMovieDatatbase + '"' ?: '"ERROR"'
 def MOVIES_REQUEST_API = '"' + movieandseriesApiRequestID + '"' ?: '"ERROR"'
+def ADMOB_APP_ID = '"' + adMobId + '"' ?: '"ERROR"'
 def STRING = 'String'
 
 
@@ -28,11 +29,13 @@ android {
             type ->
                 type.buildConfigField STRING, 'movieandseriesApiRequestID', MOVIES_REQUEST_API
                 type.buildConfigField STRING, 'sesionIDMovieDatatbase', MOVIES_SESION_ID
+                type.buildConfigField STRING,  'adMobId', ADMOB_APP_ID
 
         }
         manifestPlaceholders = [
                 MOVIES_REQUEST_API: MOVIES_REQUEST_API,
-                MOVIES_SESION_ID  : MOVIES_SESION_ID
+                MOVIES_SESION_ID  : MOVIES_SESION_ID,
+                ADMOB_APP_ID : ADMOB_APP_ID
         ]
     }
     buildTypes {
@@ -81,6 +84,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation 'com.google.android.gms:play-services-ads:17.2.0'
 
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
     implementation 'android.arch.lifecycle:extensions:1.1.1'

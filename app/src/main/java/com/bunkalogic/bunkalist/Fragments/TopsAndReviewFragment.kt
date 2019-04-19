@@ -62,7 +62,7 @@ class TopsAndReviewFragment : Fragment() {
     }
 
     private fun setUpReviewDB(){
-        reviewDBRef= store.collection("Data/Users/ReviewExt")
+        reviewDBRef= store.collection("Data/Content/ReviewExt")
     }
 
     // Creating the new instance in the database
