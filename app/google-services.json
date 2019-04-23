@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "614643812863-r9t4blqs60uaciijlf484eivtlfh4s06.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bunkalogic.bunkalist",
+            "certificate_hash": "2cf6ce2e551103d2752b3a8848163e3892e1effe"
+          }
+        },
+        {
           "client_id": "614643812863-9sakbr5j7d1dd67jusstmlhdajhoa8tn.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -41,22 +49,16 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "614643812863-9sakbr5j7d1dd67jusstmlhdajhoa8tn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-6667428027256827~7372710211"
     }
   ],
   "configuration_version": "1"

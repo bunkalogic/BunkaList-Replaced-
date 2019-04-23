@@ -76,7 +76,6 @@ class SignUpActivity : AppCompatActivity() {
 
                 if ( isValidEmail(email) && isValidPassword(password) && isValidConfirmPassword(password, corfirmPassword)) {
                     signUpByEmail(email, password)
-                    startActivity(intentFor<LoginActivity>().clearTask().newTask())
                 }else{
                     toast(R.string.signUp_data_incorrect)
                 }

@@ -111,7 +111,7 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
             val userId = mAuth.currentUser!!.uid
             preferences.userId = userId
             preferences.userName = username
-            preferences.userIdDatabase = "@$userId"
+            mGoogleApiClient.connect()
             startActivity(intentFor<BaseActivity>().newTask().clearTask())
         }
     }
@@ -167,8 +167,9 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         if (requestCode == RC_GOOGLE_SIGN_IN){
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result.isSuccess){
-                val account = result.signInAccount
-                loginByGoogleAccountIntoFirebase(account!!)
+                val account = result.signInAccount!!
+                loginByGoogleAccountIntoFirebase(account)
+                mGoogleApiClient.connect()
             }
         }
     }

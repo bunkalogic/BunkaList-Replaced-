@@ -120,4 +120,13 @@
     <string name="sign_up_accept_terms_and_use">Veuillez accepter les conditions utilisation, la politique de
         confidentialité pour continuer
     </string>
+    <string name="fragment_tops_review_button_top_movies_popular">Top Movies Popular</string>
+    <string name="fragment_tops_review_button_top_series_popular">Top Series Popular</string>
+    <string name="fragment_top_reviews_title_popular"><![CDATA[Top 100 Movies & Series]]></string>
+    <string name="fragment_tops_review_button_top_movies_rated">Top Movies Rated</string>
+    <string name="fragment_tops_review_button_top_series_rated">Top Series Rated</string>
+    <string name="fragment_top_reviews_title_rated"><![CDATA[Top 100 Rated Movies & Series]]></string>
+    <string name="fragment_tops_review_button_top_movies_upcoming">Movies Upcoming</string>
+    <string name="fragment_tops_review_button_top_series_upcoming">Series Upcoming</string>
+    <string name="fragment_top_reviews_title_Upcoming"><![CDATA[Movies & Series Upcoming]]></string>
 </resources>

@@ -18,8 +18,14 @@ import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
 import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
+import com.firebase.ui.firestore.FirestoreArray
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
+import org.jetbrains.anko.coroutines.experimental.asReference
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 
@@ -154,6 +160,45 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                 })
             }
+
+            holder.itemView.setOnLongClickListener {
+               val ref = FirebaseFirestore.getInstance().collection("Users/${preferences.userId}/RatingList")
+
+               //val refId = ref.document()
+               //Log.d("ProfileListAdapter", refId)
+
+                  ref
+                  .document("id")
+                      .delete()
+                  .addOnCompleteListener(object : OnCompleteListener<Void>{
+                      override fun onComplete(p0: Task<Void>) {
+                          if (p0.isSuccessful){
+                              Log.d("ProfileListAdapter", "Deleted item")
+                              mValues.removeAt(position)
+                              notifyDataSetChanged()
+                          }else{
+                              Log.d("ProfileListAdapter", "Failed deleted item")
+                          }
+                      }
+
+                  })
+
+
+
+
+
+
+
+
+                true
+            }
+
+
+    }
+
+    fun removeItemList(item: ItemListRating){
+       mValues.remove(item)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

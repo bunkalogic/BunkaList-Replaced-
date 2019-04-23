@@ -117,6 +117,8 @@ class ListProfileFragment : Fragment() {
     }
 
 
+
+
     // just give me the movies
     private fun subscribeToProfileListMovie(userId: String){
         Log.d("ListProfileFragment", "$userId")

@@ -237,7 +237,8 @@
                                     app:layout_constraintEnd_toEndOf="parent"
                                     android:id="@+id/recyclerOtherProfile"
                                     app:layout_constraintTop_toBottomOf="@+id/textView6" android:layout_marginTop="8dp"
-                                    app:layout_constraintBottom_toTopOf="@+id/adViewBannerActivityOtherUser">
+                                    app:layout_constraintBottom_toTopOf="@+id/adViewBannerActivityOtherUser"
+                                    android:layout_marginBottom="8dp">
 
                             </android.support.v7.widget.RecyclerView>
 
@@ -257,8 +258,9 @@
                                     android:layout_height="wrap_content"
                                     ads:adSize="BANNER"
                                     ads:adUnitId="ca-app-pub-6667428027256827/3581138003"
-                                    ads:layout_constraintBottom_toBottomOf="parent" ads:layout_constraintEnd_toEndOf="parent"
-                                    ads:layout_constraintStart_toStartOf="parent">
+                                    ads:layout_constraintBottom_toBottomOf="parent"
+                                    ads:layout_constraintEnd_toEndOf="parent"
+                                    ads:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="8dp">
                             </com.google.android.gms.ads.AdView>
 
 
