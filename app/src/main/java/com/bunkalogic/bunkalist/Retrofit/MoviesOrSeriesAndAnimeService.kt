@@ -3,6 +3,10 @@ package com.bunkalogic.bunkalist.Retrofit
 import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
+import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
+import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResponseUpcoming
+import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import retrofit2.Call
 import retrofit2.http.GET
@@ -67,6 +71,48 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Call<GenresResponse>
+
+    @GET("movie/popular")
+    fun getPopularMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<MoviesResponse>
+
+    @GET("movie/top_rated")
+    fun getRatedMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<MoviesResponse>
+
+    @GET("movie/upcoming")
+    fun getUpcomingMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<ResponseUpcoming>
+
+    @GET("tv/popular")
+    fun getPopularSeries(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<ResponseSeries>
+
+    @GET("tv/top_rated")
+    fun getRatedSeries(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<ResponseSeries>
+
+    @GET("tv/on_the_air")
+    fun getUpcomingSeries(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<ResponseSeries>
 
 
 

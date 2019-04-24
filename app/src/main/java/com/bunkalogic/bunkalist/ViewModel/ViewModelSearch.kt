@@ -40,6 +40,32 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
         searchRepository.getGenresSeries(callback)
     }
 
+    fun getMoviesPopular(callback: OnGetListMoviesCallback){
+        searchRepository.getPopularMovies(callback)
+    }
+
+    fun getMoviesRated(callback: OnGetListMoviesCallback){
+        searchRepository.getRatedMovies(callback)
+    }
+
+    fun getMoviesUpcoming(callback: OnGetListMoviesCallback){
+        searchRepository.getUpcomingMovies(callback)
+    }
+
+    fun getSeriesPopular(callback: OnGetListSeriesCallback){
+        searchRepository.getSeriesPopular(callback)
+    }
+
+    fun getSeriesRated(callback: OnGetListSeriesCallback){
+        searchRepository.getSeriesRated(callback)
+    }
+
+    fun getSeriesUpcoming(callback: OnGetListSeriesCallback){
+        searchRepository.getSeriesUpcoming(callback)
+    }
+
+
+
 
 
 
