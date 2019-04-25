@@ -17,7 +17,10 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import org.jetbrains.anko.intentFor
 
-class TopListSeriesAdapter(private val ctx: Context, private var mValues: List<ResultSeries>?): RecyclerView.Adapter<TopListSeriesAdapter.ViewHolder>(){
+
+
+class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayList<ResultSeries>): RecyclerView.Adapter<TopListSeriesAdapter.ViewHolder>(){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopListSeriesAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.top_list_item, parent, false)
 
@@ -25,13 +28,18 @@ class TopListSeriesAdapter(private val ctx: Context, private var mValues: List<R
     }
 
     override fun getItemCount(): Int {
-        return  mValues!!.size
+        return  mValues.size
     }
 
     override fun onBindViewHolder(holder: TopListSeriesAdapter.ViewHolder, position: Int) {
         val numPosition = position + 1
         holder.textViewTopPosition.text = "$numPosition."
-        holder.bind(mValues!![position])
+        holder.bind(mValues[position])
+    }
+
+    fun appendSeries(moviesToAppend: List<ResultSeries>) {
+        mValues.addAll(moviesToAppend)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder (mView: View): RecyclerView.ViewHolder(mView){

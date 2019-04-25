@@ -14,10 +14,11 @@ import com.bunkalogic.bunkalist.Dialog.AddListDialog
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import org.jetbrains.anko.intentFor
 
-class TopListMoviesAdapter (private val ctx: Context, private var mValues: List<ResultMovie>?): RecyclerView.Adapter<TopListMoviesAdapter.ViewHolder>(){
+class TopListMoviesAdapter (private val ctx: Context, private var mValues: ArrayList<ResultMovie>): RecyclerView.Adapter<TopListMoviesAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopListMoviesAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.top_list_item, parent, false)
 
@@ -32,6 +33,11 @@ class TopListMoviesAdapter (private val ctx: Context, private var mValues: List<
         val numPosition = position + 1
         holder.textViewTopPosition.text = "$numPosition."
             holder.bind(mValues!![position])
+    }
+
+    fun appendMovies(moviesToAppend: List<ResultMovie>) {
+        mValues.addAll(moviesToAppend)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(mView: View): RecyclerView.ViewHolder(mView){

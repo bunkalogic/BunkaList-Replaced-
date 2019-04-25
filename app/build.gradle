@@ -29,13 +29,13 @@ android {
             type ->
                 type.buildConfigField STRING, 'movieandseriesApiRequestID', MOVIES_REQUEST_API
                 type.buildConfigField STRING, 'sesionIDMovieDatatbase', MOVIES_SESION_ID
-                type.buildConfigField STRING,  'adMobId', ADMOB_APP_ID
+                type.buildConfigField STRING, 'adMobId', ADMOB_APP_ID
 
         }
         manifestPlaceholders = [
                 MOVIES_REQUEST_API: MOVIES_REQUEST_API,
                 MOVIES_SESION_ID  : MOVIES_SESION_ID,
-                ADMOB_APP_ID : ADMOB_APP_ID
+                ADMOB_APP_ID      : ADMOB_APP_ID
         ]
     }
     buildTypes {

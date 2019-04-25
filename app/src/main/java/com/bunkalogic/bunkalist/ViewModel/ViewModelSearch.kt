@@ -40,28 +40,28 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
         searchRepository.getGenresSeries(callback)
     }
 
-    fun getMoviesPopular(callback: OnGetListMoviesCallback){
-        searchRepository.getPopularMovies(callback)
+    fun getMoviesPopular(page: Int, callback: OnGetListMoviesCallback){
+        searchRepository.getPopularMovies(page, callback)
     }
 
-    fun getMoviesRated(callback: OnGetListMoviesCallback){
-        searchRepository.getRatedMovies(callback)
+    fun getMoviesRated(page: Int, callback: OnGetListMoviesCallback){
+        searchRepository.getRatedMovies(page, callback)
     }
 
-    fun getMoviesUpcoming(callback: OnGetListMoviesCallback){
-        searchRepository.getUpcomingMovies(callback)
+    fun getMoviesUpcoming(page: Int, callback: OnGetListMoviesCallback){
+        searchRepository.getUpcomingMovies(page, callback)
     }
 
-    fun getSeriesPopular(callback: OnGetListSeriesCallback){
-        searchRepository.getSeriesPopular(callback)
+    fun getSeriesPopular(page: Int, callback: OnGetListSeriesCallback){
+        searchRepository.getSeriesPopular(page, callback)
     }
 
-    fun getSeriesRated(callback: OnGetListSeriesCallback){
-        searchRepository.getSeriesRated(callback)
+    fun getSeriesRated(page: Int, callback: OnGetListSeriesCallback){
+        searchRepository.getSeriesRated(page, callback)
     }
 
-    fun getSeriesUpcoming(callback: OnGetListSeriesCallback){
-        searchRepository.getSeriesUpcoming(callback)
+    fun getSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
+        searchRepository.getSeriesUpcoming(page, callback)
     }
 
 

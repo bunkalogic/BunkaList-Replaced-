@@ -9,8 +9,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListMovieActivity
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListSeriesActivity
 import com.bunkalogic.bunkalist.Adapters.ReviewAdapter
 import com.bunkalogic.bunkalist.Dialog.ReviewDialog
+import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
@@ -21,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_topandreview.view.*
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -54,11 +58,41 @@ class TopsAndReviewFragment : Fragment() {
 
         setUpRecyclerView()
         setUpFab()
+        onClick()
 
         subscribeToReviews()
         subscribeToNewReview()
 
         return _view
+    }
+
+    fun onClick(){
+
+        _view.buttonMoviesPopular.setOnClickListener {
+            startActivity(intentFor<ListMovieActivity>("popular" to Constans.Popular_LIST))
+        }
+
+        _view.buttonMoviesRated.setOnClickListener {
+            startActivity(intentFor<ListMovieActivity>("rated" to Constans.Rated_LIST))
+        }
+
+        _view.buttonMoviesUpcoming.setOnClickListener {
+            startActivity(intentFor<ListMovieActivity>("upcoming" to Constans.Upcoming_LIST))
+        }
+
+        _view.buttonSeriesPopular.setOnClickListener {
+            startActivity(intentFor<ListSeriesActivity>("popular" to Constans.Popular_LIST))
+        }
+
+        _view.buttonSeriesRated.setOnClickListener {
+            startActivity(intentFor<ListSeriesActivity>("rated" to Constans.Rated_LIST))
+        }
+
+        _view.buttonSeriesUpcoming.setOnClickListener {
+            startActivity(intentFor<ListSeriesActivity>("rated" to Constans.Upcoming_LIST))
+        }
+
+
     }
 
     private fun setUpReviewDB(){

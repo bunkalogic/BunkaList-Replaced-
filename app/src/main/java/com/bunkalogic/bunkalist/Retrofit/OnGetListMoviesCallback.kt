@@ -4,7 +4,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
 
 interface OnGetListMoviesCallback {
 
-    fun onSuccess(movies: List<ResultMovie>)
+    fun onSuccess(page : Int, movies: List<ResultMovie>)
 
     fun onError()
 }

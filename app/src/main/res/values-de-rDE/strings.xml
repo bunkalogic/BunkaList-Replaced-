@@ -112,4 +112,7 @@
     <string name="fragment_tops_review_button_top_movies_upcoming">Movies Upcoming</string>
     <string name="fragment_tops_review_button_top_series_upcoming">Series Upcoming</string>
     <string name="fragment_top_reviews_title_Upcoming"><![CDATA[Movies & Series Upcoming]]></string>
+    <string name="profile_list_activity_tab_popular">Top Popular</string>
+    <string name="profile_list_activity_tab_rated">Top Rated</string>
+    <string name="profile_list_activity_tab_upcoming">Top Upcoming</string>
 </resources>

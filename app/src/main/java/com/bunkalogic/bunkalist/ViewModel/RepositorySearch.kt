@@ -195,9 +195,9 @@ class RepositorySearch internal constructor() {
         })
     }
 
-    fun getPopularMovies(callback: OnGetListMoviesCallback){
-        val call = moviesOrSeriesAndAnimeService.getPopularMovies(Constans.API_KEY, Locale.getDefault().toString(),1)
-
+    fun getPopularMovies(page: Int,callback: OnGetListMoviesCallback){
+        val call = moviesOrSeriesAndAnimeService.getPopularMovies(Constans.API_KEY, Locale.getDefault().toString(), page)
+        Log.d("RepositorySearch", "Next Page = $page")
 
         call.enqueue(object : Callback<MoviesResponse>{
             override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
@@ -208,7 +208,7 @@ class RepositorySearch internal constructor() {
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
                 if (response.isSuccessful){
                     val popularResponse : MoviesResponse = response.body()!!
-                    callback.onSuccess(popularResponse.movies!!)
+                    callback.onSuccess(popularResponse.page ,popularResponse.movies!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Popular Movies")
                 }
@@ -217,8 +217,8 @@ class RepositorySearch internal constructor() {
         })
     }
 
-    fun getRatedMovies(callback: OnGetListMoviesCallback){
-        val call = moviesOrSeriesAndAnimeService.getRatedMovies(Constans.API_KEY, Locale.getDefault().toString(),1)
+    fun getRatedMovies(page: Int, callback: OnGetListMoviesCallback){
+        val call = moviesOrSeriesAndAnimeService.getRatedMovies(Constans.API_KEY, Locale.getDefault().toString(), page)
 
 
         call.enqueue(object : Callback<MoviesResponse>{
@@ -230,7 +230,7 @@ class RepositorySearch internal constructor() {
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
                 if (response.isSuccessful){
                     val ratedResponse : MoviesResponse = response.body()!!
-                    callback.onSuccess(ratedResponse.movies!!)
+                    callback.onSuccess(ratedResponse.page, ratedResponse.movies!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Rated Movies")
                 }
@@ -239,8 +239,8 @@ class RepositorySearch internal constructor() {
         })
     }
 
-    fun getUpcomingMovies(callback: OnGetListMoviesCallback){
-        val call = moviesOrSeriesAndAnimeService.getUpcomingMovies(Constans.API_KEY, Locale.getDefault().toString(),1)
+    fun getUpcomingMovies(page: Int, callback: OnGetListMoviesCallback){
+        val call = moviesOrSeriesAndAnimeService.getUpcomingMovies(Constans.API_KEY, Locale.getDefault().toString(), page)
 
 
         call.enqueue(object : Callback<ResponseUpcoming>{
@@ -252,7 +252,7 @@ class RepositorySearch internal constructor() {
             override fun onResponse(call: Call<ResponseUpcoming>, response: Response<ResponseUpcoming>) {
                 if (response.isSuccessful){
                     val upcomingResponse : ResponseUpcoming = response.body()!!
-                    callback.onSuccess(upcomingResponse.results!!)
+                    callback.onSuccess(upcomingResponse.page!! ,upcomingResponse.results!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Upcoming Movies")
                 }
@@ -262,8 +262,8 @@ class RepositorySearch internal constructor() {
         })
     }
 
-    fun getSeriesPopular(callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getPopularSeries(Constans.API_KEY, Locale.getDefault().toString(), 1)
+    fun getSeriesPopular(page: Int, callback: OnGetListSeriesCallback){
+        val call = moviesOrSeriesAndAnimeService.getPopularSeries(Constans.API_KEY, Locale.getDefault().toString(), page)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
@@ -274,7 +274,7 @@ class RepositorySearch internal constructor() {
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
                 if (response.isSuccessful){
                     val popularResponse : ResponseSeries = response.body()!!
-                    callback.onSuccess(popularResponse.results!!)
+                    callback.onSuccess(popularResponse.page!! ,popularResponse.results!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Popular Series")
                 }
@@ -284,8 +284,8 @@ class RepositorySearch internal constructor() {
     }
 
 
-    fun getSeriesRated(callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getRatedSeries(Constans.API_KEY, Locale.getDefault().toString(), 1)
+    fun getSeriesRated(page: Int, callback: OnGetListSeriesCallback){
+        val call = moviesOrSeriesAndAnimeService.getRatedSeries(Constans.API_KEY, Locale.getDefault().toString(), page)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
@@ -296,7 +296,7 @@ class RepositorySearch internal constructor() {
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
                 if (response.isSuccessful){
                     val ratedResponse : ResponseSeries = response.body()!!
-                    callback.onSuccess(ratedResponse.results!!)
+                    callback.onSuccess(ratedResponse.page!! , ratedResponse.results!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Rated Series")
                 }
@@ -305,8 +305,8 @@ class RepositorySearch internal constructor() {
         })
     }
 
-    fun getSeriesUpcoming(callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getUpcomingSeries(Constans.API_KEY, Locale.getDefault().toString(), 1)
+    fun getSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
+        val call = moviesOrSeriesAndAnimeService.getUpcomingSeries(Constans.API_KEY, Locale.getDefault().toString(), page)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
@@ -317,7 +317,7 @@ class RepositorySearch internal constructor() {
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
                 if (response.isSuccessful){
                     val ratedResponse : ResponseSeries = response.body()!!
-                    callback.onSuccess(ratedResponse.results!!)
+                    callback.onSuccess(ratedResponse.page!!, ratedResponse.results!!)
                 }else{
                     Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Rated Series")
                 }

@@ -159,7 +159,9 @@
     <string name="activity_licence">This application uses open source components. You can find the source code and
         license information of these open source projects.
     </string>
-    <string name="sign_up_terms_anduse">"I accept the Privacy Policy and consent to the proccesing of my personal information in accordance with it."</string>
+    <string name="sign_up_terms_anduse">"I accept the Privacy Policy and consent to the proccesing of my personal
+        information in accordance with it."
+    </string>
     <string name="sign_up_accept_terms_and_use">"Please accept the terms and conditions of use, policy of Privacy
         to continue"
     </string>
@@ -172,6 +174,12 @@
     <string name="fragment_tops_review_button_top_movies_upcoming">Movies Upcoming</string>
     <string name="fragment_tops_review_button_top_series_upcoming">Series Upcoming</string>
     <string name="fragment_top_reviews_title_Upcoming"><![CDATA[Movies & Series Upcoming]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_list_activity_tab_popular">Top Popular</string>
+    <string name="profile_list_activity_tab_rated">Top Rated</string>
+    <string name="profile_list_activity_tab_upcoming">Top Upcoming</string>
 
 
 </resources>

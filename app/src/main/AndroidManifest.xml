@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:installLocation="auto"
-          package="com.bunkalogic.bunkalist">
+          package="com.bunkalogic.bunkalist"
+          android:installLocation="auto">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -16,9 +16,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-
-
-        <!--Sample Admob id: ca-app-pub-3940256099942544~3347511713 -->
+        <activity android:name=".Activities.DetailsActivities.ListSeriesActivity">
+        </activity>
+        <activity android:name=".Activities.DetailsActivities.ListMovieActivity">
+        </activity> <!-- Sample Admob id: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="ca-app-pub-3940256099942544~3347511713"/>

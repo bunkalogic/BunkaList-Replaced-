@@ -48,8 +48,14 @@ object Constans{
     val TIMELINE_GLOBAL = 1
     val TIMELINE_PERSONAL = 2
 
+    // list fragment
+    val TYPE_LIST_TOP = "LIST_TYPE_TOP"
+    val Popular_LIST = 0
+    val Rated_LIST = 1
+    val Upcoming_LIST = 2
 
-    val ADMOB = "ca-app-pub-6667428027256827~7372710211"
+
+
 
 
 
