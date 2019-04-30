@@ -81,7 +81,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
 
                         // is responsible for collecting the data to load in the ItemDetailsActivity
-                        holder.getFullDetails.setOnClickListener {
+                        holder.itemView.setOnClickListener {
                             ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
                                 "id" to idItem,
                                 "type" to mediaTypeMovie,
@@ -113,7 +113,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
 
                         // is responsible for collecting the data to load in the ItemDetailsActivity
-                        holder.getFullDetails.setOnClickListener {
+                        holder.itemView.setOnClickListener {
                             ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
                                 "id" to idItem,
                                 "type" to mediaTypeTV,
@@ -143,7 +143,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                         val name = series.name
 
                         // is responsible for collecting the data to load in the ItemDetailsActivity
-                        holder.getFullDetails.setOnClickListener {
+                        holder.itemView.setOnClickListener {
                             ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
                                 "id" to idItem,
                                 "type" to mediaTypeTV,
@@ -210,7 +210,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
         internal var title: TextView
         internal var dateRelease: TextView
         internal var globalRating: TextView
-        internal var getFullDetails: TextView
         internal var numPosition: TextView
         internal var dateAt: TextView
         internal var yourRating: TextView
@@ -221,7 +220,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             title = view.findViewById(R.id.textViewTitleListProfile)
             dateRelease = view.findViewById(R.id.textViewDateReleastListProfile)
             globalRating = view.findViewById(R.id.textViewRatingListProfile)
-            getFullDetails = view.findViewById(R.id.textViewGetFullDetailsListProfile)
             numPosition = view.findViewById(R.id.textViewListProfileNumberPosition)
             dateAt = view.findViewById(R.id.textViewListProfileDateAt)
             yourRating = view.findViewById(R.id.textViewListProfileYourRating)

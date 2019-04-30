@@ -32,9 +32,23 @@ class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val mItem = mValues[position]
+
+        val id = mItem.id
+        val type = "tv"
+        val title = mItem.name
+
+        holder.itemView.setOnClickListener {
+            ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
+                "id" to id,
+                "type" to type,
+                "title" to title
+            ))
+        }
+
         val numPosition = position + 1
         holder.textViewTopPosition.text = "$numPosition."
-        holder.bind(mValues[position])
+        holder.bind(mItem)
     }
 
     fun appendSeries(moviesToAppend: List<ResultSeries>) {
@@ -52,7 +66,6 @@ class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayL
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleTopSeries)
         private val textViewDateReleast : TextView = mView.findViewById(R.id.textViewDateReleastTopSeries)
         private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescriptionTopSeries)
-        private val textViewSeeDetails: TextView = mView.findViewById(R.id.textViewGetFullDetailsTopSeries)
         private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyListTopSeries)
         private val textViewRating: TextView = mView.findViewById(R.id.textViewRatingTopSeries)
         internal var textViewTopPosition: TextView = mView.findViewById(R.id.textViewTopListSeries)
@@ -74,17 +87,6 @@ class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayL
                 .into(imageViewPoster)
 
             val id = mItem.id
-            val type = "tv"
-            val title = mItem.name
-
-
-            textViewSeeDetails.setOnClickListener {
-                ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
-                    "id" to id,
-                    "type" to type,
-                    "title" to title
-                ))
-            }
 
             imageViewRating.setOnClickListener {
                 preferences.itemID = id!!

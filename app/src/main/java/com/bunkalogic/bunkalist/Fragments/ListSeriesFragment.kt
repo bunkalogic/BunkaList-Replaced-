@@ -39,6 +39,8 @@ class ListSeriesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
+
         arguments?.let {
             typeList = it.getInt(Constans.TYPE_LIST_TOP_SERIES)
         }
@@ -91,17 +93,14 @@ class ListSeriesFragment : Fragment() {
     }
 
     private fun initializeListSeriesPopular(page: Int, callback: OnGetListSeriesCallback){
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
         searchViewModel.getSeriesPopular(page, callback)
     }
 
     private fun initializeListSeriesRated(page: Int, callback: OnGetListSeriesCallback){
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
         searchViewModel.getSeriesRated(page, callback)
     }
 
     private fun initializeListSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
         searchViewModel.getSeriesUpcoming(page, callback)
     }
 
@@ -178,7 +177,6 @@ class ListSeriesFragment : Fragment() {
 
         })
     }
-
 
 
     companion object {

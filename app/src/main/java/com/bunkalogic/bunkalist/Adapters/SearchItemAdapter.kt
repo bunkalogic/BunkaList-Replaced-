@@ -34,7 +34,23 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.bind(mValues!![position])
+        val mItem = mValues!![position]
+
+        val id = mItem.id
+        val type = mItem.mediaType
+        val title = mItem.title
+        val name =  mItem.name
+
+        holder.itemView.setOnClickListener {
+            ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
+                "id" to id,
+                "type" to type,
+                "title" to title,
+                "name" to name
+            ))
+        }
+
+            holder.bind(mItem)
     }
 
    fun setData(title: List<ResultSearchAll>){
@@ -48,7 +64,6 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitle)
         private val textViewDateReleast :TextView = mView.findViewById(R.id.textViewDateReleast)
         private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescription)
-        private val textViewSeeDetails: TextView = mView.findViewById(R.id.textViewGetFullDetails)
         private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyList)
         private val textViewRating: TextView = mView.findViewById(R.id.textViewRating)
 
@@ -82,18 +97,8 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
 
             // is responsible for collecting the id and type to load after depending on whether it is a movie or series
             val id = mItem.id
-            val type = mItem.mediaType
-            val title = mItem.title
-            val name = mItem.name
 
-            textViewSeeDetails.setOnClickListener {
-                ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
-                    "id" to id,
-                    "type" to type,
-                    "title" to title,
-                    "name" to name
-                ))
-            }
+
 
 
             imageViewRating.setOnClickListener {

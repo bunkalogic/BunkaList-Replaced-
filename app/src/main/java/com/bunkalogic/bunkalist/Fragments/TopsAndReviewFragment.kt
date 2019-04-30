@@ -9,16 +9,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListMovieActivity
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListSeriesActivity
 import com.bunkalogic.bunkalist.Adapters.ReviewAdapter
 import com.bunkalogic.bunkalist.Dialog.ReviewDialog
-import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.db.NewReview
 import com.bunkalogic.bunkalist.db.NewReviewEvent
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -35,6 +37,7 @@ import org.jetbrains.anko.support.v4.toast
 class TopsAndReviewFragment : Fragment() {
 
     private lateinit var _view: View
+    lateinit var mAdView : AdView
 
     private val reviewList: ArrayList<NewReview> = ArrayList()
     private lateinit var adapter : ReviewAdapter
@@ -53,6 +56,7 @@ class TopsAndReviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_topandreview, container, false)
+        addBannerAds()
         setUpReviewDB()
         setUpCurrentUser()
 
@@ -66,7 +70,22 @@ class TopsAndReviewFragment : Fragment() {
         return _view
     }
 
+    //initializing the banner in this activity
+    private fun addBannerAds(){
+        mAdView = _view.findViewById(R.id.adViewBannerTopsReview)
+        // Ad request to show on the banner
+        val adRequest = AdRequest.Builder().build()
+        // Associate the request to the banner
+        mAdView.loadAd(adRequest)
+    }
+
     fun onClick(){
+
+        // Cargando la imagen del cardview
+        Glide.with(_view)
+            .load(R.drawable.imagecardviewmoviesanseries)
+            .centerCrop()
+            .into(_view.imageView7)
 
         _view.buttonMoviesPopular.setOnClickListener {
             startActivity(intentFor<ListMovieActivity>())
@@ -75,9 +94,6 @@ class TopsAndReviewFragment : Fragment() {
         _view.buttonSeriesPopular.setOnClickListener {
             startActivity(intentFor<ListSeriesActivity>())
         }
-
-
-
     }
 
     private fun setUpReviewDB(){
