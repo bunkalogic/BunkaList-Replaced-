@@ -49,10 +49,17 @@ object Constans{
     val TIMELINE_PERSONAL = 2
 
     // list fragment
-    val TYPE_LIST_TOP = "LIST_TYPE_TOP"
-    val Popular_LIST = 0
-    val Rated_LIST = 1
-    val Upcoming_LIST = 2
+    val TYPE_LIST_TOP_MOVIES = "LIST_TYPE_TOP_MOVIES"
+    val TYPE_LIST_TOP_SERIES = "LIST_TYPE_TOP_SERIES"
+    val Popular_LIST = "popular"
+    val Rated_LIST = "rated"
+    val Upcoming_LIST = "upcoming"
+
+    val Popular_LIST_Series = 3
+    val Rated_LIST_Series = 4
+    val Upcoming_LIST_Series = 5
+
+
 
 
 

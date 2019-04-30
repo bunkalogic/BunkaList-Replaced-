@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,20 +30,21 @@ class ListMovieFragment : Fragment() {
     private lateinit var _view: View
     lateinit var mAdView : AdView
 
-    private var typeList = 0
+    private var typeList = "popular"
 
     var adapter: TopListMoviesAdapter? = null
 
     private lateinit var searchViewModel: ViewModelSearch
-    //private var seriesList: ArrayList<ResultSeries>? = null
 
-    private var isFetchingSeries: Boolean = false
+    private var isFetchingMovies: Boolean = false
     private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
+
         arguments?.let {
-            typeList = it.getInt(Constans.TYPE_LIST_TOP)
+            typeList = it.getString(Constans.TYPE_LIST_TOP_MOVIES)
         }
     }
 
@@ -50,6 +52,8 @@ class ListMovieFragment : Fragment() {
         // Inflate the layout for this fragment
         _view =  inflater.inflate(R.layout.fragment_list_movie, container, false)
         addBannerAds()
+        whatTypeListIs()
+        setUpOnScrollListener()
 
 
         return _view
@@ -66,12 +70,16 @@ class ListMovieFragment : Fragment() {
 
 
     private fun whatTypeListIs(){
-        if (typeList == Constans.Popular_LIST){
-            getPopularMovies(currentPage + 1)
-        }else if (typeList == Constans.Rated_LIST){
-            getRatedMovies(currentPage + 1)
-        }else if (typeList == Constans.Upcoming_LIST){
-
+        when (typeList) {
+            Constans.Popular_LIST ->{
+                getMovieList(currentPage + 1)
+            }
+            Constans.Rated_LIST -> {
+                getMovieList(currentPage + 1)
+            }
+            Constans.Upcoming_LIST -> {
+                getMovieList(currentPage + 1)
+            }
         }
     }
 
@@ -86,72 +94,45 @@ class ListMovieFragment : Fragment() {
                 val firstVisibleItem = manager.findFirstVisibleItemPosition()
 
                 if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
-                    if (!isFetchingSeries) {
-                        //whatTypeListIs()
-
+                    if (!isFetchingMovies) {
+                        whatTypeListIs()
                     }
                 }
             }
         })
     }
 
-    private fun initializeListMoviesPopular(page: Int, callback: OnGetListMoviesCallback){
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
-        searchViewModel.getMoviesPopular(page, callback)
-    }
-
-    private fun initializeListMoviesRated(page: Int, callback: OnGetListMoviesCallback){
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
-        searchViewModel.getMoviesRated(page, callback)
-    }
+    //private fun initializeListMoviesList(page: Int, sortBy: String, callback: OnGetListMoviesCallback){
+    //    searchViewModel.getMoviesList(page, sortBy, callback)
+    //}
 
 
 
 
-    private fun getPopularMovies(page: Int){
-        isFetchingSeries = true
-        initializeListMoviesPopular(page, object :OnGetListMoviesCallback{
+
+    private fun getMovieList(page: Int){
+        isFetchingMovies = true
+        searchViewModel.getMoviesList(page, typeList, object :OnGetListMoviesCallback{
             override fun onSuccess(page: Int, movies: List<ResultMovie>) {
                 if (adapter == null){
                     adapter = TopListMoviesAdapter(context!!, movies as ArrayList)
                     _view.recyclerAllListTopMovies.adapter = adapter
                 }else{
-                    adapter!!.appendMovies(movies)
+                    if (page == 1){
+                        adapter?.clearList()
+                    }
+                    adapter?.appendMovies(movies)
                 }
-                currentPage = page
-                isFetchingSeries = false
-            }
 
+                currentPage = page
+                isFetchingMovies = false
+            }
             override fun onError() {
                 toast("Please check your internet connection")
             }
 
         })
     }
-
-    private fun getRatedMovies(page: Int){
-        isFetchingSeries = true
-        initializeListMoviesRated(page, object :OnGetListMoviesCallback{
-            override fun onSuccess(page: Int, movies: List<ResultMovie>) {
-                if (adapter == null){
-                    adapter = TopListMoviesAdapter(context!!, movies as ArrayList)
-                    _view.recyclerAllListTopMovies.adapter = adapter
-                }else{
-                    adapter!!.appendMovies(movies)
-                }
-                currentPage = page
-                isFetchingSeries = false
-            }
-
-            override fun onError() {
-                toast("Please check your internet connection")
-            }
-
-
-        })
-    }
-
-
 
 
 
@@ -159,10 +140,10 @@ class ListMovieFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(typeList: Int) =
+        fun newInstance(typeList: String) =
             ListMovieFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(Constans.TYPE_LIST_TOP, typeList)
+                    putString(Constans.TYPE_LIST_TOP_MOVIES, typeList)
                 }
             }
     }

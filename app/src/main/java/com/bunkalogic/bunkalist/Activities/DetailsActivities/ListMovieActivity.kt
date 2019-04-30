@@ -23,21 +23,21 @@ class ListMovieActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setUpTabLayoutList()
-        whatTypeListIs()
+        //whatTypeListIs()
     }
 
-    private fun whatTypeListIs(){
-        val extrasPopular = intent.extras?.getInt("popular")
-        val extrasRated = intent.extras?.getInt("rated")
-        val extrasUpcoming = intent.extras?.getInt("upcoming")
-
-        when {
-            extrasPopular == 0 -> ListMovieFragment.newInstance(Constans.Popular_LIST)
-            extrasRated == 1 -> ListMovieFragment.newInstance(Constans.Rated_LIST)
-            extrasUpcoming == 2 -> ListMovieFragment.newInstance(Constans.Upcoming_LIST)
-        }
-
-    }
+    //private fun whatTypeListIs(){
+    //    val extrasPopular = intent.extras?.getInt("popular")
+    //    val extrasRated = intent.extras?.getInt("rated")
+    //    val extrasUpcoming = intent.extras?.getInt("upcoming")
+//
+    //    when {
+    //        extrasPopular == 0 -> ListMovieFragment.newInstance(Constans.Popular_LIST)
+    //        extrasRated == 1 -> ListMovieFragment.newInstance(Constans.Rated_LIST)
+    //        extrasUpcoming == 2 -> ListMovieFragment.newInstance(Constans.Upcoming_LIST)
+    //    }
+//
+    //}
 
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -95,6 +96,30 @@ class SearchFragment : Fragment() {
     }
 
     private fun onClick(){
+
+        _view.editTextSearch.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if ((event?.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
+                    getSearchAll(object: OnGetSearchCallback{
+                        override fun onSuccess(all: List<ResultSearchAll>) {
+                            Log.d("FragmentSearch", "On success data")
+                            if (all.isEmpty()){
+                                toast("Please search again")
+                            }else{
+                                adapter.setData(all)
+
+                            }
+                        }
+
+                        override fun onError() {
+                            toast("Please check your internet connection")
+                        }
+                    })
+                }
+                return false
+            }
+
+        })
 
         _view.imageViewSearch.setOnClickListener {
             getSearchAll(object: OnGetSearchCallback{

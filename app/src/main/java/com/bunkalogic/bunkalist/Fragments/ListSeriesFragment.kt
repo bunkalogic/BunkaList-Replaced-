@@ -40,7 +40,7 @@ class ListSeriesFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            typeList = it.getInt(Constans.TYPE_LIST_TOP)
+            typeList = it.getInt(Constans.TYPE_LIST_TOP_SERIES)
         }
     }
 
@@ -48,6 +48,7 @@ class ListSeriesFragment : Fragment() {
         // Inflate the layout for this fragment
          _view = inflater.inflate(R.layout.fragment_list_series, container, false)
         addBannerAds()
+        whatTypeListIs()
         setUpOnScrollListener()
 
         return _view
@@ -63,12 +64,10 @@ class ListSeriesFragment : Fragment() {
     }
 
     private fun whatTypeListIs(){
-        if (typeList == Constans.Popular_LIST){
-            getPopularSeries(currentPage + 1)
-        }else if (typeList == Constans.Rated_LIST){
-            getRatedSeries(currentPage + 1)
-        }else if (typeList == Constans.Upcoming_LIST){
-            getUpcomingSeries(currentPage + 1)
+        when (typeList) {
+            Constans.Popular_LIST_Series -> getPopularSeries(currentPage + 1)
+            Constans.Rated_LIST_Series -> getRatedSeries(currentPage + 1)
+            Constans.Upcoming_LIST_Series -> getUpcomingSeries(currentPage + 1)
         }
     }
 
@@ -84,8 +83,7 @@ class ListSeriesFragment : Fragment() {
 
                 if (firstVisibleItem + visibleItemCount >= totalItemCount / 2) {
                     if (!isFetchingSeries) {
-                        //whatTypeListIs()
-                        getPopularSeries(currentPage + 1)
+                        whatTypeListIs()
                     }
                 }
             }
@@ -116,7 +114,10 @@ class ListSeriesFragment : Fragment() {
                     adapter = TopListSeriesAdapter(context!!, series as ArrayList)
                     _view.recyclerAllListTopSeries.adapter = adapter
                 }else{
-                    adapter!!.appendSeries(series)
+                    if (page == 1){
+                        adapter?.clearList()
+                    }
+                    adapter?.appendSeries(series)
                 }
                 currentPage = page
                 isFetchingSeries = false
@@ -137,7 +138,10 @@ class ListSeriesFragment : Fragment() {
                     adapter = TopListSeriesAdapter(context!!, series as ArrayList)
                     _view.recyclerAllListTopSeries.adapter = adapter
                 }else{
-                    adapter!!.appendSeries(series)
+                    if (page == 1){
+                        adapter?.clearList()
+                    }
+                    adapter?.appendSeries(series)
                 }
                 currentPage = page
                 isFetchingSeries = false
@@ -159,7 +163,10 @@ class ListSeriesFragment : Fragment() {
                     adapter = TopListSeriesAdapter(context!!, series as ArrayList)
                     _view.recyclerAllListTopSeries.adapter = adapter
                 }else{
-                    adapter!!.appendSeries(series)
+                    if (page == 1){
+                        adapter?.clearList()
+                    }
+                    adapter?.appendSeries(series)
                 }
                 currentPage = page
                 isFetchingSeries = false
@@ -179,7 +186,7 @@ class ListSeriesFragment : Fragment() {
         fun newInstance(typeList: Int) =
             ListSeriesFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(Constans.TYPE_LIST_TOP, typeList)
+                    putInt(Constans.TYPE_LIST_TOP_SERIES, typeList)
                 }
             }
     }

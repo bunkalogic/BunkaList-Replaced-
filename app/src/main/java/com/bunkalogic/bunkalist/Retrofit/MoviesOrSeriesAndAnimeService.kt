@@ -17,6 +17,8 @@ import com.bunkalogic.bunkalist.Retrofit.Response.TrailerResponse
 
 
 
+
+
 interface MoviesOrSeriesAndAnimeService {
 
     // https://api.themoviedb.org/3/search/multi?api_key=7bcf40aff5d7be80e294d763234a6930&language=en-US&query=cowboy%20bebop&page=1&include_adult=false
@@ -80,7 +82,7 @@ interface MoviesOrSeriesAndAnimeService {
     ): Call<MoviesResponse>
 
     @GET("movie/top_rated")
-    fun getRatedMovies(
+    fun getTopRatedMovies(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
@@ -91,7 +93,7 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int
-    ): Call<ResponseUpcoming>
+    ): Call<MoviesResponse>
 
     @GET("tv/popular")
     fun getPopularSeries(

@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Fragments
 
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
@@ -76,10 +77,10 @@ class TimeLineFragment : Fragment() {
         setUpFab()
         //setUpRecyclerView()
         setUpRecyclerViewGlobal()
+        setUpSwipeRefreshLayout()
 
         subscribeToTimelineMessageGlobal()
         subscribeToNewMessageTimeLineGlobal()
-
 
         //isGlobalOrPersonal()
         //subscribeToNewMessageTimeLine()
@@ -100,6 +101,12 @@ class TimeLineFragment : Fragment() {
     //        }
     //        .addOnFailureListener { toast("Error try Again") }
     //}
+
+    private fun setUpSwipeRefreshLayout(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            _view.swipeRefreshTimeline.setColorSchemeColors(resources.getColor(R.color.colorPrimaryDark, resources.newTheme()))
+        }
+    }
 
     // root : Users/uid/username
     private fun setUpTimeLineGlobalDB(){
@@ -259,7 +266,16 @@ class TimeLineFragment : Fragment() {
                         timelineListGlobal.clear()
                         val message = it.toObjects(TimelineMessage::class.java)
                         timelineListGlobal.addAll(message)
+
+                        _view.swipeRefreshTimeline.setOnRefreshListener {
+                            _view.swipeRefreshTimeline.isRefreshing = true
+                            adapterGlobal.notifyDataSetChanged()
+                            _view.swipeRefreshTimeline.isRefreshing = false
+                        }
                         adapterGlobal.notifyDataSetChanged()
+
+                        //_view.swipeRefreshTimeline.isRefreshing = false
+
                     }
                 }
 

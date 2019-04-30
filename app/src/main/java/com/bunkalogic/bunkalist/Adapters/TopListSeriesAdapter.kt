@@ -21,8 +21,8 @@ import org.jetbrains.anko.intentFor
 
 class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayList<ResultSeries>): RecyclerView.Adapter<TopListSeriesAdapter.ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopListSeriesAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.top_list_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.top_list_item_series, parent, false)
 
         return ViewHolder(view)
     }
@@ -31,7 +31,7 @@ class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayL
         return  mValues.size
     }
 
-    override fun onBindViewHolder(holder: TopListSeriesAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val numPosition = position + 1
         holder.textViewTopPosition.text = "$numPosition."
         holder.bind(mValues[position])
@@ -42,15 +42,20 @@ class TopListSeriesAdapter(private val ctx: Context, private var mValues: ArrayL
         notifyDataSetChanged()
     }
 
+    fun clearList(){
+        mValues.clear()
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder (mView: View): RecyclerView.ViewHolder(mView){
-        private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPosterTop)
-        private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleTop)
-        private val textViewDateReleast : TextView = mView.findViewById(R.id.textViewDateReleastTop)
-        private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescriptionTop)
-        private val textViewSeeDetails: TextView = mView.findViewById(R.id.textViewGetFullDetailsTop)
-        private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyListTop)
-        private val textViewRating: TextView = mView.findViewById(R.id.textViewRatingTop)
-        internal var textViewTopPosition: TextView = mView.findViewById(R.id.textViewTopList)
+        private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPosterTopSeries)
+        private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleTopSeries)
+        private val textViewDateReleast : TextView = mView.findViewById(R.id.textViewDateReleastTopSeries)
+        private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescriptionTopSeries)
+        private val textViewSeeDetails: TextView = mView.findViewById(R.id.textViewGetFullDetailsTopSeries)
+        private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyListTopSeries)
+        private val textViewRating: TextView = mView.findViewById(R.id.textViewRatingTopSeries)
+        internal var textViewTopPosition: TextView = mView.findViewById(R.id.textViewTopListSeries)
 
         fun bind(mItem: ResultSeries){
 

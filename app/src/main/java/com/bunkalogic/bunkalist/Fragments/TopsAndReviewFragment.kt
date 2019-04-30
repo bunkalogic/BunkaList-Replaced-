@@ -69,28 +69,13 @@ class TopsAndReviewFragment : Fragment() {
     fun onClick(){
 
         _view.buttonMoviesPopular.setOnClickListener {
-            startActivity(intentFor<ListMovieActivity>("popular" to Constans.Popular_LIST))
-        }
-
-        _view.buttonMoviesRated.setOnClickListener {
-            startActivity(intentFor<ListMovieActivity>("rated" to Constans.Rated_LIST))
-        }
-
-        _view.buttonMoviesUpcoming.setOnClickListener {
-            startActivity(intentFor<ListMovieActivity>("upcoming" to Constans.Upcoming_LIST))
+            startActivity(intentFor<ListMovieActivity>())
         }
 
         _view.buttonSeriesPopular.setOnClickListener {
-            startActivity(intentFor<ListSeriesActivity>("popular" to Constans.Popular_LIST))
+            startActivity(intentFor<ListSeriesActivity>())
         }
 
-        _view.buttonSeriesRated.setOnClickListener {
-            startActivity(intentFor<ListSeriesActivity>("rated" to Constans.Rated_LIST))
-        }
-
-        _view.buttonSeriesUpcoming.setOnClickListener {
-            startActivity(intentFor<ListSeriesActivity>("rated" to Constans.Upcoming_LIST))
-        }
 
 
     }
