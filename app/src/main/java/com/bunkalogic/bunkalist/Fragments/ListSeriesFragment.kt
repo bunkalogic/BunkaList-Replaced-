@@ -67,9 +67,15 @@ class ListSeriesFragment : Fragment() {
 
     private fun whatTypeListIs(){
         when (typeList) {
-            Constans.Popular_LIST_Series -> getPopularSeries(currentPage + 1)
-            Constans.Rated_LIST_Series -> getRatedSeries(currentPage + 1)
-            Constans.Upcoming_LIST_Series -> getUpcomingSeries(currentPage + 1)
+            Constans.Popular_LIST_Series ->{
+                getPopularSeries(currentPage + 1)
+            }
+            Constans.Rated_LIST_Series ->{
+                getRatedSeries(currentPage + 1)
+            }
+            Constans.Upcoming_LIST_Series -> {
+                getUpcomingSeries(currentPage + 1)
+            }
         }
     }
 
