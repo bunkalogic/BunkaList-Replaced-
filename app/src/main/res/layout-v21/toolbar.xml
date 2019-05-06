@@ -7,4 +7,5 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/Base.ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/Theme.AppCompat.DayNight"/>
+        app:popupTheme="@style/Theme.AppCompat.DayNight"
+        app:layout_collapseMode="parallax"/>

@@ -116,6 +116,24 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("page") page: Int
     ): Call<ResponseSeries>
 
+    @GET("movie/{movie_id}/recommendations")
+    fun getRecommendationsMovies(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<MoviesResponse>
+
+    @GET("tv/{tv_id}/recommendations")
+    fun getRecommendationsSeries(
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<ResponseSeries>
+
+
+
 
 
 }

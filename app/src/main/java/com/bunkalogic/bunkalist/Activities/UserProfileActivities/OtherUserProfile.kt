@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
 import com.bunkalogic.bunkalist.R
@@ -20,6 +21,7 @@ import com.google.android.gms.ads.AdView
 import com.google.firebase.firestore.*
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
+import kotlinx.android.synthetic.main.fragment_topandreview.view.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.support.v4.intentFor
 
@@ -48,6 +50,7 @@ class OtherUserProfile : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        fixScrollPosition()
         addBannerAds()
 
         setUpFollowsDB()
@@ -59,6 +62,11 @@ class OtherUserProfile : AppCompatActivity() {
 
         subscribeToProfileListOther()
         //subscribeToNewUserFollows()
+    }
+    private fun fixScrollPosition(){
+        // This function ensures that when the fragment is loaded, it is displayed from the first position
+        scrollView2.isFocusableInTouchMode = true
+        scrollView2.descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
     }
 
 

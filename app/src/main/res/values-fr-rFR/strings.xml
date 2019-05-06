@@ -135,4 +135,7 @@
     <string name="fragment_top_reviews_title_list">Tops Popular, Rated, Upcoming of Movies, Series and Anime</string>
     <string name="fragment_tops_review_button_top_movies_list">Tops Movies</string>
     <string name="fragment_tops_review_button_top_series_list">Tops Series and Anime</string>
+    <string name="search_item_full_details_recommendations">Recommendations</string>
+    <string name="title_toolbar_tops_Movies">Tops Movies</string>
+    <string name="title_toolbar_tops_Series">Tops Series And Anime</string>
 </resources>

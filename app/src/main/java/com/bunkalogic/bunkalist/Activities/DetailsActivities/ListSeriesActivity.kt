@@ -23,6 +23,8 @@ class ListSeriesActivity : AppCompatActivity() {
 
         setUpTabLayoutList()
 
+        supportActionBar!!.title  = getString(R.string.title_toolbar_tops_Series)
+
     }
 
     //private fun whatTypeListIs(){

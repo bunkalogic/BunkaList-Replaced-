@@ -24,6 +24,8 @@ class ListMovieActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setUpTabLayoutList()
         //whatTypeListIs()
+
+        supportActionBar!!.title  = getString(R.string.title_toolbar_tops_Movies)
     }
 
     //private fun whatTypeListIs(){

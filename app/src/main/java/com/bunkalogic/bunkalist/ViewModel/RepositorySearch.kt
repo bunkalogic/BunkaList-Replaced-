@@ -294,6 +294,48 @@ class RepositorySearch internal constructor() {
         })
     }
 
+    fun getRecommendationsMovies(Id: Int, callback: OnGetListMoviesCallback){
+        val call = moviesOrSeriesAndAnimeService.getRecommendationsMovies(Id, Constans.API_KEY, Locale.getDefault().toString(), 1)
+
+        call.enqueue(object : Callback<MoviesResponse>{
+            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Movies Recommendations")
+            }
+
+            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+                if (response.isSuccessful){
+                    val recommendationsMoviesResponse : MoviesResponse = response.body()!!
+                    callback.onSuccess(1, recommendationsMoviesResponse.results!!)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
+                }
+            }
+
+        })
+    }
+
+    fun getRecommendationsSeries(Id: Int, callback: OnGetListSeriesCallback){
+        val call = moviesOrSeriesAndAnimeService.getRecommendationsSeries(Id, Constans.API_KEY, Locale.getDefault().toString(), 1)
+
+        call.enqueue(object : Callback<ResponseSeries>{
+            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Movies Recommendations")
+            }
+
+            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
+                if (response.isSuccessful){
+                    val recommendationsSeriesResponse : ResponseSeries = response.body()!!
+                    callback.onSuccess(1, recommendationsSeriesResponse.results!!)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
+                }
+            }
+
+        })
+    }
+
 
 
 

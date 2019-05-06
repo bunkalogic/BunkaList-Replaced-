@@ -39,6 +39,14 @@
           }
         },
         {
+          "client_id": "614643812863-5g46k02fi287dsdjloe07fq629mj48m4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bunkalogic.bunkalist",
+            "certificate_hash": "137f600b18757d3080bf1ac16cd123b9c090ce8b"
+          }
+        },
+        {
           "client_id": "614643812863-9sakbr5j7d1dd67jusstmlhdajhoa8tn.apps.googleusercontent.com",
           "client_type": 3
         }

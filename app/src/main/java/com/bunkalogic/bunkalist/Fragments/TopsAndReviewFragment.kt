@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ScrollView
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListMovieActivity
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListSeriesActivity
@@ -56,6 +57,8 @@ class TopsAndReviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_topandreview, container, false)
+
+        fixScrollPosition()
         addBannerAds()
         setUpReviewDB()
         setUpCurrentUser()
@@ -70,6 +73,12 @@ class TopsAndReviewFragment : Fragment() {
         return _view
     }
 
+    private fun fixScrollPosition(){
+        // This function ensures that when the fragment is loaded, it is displayed from the first position
+        _view.scrollView4.isFocusableInTouchMode = true
+        _view.scrollView4.descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
+    }
+
     //initializing the banner in this activity
     private fun addBannerAds(){
         mAdView = _view.findViewById(R.id.adViewBannerTopsReview)
@@ -77,6 +86,7 @@ class TopsAndReviewFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         // Associate the request to the banner
         mAdView.loadAd(adRequest)
+
     }
 
     fun onClick(){
@@ -129,6 +139,7 @@ class TopsAndReviewFragment : Fragment() {
         _view.recyclerReviews.layoutManager = layoutManager
         _view.recyclerReviews.itemAnimator = DefaultItemAnimator()
         _view.recyclerReviews.adapter = adapter
+
     }
 
     fun subscribeToReviews(){

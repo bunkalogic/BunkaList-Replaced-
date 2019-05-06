@@ -30,6 +30,7 @@ import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_list_profile.view.*
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.fragment_topandreview.view.*
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 
@@ -58,6 +59,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_profile, container, false)
+        fixScrollPosition()
         setUpAddListDB()
         setUpCurrentUser()
 
@@ -71,6 +73,12 @@ class ProfileFragment : Fragment() {
 
 
         return _view
+    }
+
+    private fun fixScrollPosition(){
+        // This function ensures that when the fragment is loaded, it is displayed from the first position
+        _view.scrollView6.isFocusableInTouchMode = true
+        _view.scrollView6.descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
     }
 
     // Initializing the currentUser

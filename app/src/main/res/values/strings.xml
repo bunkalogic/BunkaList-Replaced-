@@ -107,6 +107,7 @@
     <string name="search_item_details_summary_label">Summary</string>
     <string name="activity_full_details">Genres :</string>
     <string name="activity_full_details_date">Date Release :</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 
 
     <!-- SearchFragmentItemDetailsDialog -->
@@ -183,6 +184,9 @@
     <string name="fragment_top_reviews_title_list">Tops Popular, Rated, Upcoming of Movies, Series and Anime</string>
     <string name="fragment_tops_review_button_top_movies_list">Tops Movies</string>
     <string name="fragment_tops_review_button_top_series_list">Tops Series and Anime</string>
+    <string name="search_item_full_details_recommendations">Recommendations</string>
+    <string name="title_toolbar_tops_Movies">Tops Movies</string>
+    <string name="title_toolbar_tops_Series">Tops Series And Anime</string>
 
 
 </resources>

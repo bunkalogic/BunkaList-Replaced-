@@ -5,7 +5,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-            tools:context=".Fragments.TopsAndReviewFragment" android:id="@+id/scrollView4">
+            tools:context=".Fragments.TopsAndReviewFragment" android:id="@+id/scrollView4"
+>
 
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="wrap_content"
@@ -52,7 +53,6 @@
                         android:text="@string/fragment_top_reviews_title_list"
                         android:textColor="@color/colorAccent" android:textAlignment="center"
                         app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"/>
-
 
 
                 <Button

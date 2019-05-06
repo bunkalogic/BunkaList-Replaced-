@@ -24,6 +24,14 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
         searchRepository.getSeries(Id, callback)
     }
 
+    fun getMovieRecommendations(Id: Int, callback: OnGetListMoviesCallback){
+        searchRepository.getRecommendationsMovies(Id, callback)
+    }
+
+    fun getSeriesAndAnimeRecommendations(Id: Int, callback: OnGetListSeriesCallback){
+        searchRepository.getRecommendationsSeries(Id, callback)
+    }
+
     fun getTrailersMovies(Id: Int, callback: OnGetTrailersCallback){
         searchRepository.getTrailerMovie(Id, callback)
     }

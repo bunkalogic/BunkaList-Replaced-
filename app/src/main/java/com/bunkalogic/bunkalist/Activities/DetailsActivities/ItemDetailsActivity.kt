@@ -9,16 +9,10 @@ import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Dialog.AddListDialog
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
-import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
-import com.bunkalogic.bunkalist.Retrofit.OnGetTrailersCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.Retrofit.Response.Trailer
-import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
-import com.bunkalogic.bunkalist.db.ItemListRating
-import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
@@ -32,10 +26,14 @@ import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
-import com.bunkalogic.bunkalist.Retrofit.OnGetGenresCallback
+import android.widget.TextView
+import com.bunkalogic.bunkalist.Retrofit.*
+import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import org.jetbrains.anko.intentFor
 
 
 class ItemDetailsActivity : AppCompatActivity() {
@@ -49,11 +47,6 @@ class ItemDetailsActivity : AppCompatActivity() {
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
 
-    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var addItemListDBRef: CollectionReference
-
-    private var itemRatingSubscription: ListenerRegistration? = null
-    private lateinit var itemRatingBusListener: Disposable
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +57,6 @@ class ItemDetailsActivity : AppCompatActivity() {
 
         //instantiate the ViewModel
         searchViewModel = ViewModelProviders.of(this).get(ViewModelSearch::class.java)
-        setUpAddListDB()
         setUpCurrentUser()
         isMovieOrSerie()
         onClick()
@@ -82,9 +74,10 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // You can select the title of the toolbar
     private fun setUpToolbarTitle(){
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbarFullDetails)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
 
         val extrasTitle = intent.extras?.getString("title")
         val extrasName = intent.extras?.getString("name")
@@ -120,9 +113,11 @@ class ItemDetailsActivity : AppCompatActivity() {
         if (extrasType == type){
             isSerieAndAnime()
             getTrailersSeries()
+            getSeriesRecommendations()
         }else{
             isMovie()
             getTrailersMovies()
+            getMoviesRecommendations()
         }
     }
 
@@ -208,6 +203,63 @@ class ItemDetailsActivity : AppCompatActivity() {
         })
     }
 
+    // is responsible for collecting the Id of the film and filling the function of the ViewModel
+    private fun getMovieRecommendationsContentForID(callback: OnGetListMoviesCallback){
+        val extrasIdMovies = intent.extras?.getInt("id")
+        searchViewModel.getMovieRecommendations(extrasIdMovies!!, callback)
+    }
+
+
+            // It is responsible for collecting the recommended films from the movie Id
+    private fun getMoviesRecommendations(){
+        getMovieRecommendationsContentForID(object : OnGetListMoviesCallback {
+            override fun onSuccess(page: Int, movies: List<ResultMovie>) {
+                    recommendationsLabel.visibility = View.VISIBLE
+                    LinearRecommendations.removeAllViews()
+
+                    for (recommend in movies){
+                        val parent = layoutInflater.inflate(R.layout.recommendations_view, LinearRecommendations, false)
+                        val titleTextView = parent.findViewById<TextView>(R.id.textViewTitleRecommendation)
+                        val poster = parent.findViewById<ImageView>(R.id.imageViewRecommendation)
+
+                        val titleOeuvre = recommend.title.toString()
+                        val posterOeuvre = recommend.backdropPath.toString()
+
+                        titleTextView.text = titleOeuvre
+
+                        Glide.with(this@ItemDetailsActivity)
+                            .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + posterOeuvre)
+                            .centerCrop()
+                            .into(poster)
+
+                        LinearRecommendations.addView(parent)
+
+                        val Id = recommend.id
+                        val extrasType = intent.extras?.getString("type")
+                        val title = titleOeuvre
+
+                        poster.setOnClickListener {
+                            startActivity(intentFor<ItemDetailsActivity>(
+                                "id" to Id,
+                                "type" to extrasType,
+                                "title" to title
+                            ))
+                        }
+
+                        }
+
+                    }
+
+            override fun onError() {
+                recommendationsLabel.visibility = View.GONE
+
+            }
+        })
+    }
+
+
+
+
 
 
     // is responsible for collecting the Id of the series and filling the function of the ViewModel
@@ -292,6 +344,60 @@ class ItemDetailsActivity : AppCompatActivity() {
         })
     }
 
+    // is responsible for collecting the Id of the film and filling the function of the ViewModel
+    private fun getSeriesRecommendationsContentForID(callback: OnGetListSeriesCallback){
+        val extrasIdSeries = intent.extras?.getInt("id")
+        searchViewModel.getSeriesAndAnimeRecommendations(extrasIdSeries!!, callback)
+    }
+
+
+    // It is responsible for collecting the recommended films from the movie Id
+    private fun getSeriesRecommendations(){
+        getSeriesRecommendationsContentForID(object : OnGetListSeriesCallback {
+            override fun onSuccess(page: Int, series: List<ResultSeries>) {
+                recommendationsLabel.visibility = View.VISIBLE
+                LinearRecommendations.removeAllViews()
+
+                for (recommend in series){
+                    val parent = layoutInflater.inflate(R.layout.recommendations_view, LinearRecommendations, false)
+                    val titleTextView = parent.findViewById<TextView>(R.id.textViewTitleRecommendation)
+                    val poster = parent.findViewById<ImageView>(R.id.imageViewRecommendation)
+
+                    val titleOeuvre = recommend.name.toString()
+                    val posterOeuvre = recommend.backdropPath.toString()
+
+                    titleTextView.text = titleOeuvre
+
+                    Glide.with(this@ItemDetailsActivity)
+                        .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + posterOeuvre)
+                        .centerCrop()
+                        .into(poster)
+
+                    LinearRecommendations.addView(parent)
+
+                    val Id = recommend.id
+                    val extrasType = intent.extras?.getString("type")
+                    val title = titleOeuvre
+
+                    poster.setOnClickListener {
+                        startActivity(intentFor<ItemDetailsActivity>(
+                            "id" to Id,
+                            "type" to extrasType,
+                            "title" to title
+                        ))
+                    }
+
+                }
+
+            }
+
+            override fun onError() {
+                recommendationsLabel.visibility = View.GONE
+
+            }
+        })
+    }
+
 
     // Is responsible for collecting the list of movies genres
     private fun ListGenresMovies(movie: Movie){
@@ -317,7 +423,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // Is responsible for collecting the list of series genres
     private fun ListGenresSeriesAndAnime(series: Series){
-        searchViewModel.getGenresMovies(object : OnGetGenresCallback{
+        searchViewModel.getGenresSeries(object : OnGetGenresCallback{
             override fun onSuccess(genres: List<Genre>) {
                 if (series.genres != null){
                     val currentGenres: ArrayList<String> = ArrayList()
@@ -344,10 +450,6 @@ class ItemDetailsActivity : AppCompatActivity() {
     }
 
 
-    //Creating the name instance in the database
-    private fun setUpAddListDB() {
-         addItemListDBRef = store.collection("Data/Users/ ${preferences.userId} / ${preferences.userName} /RatingList")
-     }
 
 
     override fun onSupportNavigateUp(): Boolean {
