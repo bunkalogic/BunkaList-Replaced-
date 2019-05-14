@@ -75,7 +75,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/buttonSearchItemDetailsAddInYourList"
-                    android:textStyle="bold|italic" android:textSize="18sp"/>
+                    android:textStyle="bold|italic" android:textSize="18sp" android:textAlignment="center"/>
 
             <TextView
                     android:id="@+id/textViewSearchDetailsAllDescription"
@@ -131,7 +131,80 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDetailsGenres" android:textStyle="bold"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" android:textAlignment="center"/>
+
+
+            <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/CastContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CastLabel"
+                    app:layout_constraintBottom_toTopOf="@+id/CrewLabel" android:layout_marginBottom="8dp">
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/RecyclerCast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
+            </android.support.v4.widget.NestedScrollView>
+
+            <TextView
+                    android:id="@+id/CastLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/search_item_full_details_cast"
+                    android:textSize="24sp"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewSearchDetailsAllDescription" />
+
+            <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/CrewContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CrewLabel"
+                    app:layout_constraintBottom_toTopOf="@+id/trailersLabel" android:layout_marginBottom="8dp">
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/RecyclerCrew"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
+            </android.support.v4.widget.NestedScrollView>
+
+            <TextView
+                    android:id="@+id/CrewLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/search_item_full_details_crew"
+                    android:textSize="24sp"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/CastContainer" />
 
             <HorizontalScrollView
                     android:id="@+id/TrailersContainer"
@@ -144,13 +217,13 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/trailersLabel"
-                    app:layout_constraintBottom_toTopOf="@+id/recommendationsLabel">
+                    app:layout_constraintBottom_toTopOf="@+id/recommendationsLabel" android:layout_marginBottom="8dp">
 
                 <LinearLayout
                         android:id="@+id/LinearTrailers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal" />
+                        android:orientation="horizontal"/>
             </HorizontalScrollView>
 
             <TextView
@@ -165,9 +238,9 @@
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewSearchDetailsAllDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/CrewContainer" />
 
-            <HorizontalScrollView
+            <android.support.v4.widget.NestedScrollView
                     android:id="@+id/recommendationsContainer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -181,12 +254,14 @@
                     app:layout_constraintBottom_toTopOf="@+id/adViewBannerItemDetails"
                     android:layout_marginBottom="16dp">
 
-                <LinearLayout
-                        android:id="@+id/LinearRecommendations"
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/RecyclerRecommendations"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                         android:orientation="horizontal"/>
-            </HorizontalScrollView>
+            </android.support.v4.widget.NestedScrollView>
 
             <TextView
                     android:id="@+id/recommendationsLabel"
@@ -201,6 +276,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/TrailersContainer" />
+
+
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

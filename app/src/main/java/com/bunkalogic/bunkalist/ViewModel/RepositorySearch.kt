@@ -3,9 +3,11 @@ package com.bunkalogic.bunkalist.ViewModel
 import android.util.Log
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.Retrofit.*
+import com.bunkalogic.bunkalist.Retrofit.Callback.*
 import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
+import com.bunkalogic.bunkalist.Retrofit.Response.People.*
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
@@ -335,6 +337,114 @@ class RepositorySearch internal constructor() {
 
         })
     }
+
+    fun getPeopleMovies(Id : Int, callback: OnGetPeopleCallback){
+        val call = moviesOrSeriesAndAnimeService.getCreditsMovies(Id, Constans.API_KEY)
+
+        call.enqueue(object : Callback<ResponsePeople>{
+            override fun onFailure(call: Call<ResponsePeople>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Movies Credits")
+            }
+
+            override fun onResponse(call: Call<ResponsePeople>, response: Response<ResponsePeople>) {
+                if (response.isSuccessful){
+                    val creditsMovie : ResponsePeople = response.body()!!
+                    callback.onSuccess(creditsMovie.crew!!, creditsMovie.cast!!)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Credits")
+                }
+            }
+
+        })
+    }
+
+    fun getPeopleSeries(Id : Int, callback: OnGetPeopleCallback){
+        val call = moviesOrSeriesAndAnimeService.getCreditsSeries(Id, Constans.API_KEY, Locale.getDefault().toString())
+
+        call.enqueue(object : Callback<ResponsePeople>{
+            override fun onFailure(call: Call<ResponsePeople>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection Series Credits")
+            }
+
+            override fun onResponse(call: Call<ResponsePeople>, response: Response<ResponsePeople>) {
+                if (response.isSuccessful){
+                    val creditsSeries : ResponsePeople = response.body()!!
+                    callback.onSuccess(creditsSeries.crew!!, creditsSeries.cast!!)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series Credits")
+                }
+            }
+
+        })
+    }
+
+    fun getPeopleData(Id : Int, callback: OnGetPeopleDataCallback){
+        val call = moviesOrSeriesAndAnimeService.getPeopleData(Id, Constans.API_KEY, Locale.getDefault().toString())
+
+        call.enqueue(object : Callback<ResultPeople>{
+            override fun onFailure(call: Call<ResultPeople>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection People Data")
+            }
+
+            override fun onResponse(call: Call<ResultPeople>, response: Response<ResultPeople>) {
+                if (response.isSuccessful){
+                    val peopleData : ResultPeople = response.body()!!
+                    callback.onSuccess(peopleData)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in People Data")
+                }
+            }
+
+        })
+    }
+
+    fun getPeopleDataCast(Id : Int, callback: OnGetPeopleDataCastCallback){
+        val call = moviesOrSeriesAndAnimeService.getPeopleDataCast(Id, Constans.API_KEY, Locale.getDefault().toString())
+
+        call.enqueue(object : Callback<DataPeopleResponse>{
+            override fun onFailure(call: Call<DataPeopleResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection People Data Cast")
+            }
+
+            override fun onResponse(call: Call<DataPeopleResponse>, response: Response<DataPeopleResponse>) {
+                if (response.isSuccessful){
+                    val peopleData : DataPeopleResponse = response.body()!!
+                    callback.onSuccess(peopleData.cast!!, peopleData.crew!!)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in People Data Cast")
+                }
+            }
+
+        })
+    }
+
+    fun getPeopleSocialMedia(Id : Int, callback: OnGetPeopleSocialMediaCallback){
+        val call = moviesOrSeriesAndAnimeService.getPeopleSocialMedia(Id, Constans.API_KEY, Locale.getDefault().toString())
+
+        call.enqueue(object : Callback<PeopleSocialMediaResponse>{
+            override fun onFailure(call: Call<PeopleSocialMediaResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositorySearch", "Error connection People Data")
+            }
+
+            override fun onResponse(call: Call<PeopleSocialMediaResponse>, response: Response<PeopleSocialMediaResponse>) {
+                if (response.isSuccessful){
+                    val peopleData : PeopleSocialMediaResponse = response.body()!!
+                    callback.onSuccess(peopleData)
+                }else{
+                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in People Data")
+                }
+            }
+
+        })
+    }
+
+
+
 
 
 

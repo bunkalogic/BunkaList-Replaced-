@@ -1,4 +1,4 @@
-package com.bunkalogic.bunkalist.Retrofit
+package com.bunkalogic.bunkalist.Retrofit.Callback
 
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
 

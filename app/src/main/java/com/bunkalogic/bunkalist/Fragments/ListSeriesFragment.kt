@@ -11,7 +11,7 @@ import com.bunkalogic.bunkalist.Adapters.TopListSeriesAdapter
 import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.Retrofit.OnGetListSeriesCallback
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetListSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.google.android.gms.ads.AdRequest
@@ -113,7 +113,7 @@ class ListSeriesFragment : Fragment() {
 
     private fun getPopularSeries(page: Int){
         isFetchingSeries = true
-        initializeListSeriesPopular(page, object :OnGetListSeriesCallback{
+        initializeListSeriesPopular(page, object : OnGetListSeriesCallback {
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 if (adapter == null){
                     adapter = TopListSeriesAdapter(context!!, series as ArrayList)
@@ -137,7 +137,7 @@ class ListSeriesFragment : Fragment() {
 
     private fun getRatedSeries(page: Int){
         isFetchingSeries = true
-        initializeListSeriesRated(page, object :OnGetListSeriesCallback{
+        initializeListSeriesRated(page, object : OnGetListSeriesCallback {
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 if (adapter == null){
                     adapter = TopListSeriesAdapter(context!!, series as ArrayList)
@@ -162,7 +162,7 @@ class ListSeriesFragment : Fragment() {
 
     private fun getUpcomingSeries(page: Int){
         isFetchingSeries = true
-        initializeListSeriesUpcoming(page, object :OnGetListSeriesCallback{
+        initializeListSeriesUpcoming(page, object : OnGetListSeriesCallback {
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 if (adapter == null){
                     adapter = TopListSeriesAdapter(context!!, series as ArrayList)

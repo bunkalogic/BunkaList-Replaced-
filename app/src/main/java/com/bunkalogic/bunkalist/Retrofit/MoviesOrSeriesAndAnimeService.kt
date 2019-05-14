@@ -6,6 +6,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResponseUpcoming
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
+import com.bunkalogic.bunkalist.Retrofit.Response.People.*
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import retrofit2.Call
@@ -131,6 +132,43 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("language") language: String,
         @Query("page") page: Int
     ): Call<ResponseSeries>
+
+    @GET("movie/{movie_id}/credits")
+    fun getCreditsMovies(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): Call<ResponsePeople>
+
+    @GET("tv/{tv_id}/credits")
+    fun getCreditsSeries(
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<ResponsePeople>
+
+    @GET("person/{person_id}")
+        fun getPeopleData(
+        @Path("person_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<ResultPeople>
+
+    @GET("person/{person_id}/combined_credits")
+    fun getPeopleDataCast(
+        @Path("person_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<DataPeopleResponse>
+
+    @GET("person/{person_id}/external_ids")
+    fun getPeopleSocialMedia(
+        @Path("person_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<PeopleSocialMediaResponse>
+
+
+
 
 
 

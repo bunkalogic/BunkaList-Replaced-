@@ -15,14 +15,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.bunkalogic.bunkalist.Adapters.SearchItemAdapter
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.Retrofit.OnGetSearchCallback
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetSearchCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
 import org.jetbrains.anko.support.v4.toast
@@ -100,7 +99,7 @@ class SearchFragment : Fragment() {
         _view.editTextSearch.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
                 if ((event?.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)){
-                    getSearchAll(object: OnGetSearchCallback{
+                    getSearchAll(object: OnGetSearchCallback {
                         override fun onSuccess(all: List<ResultSearchAll>) {
                             Log.d("FragmentSearch", "On success data")
                             if (all.isEmpty()){
@@ -122,7 +121,7 @@ class SearchFragment : Fragment() {
         })
 
         _view.imageViewSearch.setOnClickListener {
-            getSearchAll(object: OnGetSearchCallback{
+            getSearchAll(object: OnGetSearchCallback {
                 override fun onSuccess(all: List<ResultSearchAll>) {
                     Log.d("FragmentSearch", "On success data")
                     if (all.isEmpty()){

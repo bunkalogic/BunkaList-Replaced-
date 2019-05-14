@@ -122,4 +122,14 @@
     <string name="search_item_full_details_recommendations">Recommendations</string>
     <string name="title_toolbar_tops_Movies">Tops Movies</string>
     <string name="title_toolbar_tops_Series">Tops Series And Anime</string>
+    <string name="search_item_full_details_cast">Casting / Characters</string>
+    <string name="search_item_full_details_crew">Crew</string>
+    <string name="birthday_date_activity_people">Birthday Date :</string>
+    <string name="deathday_date_activity_people">Deathday Date :</string>
+    <string name="place_birth_activity_people">Place of Birth :</string>
+    <string name="cast_historial_people_activity">Casting History :</string>
+    <string name="crew_historial_people_activity">Director / Producer</string>
+    <string name="item_cast_people_data">Episode Count :</string>
+    <string name="item_cast_people_data_character">character\'s name :</string>
+    <string name="item_crew_people_data_work">work departments :</string>
 </resources>

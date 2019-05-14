@@ -2,7 +2,7 @@ package com.bunkalogic.bunkalist.ViewModel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import com.bunkalogic.bunkalist.Retrofit.*
+import com.bunkalogic.bunkalist.Retrofit.Callback.*
 
 class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
 
@@ -64,6 +64,30 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
     fun getSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
         searchRepository.getSeriesUpcoming(page, callback)
     }
+
+    fun getPeopleMovies(Id: Int, callback: OnGetPeopleCallback){
+        searchRepository.getPeopleMovies(Id, callback)
+    }
+
+    fun getPeopleSeries(Id: Int, callback: OnGetPeopleCallback){
+        searchRepository.getPeopleSeries(Id, callback)
+    }
+
+    fun getPeopleData(Id: Int, callback: OnGetPeopleDataCallback){
+        searchRepository.getPeopleData(Id, callback)
+    }
+
+    fun getPeopleDataCast(Id: Int, callback: OnGetPeopleDataCastCallback){
+        searchRepository.getPeopleDataCast(Id, callback)
+    }
+
+    fun getPeopleSocialMedia(Id: Int, callback: OnGetPeopleSocialMediaCallback){
+        searchRepository.getPeopleSocialMedia(Id, callback)
+    }
+
+
+
+
 
 
 

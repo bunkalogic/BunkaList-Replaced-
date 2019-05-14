@@ -1,4 +1,4 @@
-package com.bunkalogic.bunkalist.Retrofit
+package com.bunkalogic.bunkalist.Retrofit.Callback
 
 import android.os.AsyncTask.execute
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll

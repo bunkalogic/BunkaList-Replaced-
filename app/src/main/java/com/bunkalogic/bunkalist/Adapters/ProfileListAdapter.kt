@@ -14,18 +14,16 @@ import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemDetailsActivity
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.Retrofit.OnGetMovieCallback
-import com.bunkalogic.bunkalist.Retrofit.OnGetSeriesCallback
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetMovieCallback
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.bunkalogic.bunkalist.db.ItemListRating
-import com.firebase.ui.firestore.FirestoreArray
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
-import org.jetbrains.anko.coroutines.experimental.asReference
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 
@@ -66,7 +64,8 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
             // check which value has type to load movie or series or anime
             if (type == Constans.MOVIE_LIST){
-                searchViewModelSearch!!.getMovie(idItem!!,object : OnGetMovieCallback{
+                searchViewModelSearch!!.getMovie(idItem!!,object :
+                    OnGetMovieCallback {
                     override fun onSuccess(movie: Movie) {
                         holder.title.text = movie.title
                         holder.dateRelease.text = movie.releaseDate?.split("-")?.get(0) ?: movie.releaseDate
@@ -98,7 +97,8 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                 })
             }else if (type == Constans.SERIE_LIST){
-                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object : OnGetSeriesCallback{
+                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object :
+                    OnGetSeriesCallback {
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
                         holder.dateRelease.text = series.firstAirDate?.split("-")?.get(0) ?: series.firstAirDate
@@ -128,7 +128,8 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                 })
             }else if (type == Constans.ANIME_LIST){
-                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object : OnGetSeriesCallback{
+                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object :
+                    OnGetSeriesCallback {
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
                         holder.dateRelease.text = series.firstAirDate?.split("-")?.get(0) ?: series.firstAirDate

@@ -15,25 +15,29 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Trailer
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.*
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.search_item_full_details.*
 import org.jetbrains.anko.toast
 import com.bumptech.glide.request.RequestOptions
 import android.content.Intent
 import android.net.Uri
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
-import android.widget.TextView
-import com.bunkalogic.bunkalist.Retrofit.*
+import com.bunkalogic.bunkalist.Adapters.CastPersonAdapter
+import com.bunkalogic.bunkalist.Adapters.CrewPersonAdapter
+import com.bunkalogic.bunkalist.Adapters.RecommedationsMoviesAdapter
+import com.bunkalogic.bunkalist.Adapters.RecommedationsSeriesAdapter
+import com.bunkalogic.bunkalist.Retrofit.Callback.*
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
+import com.bunkalogic.bunkalist.Retrofit.Response.People.Cast
+import com.bunkalogic.bunkalist.Retrofit.Response.People.Crew
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import org.jetbrains.anko.intentFor
 
 
 class ItemDetailsActivity : AppCompatActivity() {
@@ -43,6 +47,11 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     private lateinit var toolbar: Toolbar
     lateinit var mAdView : AdView
+
+    private lateinit var AdapterMovieRec: RecommedationsMoviesAdapter
+    private lateinit var AdapterSeriesRec: RecommedationsSeriesAdapter
+    private lateinit var AdapterCast: CastPersonAdapter
+    private lateinit var AdapterCrew: CrewPersonAdapter
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -112,10 +121,12 @@ class ItemDetailsActivity : AppCompatActivity() {
 
         if (extrasType == type){
             isSerieAndAnime()
+            getSeriesCredits()
             getTrailersSeries()
             getSeriesRecommendations()
         }else{
             isMovie()
+            getMoviesCredits()
             getTrailersMovies()
             getMoviesRecommendations()
         }
@@ -130,7 +141,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     }
     // is responsible for filling the layout with the elements obtained from the API
     private fun isMovie(){
-        getMovieContentForID(object: OnGetMovieCallback{
+        getMovieContentForID(object: OnGetMovieCallback {
             override fun onSuccess(movie: Movie) {
                 textViewTitleDetails.text = movie.title
 
@@ -175,7 +186,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // is responsible for collecting the key to create the YouTube URL and show the video image
     private fun getTrailersMovies(){
-        getMovieTrailersContentForID(object : OnGetTrailersCallback{
+        getMovieTrailersContentForID(object : OnGetTrailersCallback {
             override fun onSuccess(trailers: List<Trailer>) {
               trailersLabel.visibility = View.VISIBLE
                 LinearTrailers.removeAllViews()
@@ -210,45 +221,24 @@ class ItemDetailsActivity : AppCompatActivity() {
     }
 
 
-            // It is responsible for collecting the recommended films from the movie Id
+    // It is responsible for collecting the recommended films from the movie Id
     private fun getMoviesRecommendations(){
-        getMovieRecommendationsContentForID(object : OnGetListMoviesCallback {
+        getMovieRecommendationsContentForID(object :
+            OnGetListMoviesCallback {
             override fun onSuccess(page: Int, movies: List<ResultMovie>) {
-                    recommendationsLabel.visibility = View.VISIBLE
-                    LinearRecommendations.removeAllViews()
+                recommendationsLabel.visibility = View.VISIBLE
+                RecyclerRecommendations.removeAllViews()
 
-                    for (recommend in movies){
-                        val parent = layoutInflater.inflate(R.layout.recommendations_view, LinearRecommendations, false)
-                        val titleTextView = parent.findViewById<TextView>(R.id.textViewTitleRecommendation)
-                        val poster = parent.findViewById<ImageView>(R.id.imageViewRecommendation)
+                val layoutManager = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                AdapterMovieRec = RecommedationsMoviesAdapter(this@ItemDetailsActivity, movies)
 
-                        val titleOeuvre = recommend.title.toString()
-                        val posterOeuvre = recommend.backdropPath.toString()
 
-                        titleTextView.text = titleOeuvre
+                RecyclerRecommendations.layoutManager = layoutManager
+                RecyclerRecommendations.setHasFixedSize(true)
+                RecyclerRecommendations.itemAnimator = DefaultItemAnimator()
+                RecyclerRecommendations.adapter = AdapterMovieRec
 
-                        Glide.with(this@ItemDetailsActivity)
-                            .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + posterOeuvre)
-                            .centerCrop()
-                            .into(poster)
-
-                        LinearRecommendations.addView(parent)
-
-                        val Id = recommend.id
-                        val extrasType = intent.extras?.getString("type")
-                        val title = titleOeuvre
-
-                        poster.setOnClickListener {
-                            startActivity(intentFor<ItemDetailsActivity>(
-                                "id" to Id,
-                                "type" to extrasType,
-                                "title" to title
-                            ))
-                        }
-
-                        }
-
-                    }
+            }
 
             override fun onError() {
                 recommendationsLabel.visibility = View.GONE
@@ -257,8 +247,53 @@ class ItemDetailsActivity : AppCompatActivity() {
         })
     }
 
+    // is responsible for collecting the Id of the film and filling the function of the ViewModel
+    private fun getMovieCreditsContentForID(callback: OnGetPeopleCallback){
+        val extrasIdMovies = intent.extras?.getInt("id")
+        searchViewModel.getPeopleMovies(extrasIdMovies!!, callback)
+    }
+
+    // It is responsible for collecting all the people who work in said oeuvre
+    private fun getMoviesCredits(){
+        getMovieCreditsContentForID(object : OnGetPeopleCallback {
+            override fun onSuccess(crew: List<Crew>, cast: List<Cast>){
+
+                CastLabel.visibility = View.VISIBLE
+                RecyclerCast.removeAllViews()
+
+                val layoutManagerCast = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+
+                AdapterCast = CastPersonAdapter(this@ItemDetailsActivity, cast)
+
+                RecyclerCast.layoutManager = layoutManagerCast
+                RecyclerCast.setHasFixedSize(true)
+                RecyclerCast.itemAnimator = DefaultItemAnimator()
+                RecyclerCast.adapter = AdapterCast
+
+                CrewLabel.visibility = View.VISIBLE
+                RecyclerCrew.removeAllViews()
+
+                val layoutManagerCrew = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+
+                AdapterCrew = CrewPersonAdapter(this@ItemDetailsActivity, crew)
+
+                RecyclerCrew.layoutManager = layoutManagerCrew
+                RecyclerCrew.setHasFixedSize(true)
+                RecyclerCrew.itemAnimator = DefaultItemAnimator()
+                RecyclerCrew.adapter = AdapterCrew
 
 
+
+
+            }
+
+            override fun onError() {
+                CastLabel.visibility = View.GONE
+                CrewLabel.visibility = View.GONE
+            }
+
+        })
+    }
 
 
 
@@ -271,7 +306,7 @@ class ItemDetailsActivity : AppCompatActivity() {
     }
     // is responsible for filling the layout with the elements obtained from the API
     private fun isSerieAndAnime(){
-            getSeriesContentForID(object : OnGetSeriesCallback{
+            getSeriesContentForID(object : OnGetSeriesCallback {
                 override fun onSuccess(series: Series) {
                     textViewTitleDetails.text = series.name
 
@@ -316,7 +351,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // is responsible for collecting the key to create the YouTube URL and show the video image
     private fun getTrailersSeries(){
-        getSeriesTrailersContentForID(object : OnGetTrailersCallback{
+        getSeriesTrailersContentForID(object : OnGetTrailersCallback {
             override fun onSuccess(trailers: List<Trailer>) {
                 trailersLabel.visibility = View.VISIBLE
                 LinearTrailers.removeAllViews()
@@ -353,41 +388,20 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // It is responsible for collecting the recommended films from the movie Id
     private fun getSeriesRecommendations(){
-        getSeriesRecommendationsContentForID(object : OnGetListSeriesCallback {
+        getSeriesRecommendationsContentForID(object :
+            OnGetListSeriesCallback {
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 recommendationsLabel.visibility = View.VISIBLE
-                LinearRecommendations.removeAllViews()
+                RecyclerRecommendations.removeAllViews()
 
-                for (recommend in series){
-                    val parent = layoutInflater.inflate(R.layout.recommendations_view, LinearRecommendations, false)
-                    val titleTextView = parent.findViewById<TextView>(R.id.textViewTitleRecommendation)
-                    val poster = parent.findViewById<ImageView>(R.id.imageViewRecommendation)
+                val layoutManager = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                AdapterSeriesRec = RecommedationsSeriesAdapter(this@ItemDetailsActivity, series)
 
-                    val titleOeuvre = recommend.name.toString()
-                    val posterOeuvre = recommend.backdropPath.toString()
+                RecyclerRecommendations.layoutManager = layoutManager
+                RecyclerRecommendations.setHasFixedSize(true)
+                RecyclerRecommendations.itemAnimator = DefaultItemAnimator()
+                RecyclerRecommendations.adapter = AdapterSeriesRec
 
-                    titleTextView.text = titleOeuvre
-
-                    Glide.with(this@ItemDetailsActivity)
-                        .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + posterOeuvre)
-                        .centerCrop()
-                        .into(poster)
-
-                    LinearRecommendations.addView(parent)
-
-                    val Id = recommend.id
-                    val extrasType = intent.extras?.getString("type")
-                    val title = titleOeuvre
-
-                    poster.setOnClickListener {
-                        startActivity(intentFor<ItemDetailsActivity>(
-                            "id" to Id,
-                            "type" to extrasType,
-                            "title" to title
-                        ))
-                    }
-
-                }
 
             }
 
@@ -398,10 +412,57 @@ class ItemDetailsActivity : AppCompatActivity() {
         })
     }
 
+    // is responsible for collecting the Id of the film and filling the function of the ViewModel
+    private fun getSeriesCreditsContentForID(callback: OnGetPeopleCallback){
+        val extrasIdSeries = intent.extras?.getInt("id")
+        searchViewModel.getPeopleSeries(extrasIdSeries!!, callback)
+    }
+
+    // It is responsible for collecting all the people who work in said oeuvre
+    private fun getSeriesCredits(){
+        getSeriesCreditsContentForID(object : OnGetPeopleCallback {
+            override fun onSuccess(crew: List<Crew>, cast: List<Cast>){
+                CastLabel.visibility = View.VISIBLE
+                RecyclerCast.removeAllViews()
+
+                val layoutManagerCast = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+
+                AdapterCast = CastPersonAdapter(this@ItemDetailsActivity, cast)
+
+                RecyclerCast.layoutManager = layoutManagerCast
+                RecyclerCast.setHasFixedSize(true)
+                RecyclerCast.itemAnimator = DefaultItemAnimator()
+                RecyclerCast.adapter = AdapterCast
+
+                CrewLabel.visibility = View.VISIBLE
+                RecyclerCrew.removeAllViews()
+
+                val layoutManagerCrew = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+
+                AdapterCrew = CrewPersonAdapter(this@ItemDetailsActivity, crew)
+
+                RecyclerCrew.layoutManager = layoutManagerCrew
+                RecyclerCrew.setHasFixedSize(true)
+                RecyclerCrew.itemAnimator = DefaultItemAnimator()
+                RecyclerCrew.adapter = AdapterCrew
+
+
+            }
+
+            override fun onError() {
+                CastLabel.visibility = View.GONE
+                CrewLabel.visibility = View.GONE
+            }
+
+        })
+    }
+
+
+
 
     // Is responsible for collecting the list of movies genres
     private fun ListGenresMovies(movie: Movie){
-        searchViewModel.getGenresMovies(object : OnGetGenresCallback{
+        searchViewModel.getGenresMovies(object : OnGetGenresCallback {
             override fun onSuccess(genres: List<Genre>) {
                 if (movie.genres != null){
                     val currentGenres: ArrayList<String> = ArrayList()
@@ -423,7 +484,7 @@ class ItemDetailsActivity : AppCompatActivity() {
 
     // Is responsible for collecting the list of series genres
     private fun ListGenresSeriesAndAnime(series: Series){
-        searchViewModel.getGenresSeries(object : OnGetGenresCallback{
+        searchViewModel.getGenresSeries(object : OnGetGenresCallback {
             override fun onSuccess(genres: List<Genre>) {
                 if (series.genres != null){
                     val currentGenres: ArrayList<String> = ArrayList()
@@ -448,9 +509,6 @@ class ItemDetailsActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-
-
-
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

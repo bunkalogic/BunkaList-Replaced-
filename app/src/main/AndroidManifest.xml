@@ -16,6 +16,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.DetailsActivities.PeopleActivity">
+        </activity>
         <activity android:name=".Activities.DetailsActivities.ListSeriesActivity">
         </activity>
         <activity android:name=".Activities.DetailsActivities.ListMovieActivity">
