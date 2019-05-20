@@ -17,8 +17,10 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleDataCallback
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleDataCastCallback
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleDataCrewCallback
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleSocialMediaCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.People.CastResult
 import com.bunkalogic.bunkalist.Retrofit.Response.People.CrewResult
+import com.bunkalogic.bunkalist.Retrofit.Response.People.PeopleSocialMediaResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.People.ResultPeople
 import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
 import com.google.android.gms.ads.AdRequest
@@ -27,6 +29,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_people.*
 import org.jetbrains.anko.toast
+import android.content.Intent
+import android.net.Uri
+
+
+
+
+
 
 class PeopleActivity : AppCompatActivity() {
 
@@ -54,6 +63,7 @@ class PeopleActivity : AppCompatActivity() {
 
         getPeopleData()
         getPeopleCastAndCrew()
+        getPeopleSocialMedia()
 
 
     }
@@ -86,6 +96,7 @@ class PeopleActivity : AppCompatActivity() {
         searchViewModel.getPeopleData(extrasId!!, callback)
     }
 
+    // It is responsible for collecting the biographical data of said person
     private fun getPeopleData(){
         getContentPeopleDataId(object : OnGetPeopleDataCallback{
             override fun onSuccess(people: ResultPeople) {
@@ -129,6 +140,7 @@ class PeopleActivity : AppCompatActivity() {
         searchViewModel.getPeopleDataCast(extrasId!!, callback)
     }
 
+    // It is responsible for collecting lists of movies and series that said person has worked on it
     private fun getPeopleCastAndCrew(){
         getContentPeopleDataIdCastAndCrew(object : OnGetPeopleDataCastCallback{
             override fun onSuccess(peopleCast: List<CastResult>, peopleCrew: List<CrewResult>) {
@@ -170,6 +182,101 @@ class PeopleActivity : AppCompatActivity() {
                 textViewLabelDataCast.visibility = View.GONE
                 textViewLabelDataCrew.visibility = View.GONE
                 toast("Please check your internet connection")
+            }
+
+        })
+    }
+
+    private fun getContentPeopleDataIdSocialMedia(callback : OnGetPeopleSocialMediaCallback){
+        val extrasId = intent.extras?.getInt("idPerson")
+        searchViewModel.getPeopleSocialMedia(extrasId!!, callback)
+    }
+
+    // Responsible for showing the icons of social networks if that person has an account
+    private fun getPeopleSocialMedia(){
+        getContentPeopleDataIdSocialMedia(object : OnGetPeopleSocialMediaCallback{
+            override fun onSuccess(peopleSocial: PeopleSocialMediaResponse) {
+                val facebookId = peopleSocial.facebookId.toString()
+                val twitterId = peopleSocial.twitterId.toString()
+                val instagramId = peopleSocial.instagramId.toString()
+
+                //Check if the facebookId is null if it is not try to open the App or if the browser does not have it installed
+                if (facebookId == "null"){
+                    imageViewPeopleFacebook.visibility = View.INVISIBLE
+                }else{
+                    imageViewPeopleFacebook.visibility = View.VISIBLE
+
+                    val facebookApp = "fb://page/$facebookId"
+                    val facebookUrl = "http://www.facebook.com/$facebookId"
+
+                    imageViewPeopleFacebook.setOnClickListener {
+                        try {
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(facebookApp)))
+                        } catch (e: Exception) {
+                            Log.e("PeopleActivity", "Application not installed.")
+                            //Abre url de pagina.
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(facebookUrl)))
+                        }
+                    }
+                }
+
+                //Check if the instagramId is null if it is not try to open the App or if the browser does not have it installed
+                if (instagramId == "null"){
+                    imageViewPeopleInstagram.visibility = View.INVISIBLE
+                }else{
+                    imageViewPeopleInstagram.visibility = View.VISIBLE
+
+
+                    imageViewPeopleInstagram.setOnClickListener {
+                        try {
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = Uri.parse("http://instagram.com/_u/$instagramId")
+                            intent.setPackage("com.instagram.android")
+                            startActivity(intent)
+                        } catch (anfe: android.content.ActivityNotFoundException) {
+                            startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://www.instagram.com/$instagramId")
+                                )
+                            )
+                        }
+
+                    }
+                }
+                //Check if the twitterId is null if it is not try to open the App or if the browser does not have it installed
+                if (twitterId == "null"){
+                    imageViewPeopleTwitter.visibility = View.INVISIBLE
+                }else{
+                    imageViewPeopleTwitter.visibility = View.VISIBLE
+
+                    imageViewPeopleTwitter.setOnClickListener {
+                        try {
+                            val intent = Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("twitter://user?screen_name=$twitterId")
+                            )
+                            startActivity(intent)
+                        } catch (e: Exception) {
+                            startActivity(
+                                Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://twitter.com/#!/$twitterId")
+                                )
+                            )
+                        }
+
+                    }
+                }
+
+
+
+            }
+
+            override fun onError() {
+                imageViewPeopleFacebook.visibility = View.GONE
+                imageViewPeopleTwitter.visibility = View.GONE
+                imageViewPeopleInstagram.visibility = View.GONE
             }
 
         })

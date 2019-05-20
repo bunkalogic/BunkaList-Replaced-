@@ -79,7 +79,7 @@ class SearchFragment : Fragment() {
        val layoutManager = LinearLayoutManager(context)
 
        adapter = SearchItemAdapter(activity!!, searchList)
-       _view.recyclerSearch.layoutManager = layoutManager as RecyclerView.LayoutManager?
+       _view.recyclerSearch.layoutManager = layoutManager
        _view.recyclerSearch.setHasFixedSize(true)
        _view.recyclerSearch.itemAnimator = DefaultItemAnimator()
 

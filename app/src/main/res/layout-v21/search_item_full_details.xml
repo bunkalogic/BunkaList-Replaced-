@@ -45,6 +45,7 @@
     <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorBackgroundPrimary"
             app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
         <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
@@ -59,6 +60,7 @@
                     android:layout_marginTop="16dp"
                     android:textSize="30sp"
                     android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryText"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -68,6 +70,7 @@
                     android:id="@+id/textViewDetailsGenres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
@@ -81,6 +84,7 @@
                     android:id="@+id/textViewSearchDetailsAllDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
@@ -94,6 +98,7 @@
             <Button
                     android:id="@+id/buttonSearchItemDetailsAddInYourList"
                     android:text="@string/btn_search_item_details_your_list"
+                    android:textColor="@color/colorPrimaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -113,6 +118,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="31dp"
                     android:text="@string/search_item_details_summary_label"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="24sp"
                     android:visibility="gone"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -124,6 +130,7 @@
                     android:id="@+id/textViewDateRelease"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
@@ -164,6 +171,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
                     android:text="@string/search_item_full_details_cast"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="24sp"
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -199,6 +207,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
+                    android:textColor="@color/colorPrimaryText"
                     android:text="@string/search_item_full_details_crew"
                     android:textSize="24sp"
                     android:visibility="gone"
@@ -234,6 +243,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
                     android:text="@string/search_item_full_details_trailers"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="24sp"
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -271,6 +281,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
                     android:text="@string/search_item_full_details_recommendations"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="24sp"
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -297,6 +308,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewLabelGenres"
+                    android:textColor="@color/colorPrimaryText"
                     app:layout_constraintTop_toBottomOf="@+id/imageView5" android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="@+id/textViewDetailsGenres" android:layout_marginStart="8dp"
                     android:text="@string/activity_full_details" android:textSize="18sp" android:textStyle="bold"
@@ -310,6 +322,7 @@
                     app:layout_constraintStart_toStartOf="@+id/textViewDateRelease" android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp" app:layout_constraintBottom_toTopOf="@+id/textViewDateRelease"
                     android:text="@string/activity_full_details_date" android:textSize="18sp"
+                    android:textColor="@color/colorPrimaryText"
                     android:textStyle="bold|italic" android:visibility="invisible"/>
 
             <com.google.android.gms.ads.AdView

@@ -6,9 +6,9 @@
     <color name="colorPrimaryLight">#7E57C2</color>
     <color name="colorAccentLight">#FF8A65</color>
     <color name="colorAccentDark">#F4511E</color>
-    <color name="colorPrimaryText">#211F1F</color>
-    <color name="colorBackground">#F0EAEA</color>
-    <color name="colorBackgroundPrimary">#FBFBFB</color>
+    <color name="colorPrimaryText">#FFFF</color>
+    <color name="colorBackground">#3C3C42</color>
+    <color name="colorBackgroundPrimary">#202026</color>
     <color name="colorSecondaryText">#757575</color>
     <color name="colorPrimaryTextDark">#FFFFFF</color>
 
@@ -19,6 +19,4 @@
     <color name="colorItemTimeline">#3C3C42</color>
     <color name="colorStarRating">#FF6D00</color>
     <color name="colorPrimaryDarkSecond">#4A148C</color>
-
-
 </resources>

@@ -4,6 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
+        android:background="@color/colorBackground"
         android:layout_height="match_parent"
         tools:context=".Activities.SettingsActivities.ModeDayOrNightActivity" android:id="@+id/constraintLayout">
 
@@ -14,6 +15,7 @@
             android:id="@+id/radioGroup"
             android:layout_width="0dp"
             android:layout_height="230dp"
+            android:background="@color/colorBackgroundPrimary"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
             app:layout_constraintHorizontal_bias="0.398" app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -23,6 +25,7 @@
 
         <RadioButton
                 android:text="@string/changed_mode_light"
+                android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/radioButtonLight" android:layout_weight="1"
@@ -30,6 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         <RadioButton
                 android:text="@string/changed_mode_dark"
+                android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/radioButtonDark" android:layout_weight="1"
@@ -38,6 +42,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/radioButtonLight"/>
         <RadioButton
                 android:text="@string/changed_mode_custom"
+                android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/radioButtonCustom" android:layout_weight="1"

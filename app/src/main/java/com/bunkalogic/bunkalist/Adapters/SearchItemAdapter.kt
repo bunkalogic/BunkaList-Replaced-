@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -97,15 +98,25 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
 
             // is responsible for collecting the id and type to load after depending on whether it is a movie or series
             val id = mItem.id
+            val type = mItem.mediaType.toString()
+            val title = mItem.title
+            val name =  mItem.name.toString()
 
+            val bundle = Bundle()
+
+            bundle.putInt("id", id!!)
+            bundle.putString("title", title)
+            bundle.putString("name", name)
 
 
 
             imageViewRating.setOnClickListener {
-                preferences.itemID = id!!
-                mItem.title = preferences.itemName
-                val manager = (ctx as AppCompatActivity).supportFragmentManager
-                AddListDialog().show(manager, "")
+
+                val dialog = AddListDialog()
+                dialog.arguments = bundle
+                val manager = (ctx as AppCompatActivity).supportFragmentManager.beginTransaction()
+                dialog.show(manager, null)
+
             }
         }
     }

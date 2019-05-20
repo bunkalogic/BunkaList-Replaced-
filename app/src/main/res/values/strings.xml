@@ -117,7 +117,7 @@
     <string name="dialog_add_list_add_negative_button">Cancel</string>
     <string name="dialogAddList">Set Status:</string>
     <string name="dialog_add_list_what_type">What type ?</string>
-    <string name="dialog_add_list_text_view_arguments">What note do you give as a History?</string>
+    <string name="dialog_add_list_text_view_arguments">What note do you give as a Story?</string>
     <string name="dialog_add_list_text_view_character">What note do you give as a Characters?</string>
     <string name="dialog_add_list_text_view_band_sound">What note do you give as a Soundtrack?</string>
     <string name="dialog_add_list_text_view_effects">What note do you give as a Photography / Animation?</string>
@@ -198,6 +198,7 @@
     <string name="item_cast_people_data">Episode Count :</string>
     <string name="item_cast_people_data_character">character\'s name :</string>
     <string name="item_crew_people_data_work">work departments :</string>
+    <string name="dialog_add_list_text_view_general">What note do you give to the entire work?</string>
 
 
 </resources>

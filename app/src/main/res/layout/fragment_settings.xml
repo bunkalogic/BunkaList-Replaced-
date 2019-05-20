@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackgroundPrimary"
         android:fillViewport="true"
         tools:context=".Fragments.SettingsFragment">
 
@@ -46,7 +47,7 @@
                 android:layout_marginEnd="32dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:elevation="10dp"
+                android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
                 android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/textView_Select_Mode"
@@ -106,6 +107,7 @@
 
         <TextView
                 android:text="@string/terms_of_use"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView_Terms_use"
@@ -115,6 +117,7 @@
                 android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/textViewLicence"/>
         <TextView
                 android:text="@string/licence"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewLicence"
@@ -127,6 +130,7 @@
 
         <Button
                 android:text="@string/sign_out"
+                android:textColor="@color/colorPrimaryText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:clickable="true"

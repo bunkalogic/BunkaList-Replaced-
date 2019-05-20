@@ -7,6 +7,7 @@
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorBackgroundPrimary"
             app:cardCornerRadius="4dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginBottom="0.5dp"
@@ -21,6 +22,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewUsername"
+                    android:textColor="@color/colorPrimaryText"
                     app:layout_constraintTop_toTopOf="@+id/imageViewUserImage"
                     android:textStyle="bold|italic" android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageViewUserImage"
@@ -42,6 +44,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewOeuvreName"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
                     app:layout_constraintStart_toEndOf="@+id/imageViewUserImage"
@@ -53,6 +56,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewSeason" android:textSize="12sp"
                     android:textStyle="italic"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -63,6 +67,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewCapsNumbers" android:textSize="12sp"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -74,6 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewContent"
+                    android:textColor="@color/colorPrimaryText"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textSize="16sp"
                     android:padding="2dp"
@@ -94,6 +100,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryText"
                         android:id="@+id/textViewNumberPositive"
                         android:textSize="12sp"
                         app:layout_constraintTop_toTopOf="@+id/imageViewTimelineChat"
@@ -125,6 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewDate"
+                    android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="4dp"

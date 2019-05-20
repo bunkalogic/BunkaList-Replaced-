@@ -27,6 +27,9 @@ class PeopleSocialMediaResponse {
     @SerializedName("id")
     @Expose
     var id: Int? = null
+    @SerializedName("instagram_id")
+    @Expose
+    var instagramId: Any? = null
 
     /**
      * No args constructor for use in serialization
@@ -43,6 +46,7 @@ class PeopleSocialMediaResponse {
      * @param twitterId
      * @param imdbId
      * @param freebaseMid
+     * @param instagramId
      */
     constructor(
         imdbId: String,
@@ -51,7 +55,8 @@ class PeopleSocialMediaResponse {
         freebaseId: Any,
         tvrageId: Int?,
         twitterId: Any,
-        id: Int?
+        id: Int?,
+        instagramId: Any
     ) : super() {
         this.imdbId = imdbId
         this.facebookId = facebookId
@@ -60,6 +65,7 @@ class PeopleSocialMediaResponse {
         this.tvrageId = tvrageId
         this.twitterId = twitterId
         this.id = id
+        this.instagramId = instagramId
     }
 
 }

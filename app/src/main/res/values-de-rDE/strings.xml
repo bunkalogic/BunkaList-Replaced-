@@ -131,4 +131,5 @@
     <string name="item_cast_people_data">Episode Count :</string>
     <string name="item_cast_people_data_character">character\'s name :</string>
     <string name="item_crew_people_data_work">work departments :</string>
+    <string name="dialog_add_list_text_view_general">What note do you give to the entire work?</string>
 </resources>

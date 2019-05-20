@@ -7,6 +7,7 @@
     <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="180dp"
+            android:background="@color/colorBackgroundPrimary"
             app:cardCornerRadius="8dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="5dp"
@@ -51,7 +52,7 @@
                     app:layout_constraintStart_toEndOf="@+id/textViewListProfileNumberPosition"
                     android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toStartOf="@+id/textViewDateReleastListProfile"
-                    android:textColor="@color/colorPrimaryText"/>
+                    android:textColor="@color/colorPrimaryTextDark"/>
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView3"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                     app:layout_constraintEnd_toStartOf="@+id/imageView3" android:layout_marginEnd="32dp"
-                    android:textColor="@color/colorPrimaryText"/>
+                    android:textColor="@color/colorPrimaryTextDark"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,7 +98,7 @@
                     android:shadowDy="3"
                     android:shadowRadius="3"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:textColor="@color/colorPrimaryText" android:layout_marginStart="8dp"
+                    android:textColor="@color/colorPrimaryTextDark" android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent"/>
             <TextView
                     android:layout_width="wrap_content"
