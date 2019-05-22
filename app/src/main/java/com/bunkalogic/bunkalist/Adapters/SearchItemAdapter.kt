@@ -2,7 +2,9 @@ package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +17,6 @@ import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import org.jetbrains.anko.intentFor
-import android.support.v7.app.AppCompatActivity
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
 
 
 class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
@@ -96,6 +96,15 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
                     .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + photo)
                     .into(imageViewPoster)
 
+
+            // get list genres
+            val currentGenres: List<Int>? = mItem.genreIds
+
+            Log.d("SearchItemAdapter", "List: $currentGenres")
+
+            val typeAnime = currentGenres?.filter { it == 16 }?.any()
+
+
             // is responsible for collecting the id and type to load after depending on whether it is a movie or series
             val id = mItem.id
             val type = mItem.mediaType.toString()
@@ -107,6 +116,8 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
             bundle.putInt("id", id!!)
             bundle.putString("title", title)
             bundle.putString("name", name)
+            bundle.putString("type", type)
+            bundle.putBoolean("anime", typeAnime!!)
 
 
 

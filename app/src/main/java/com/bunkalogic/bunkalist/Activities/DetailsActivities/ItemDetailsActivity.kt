@@ -38,6 +38,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import org.jetbrains.anko.activityManager
 
 
 class ItemDetailsActivity : AppCompatActivity() {
@@ -52,6 +53,11 @@ class ItemDetailsActivity : AppCompatActivity() {
     private lateinit var AdapterSeriesRec: RecommedationsSeriesAdapter
     private lateinit var AdapterCast: CastPersonAdapter
     private lateinit var AdapterCrew: CrewPersonAdapter
+
+    // I use these 2 variables to collect the data correctly if it is an anime
+    val bundle = Bundle()
+    var isAnime : Boolean = false
+
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -100,17 +106,9 @@ class ItemDetailsActivity : AppCompatActivity() {
     }
 
 
-
-
     // Initializing the currentUser
     private fun setUpCurrentUser(){
         currentUser = mAuth.currentUser!!
-    }
-
-    private fun onClick(){
-        buttonSearchItemDetailsAddInYourList.setOnClickListener {
-            AddListDialog().show(supportFragmentManager, "")
-        }
     }
 
     // check if it is a series or a film and around it loads a function or another
@@ -135,9 +133,8 @@ class ItemDetailsActivity : AppCompatActivity() {
     // is responsible for collecting the Id of the film and filling the function of the ViewModel
     private fun getMovieContentForID(callback: OnGetMovieCallback){
         val extrasIdMovies = intent.extras?.getInt("id")
-        preferences.itemID = extrasIdMovies!!
         Log.d("SearchItemDetailsActMov", "Id: $extrasIdMovies")
-        searchViewModel.getMovie(extrasIdMovies, callback)
+        searchViewModel.getMovie(extrasIdMovies!!, callback)
     }
     // is responsible for filling the layout with the elements obtained from the API
     private fun isMovie(){
@@ -157,6 +154,29 @@ class ItemDetailsActivity : AppCompatActivity() {
 
                 val imageBackground = movie.backdropPath
                 val imagePoster = movie.posterPath
+
+
+                // It is responsible for collecting all necessary information to verify what type it is and add it to the list
+                val id = movie.id
+                val type = "movie"
+                val title = movie.title.toString()
+
+                val bundle = Bundle()
+
+                bundle.putInt("id", id!!)
+                bundle.putString("title", title)
+                bundle.putString("type", type)
+
+
+
+                buttonSearchItemDetailsAddInYourList.setOnClickListener {
+
+                    val dialog = AddListDialog()
+                    dialog.arguments = bundle
+                    val manager = supportFragmentManager.beginTransaction()
+                    dialog.show(manager, null)
+
+                }
 
                 // Here I check if imageBackground is different from null and if it is null charge the imagePoster
                 if (imageBackground != null){
@@ -308,31 +328,46 @@ class ItemDetailsActivity : AppCompatActivity() {
     private fun isSerieAndAnime(){
             getSeriesContentForID(object : OnGetSeriesCallback {
                 override fun onSuccess(series: Series) {
-                    textViewTitleDetails.text = series.name
-
-                    textViewLabelDate.visibility = View.VISIBLE
-                    textViewDateRelease.text = series.firstAirDate
-
-                    summaryLabel.visibility = View.VISIBLE
-                    textViewSearchDetailsAllDescription.text = series.overview
-
-                    textViewDetailsRating.text = series.voteAverage.toString()
-
-
                     ListGenresSeriesAndAnime(series)
+                    textViewLabelGenres.visibility = View.VISIBLE
 
-                    val imageBackground = series.backdropPath
-                    val imagePoster = series.posterPath
-                    // Here I check if imageBackground is different from null and if it is null charge the imagePoster
-                    if (imageBackground != null){
-                        Glide.with(this@ItemDetailsActivity)
-                            .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + imageBackground)
-                            .into(imageViewBackDrop)
-                    }else{
-                        Glide.with(this@ItemDetailsActivity)
-                            .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + imagePoster)
-                            .into(imageViewBackDrop)
-                    }
+
+                        textViewTitleDetails.text = series.name
+
+                        textViewLabelDate.visibility = View.VISIBLE
+                        textViewDateRelease.text = series.firstAirDate
+
+                        summaryLabel.visibility = View.VISIBLE
+                        textViewSearchDetailsAllDescription.text = series.overview
+
+                        textViewDetailsRating.text = series.voteAverage.toString()
+
+                        // It is responsible for collecting all necessary information to verify what type it is and add it to the list
+                        val id = series.id
+                        val type = "tv"
+                        val title = series.name.toString()
+
+                        bundle.putInt("id", id!!)
+                        bundle.putString("title", title)
+                        bundle.putString("type", type)
+
+
+                        // Load images
+                        val imageBackground = series.backdropPath
+                        val imagePoster = series.posterPath
+                        // Here I check if imageBackground is different from null and if it is null charge the imagePoster
+                        if (imageBackground != null){
+                            Glide.with(this@ItemDetailsActivity)
+                                .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + imageBackground)
+                                .into(imageViewBackDrop)
+                        }else{
+                            Glide.with(this@ItemDetailsActivity)
+                                .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + imagePoster)
+                                .into(imageViewBackDrop)
+                        }
+
+
+
                 }
 
                 override fun onError() {
@@ -488,9 +523,15 @@ class ItemDetailsActivity : AppCompatActivity() {
             override fun onSuccess(genres: List<Genre>) {
                 if (series.genres != null){
                     val currentGenres: ArrayList<String> = ArrayList()
+                    val currentGenresId: ArrayList<Int> = ArrayList()
+
                     for (genre in series.genres!!) {
                         currentGenres.add(genre.name!!)
+                        currentGenresId.add(genre.id!!)
                     }
+                    isAnime = currentGenresId.filter { it == 16 }.any()
+                    Log.d("SearchItemDetailsActTV", "is Anime: $isAnime")
+
                     textViewLabelGenres.visibility = View.VISIBLE
                     textViewDetailsGenres.text = TextUtils.join(" - ", currentGenres)
                 }
@@ -502,6 +543,20 @@ class ItemDetailsActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+
+    private fun onClick(){
+        buttonSearchItemDetailsAddInYourList.setOnClickListener {
+            // I add this here so that the boolean isAnime is picked up correctly
+            bundle.putBoolean("anime", isAnime)
+
+            val dialog = AddListDialog()
+            dialog.arguments = bundle
+            val manager = supportFragmentManager.beginTransaction()
+            dialog.show(manager, null)
+
+        }
     }
 
     // Is responsible for launching the YouTube App

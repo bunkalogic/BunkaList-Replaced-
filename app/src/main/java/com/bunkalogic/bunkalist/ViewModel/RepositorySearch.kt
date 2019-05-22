@@ -31,7 +31,7 @@ class RepositorySearch internal constructor() {
     }
 
     fun getAll(title: String, callback: OnGetSearchCallback){
-        val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY,Locale.getDefault().toString(), title)
+        val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY,Locale.getDefault().language, title)
 
         call.enqueue(object : Callback<ResponseSearchAll>{
 
@@ -223,17 +223,17 @@ class RepositorySearch internal constructor() {
 
         when(sortBy){
 
-            Constans.Popular_LIST -> moviesOrSeriesAndAnimeService.getPopularMovies(Constans.API_KEY, Locale.getDefault().toString(), page).enqueue(call)
+            Constans.Popular_LIST -> moviesOrSeriesAndAnimeService.getPopularMovies(Constans.API_KEY, Locale.getDefault().language, page).enqueue(call)
 
-            Constans.Rated_LIST -> moviesOrSeriesAndAnimeService.getTopRatedMovies(Constans.API_KEY, Locale.getDefault().toString(), page).enqueue(call)
+            Constans.Rated_LIST -> moviesOrSeriesAndAnimeService.getTopRatedMovies(Constans.API_KEY, Locale.getDefault().language, page).enqueue(call)
 
-            Constans.Upcoming_LIST -> moviesOrSeriesAndAnimeService.getUpcomingMovies(Constans.API_KEY, Locale.getDefault().toString(), page).enqueue(call)
+            Constans.Upcoming_LIST -> moviesOrSeriesAndAnimeService.getUpcomingMovies(Constans.API_KEY, Locale.getDefault().language, page).enqueue(call)
         }
     }
 
 
     fun getSeriesPopular(page: Int, callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getPopularSeries(Constans.API_KEY, Locale.getDefault().toString(), page)
+        val call = moviesOrSeriesAndAnimeService.getPopularSeries(Constans.API_KEY, Locale.getDefault().language, page)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
@@ -255,7 +255,7 @@ class RepositorySearch internal constructor() {
 
 
     fun getSeriesRated(page: Int, callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getRatedSeries(Constans.API_KEY, Locale.getDefault().toString(), page)
+        val call = moviesOrSeriesAndAnimeService.getRatedSeries(Constans.API_KEY, Locale.getDefault().language, page)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
@@ -276,7 +276,7 @@ class RepositorySearch internal constructor() {
     }
 
     fun getSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getUpcomingSeries(Constans.API_KEY, Locale.getDefault().toString(), page)
+        val call = moviesOrSeriesAndAnimeService.getUpcomingSeries(Constans.API_KEY, Locale.getDefault().language, page)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
@@ -381,7 +381,7 @@ class RepositorySearch internal constructor() {
     }
 
     fun getPeopleData(Id : Int, callback: OnGetPeopleDataCallback){
-        val call = moviesOrSeriesAndAnimeService.getPeopleData(Id, Constans.API_KEY, Locale.getDefault().toString())
+        val call = moviesOrSeriesAndAnimeService.getPeopleData(Id, Constans.API_KEY, Locale.getDefault().language)
 
         call.enqueue(object : Callback<ResultPeople>{
             override fun onFailure(call: Call<ResultPeople>, t: Throwable) {

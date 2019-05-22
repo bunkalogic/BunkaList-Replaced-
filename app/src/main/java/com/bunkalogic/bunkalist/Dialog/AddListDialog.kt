@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
@@ -49,6 +50,13 @@ class AddListDialog : DialogFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.FullScreenDialogStyle)
+        val args = arguments
+        val Id = args?.getInt("id")
+        val isAnime = args?.getBoolean("anime")
+        Log.d("AddListDialog", "$Id")
+        Log.d("AddListDialog", "is Anime = $isAnime")
+
+
 
     }
 
@@ -59,6 +67,7 @@ class AddListDialog : DialogFragment(){
         Log.d("AddListDialog", "${preferences.itemID}")
         setUpCurrentUser()
         setUpToolbar()
+        whatTypeIs()
         setUpSpinner()
         onClicks()
 
@@ -97,29 +106,31 @@ class AddListDialog : DialogFragment(){
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("AddListDialog", "Selcted: $position")
+                Log.d("AddListDialog", "Selected: $position")
                 statusInt = position
                 Log.d("AddListDialog", "typeInt = $statusInt")
             }
 
         }
 
-        // Creating the spinnerStatus adapter
-        val adpType: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(context!!, R.array.type, android.R.layout.simple_spinner_item)
-        adpType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        viewDialog.spinnerType.adapter = adpType
+    }
 
-        viewDialog.spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.d("AddListDialog", "No selected")
+    private fun whatTypeIs(){
+        val args = arguments
+        val type = args?.getString("type")
+        val isAnime = args?.getBoolean("anime")
+
+        if (type == "movie"){
+            typeInt = Constans.MOVIE_LIST
+            viewDialog.editTextDialogAddListSeason.visibility = View.INVISIBLE
+            viewDialog.editTextDialogAddListEpisode.visibility = View.INVISIBLE
+        }
+        if (type == "tv"){
+            typeInt = if (isAnime!!){
+                Constans.ANIME_LIST
+            }else{
+                Constans.SERIE_LIST
             }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("AddListDialog", "Selcted: $position")
-                typeInt = position
-                Log.d("AddListDialog", "typeInt = $typeInt")
-            }
-
         }
     }
 
@@ -161,37 +172,67 @@ class AddListDialog : DialogFragment(){
         }
 
         viewDialog.buttonAddList.setOnClickListener {
+            val args = arguments
+            val Id = args?.getInt("id")
+
             val season = viewDialog.editTextDialogAddListSeason.text.toString()
             val episode = viewDialog.editTextDialogAddListEpisode.text.toString()
+
+            val ratingGeneral = viewDialog.ratingBarGeneral.rating
             val ratingHistory = viewDialog.ratingBarHistory.rating
             val ratingCharacter = viewDialog.ratingBarCharacter.rating
             val ratingEffects = viewDialog.ratingBarEffects.rating
             val ratingSoundtrack = viewDialog.ratingBarSoundtrack.rating
             val ratingEnjoyment = viewDialog.ratingBarEnjoyment.rating
 
-            // we add all the results
-            var resultFinalRate = ratingHistory + ratingCharacter + ratingEffects + ratingSoundtrack + ratingEnjoyment
-            // we divide to get the average
-            val result = resultFinalRate / 5
-            Log.d("AddListDialog", "Result final rate = $result")
+            
+            if(ratingGeneral.toInt() == 0){
+                Log.d("AddListDialog", "it is a note in detail")
+                var resultFinalRate = ratingHistory + ratingCharacter + ratingEffects + ratingSoundtrack + ratingEnjoyment
+                // we divide to get the average
+                val result = resultFinalRate / 5
+                Log.d("AddListDialog", "Result final rate = $result")
 
 
-            val itemRating = ItemListRating(
-                currentUser.uid,
-                statusInt,
-                preferences.itemID,
-                Date(),
-                ratingHistory,
-                ratingCharacter,
-                ratingEffects,
-                ratingSoundtrack,
-                ratingEnjoyment,
-                result,
-                season,
-                episode,
-                typeInt
-            )
-            RxBus.publish(NewListRating(itemRating))
+                val itemRating = ItemListRating(
+                    currentUser.uid,
+                    statusInt,
+                    Id,
+                    Date(),
+                    ratingHistory,
+                    ratingCharacter,
+                    ratingEffects,
+                    ratingSoundtrack,
+                    ratingEnjoyment,
+                    result,
+                    season,
+                    episode,
+                    typeInt
+                )
+                RxBus.publish(NewListRating(itemRating))
+                dismiss()
+            }else{
+                val itemRatingGeneral = ItemListRating(
+                    currentUser.uid,
+                    statusInt,
+                    Id,
+                    Date(),
+                    ratingGeneral,
+                    ratingGeneral,
+                    ratingGeneral,
+                    ratingGeneral,
+                    ratingGeneral,
+                    ratingGeneral,
+                    season,
+                    episode,
+                    typeInt
+                )
+                RxBus.publish(NewListRating(itemRatingGeneral))
+                dismiss()
+            }
+
+
+
         }
     }
 }

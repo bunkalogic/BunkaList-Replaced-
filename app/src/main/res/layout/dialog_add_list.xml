@@ -42,31 +42,17 @@
                  app:layout_constraintTop_toTopOf="parent"
                  app:layout_constraintStart_toEndOf="@+id/textViewDialogAddStatus"
                  android:id="@+id/spinnerStatus" android:layout_marginStart="8dp"/>
-            <TextView
-                    android:text="@string/dialog_add_list_what_type"
-                    android:textColor="@color/colorPrimaryText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewType" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="32dp"
-                    android:textStyle="bold|italic" android:textSize="20sp"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewDialogAddStatus" android:layout_marginTop="8dp"/>
-        <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/spinnerType"
-                app:layout_constraintStart_toEndOf="@+id/textViewType" android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="@+id/textViewType"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewType"/>
 
-        <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:inputType="number"
-                  android:hint="@string/hint_dialog_timeline_season"
-                  android:textColor="@color/colorPrimaryText"
-                  android:background="@drawable/edittext_rounded" android:padding="2dp"
-                  android:id="@+id/editTextDialogAddListSeason"
-                  app:layout_constraintStart_toStartOf="@+id/textViewType" android:layout_marginTop="16dp"
-                  app:layout_constraintTop_toBottomOf="@+id/textViewType"/>
+            <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:inputType="number"
+                      android:hint="@string/hint_dialog_timeline_season"
+                      android:textColor="@color/colorPrimaryText"
+                      android:background="@drawable/edittext_rounded" android:padding="2dp"
+                      android:id="@+id/editTextDialogAddListSeason"
+                      app:layout_constraintStart_toStartOf="@+id/textViewDialogAddStatus"
+                      android:layout_marginTop="8dp"
+                      app:layout_constraintTop_toBottomOf="@+id/textViewDialogAddStatus"
+                      android:layout_marginStart="8dp"/>
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

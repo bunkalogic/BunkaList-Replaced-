@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -83,13 +84,27 @@ class TopListMoviesAdapter (private val ctx: Context, private var mValues: Array
                 .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + photo)
                 .into(imageViewPoster)
 
+            // is responsible for collecting the id and type to load after depending on whether it is a movie or series
             val id = mItem.id
+            val type = "movie"
+            val title = mItem.title
+
+
+            val bundle = Bundle()
+
+            bundle.putInt("id", id!!)
+            bundle.putString("title", title)
+            bundle.putString("type", type)
+
+
 
             imageViewRating.setOnClickListener {
-                preferences.itemID = id!!
-                mItem.title = preferences.itemName
-                val manager = (ctx as AppCompatActivity).supportFragmentManager
-                AddListDialog().show(manager, "")
+
+                val dialog = AddListDialog()
+                dialog.arguments = bundle
+                val manager = (ctx as AppCompatActivity).supportFragmentManager.beginTransaction()
+                dialog.show(manager, null)
+
             }
 
         }
