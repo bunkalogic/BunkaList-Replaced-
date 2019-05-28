@@ -6,10 +6,8 @@ import android.support.design.widget.TabLayout
 import android.util.Log
 import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
 import com.bunkalogic.bunkalist.Adapters.TopsTabProfileAdapter
-import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
-import com.bunkalogic.bunkalist.Others.Constans
+import com.bunkalogic.bunkalist.Fragments.FabFilter.FabFilterListFragment
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import kotlinx.android.synthetic.main.activity_profile_list.*
 
 class ProfileListActivity : AppCompatActivity() {
@@ -38,7 +36,11 @@ class ProfileListActivity : AppCompatActivity() {
     }
 
     private fun onClick(){
-        fabFilter.hide()
+        fabFilter.setOnClickListener {
+            val dialogFabList: FabFilterListFragment = FabFilterListFragment().newInstance()
+            dialogFabList.setParentFab(fabFilter)
+            dialogFabList.show(supportFragmentManager, dialogFabList.tag)
+        }
     }
 
     private fun isListOrTop(){

@@ -21,8 +21,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         multiDexEnabled true
-        versionCode 13
-        versionName "0.8.79"
+        versionCode 14
+        versionName "0.8.82"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         each {
@@ -76,6 +76,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.allattentionhere:fabulousfilter:0.0.5'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.google.android:flexbox:1.0.0'
 
 
     implementation 'com.google.code.gson:gson:2.8.5'
