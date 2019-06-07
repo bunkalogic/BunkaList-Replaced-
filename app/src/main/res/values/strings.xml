@@ -134,6 +134,20 @@
         <item>Dropped</item>
     </string-array>
 
+    <string-array name="rating">
+        <item>Rating Story</item>
+        <item>Rating Characters</item>
+        <item>Rating Soundtrack</item>
+        <item>Rating Photography</item>
+        <item>Rating Enjoyment</item>
+        <item>Rating Final</item>
+    </string-array>
+
+    <string-array name="order">
+        <item>ascendant</item>
+        <item>descend</item>
+    </string-array>
+
     <string-array name="type">
         <item>Movie</item>
         <item>Series</item>
@@ -203,6 +217,25 @@
     <string name="fab_filter_list_profile_status">Status</string>
     <string name="fab_filter_list_profile_rating">Rating</string>
     <string name="fab_filter_list_profile_order">Order</string>
+
+    <string name="fab_filter_profile_status_complete">Complete</string>
+    <string name="fab_filter_profile_status_watching">Watching</string>
+    <string name="fab_filter_profile_status_waiting">Waiting for out</string>
+    <string name="fab_filter_profile_status_pause">On pause</string>
+    <string name="fab_filter_profile_status_dropped">Dropped</string>
+
+    <string name="fab_filter_profile_rating_story">Rating Story</string>
+    <string name="fab_filter_profile_rating_characters">Rating Characters</string>
+    <string name="fab_filter_profile_rating_soundtrack">Rating Soundtrack</string>
+    <string name="fab_filter_profile_rating_photography">Rating Photography</string>
+    <string name="fab_filter_profile_rating_enjoyment">Rating Enjoyment</string>
+    <string name="fab_filter_profile_rating_final">Rating Final</string>
+
+    <string name="fab_filter_profile_order_ascendent">Ascendant</string>
+    <string name="fab_filter_profile_order_descend">Descend</string>
+
+
+
 
 
 </resources>

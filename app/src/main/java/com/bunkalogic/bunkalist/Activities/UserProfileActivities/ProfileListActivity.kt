@@ -3,20 +3,26 @@ package com.bunkalogic.bunkalist.Activities.UserProfileActivities
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.util.ArrayMap
 import android.util.Log
 import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
 import com.bunkalogic.bunkalist.Adapters.TopsTabProfileAdapter
 import com.bunkalogic.bunkalist.Fragments.FabFilter.FabFilterListFragment
+import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
+import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
 import com.bunkalogic.bunkalist.R
 import kotlinx.android.synthetic.main.activity_profile_list.*
 
-class ProfileListActivity : AppCompatActivity() {
+
+
+class ProfileListActivity : AppCompatActivity(){
+
 
     private lateinit var toolbar: android.support.v7.widget.Toolbar
 
-
     val clickList = 1
     val clickTop = 2
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +31,6 @@ class ProfileListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         isListOrTop()
-
-        onClick()
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -35,13 +38,6 @@ class ProfileListActivity : AppCompatActivity() {
         return true
     }
 
-    private fun onClick(){
-        fabFilter.setOnClickListener {
-            val dialogFabList: FabFilterListFragment = FabFilterListFragment().newInstance()
-            dialogFabList.setParentFab(fabFilter)
-            dialogFabList.show(supportFragmentManager, dialogFabList.tag)
-        }
-    }
 
     private fun isListOrTop(){
         val list = intent.extras?.getInt("list")
@@ -125,6 +121,10 @@ class ProfileListActivity : AppCompatActivity() {
         })
 
     }
+
+
+
+
 
 
 

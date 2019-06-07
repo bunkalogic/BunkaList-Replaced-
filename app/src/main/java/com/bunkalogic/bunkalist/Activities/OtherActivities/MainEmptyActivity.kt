@@ -19,7 +19,7 @@ class MainEmptyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713")
+        MobileAds.initialize(this, "")
         if (mAuth.currentUser == null){
             startActivity(intentFor<LoginActivity>().newTask())
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

@@ -1,5 +1,6 @@
 package com.bunkalogic.bunkalist.Others
 
+import android.util.ArrayMap
 import com.bunkalogic.bunkalist.BuildConfig
 
 object Constans{
@@ -25,6 +26,7 @@ object Constans{
     val MOVIE_LIST = 0
     val SERIE_LIST = 1
     val ANIME_LIST = 2
+    val typeOuevre = "typeOeuvre"
 
     // top fragment
 
@@ -59,6 +61,38 @@ object Constans{
     val Popular_LIST_Series = 3
     val Rated_LIST_Series = 4
     val Upcoming_LIST_Series = 5
+
+    // filter id status
+    val filter_status_name = "status"
+    val filter_status_complete = 0
+    val filter_status_watching = 1
+    val filter_status_waiting = 2
+    val filter_status_pause = 3
+    val filter_status_dropped = 4
+
+
+    // filter id rating
+    val filter_rating_story = 5
+    val filter_rating_characters = 6
+    val filter_rating_soundtrack = 7
+    val filter_rating_photography = 8
+    val filter_rating_enjoyment = 9
+    val filter_rating_final = 10
+
+    // filter name rating
+    val filter_rating_story_name = "historyRate"
+    val filter_rating_characters_name = "characterRate"
+    val filter_rating_soundtrack_name = "soundtrackRate"
+    val filter_rating_photography_name = "effectsRate"
+    val filter_rating_enjoyment_name = "enjoymentRate"
+    val filter_rating_final_name = "finalRate"
+
+
+    // filter id order
+    val filter_order_ascendant = 11
+    val filter_order_descend = 12
+
+    var applied_list_filter: ArrayMap<String, Int> = ArrayMap()
 
 
 
