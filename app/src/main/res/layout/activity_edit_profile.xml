@@ -26,6 +26,7 @@
     <EditText
             android:layout_width="218dp"
             android:layout_height="36dp"
+            android:fontFamily="@font/overpass"
             android:ems="10"
             android:id="@+id/edit_Text_Username"
             android:background="@drawable/edittext_rounded"
@@ -40,12 +41,13 @@
             android:id="@+id/buttonApplyChanges" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="32dp"
             android:clickable="true"
+            android:fontFamily="@font/overpass"
             android:focusable="true"
             android:background="@drawable/button_rounded_transparent_color"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
             android:text="@string/apply_changes" app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/adViewBannerActivityEditProfile"/>
+            app:layout_constraintBottom_toTopOf="@+id/adViewBannerActivityEditProfile" android:textAllCaps="false"/>
 
 
     <com.google.android.gms.ads.AdView

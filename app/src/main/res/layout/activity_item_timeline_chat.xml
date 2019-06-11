@@ -30,6 +30,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewUsername"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     app:layout_constraintTop_toTopOf="@+id/imageViewUserImage"
                     android:textStyle="bold|italic" android:textSize="18sp"
@@ -52,6 +53,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewOeuvreName"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
@@ -64,6 +66,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewSeason" android:textSize="12sp"
                     android:textStyle="italic"
@@ -75,6 +78,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewCapsNumbers" android:textSize="12sp"
                     android:textStyle="italic"
@@ -86,6 +90,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewContent"
                     android:textColor="@color/colorPrimaryText"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -100,6 +105,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewDate"
                     android:textSize="14sp"
                     android:textColor="@color/colorPrimaryText"
@@ -146,6 +152,7 @@
     <EditText
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:fontFamily="@font/overpass"
             android:ems="10"
             android:id="@+id/editTextTimelineChat"
             app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonChatTimeline"

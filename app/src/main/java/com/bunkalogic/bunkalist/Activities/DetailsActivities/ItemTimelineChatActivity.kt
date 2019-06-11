@@ -115,7 +115,7 @@ class ItemTimelineChatActivity : AppCompatActivity() {
         floatingActionButtonChatTimeline.setOnClickListener {
             val message = editTextTimelineChat.text.toString()
 
-            if (message.isNotEmpty()){
+            if (message.isNotEmpty() && message != "text" && message != "text1234"){
                 val messageEvent = TimelineChat(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), message)
                 saveMessageChat(messageEvent)
             }

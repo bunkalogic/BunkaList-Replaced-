@@ -72,6 +72,7 @@
 
                                 <TextView
                                         android:id="@+id/userNameProfile"
+                                        android:fontFamily="@font/overpass"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textStyle="bold"
@@ -85,6 +86,7 @@
 
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
+                                          android:fontFamily="@font/overpass"
                                           android:layout_gravity="center_horizontal"
                                           android:textSize="14sp"
                                           android:textColor="@color/colorPrimaryText"
@@ -98,6 +100,7 @@
 
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
+                                          android:fontFamily="@font/overpass"
                                           android:text="Follows"
                                           android:textColor="@color/colorPrimaryText"
                                           android:textSize="14sp"
@@ -112,6 +115,7 @@
 
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
+                                          android:fontFamily="@font/overpass"
                                           android:layout_gravity="center_horizontal"
                                           android:textSize="14sp"
                                           android:textColor="@color/colorPrimaryText"
@@ -124,6 +128,7 @@
 
                                 <TextView android:layout_width="wrap_content"
                                           android:layout_height="wrap_content"
+                                          android:fontFamily="@font/overpass"
                                           android:layout_gravity="center_horizontal"
                                           android:text="Followers"
                                           android:textColor="@color/colorPrimaryText"
@@ -139,6 +144,7 @@
                                 <TextView
                                         android:id="@+id/numberMovie"
                                         android:text="Movies views: "
+                                        android:fontFamily="@font/overpass"
                                         android:textColor="@color/colorPrimaryText"
                                         android:textStyle="italic|bold"
                                         android:textSize="14sp"
@@ -154,6 +160,7 @@
                                 <TextView
                                         android:id="@+id/numberSeries"
                                         android:text="Series views: "
+                                        android:fontFamily="@font/overpass"
                                         android:textColor="@color/colorPrimaryText"
                                         android:textStyle="italic|bold"
                                         android:textSize="14sp"
@@ -171,6 +178,7 @@
 
                                 <TextView
                                         android:id="@+id/numberAnime"
+                                        android:fontFamily="@font/overpass"
                                         android:text="Anime views: "
                                         android:textColor="@color/colorPrimaryText"
                                         android:textStyle="italic|bold"
@@ -193,6 +201,7 @@
                             <Button
                                     android:text="@string/btn_list_all_movies"
                                     android:layout_width="0dp"
+                                    android:fontFamily="@font/overpass"
                                     android:textColor="@color/colorPrimaryText"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/buttonListAll"
@@ -212,6 +221,7 @@
                                     android:text="@string/btn_top_movie"
                                     android:textColor="@color/colorPrimaryText"
                                     android:layout_width="0dp"
+                                    android:fontFamily="@font/overpass"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/buttonTopFavsAll"
                                     android:clickable="true"
@@ -237,6 +247,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/textView6"
+                                    android:fontFamily="@font/overpass"
                                     android:textColor="@color/colorPrimaryText"
                                     app:layout_constraintTop_toBottomOf="@+id/buttonListAll"
                                     app:layout_constraintStart_toStartOf="@+id/buttonListAll"

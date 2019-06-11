@@ -15,6 +15,7 @@
                                                   android:id="@+id/ImageItemPeople"/>
     <TextView
             android:layout_width="0dp"
+            android:fontFamily="@font/overpass"
             android:layout_height="wrap_content" android:id="@+id/textViewItemPeopleWork"
             android:layout_marginTop="4dp"
             android:textColor="@color/colorPrimaryText"
@@ -23,6 +24,7 @@
             android:layout_marginStart="2dp" android:layout_marginEnd="2dp" android:textAlignment="center"/>
     <TextView
             android:layout_width="0dp"
+            android:fontFamily="@font/overpass"
             android:layout_height="wrap_content"
             android:id="@+id/textViewItemPeopleName"
             android:textColor="@color/colorPrimaryText"

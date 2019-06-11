@@ -37,7 +37,7 @@ class ReviewDialog: DialogFragment(){
                 val isSpoiler = view.checkBoxReviewContainsSpoiler.isChecked
 
 
-                if (review.isEmpty()){
+                if (review.isEmpty() && review != "text" && review == "text1234"){
                     toast("The review is empty")
                 }else{
                     val reviewExts = NewReview(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), title, review, isSpoiler)

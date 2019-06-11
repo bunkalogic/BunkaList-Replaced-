@@ -44,6 +44,7 @@
                 <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/overpass"
                         android:id="@+id/textView67" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
                         android:shadowColor="#000"
@@ -58,6 +59,7 @@
 
                 <Button
                         android:text="@string/fragment_tops_review_button_top_movies_list"
+                        android:fontFamily="@font/overpass"
                         android:textColor="@color/colorPrimaryText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
                         android:textAlignment="center"/>
                 <Button
                         android:text="@string/fragment_tops_review_button_top_series_list"
+                        android:fontFamily="@font/overpass"
                         android:textColor="@color/colorPrimaryText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
-             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto" android:animateLayoutChanges="true"
              tools:context=".Fragments.ListProfileFragment">
 
     <android.support.v7.widget.RecyclerView
@@ -26,7 +27,7 @@
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/adViewBannerFragmentList"/>
 
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabFilterOk"
+            android:id="@+id/fabFilterCheck"
             android:visibility="gone"
             app:srcCompat="@drawable/ic_fab_filter_ok"
             android:tint="@color/colorPrimary"

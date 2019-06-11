@@ -28,6 +28,7 @@
         <TextView
                 android:id="@+id/textViewTitleRecommendation"
                 android:layout_width="0dp"
+                android:fontFamily="@font/overpass"
                 android:layout_height="wrap_content"
                 android:shadowColor="#000"
                 android:shadowDx="3"

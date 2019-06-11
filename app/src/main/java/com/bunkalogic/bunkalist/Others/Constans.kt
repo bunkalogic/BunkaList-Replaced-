@@ -94,6 +94,8 @@ object Constans{
 
     var applied_list_filter: ArrayMap<String, Int> = ArrayMap()
 
+    val SEARCH_NAME = "SEARCH_TEXT"
+
 
 
 

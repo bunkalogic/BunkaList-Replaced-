@@ -39,6 +39,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewTitleListProfile"
                     android:textStyle="bold|italic" android:textSize="16sp"
                     android:maxLines="2" android:ellipsize="end"
@@ -56,6 +57,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewDateReleastListProfile"
                     android:textStyle="bold"
                     android:textSize="14sp"
@@ -70,6 +72,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:shadowColor="#000"
                     android:shadowDx="3"
                     android:shadowDy="3"
@@ -89,6 +92,7 @@
 
             <TextView
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewListProfileNumberPosition"
                     android:textSize="24sp"
@@ -102,6 +106,7 @@
                     app:layout_constraintStart_toStartOf="parent"/>
             <TextView
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewListProfileDateAt"
                     android:textStyle="italic"
@@ -111,6 +116,7 @@
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
             <ImageView
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/ic_stars_black_your"
                     android:id="@+id/imageView2"
                     app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +126,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewListProfileYourRating"
                     android:textAlignment="center"
                     android:textStyle="bold" android:textSize="18sp"

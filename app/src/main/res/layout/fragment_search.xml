@@ -16,19 +16,12 @@
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
             android:hint="@string/fragment_search"
+            android:fontFamily="@font/overpass"
             android:background="@drawable/edittext_rounded"
-            android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/imageViewSearch"/>
+            android:drawableStart="@drawable/ic_fragment_search_go_search" android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            android:textColorHint="@color/colorBottomNavigationBar"/>
 
-    <ImageView
-            app:srcCompat="@drawable/ic_fragment_search_go_search"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageViewSearch"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:padding="2dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"/>
 
 
     <android.support.v7.widget.RecyclerView

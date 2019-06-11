@@ -30,6 +30,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/overpass_extralight_italic"
                 android:text="Bunkalist"
                 android:textSize="24sp"
                 android:textColor="@color/colorAccent"
@@ -37,15 +38,16 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
                 android:textAlignment="center" android:textStyle="italic"
-                android:fontFamily="sans-serif-thin" android:id="@+id/textView62" android:layout_marginBottom="32dp"
+                android:id="@+id/textView62" android:layout_marginBottom="32dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline7"/>
 
         <EditText
                 android:id="@+id/editTextEmailSignUp"
                 android:inputType="textEmailAddress"
+                android:fontFamily="@font/overpass"
                 android:hint="@string/login_email"
                 android:textSize="@dimen/login_text_size"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -56,15 +58,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintHorizontal_bias="1.0"
-                android:textColorHint="@color/colorPrimaryText" android:layout_marginTop="16dp"
+                android:textColorHint="@color/colorPrimaryTextDark" android:layout_marginTop="16dp"
                 app:layout_constraintTop_toTopOf="@+id/guideline7"/>
 
         <EditText
                 android:id="@+id/editTextPasswordSignUp"
                 android:inputType="textPassword"
+                android:fontFamily="@font/overpass"
                 android:hint="@string/login_password"
                 android:textSize="@dimen/login_text_size"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -75,15 +78,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintHorizontal_bias="0.0"
-                android:textColorHint="@color/colorPrimaryText" android:layout_marginTop="16dp"
+                android:textColorHint="@color/colorPrimaryTextDark" android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/editTextEmailSignUp"/>
 
         <EditText
                 android:id="@+id/editTextConfirmPassword"
                 android:inputType="textPassword"
+                android:fontFamily="@font/overpass"
                 android:hint="@string/login_confirm_password"
                 android:textSize="@dimen/login_text_size"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_edit_text_height"
                 android:background="@drawable/edittext_rounded"
@@ -94,7 +98,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintHorizontal_bias="0.0"
-                android:textColorHint="@color/colorPrimaryText" android:layout_marginTop="16dp"
+                android:textColorHint="@color/colorPrimaryTextDark" android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@+id/editTextPasswordSignUp"/>
 
         <Button
@@ -102,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_button_height"
                 android:text="@string/login_sign_up"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:textSize="@dimen/login_text_xl_size"
                 android:background="@drawable/button_rounded_transparent_color"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -111,14 +115,16 @@
                 android:layout_marginEnd="32dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginTop="32dp"
-                app:layout_constraintTop_toBottomOf="@+id/checkBoxSignUpTermsAndUse"/>
+                app:layout_constraintTop_toBottomOf="@+id/checkBoxSignUpTermsAndUse"
+                android:fontFamily="@font/overpass" android:textAllCaps="false"/>
 
         <Button
                 android:id="@+id/buttonGoLogIn"
                 android:layout_width="match_parent"
                 android:background="@drawable/button_ripple"
+                android:fontFamily="@font/overpass" android:textAllCaps="false"
                 android:text="@string/go_to_login"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:layout_height="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,6 +137,7 @@
                 android:id="@+id/checkBoxSignUpTermsAndUse"
                 app:layout_constraintStart_toStartOf="@+id/editTextConfirmPassword" android:layout_marginTop="28dp"
                 app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword"
+                android:fontFamily="@font/overpass" android:textAllCaps="false"
                 android:text="@string/sign_up_terms_anduse"
                 app:layout_constraintEnd_toEndOf="@+id/editTextConfirmPassword"
                 android:textStyle="bold|italic" android:textAlignment="textStart"

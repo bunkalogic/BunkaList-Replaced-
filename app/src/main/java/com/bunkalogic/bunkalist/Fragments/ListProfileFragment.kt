@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_list_profile.*
 import kotlinx.android.synthetic.main.fragment_list_profile.view.*
-
+import org.jetbrains.anko.support.v4.intentFor
 
 
 class ListProfileFragment : Fragment() {
@@ -84,16 +84,17 @@ class ListProfileFragment : Fragment() {
             dialogFabList.setParentFab(fabFilter)
             dialogFabList.show(activity?.supportFragmentManager, dialogFabList.tag)
             _view.fabFilter.visibility = View.GONE
-            _view.fabFilterOk.visibility = View.VISIBLE
+            _view.fabFilterCheck.visibility = View.VISIBLE
         }
 
-        _view.fabFilterOk.setOnClickListener {
+        _view.fabFilterCheck.setOnClickListener {
             resultFilter(Constans.applied_list_filter)
-            _view.fabFilterOk.visibility = View.GONE
+            _view.fabFilterCheck.visibility = View.GONE
             _view.fabFilterClean.visibility = View.VISIBLE
         }
 
         _view.fabFilterClean.setOnClickListener {
+            Constans.applied_list_filter.clear()
             _view.fabFilterClean.visibility = View.GONE
             _view.fabFilter.visibility = View.VISIBLE
         }
@@ -103,6 +104,7 @@ class ListProfileFragment : Fragment() {
     }
 
 
+    // is responsible for collecting the filter list of the fabFilterListFragment and updating the lists
     private fun resultFilter(applied_filters: ArrayMap<String, Int> = ArrayMap()){
         if (applied_filters.isNotEmpty() && applied_filters.size != 0){
                 val status = context!!.getString(R.string.fab_filter_list_profile_status)
@@ -136,9 +138,7 @@ class ListProfileFragment : Fragment() {
                         }
                     }
                 }
-            subscribeToProfileListMovie(currentUser.uid, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
-            subscribeToProfileListSeries(currentUser.uid, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
-            subscribeToProfileListAnime(currentUser.uid, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+            getListOeuvre(currentUser.uid)
         }
 
     }
@@ -189,13 +189,21 @@ class ListProfileFragment : Fragment() {
 
     private fun getListOeuvre(userId: String){
 
-        when (typeList) {
-            Constans.MOVIE_LIST -> subscribeToProfileListMovie(userId, Constans.typeOuevre, Constans.MOVIE_LIST, Constans.filter_rating_final_name, orderDesc)
-            Constans.SERIE_LIST -> subscribeToProfileListSeries(userId, Constans.typeOuevre, Constans.SERIE_LIST, Constans.filter_rating_final_name, orderDesc)
-            Constans.ANIME_LIST -> subscribeToProfileListAnime(userId, Constans.typeOuevre, Constans.ANIME_LIST, Constans.filter_rating_final_name, orderDesc)
-            Constans.MOVIE_TOP -> subscribeToProfileTopMovie(userId)
-            Constans.SERIE_TOP -> subscribeToProfileTopSeries(userId)
-            Constans.ANIME_TOP -> subscribeToProfileTopAnime(userId)
+        if(statusFinalId == -1 && ratingFieldFinal == ""){
+            when (typeList) {
+                Constans.MOVIE_LIST -> subscribeToProfileListMovie(userId, Constans.typeOuevre, Constans.MOVIE_LIST, Constans.filter_rating_final_name, orderDesc)
+                Constans.SERIE_LIST -> subscribeToProfileListSeries(userId, Constans.typeOuevre, Constans.SERIE_LIST, Constans.filter_rating_final_name, orderDesc)
+                Constans.ANIME_LIST -> subscribeToProfileListAnime(userId, Constans.typeOuevre, Constans.ANIME_LIST, Constans.filter_rating_final_name, orderDesc)
+                Constans.MOVIE_TOP -> subscribeToProfileTopMovie(userId)
+                Constans.SERIE_TOP -> subscribeToProfileTopSeries(userId)
+                Constans.ANIME_TOP -> subscribeToProfileTopAnime(userId)
+            }
+        }else{
+            when(typeList){
+                Constans.MOVIE_LIST -> subscribeToProfileListMovie(userId, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+                Constans.SERIE_LIST ->subscribeToProfileListSeries(userId, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+                Constans.ANIME_LIST -> subscribeToProfileListAnime(userId, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+            }
         }
 
     }

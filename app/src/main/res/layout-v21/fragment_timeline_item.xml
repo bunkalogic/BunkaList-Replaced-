@@ -23,6 +23,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewUsername"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     app:layout_constraintTop_toTopOf="@+id/imageViewUserImage"
                     android:textStyle="bold|italic" android:textSize="18sp"
@@ -34,6 +35,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/imageViewUserImage"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="4dp"
@@ -45,6 +47,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewOeuvreName"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
                     android:textStyle="bold|italic"
@@ -57,6 +60,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewSeason" android:textSize="12sp"
                     android:textStyle="italic"
@@ -68,6 +72,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewCapsNumbers" android:textSize="12sp"
                     android:textStyle="italic"
@@ -79,6 +84,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewContent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -102,6 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/textViewNumberPositive"
+                        android:fontFamily="@font/overpass"
                         android:textSize="12sp"
                         app:layout_constraintTop_toTopOf="@+id/imageViewTimelineChat"
                         app:layout_constraintBottom_toBottomOf="@+id/imageViewTimelineChat"
@@ -132,6 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewDate"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"

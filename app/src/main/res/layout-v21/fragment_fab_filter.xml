@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/colorAccent"
-                    app:srcCompat="@drawable/ic_check_black_24dp"
+                    app:srcCompat="@drawable/ic_fab_filter"
                     android:layout_weight="1"/>
 
         </LinearLayout>

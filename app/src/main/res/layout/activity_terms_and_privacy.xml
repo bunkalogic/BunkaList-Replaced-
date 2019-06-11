@@ -17,12 +17,14 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView59"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/overpass"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:textSize="24sp" android:textColor="@color/colorPrimaryText"
             android:text="Terms of Use and Policy Privacy and Cookies" android:textStyle="bold"
             android:textAlignment="center" app:layout_constraintTop_toBottomOf="@+id/toolbar"/>
     <TextView
+            android:fontFamily="@font/overpass"
             android:text="in this link you have everything related to the privacy policy and cookies :"
             android:layout_width="0dp"
             android:textColor="@color/colorPrimaryText"
@@ -32,6 +34,7 @@
             android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp" android:textStyle="italic" android:textAlignment="textStart"/>
     <TextView
+            android:fontFamily="@font/overpass"
             android:text="https://www.iubenda.com/privacy-policy/33068007"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

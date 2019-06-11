@@ -25,6 +25,7 @@
         <EditText
                 android:id="@+id/editTextEmail"
                 android:inputType="textEmailAddress"
+                android:fontFamily="@font/overpass"
                 android:hint="@string/login_email"
                 android:textSize="@dimen/login_text_size"
                 android:textColor="@color/colorPrimaryText"
@@ -43,6 +44,7 @@
         <EditText
                 android:id="@+id/editTextPassword"
                 android:inputType="textPassword"
+                android:fontFamily="@font/overpass"
                 android:hint="@string/login_password"
                 android:textSize="@dimen/login_text_size"
                 android:textColor="@color/colorPrimaryText"
@@ -62,9 +64,10 @@
         <Button
                 android:id="@+id/buttonLogIn"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/overpass"
                 android:layout_height="@dimen/login_button_height"
-                android:text="@string/login_sign_in"
-                android:textColor="@color/colorPrimaryText"
+                android:text="Login"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:textSize="@dimen/login_text_xl_size"
                 android:background="@drawable/button_rounded_transparent_color"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,14 +75,15 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/textViewForgotPassword"/>
+                app:layout_constraintBottom_toTopOf="@+id/textViewForgotPassword" android:textAllCaps="false"/>
 
         <TextView
                 android:id="@+id/textViewForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/overpass"
                 android:text="@string/login_forgot_password"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginEnd="8dp"
@@ -89,37 +93,39 @@
         <Button
                 android:id="@+id/buttonLogInGoogle"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/overpass"
                 android:layout_height="@dimen/login_button_height"
                 android:background="@drawable/button_ripple_google"
                 android:text="@string/login_sign_in_google"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount"/>
+                app:layout_constraintBottom_toTopOf="@+id/buttonCreateAccount" android:textAllCaps="false"/>
 
         <Button
                 android:id="@+id/buttonCreateAccount"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/overpass"
                 android:background="@drawable/button_ripple"
                 android:text="@string/login_create_account"
                 android:textSize="@dimen/login_text_xl_size"
-                android:textColor="@color/colorPrimaryText"
+                android:textColor="@color/colorPrimaryTextDark"
                 android:layout_height="42dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginBottom="2dp"/>
+                android:layout_marginBottom="2dp" android:textAllCaps="false"/>
         <TextView
                 android:text="BunkaList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewCharacter"
                 app:layout_constraintStart_toStartOf="@+id/imageView4"
-                android:textSize="30sp" android:fontFamily="sans-serif-thin"
+                android:textSize="30sp" android:fontFamily="@font/overpass_extralight_italic"
                 android:textColor="@color/colorAccentDark"
                 app:layout_constraintEnd_toEndOf="@+id/imageView4"
                 android:textAllCaps="false" android:textStyle="italic"
@@ -135,6 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView3"
+                android:fontFamily="@font/overpass"
                 android:text="@string/activity_login_db_notice" android:textAlignment="center"
                 android:textSize="12sp" android:textStyle="italic"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" android:layout_marginEnd="24dp"

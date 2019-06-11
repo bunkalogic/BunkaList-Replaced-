@@ -55,6 +55,7 @@
                     android:id="@+id/textViewTitleDetails"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="16dp"
@@ -70,6 +71,7 @@
                     android:id="@+id/textViewDetailsGenres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -83,6 +85,7 @@
             <TextView
                     android:id="@+id/textViewSearchDetailsAllDescription"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
@@ -98,6 +101,7 @@
             <Button
                     android:id="@+id/buttonSearchItemDetailsAddInYourList"
                     android:text="@string/btn_search_item_details_your_list"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,6 +114,7 @@
 
             <TextView
                     android:id="@+id/summaryLabel"
+                    android:fontFamily="@font/overpass"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -129,6 +134,7 @@
             <TextView
                     android:id="@+id/textViewDateRelease"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
@@ -166,6 +172,7 @@
             <TextView
                     android:id="@+id/CastLabel"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -203,6 +210,7 @@
             <TextView
                     android:id="@+id/CrewLabel"
                     android:layout_width="0dp"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
@@ -243,6 +251,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
                     android:text="@string/search_item_full_details_trailers"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="24sp"
                     android:visibility="gone"
@@ -280,6 +289,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="32dp"
+                    android:fontFamily="@font/overpass"
                     android:text="@string/search_item_full_details_recommendations"
                     android:textColor="@color/colorPrimaryText"
                     android:textSize="24sp"
@@ -292,6 +302,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewDetailsRating" android:layout_marginTop="24dp"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetails"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
@@ -307,6 +318,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewLabelGenres"
                     android:textColor="@color/colorPrimaryText"
                     app:layout_constraintTop_toBottomOf="@+id/imageView5" android:layout_marginTop="16dp"
@@ -317,6 +329,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewLabelDate"
                     app:layout_constraintTop_toBottomOf="@+id/textViewDetailsGenres"
                     app:layout_constraintStart_toStartOf="@+id/textViewDateRelease" android:layout_marginStart="8dp"

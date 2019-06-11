@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bunkalogic.bunkalist.Adapters.SearchItemAdapter
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetSearchCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
@@ -39,6 +40,7 @@ class SearchFragment : Fragment() {
     lateinit var mAdView : AdView
 
 
+
     private lateinit var searchViewModel: ViewModelSearch
     private var searchList: List<ResultSearchAll>? = null
 
@@ -54,6 +56,7 @@ class SearchFragment : Fragment() {
         setUpCurrentUser()
         setUpAdapterSearch()
         onClick()
+        //getTitleOuvreFromTimelineFragment()
 
         return _view
     }
@@ -78,7 +81,7 @@ class SearchFragment : Fragment() {
    private fun setUpAdapterSearch(){
        val layoutManager = LinearLayoutManager(context)
 
-       adapter = SearchItemAdapter(activity!!, searchList)
+       adapter = SearchItemAdapter(context!!, searchList)
        _view.recyclerSearch.layoutManager = layoutManager
        _view.recyclerSearch.setHasFixedSize(true)
        _view.recyclerSearch.itemAnimator = DefaultItemAnimator()
@@ -119,9 +122,17 @@ class SearchFragment : Fragment() {
             }
 
         })
+    }
 
-        _view.imageViewSearch.setOnClickListener {
-            getSearchAll(object: OnGetSearchCallback {
+    private fun getTitleOuvreFromTimelineFragment(){
+        val args = arguments
+        val nameOuevre = args?.getString(Constans.SEARCH_NAME)
+
+        if (nameOuevre.toString().isEmpty()){
+            Log.d("FragmentSearch", "nameOuevre is Empty")
+        }else{
+            searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
+            searchViewModel.getSearchAll(nameOuevre.toString(), object : OnGetSearchCallback{
                 override fun onSuccess(all: List<ResultSearchAll>) {
                     Log.d("FragmentSearch", "On success data")
                     if (all.isEmpty()){
@@ -133,13 +144,13 @@ class SearchFragment : Fragment() {
                 }
 
                 override fun onError() {
-                  toast("Please check your internet connection")
-               }
+                    toast("Please check your internet connection")
+                }
+
             })
-
-
-
         }
+
+
     }
 
 

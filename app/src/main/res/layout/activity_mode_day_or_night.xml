@@ -25,6 +25,7 @@
 
         <RadioButton
                 android:text="@string/changed_mode_light"
+                android:fontFamily="@font/overpass"
                 android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 android:layout_width="match_parent"
@@ -33,6 +34,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
         <RadioButton
                 android:text="@string/changed_mode_dark"
+                android:fontFamily="@font/overpass"
                 android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 android:layout_width="match_parent"
@@ -42,6 +44,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/radioButtonLight"/>
         <RadioButton
                 android:text="@string/changed_mode_custom"
+                android:fontFamily="@font/overpass"
                 android:textColor="@color/colorPrimaryText"
                 android:background="@drawable/button_rounded_transparent_color"
                 android:layout_width="match_parent"

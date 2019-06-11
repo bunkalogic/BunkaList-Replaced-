@@ -13,6 +13,7 @@
             android:textColorHint="@color/colorPrimaryText"
             android:id="@+id/multiAutoCompleteTextViewOeuvre"
             android:background="@drawable/edittext_rounded"
+            android:fontFamily="@font/overpass"
             android:textStyle="italic" android:hint="@string/hint_name_oeuvre" android:textSize="14sp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
@@ -22,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="35dp"
             android:inputType="number"
+            android:fontFamily="@font/overpass"
             android:textColor="@color/colorPrimaryText"
             android:textColorHint="@color/colorPrimaryText"
             android:ems="10"
@@ -37,6 +39,7 @@
     <EditText
             android:layout_width="0dp"
             android:layout_height="35dp"
+            android:fontFamily="@font/overpass"
             android:textColor="@color/colorPrimaryText"
             android:textColorHint="@color/colorPrimaryText"
             android:inputType="number"
@@ -62,6 +65,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/overpass"
                 android:textColor="@color/colorPrimaryText"
                 android:textColorHint="@color/colorPrimaryText"
                 android:inputType="textMultiLine"
@@ -78,6 +82,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/checkBoxIsSpoiler"
+            android:fontFamily="@font/overpass"
             android:text="@string/checkbox_is_spoiler" android:textStyle="italic"
             app:layout_constraintStart_toStartOf="@+id/editTextSelectSeason"
             android:layout_marginStart="8dp" android:layout_marginTop="8dp"
@@ -89,7 +94,9 @@
                                           app:layout_constraintGuide_percent="0.5"/>
     <CheckBox
             android:layout_width="0dp"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/overpass"
             android:id="@+id/checkBoxIsPersonal" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             app:layout_constraintStart_toStartOf="@+id/guideline3" android:layout_marginStart="8dp"

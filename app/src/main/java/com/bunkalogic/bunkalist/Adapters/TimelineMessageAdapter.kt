@@ -2,6 +2,8 @@ package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
 import android.graphics.Typeface
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +15,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemTimelineChatActivity
 import com.bunkalogic.bunkalist.Activities.UserProfileActivities.OtherUserProfile
+import com.bunkalogic.bunkalist.Fragments.SearchFragment
+import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.Others.SolutionCounters
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
@@ -113,7 +117,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
         val numEpisode = tlmessage.numEpisode
 
 
-
+        // it is charged to collect the user's data show his profile
         holder.userImage.setOnClickListener {
             ctx.startActivity(ctx.intentFor<OtherUserProfile>(
                 "userId" to userId,
@@ -122,7 +126,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
             ))
         }
 
-
+        // it is charged to collect the user's data show his chat
         holder.imageViewChat.setOnClickListener {
             ctx.startActivity(ctx.intentFor<ItemTimelineChatActivity>(
                 "userId" to userId,
@@ -135,6 +139,20 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
                 "numEpisode" to numEpisode,
                 "title" to ouevreTitle
             ))
+        // is responsible for collecting the title of the work and pass it in SearchFragment
+        holder.oeuvreName.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(Constans.SEARCH_NAME, ouevreTitle)
+            val search = SearchFragment()
+            search.arguments = bundle
+            search.fragmentManager?.beginTransaction()?.commit()
+
+
+
+        }
+
+
+            //It is responsible for showing the number of comments that this TimelineMessage has
             countBusListener = RxBus.listen(TimelineChatEvent::class.java).subscribe {
                 if (holder.numPositive.text.isEmpty()){
                     holder.numPositive.text = it.size.toString()

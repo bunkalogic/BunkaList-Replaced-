@@ -29,6 +29,7 @@
                     android:padding="0dp"/>
             <TextView
                     android:layout_width="0dp"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewTitleTopMovies"
                     android:textColor="@color/colorPrimaryText"
@@ -43,6 +44,7 @@
                     android:maxEms="35" android:padding="2dp"/>
             <TextView
                     android:layout_width="0dp"
+                    android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:id="@+id/textViewDateReleastTopMovies"
                     android:textColor="@color/colorPrimaryText"
@@ -54,6 +56,7 @@
             <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewDescriptionTopMovies" app:layout_constraintStart_toEndOf="@+id/imageViewPosterTopMovies"
                     android:layout_marginStart="8dp"
@@ -66,6 +69,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
                     android:id="@+id/textViewRatingTopMovies" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
@@ -95,6 +99,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/overpass"
                     android:id="@+id/textViewTopListMovies"
                     android:textColor="@color/colorAccentDark" android:textStyle="bold|italic"
                     android:shadowColor="#000"
