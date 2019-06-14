@@ -6,7 +6,7 @@
             android:radius="7dp"/>
 
     <solid
-            android:color="@color/fui_transparent"/>
+            android:color="@color/colorAccent"/>
 
     <padding
             android:left="15dp"

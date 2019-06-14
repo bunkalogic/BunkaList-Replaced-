@@ -233,9 +233,9 @@
 
     <string name="fab_filter_profile_order_ascendent">Ascendant</string>
     <string name="fab_filter_profile_order_descend">Descend</string>
-
-
-
+    <string name="app_is_update">BunkaList has already been updated, restart</string>
+    <string name="notification_week_title">what have you seen during this week ?</string>
+    <string name="notification_week_message">Add it to your lists and comment</string>
 
 
 </resources>

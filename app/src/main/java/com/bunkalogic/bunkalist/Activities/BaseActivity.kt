@@ -1,9 +1,16 @@
 package com.bunkalogic.bunkalist.Activities
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.IntentSender
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.bumptech.glide.Glide
@@ -13,9 +20,25 @@ import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.InstallState
+
+
+
+
+
+
+
+
 
 
 /**
@@ -25,6 +48,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 class BaseActivity : AppCompatActivity() {
 
     private var prevBottomSelected: MenuItem? = null
+
+    private var RC_APP_UPDATE = 25
+
+    private lateinit var appUpdateManager : AppUpdateManager
+    private var installStateUpdatedListener : InstallStateUpdatedListener? = null
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -37,6 +65,7 @@ class BaseActivity : AppCompatActivity() {
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
         setUpCurrentUser()
+        checkNewUpdates()
 
 
 
@@ -134,4 +163,72 @@ class BaseActivity : AppCompatActivity() {
         AppCompatDelegate.getDefaultNightMode()
 
     }
+
+    // Check if there are any updates available
+    private fun checkNewUpdates(){
+        appUpdateManager = AppUpdateManagerFactory.create(this)
+
+        appUpdateManager.registerListener(installStateUpdatedListener)// Error: that was originally registered here. Are you missing a call to unregisterReceiver()?
+
+        appUpdateManager.appUpdateInfo.addOnSuccessListener {
+            if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && it.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)){
+                try {
+                    appUpdateManager.startUpdateFlowForResult(it, AppUpdateType.FLEXIBLE, this, RC_APP_UPDATE)
+                }catch (e : IntentSender.SendIntentException){
+                    e.printStackTrace()
+                }
+            }else if (it.installStatus() == InstallStatus.DOWNLOADED){
+                popupSnackbarForCompleteUpdate()
+            }else{
+                Log.d("BaseActivity", "checkForAppUpdateAvailability: something else")
+            }
+        }
+
+        // listen to update
+        installStateUpdatedListener = InstallStateUpdatedListener { state ->
+            when {
+                state.installStatus() == InstallStatus.DOWNLOADED -> popupSnackbarForCompleteUpdate()
+                state.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(installStateUpdatedListener)
+                else -> Log.d("BaseActivity", "InstallStateUpdatedListener: state: " + state.installStatus())
+            }
+        }
+
+
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    private fun popupSnackbarForCompleteUpdate(){
+        val snackbar = Snackbar.make(ConstraintBase, R.string.app_is_update, Snackbar.LENGTH_INDEFINITE)
+
+        snackbar.setAction("Restart") { appUpdateManager.completeUpdate() }
+        snackbar.setActionTextColor(R.color.colorAccentDark)
+        snackbar.show()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        appUpdateManager.appUpdateInfo.addOnSuccessListener {
+            if (it.installStatus() == InstallStatus.DOWNLOADED){
+            popupSnackbarForCompleteUpdate()
+            }else{
+            Log.d("BaseActivity", "checkForAppUpdateAvailability: something else")
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_APP_UPDATE){
+            if (resultCode != Activity.RESULT_OK){
+                Log.d("BaseActivity", "onActivityResult: app download failed")
+            }
+        }
+    }
+
+
 }

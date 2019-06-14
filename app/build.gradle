@@ -21,8 +21,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         multiDexEnabled true
-        versionCode 16
-        versionName "0.9.11"
+        versionCode 19
+        versionName "0.9.21"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         each {
@@ -89,6 +89,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
     implementation 'com.google.firebase:firebase-storage:16.1.0'
     implementation 'com.google.firebase:firebase-ads:17.2.0'
+    implementation 'com.google.android.play:core:1.5.0'
 
 
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"

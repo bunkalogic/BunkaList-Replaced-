@@ -200,7 +200,7 @@
                                         app:layout_constraintStart_toStartOf="@+id/textViewOeuvreName"
                                         android:layout_marginEnd="8dp"
                                         app:layout_constraintEnd_toEndOf="@+id/textViewFollowers"
-                                        android:layout_marginTop="4dp"/>
+                                        android:layout_marginTop="4dp" android:tag="unclick"/>
 
                             </android.support.constraint.ConstraintLayout>
 

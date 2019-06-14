@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Fragments
 
 
+import android.app.Notification
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListFollowsActivity
 import com.bunkalogic.bunkalist.Activities.UserProfileActivities.ProfileListActivity
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
+import com.bunkalogic.bunkalist.Notification.NotificationHandler
 import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
@@ -33,6 +35,8 @@ import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.fragment_topandreview.view.*
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
+
+
 
 /**
  *  Created by @author Naim Dridi on 25/02/19
@@ -56,9 +60,12 @@ class ProfileFragment : Fragment() {
     private var itemRatingSubscription: ListenerRegistration? = null
     private lateinit var itemRatingBusListener: Disposable
 
+    private var notificationHandler: NotificationHandler? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_profile, container, false)
+        notificationHandler = NotificationHandler(context!!)
         fixScrollPosition()
         setUpAddListDB()
         setUpCurrentUser()
@@ -177,6 +184,7 @@ class ProfileFragment : Fragment() {
         _view.textViewFollows.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("follow" to 1)) }
 
         _view.textViewFollowers.setOnClickListener { startActivity(intentFor<ListFollowsActivity>("followers" to 2)) }
+
     }
 
     private fun addToNewItemRating(){

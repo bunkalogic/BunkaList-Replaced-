@@ -16,6 +16,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+
+        <receiver android:name=".Receiver.ReceiverNotification"></receiver>
+
         <activity android:name=".Activities.DetailsActivities.PeopleActivity">
         </activity>
         <activity android:name=".Activities.DetailsActivities.ListSeriesActivity">
@@ -45,7 +48,9 @@
         <meta-data
                 android:name=".com.movies.sesionID"
                 android:value="{$MOVIES_SESION_ID}"/>
-        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/>
+        <meta-data
+                android:name="preloaded_fonts"
+                android:resource="@array/preloaded_fonts"/>
 
         <activity android:name=".Activities.DetailsActivities.ItemDetailsActivity">
         </activity>

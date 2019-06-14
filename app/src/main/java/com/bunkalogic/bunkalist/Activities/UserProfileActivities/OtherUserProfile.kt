@@ -22,6 +22,7 @@ import com.google.firebase.firestore.*
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_other_user_profile.*
 import kotlinx.android.synthetic.main.fragment_topandreview.view.*
+import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.support.v4.intentFor
 
@@ -143,10 +144,20 @@ class OtherUserProfile : AppCompatActivity() {
         }
 
         buttonFollows.setOnClickListener {
-           val follow = Users(userId!!, username!!, userPhoto!!)
-            saveUsers(follow)
-            val followers = Users(preferences.userId!!, preferences.userName!!, preferences.imageProfilePath!!)
-            saveFollowersUsers(followers)
+            if (buttonFollows.tag == "click"){
+                Log.d("OtherUserProfile", "is click")
+                buttonFollows.tag = "unclick"
+                buttonFollows.backgroundResource = R.drawable.button_rounded_transparent_color
+
+            }else{
+                buttonFollows.tag = "click"
+                buttonFollows.backgroundResource = R.drawable.button_rounded_transparent_color_selected
+                val follow = Users(userId!!, username!!, userPhoto!!)
+                saveUsers(follow)
+                val followers = Users(preferences.userId!!, preferences.userName!!, preferences.imageProfilePath!!)
+                saveFollowersUsers(followers)
+            }
+
         }
 
         buttonListAll.setOnClickListener {
