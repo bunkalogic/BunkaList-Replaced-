@@ -80,6 +80,11 @@ class UserSharedPreferences(context: Context){
         get() = prefsUser.getString("OtherUsername", "")
         set(value) = prefsUser.edit().putString("OtherUsername",value).apply()
 
+    // collect the type of rating that is
+    var ratingId: Int
+        get() = prefsUser.getInt("ratingId", 0)
+        set(value) = prefsUser.edit().putInt("ratingId", value).apply()
+
 
     fun editCurrentUser(){
         prefsUser.edit().apply()

@@ -36,8 +36,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
     init {
         searchViewModelSearch = ViewModelProviders.of(ctx as FragmentActivity).get(ViewModelSearch::class.java)
-
-
     }
 
 
@@ -48,7 +46,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
     }
 
 
-    override fun onBindViewHolder(holder: ProfileListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listRating = mValues[position]
 
             val numPosition = position + 1
@@ -56,6 +54,97 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             holder.numPosition.text = "$numPosition."
             holder.dateAt.text = SimpleDateFormat("dd.MM.yyyy").format(listRating.addDate)
             holder.yourRating.text = listRating.finalRate.toString()
+
+            holder.yourRatingFilter.visibility = View.GONE
+            holder.imageFilter.visibility = View.GONE
+
+
+            // is responsible for checking the list has been filtered and if so load the corresponding notes
+            if (preferences.ratingId != 0){
+                when(preferences.ratingId){
+                    Constans.filter_rating_story -> {
+                        holder.imageFinalRate.visibility = View.GONE
+                        holder.yourRating.visibility = View.GONE
+                        holder.yourRatingFilter.visibility = View.VISIBLE
+                        holder.imageFilter.visibility = View.VISIBLE
+                        // We add the corresponding data
+                        holder.yourRatingFilter.text = listRating.historyRate.toString()
+                        Glide.with(ctx)
+                            .load(R.drawable.ic_filter_rating_story)
+                            .override(60, 60)
+                            .into(holder.imageFilter)
+
+                    }
+                    Constans.filter_rating_characters -> {
+                        holder.imageFinalRate.visibility = View.GONE
+                        holder.yourRating.visibility = View.GONE
+                        holder.yourRatingFilter.visibility = View.VISIBLE
+                        holder.imageFilter.visibility = View.VISIBLE
+                        // We add the corresponding data
+                        holder.yourRatingFilter.text = listRating.characterRate.toString()
+                        Glide.with(ctx)
+                            .load(R.drawable.ic_filter_rating_characters)
+                            .override(60, 60)
+                            .into(holder.imageFilter)
+
+
+                    }
+                    Constans.filter_rating_soundtrack -> {
+                        holder.imageFinalRate.visibility = View.GONE
+                        holder.yourRating.visibility = View.GONE
+                        holder.yourRatingFilter.visibility = View.VISIBLE
+                        holder.imageFilter.visibility = View.VISIBLE
+                        // We add the corresponding data
+                        holder.yourRatingFilter.text = listRating.soundtrackRate.toString()
+                        Glide.with(ctx)
+                            .load(R.drawable.ic_filter_rating_soundtrack)
+                            .override(60, 60)
+                            .into(holder.imageFilter)
+                    }
+                    Constans.filter_rating_photography -> {
+                        holder.imageFinalRate.visibility = View.GONE
+                        holder.yourRating.visibility = View.GONE
+                        holder.yourRatingFilter.visibility = View.VISIBLE
+                        holder.imageFilter.visibility = View.VISIBLE
+                        // We add the corresponding data
+                        holder.yourRatingFilter.text = listRating.effectsRate.toString()
+                        Glide.with(ctx)
+                            .load(R.drawable.ic_filter_rating_effects)
+                            .override(60, 60)
+                            .into(holder.imageFilter)
+
+                    }
+                    Constans.filter_rating_enjoyment -> {
+                        holder.imageFinalRate.visibility = View.GONE
+                        holder.yourRating.visibility = View.GONE
+                        holder.yourRatingFilter.visibility = View.VISIBLE
+                        holder.imageFilter.visibility = View.VISIBLE
+                        // We add the corresponding data
+                        holder.yourRatingFilter.text = listRating.enjoymentRate.toString()
+                        Glide.with(ctx)
+                            .load(R.drawable.ic_filter_rating_enjoyment)
+                            .override(60, 60)
+                            .into(holder.imageFilter)
+
+                    }
+                    Constans.filter_rating_final ->{
+                        holder.imageFinalRate.visibility = View.VISIBLE
+                        holder.yourRating.visibility = View.VISIBLE
+                        holder.yourRatingFilter.visibility = View.GONE
+                        holder.imageFilter.visibility = View.GONE
+                        holder.yourRating.text = listRating.finalRate.toString()
+                    }
+                }
+            }else{
+                holder.imageFinalRate.visibility = View.VISIBLE
+                holder.yourRating.visibility = View.VISIBLE
+                holder.yourRatingFilter.visibility = View.GONE
+                holder.imageFilter.visibility = View.GONE
+                holder.yourRating.text = listRating.finalRate.toString()
+            }
+
+
+
 
             val type = listRating.typeOeuvre
             val idItem = listRating.oeuvreId
@@ -183,14 +272,6 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                       }
 
                   })
-
-
-
-
-
-
-
-
                 true
             }
 
@@ -215,6 +296,9 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
         internal var dateAt: TextView
         internal var yourRating: TextView
         internal var imagePoster: ImageView
+        internal var yourRatingFilter: TextView
+        internal var imageFilter: ImageView
+        internal var imageFinalRate: ImageView
 
 
         init {
@@ -225,6 +309,9 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             dateAt = view.findViewById(R.id.textViewListProfileDateAt)
             yourRating = view.findViewById(R.id.textViewListProfileYourRating)
             imagePoster = view.findViewById(R.id.imageViewPosterListProfile)
+            yourRatingFilter = view.findViewById(R.id.textViewRatingFilterSelected)
+            imageFilter = view.findViewById(R.id.imageViewFilterIcon)
+            imageFinalRate = view.findViewById(R.id.imageViewFinalRate)
         }
     }
 

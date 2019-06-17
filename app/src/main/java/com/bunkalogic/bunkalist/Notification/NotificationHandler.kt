@@ -130,7 +130,6 @@ class NotificationHandler(context: Context) : ContextWrapper(context) {
             //intent.putExtra("message", message)
             //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             val pIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
-            val pIntentService = PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
 
             //val alarmManager1 = getSystemService(Context.ALARM_SERVICE) as AlarmManager
             //val calendar1Notify = Calendar.getInstance()

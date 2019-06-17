@@ -95,11 +95,12 @@ class ListProfileFragment : Fragment() {
 
         _view.fabFilterClean.setOnClickListener {
             Constans.applied_list_filter.clear()
+            preferences.ratingId = 0
+            getListOeuvre(currentUser.uid)
             _view.fabFilterClean.visibility = View.GONE
             _view.fabFilter.visibility = View.VISIBLE
+            adapter.notifyDataSetChanged()
         }
-
-
 
     }
 
@@ -119,7 +120,9 @@ class ListProfileFragment : Fragment() {
                             statusFinalId = value
                         }
                         rating -> {
-                            // pasar field del .orderBy
+                            // save the value of the ratingId
+                            preferences.ratingId = value
+                            // pass field from .orderBy
                             when(value){
                                 Constans.filter_rating_story -> ratingFieldFinal = Constans.filter_rating_story_name
                                 Constans.filter_rating_characters -> ratingFieldFinal = Constans.filter_rating_characters_name

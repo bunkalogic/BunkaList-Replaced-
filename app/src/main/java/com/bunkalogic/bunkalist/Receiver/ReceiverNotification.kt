@@ -11,12 +11,15 @@ class ReceiverNotification : BroadcastReceiver() {
 
     var notificationHandler : NotificationHandler? = null
 
-    override fun onReceive(context: Context?, intent: Intent?) {
+    // is responsible for displaying a notification every 5 days even if the app is not in use
+    override fun onReceive(context: Context?, intent: Intent) {
         notificationHandler = NotificationHandler(context!!)
 
         val nb : Notification.Builder? = notificationHandler!!.createNotificationWeek(
             context.getString(R.string.notification_week_title),
             context.getString(R.string.notification_week_message))
-        notificationHandler?.getManager()?.notify(1, nb?.build())
+        if (nb != null) {
+            notificationHandler?.run { getManager()?.notify(1, nb.build()) }
+        }
     }
 }
