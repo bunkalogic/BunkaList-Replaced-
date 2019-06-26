@@ -4,7 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.Activities.BaseActivity

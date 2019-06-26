@@ -2,7 +2,7 @@ package com.bunkalogic.bunkalist.Activities.SettingsActivities
 
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate
 import com.bunkalogic.bunkalist.Activities.OtherActivities.ToolbarActivity
 import com.bunkalogic.bunkalist.BuildConfig
 import com.bunkalogic.bunkalist.R
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_mode_day_or_night.*
 
 class ModeDayOrNightActivity : ToolbarActivity() {
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     private val MODE_DAY = 1
     private val MODE_NIGHT = 2

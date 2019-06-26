@@ -1,6 +1,6 @@
 package com.bunkalogic.bunkalist.Activities.Login
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Others.isValidEmail
 import com.bunkalogic.bunkalist.Others.validate

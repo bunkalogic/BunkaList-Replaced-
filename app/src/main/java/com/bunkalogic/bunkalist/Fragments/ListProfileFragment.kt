@@ -2,10 +2,10 @@ package com.bunkalogic.bunkalist.Fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.ArrayMap
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_list_profile.view.*
 import org.jetbrains.anko.support.v4.intentFor
 
 
-class ListProfileFragment : Fragment() {
+class ListProfileFragment : androidx.fragment.app.Fragment() {
 
 
     private lateinit var _view: View
@@ -169,14 +169,14 @@ class ListProfileFragment : Fragment() {
     }
 
     private fun setUpRecycler(){
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
 
         adapter = ProfileListAdapter(context!!, listProfileitem)
 
         _view.recyclerAllList.setHasFixedSize(true)
         _view.recyclerAllList.layoutManager = layoutManager
-        _view.recyclerAllList.itemAnimator = DefaultItemAnimator()
+        _view.recyclerAllList.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         _view.recyclerAllList.adapter = adapter
     }
 

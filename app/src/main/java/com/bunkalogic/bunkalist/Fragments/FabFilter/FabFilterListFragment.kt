@@ -4,8 +4,8 @@ package com.bunkalogic.bunkalist.Fragments.FabFilter
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.PagerAdapter
+import com.google.android.material.tabs.TabLayout
+import androidx.viewpager.widget.PagerAdapter
 import android.util.ArrayMap
 import android.util.Log
 import android.view.LayoutInflater
@@ -88,7 +88,7 @@ class FabFilterListFragment : AAH_FabulousFragment() {
 
     }
 
-    inner class ProfileListFabFilterAdapter(private val ctx : Context) : PagerAdapter() {
+    inner class ProfileListFabFilterAdapter(private val ctx : Context) : androidx.viewpager.widget.PagerAdapter() {
 
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {
             val inflater = LayoutInflater.from(ctx)

@@ -1,6 +1,6 @@
 package com.bunkalogic.bunkalist.Activities.DetailsActivities
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Fragments.ListFollowFragment
 import com.bunkalogic.bunkalist.Others.Constans
@@ -8,7 +8,7 @@ import com.bunkalogic.bunkalist.R
 
 class ListFollowsActivity : AppCompatActivity() {
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     private val follows = 1
     private val followers = 2

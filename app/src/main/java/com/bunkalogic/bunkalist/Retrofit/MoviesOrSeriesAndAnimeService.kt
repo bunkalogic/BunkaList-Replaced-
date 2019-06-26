@@ -1,5 +1,7 @@
 package com.bunkalogic.bunkalist.Retrofit
 
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetMovieListFilterCallback
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetSeriesListFilterCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
@@ -168,7 +170,27 @@ interface MoviesOrSeriesAndAnimeService {
     ): Call<PeopleSocialMediaResponse>
 
 
+    @GET("discover/movie")
+    fun getSearchFilterMovie(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("sort_by") sort_by: String,
+        @Query("include_adult") include_adult: Boolean,
+        @Query("page") page: Int,
+        @Query("with_genres") with_genres: String,
+        @Query("year") year: Int
+    ): Call<MoviesResponse>
 
+    @GET("discover/tv")
+    fun getSearchFilterSeriesAndAnime(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("sort_by") sort_by: String,
+        @Query("include_adult") include_adult: Boolean,
+        @Query("page") page: Int,
+        @Query("first_air_date_year") first_air_date_year: Int,
+        @Query("with_genres") with_genres: String
+    ): Call<ResponseSeries>
 
 
 

@@ -2,8 +2,8 @@ package com.bunkalogic.bunkalist.Dialog
 
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.widget.Toolbar
+import androidx.fragment.app.DialogFragment
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +25,7 @@ import java.util.*
 
 
 
-class AddListDialog : DialogFragment(){
+class AddListDialog : androidx.fragment.app.DialogFragment(){
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var currentUser: FirebaseUser

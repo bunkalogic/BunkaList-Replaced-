@@ -1,9 +1,8 @@
 package com.bunkalogic.bunkalist.Fragments
 
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,23 +12,21 @@ import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetListSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
-import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_list_series.view.*
 import org.jetbrains.anko.support.v4.toast
 
 
-class ListSeriesFragment : Fragment() {
+class ListSeriesFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
     lateinit var mAdView : AdView
 
     var adapter: TopListSeriesAdapter? = null
 
-    private lateinit var searchViewModel: ViewModelSearch
+    private lateinit var searchViewModel: ViewModelAPItmdb
     //private var seriesList: ArrayList<ResultSeries>? = null
 
     private var typeList = 0
@@ -39,7 +36,7 @@ class ListSeriesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
+        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelAPItmdb::class.java)
 
         arguments?.let {
             typeList = it.getInt(Constans.TYPE_LIST_TOP_SERIES)
@@ -80,11 +77,11 @@ class ListSeriesFragment : Fragment() {
     }
 
     private fun setUpOnScrollListener() {
-        val manager = LinearLayoutManager(context)
+        val manager = androidx.recyclerview.widget.LinearLayoutManager(context)
         _view.recyclerAllListTopSeries.layoutManager = manager
 
-        _view.recyclerAllListTopSeries.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        _view.recyclerAllListTopSeries.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 val totalItemCount = manager.itemCount
                 val visibleItemCount = manager.childCount
                 val firstVisibleItem = manager.findFirstVisibleItemPosition()

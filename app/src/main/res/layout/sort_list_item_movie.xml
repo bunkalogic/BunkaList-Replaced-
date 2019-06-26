@@ -21,7 +21,7 @@
             <ImageView
                     android:layout_width="120dp"
                     android:layout_height="0dp"
-                    android:id="@+id/imageViewPoster"
+                    android:id="@+id/imageViewPosterSortMovies"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -29,14 +29,14 @@
                     android:padding="0dp"/>
             <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewTitleSortMovies"
                     android:textColor="@color/colorPrimaryText"
-                    android:id="@+id/textViewTitle"
                     android:textStyle="bold|italic" android:textSize="16sp"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewDateReleast" android:layout_marginEnd="8dp"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewPoster" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/textViewDateReleastSortMovies" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewPosterSortMovies" android:layout_marginStart="8dp"
                     android:layout_marginTop="24dp"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView3"
@@ -44,10 +44,10 @@
                     android:maxEms="35" android:padding="2dp"/>
             <TextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewDateReleastSortMovies"
                     android:textColor="@color/colorPrimaryText"
-                    android:id="@+id/textViewDateReleast"
                     android:textStyle="bold"
                     android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="@+id/imageView3"
@@ -58,20 +58,20 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
-                    android:id="@+id/textViewDescription" app:layout_constraintStart_toEndOf="@+id/imageViewPoster"
+                    android:id="@+id/textViewDescriptionSortMovies" app:layout_constraintStart_toEndOf="@+id/imageViewPosterSortMovies"
                     android:layout_marginStart="8dp"
                     android:maxLines="5"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:textStyle="italic" android:textAlignment="viewStart"
                     android:textSize="14sp" app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/textViewRating"
+                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/textViewRatingSortMovies"
                     android:ellipsize="end" android:maxEms="140"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
                     android:textColor="@color/colorPrimaryText"
-                    android:id="@+id/textViewRating" app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/textViewRatingSortMovies" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:textStyle="bold"/>
             <ImageView
@@ -80,16 +80,19 @@
                     android:id="@+id/imageView3"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewDescriptionSortMovies"
                     app:layout_constraintVertical_bias="0.0" android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewRating"/>
+                    app:layout_constraintEnd_toStartOf="@+id/textViewRatingSortMovies"/>
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/ic_playlist_add_black_24dp"
-                    android:id="@+id/imageViewAddToMyList" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewDescription"
+                    android:id="@+id/imageViewAddToMyListSortMovies" android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionSortMovies"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

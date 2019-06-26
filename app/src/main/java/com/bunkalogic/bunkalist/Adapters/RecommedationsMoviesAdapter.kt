@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
 import org.jetbrains.anko.intentFor
 
-class RecommedationsMoviesAdapter(private val ctx: Context, private var mValues: List<ResultMovie>): RecyclerView.Adapter<RecommedationsMoviesAdapter.ViewHolder>() {
+class RecommedationsMoviesAdapter(private val ctx: Context, private var mValues: List<ResultMovie>): androidx.recyclerview.widget.RecyclerView.Adapter<RecommedationsMoviesAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recommendations_view, parent, false)
 
@@ -46,7 +46,7 @@ class RecommedationsMoviesAdapter(private val ctx: Context, private var mValues:
 
     }
 
-    inner class ViewHolder(mView: View): RecyclerView.ViewHolder(mView){
+    inner class ViewHolder(mView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(mView){
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleRecommendation)
         private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewRecommendation)
 

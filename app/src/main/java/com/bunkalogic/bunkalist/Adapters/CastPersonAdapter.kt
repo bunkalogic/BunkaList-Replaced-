@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +15,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Response.People.Cast
 import org.jetbrains.anko.intentFor
 
-class CastPersonAdapter(private val ctx: Context, private var mValues: List<Cast>): RecyclerView.Adapter<CastPersonAdapter.ViewHolder>() {
+class CastPersonAdapter(private val ctx: Context, private var mValues: List<Cast>): androidx.recyclerview.widget.RecyclerView.Adapter<CastPersonAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_people_view, parent, false)
 
@@ -30,7 +30,7 @@ class CastPersonAdapter(private val ctx: Context, private var mValues: List<Cast
         holder.bind(mValues[position])
     }
 
-    inner class ViewHolder(mView: View): RecyclerView.ViewHolder(mView){
+    inner class ViewHolder(mView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(mView){
         private val textViewName: TextView = mView.findViewById(R.id.textViewItemPeopleName)
         private val textViewWork: TextView = mView.findViewById(R.id.textViewItemPeopleWork)
         private val imageViewPoster: ImageView = mView.findViewById(R.id.ImageItemPeople)

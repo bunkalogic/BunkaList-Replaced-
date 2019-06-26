@@ -2,8 +2,8 @@ package com.bunkalogic.bunkalist.Dialog
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
@@ -21,7 +21,7 @@ import org.jetbrains.anko.sdk27.coroutines.onCheckedChange
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
-class TimeLineDialog : DialogFragment(){
+class TimeLineDialog : androidx.fragment.app.DialogFragment(){
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var currentUser: FirebaseUser
@@ -52,7 +52,7 @@ class TimeLineDialog : DialogFragment(){
                 val token = UUID.randomUUID().toString()
 
 
-                if(textContent.isNotEmpty() && textContent != "text"  && textContent != "text1234"){
+                if(textContent.isNotEmpty() && textContent != "text"  && textContent != "text1234" && currentUser.displayName!!.isNotEmpty()){
 
                     val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler, token)
 

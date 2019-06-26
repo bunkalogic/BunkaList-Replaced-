@@ -4,10 +4,10 @@ package com.bunkalogic.bunkalist.Fragments
 import android.app.Notification
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +43,7 @@ import org.jetbrains.anko.support.v4.toast
  */
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
     val userToken = 1
@@ -138,14 +138,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setUpRecycler(){
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
 
         adapter = ProfileListAdapter(context!!, listProfileitem)
 
         _view.recyclerProfileAll.setHasFixedSize(true)
         _view.recyclerProfileAll.layoutManager = layoutManager
-        _view.recyclerProfileAll.itemAnimator = DefaultItemAnimator()
+        _view.recyclerProfileAll.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         _view.recyclerProfileAll.adapter = adapter
     }
 

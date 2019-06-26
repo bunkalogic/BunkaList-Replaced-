@@ -1,6 +1,6 @@
 package com.bunkalogic.bunkalist.Others
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks

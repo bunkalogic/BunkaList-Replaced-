@@ -11,7 +11,7 @@
         tools:context=".Fragments.SettingsFragment">
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -164,11 +164,11 @@
                 ads:layout_constraintBottom_toBottomOf="parent" ads:layout_constraintEnd_toEndOf="parent"
                 ads:layout_constraintStart_toStartOf="parent">
         </com.google.android.gms.ads.AdView>
-        <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                              android:id="@+id/guideline9"
-                                              android:orientation="horizontal"
-                                              app:layout_constraintGuide_percent="0.68"/>
+        <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                                    android:id="@+id/guideline9"
+                                                    android:orientation="horizontal"
+                                                    app:layout_constraintGuide_percent="0.68"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

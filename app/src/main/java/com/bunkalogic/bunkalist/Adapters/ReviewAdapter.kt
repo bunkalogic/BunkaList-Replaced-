@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.NewReview
 import java.text.SimpleDateFormat
 
-class ReviewAdapter(val ctx: Context, private val reviewList : MutableList<NewReview>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
+class ReviewAdapter(val ctx: Context, private val reviewList : MutableList<NewReview>) : androidx.recyclerview.widget.RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewAdapter.ViewHolder {
@@ -60,7 +60,7 @@ class ReviewAdapter(val ctx: Context, private val reviewList : MutableList<NewRe
     }
 
 
-    inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
+    inner class ViewHolder internal constructor(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
         internal var titleReview : TextView
         internal var usernameReview : TextView
         internal var dateOnReview : TextView

@@ -2,9 +2,9 @@ package com.bunkalogic.bunkalist.Fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -35,7 +35,7 @@ import org.jetbrains.anko.support.v4.toast
  *  Created by @author Naim Dridi on 25/02/19
  */
 
-class TopsAndReviewFragment : Fragment() {
+class TopsAndReviewFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
     lateinit var mAdView : AdView
@@ -132,12 +132,12 @@ class TopsAndReviewFragment : Fragment() {
     }
 
     fun setUpRecyclerView(){
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         adapter = ReviewAdapter(context!!, reviewList)
 
         _view.recyclerReviews.setHasFixedSize(true)
         _view.recyclerReviews.layoutManager = layoutManager
-        _view.recyclerReviews.itemAnimator = DefaultItemAnimator()
+        _view.recyclerReviews.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         _view.recyclerReviews.adapter = adapter
 
     }

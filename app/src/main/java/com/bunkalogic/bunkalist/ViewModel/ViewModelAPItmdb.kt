@@ -1,15 +1,15 @@
 package com.bunkalogic.bunkalist.ViewModel
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import androidx.lifecycle.AndroidViewModel
 import com.bunkalogic.bunkalist.Retrofit.Callback.*
 
-class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
+class ViewModelAPItmdb(app: Application) : AndroidViewModel(app)  {
 
-    private val searchRepository: RepositorySearch
+    private val searchRepository: RepositoryAPItmdb
 
     init {
-        searchRepository = RepositorySearch()
+        searchRepository = RepositoryAPItmdb()
     }
 
     fun getSearchAll(title: String, callback: OnGetSearchCallback){
@@ -83,6 +83,14 @@ class ViewModelSearch(app: Application) : AndroidViewModel(app)  {
 
     fun getPeopleSocialMedia(Id: Int, callback: OnGetPeopleSocialMediaCallback){
         searchRepository.getPeopleSocialMedia(Id, callback)
+    }
+
+    fun getMoviesFilters(callback: OnGetMovieListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int){
+        searchRepository.getMoviesListFilter(callback, sort_By, page, withGenres, year)
+    }
+
+    fun getSeriesFilters(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int){
+        searchRepository.getSeriesListFilter(callback, sort_By, page, withGenres, year)
     }
 
 

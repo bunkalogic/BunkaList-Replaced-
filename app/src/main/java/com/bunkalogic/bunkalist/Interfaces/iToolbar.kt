@@ -1,6 +1,6 @@
 package com.bunkalogic.bunkalist.Interfaces
 
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 
 interface iToolbar{
     fun toolbarToLoad(toolbar: Toolbar?)

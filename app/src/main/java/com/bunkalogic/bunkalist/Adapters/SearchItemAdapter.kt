@@ -2,8 +2,8 @@ package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +19,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import org.jetbrains.anko.intentFor
 
 
-class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
+class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): androidx.recyclerview.widget.RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -60,7 +60,7 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
    }
 
 
-    inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(mView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mView) {
         private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPoster)
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitle)
         private val textViewDateReleast :TextView = mView.findViewById(R.id.textViewDateReleast)
@@ -98,11 +98,11 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
 
 
             // get list genres
-            val currentGenres: List<Int>? = mItem.genreIds
+            val currentGenres: List<Int> = mItem.genreIds!!
 
             Log.d("SearchItemAdapter", "List: $currentGenres")
 
-            val typeAnime = currentGenres?.filter { it == 16 }?.any()
+            val typeAnime = currentGenres.filter { it == 16 }.any()
 
 
             // is responsible for collecting the id and type to load after depending on whether it is a movie or series
@@ -117,7 +117,7 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
             bundle.putString("title", title)
             bundle.putString("name", name)
             bundle.putString("type", type)
-            bundle.putBoolean("anime", typeAnime!!)
+            bundle.putBoolean("anime", typeAnime)
 
 
 

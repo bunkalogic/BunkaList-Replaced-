@@ -9,7 +9,7 @@
         android:fillViewport="true"
         tools:context="Activities.Login.LoginActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -149,7 +149,7 @@
                 app:layout_constraintStart_toStartOf="parent" android:textColor="@color/colorPrimaryTextDark"
                 android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/editTextEmail"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

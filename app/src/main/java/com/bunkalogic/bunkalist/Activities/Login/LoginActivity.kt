@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Activities.Login
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.BaseActivity
 import com.bunkalogic.bunkalist.Activities.NewUser.NewUserActivity

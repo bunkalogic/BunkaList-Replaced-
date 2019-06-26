@@ -1,17 +1,17 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import android.util.Log
 import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
 import com.bunkalogic.bunkalist.Others.Constans
 import org.jetbrains.anko.toast
 
-class ListTabProfileAdapter(fm: FragmentManager, private var totalTabs: Int): FragmentPagerAdapter(fm){
+class ListTabProfileAdapter(fm: androidx.fragment.app.FragmentManager, private var totalTabs: Int): androidx.fragment.app.FragmentPagerAdapter(fm){
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
         return when(position){
             0 -> {
                 ListProfileFragment.newInstance(Constans.MOVIE_LIST)

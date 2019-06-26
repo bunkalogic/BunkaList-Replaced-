@@ -2,7 +2,7 @@ package com.bunkalogic.bunkalist.Fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +25,7 @@ import org.jetbrains.anko.support.v4.intentFor
  *  Created by @author Naim Dridi on 25/02/19
  */
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
     lateinit var mAdView : AdView

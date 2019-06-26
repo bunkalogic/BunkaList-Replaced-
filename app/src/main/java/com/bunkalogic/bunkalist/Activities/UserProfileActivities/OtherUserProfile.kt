@@ -1,10 +1,10 @@
 package com.bunkalogic.bunkalist.Activities.UserProfileActivities
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +28,7 @@ import org.jetbrains.anko.support.v4.intentFor
 
 class OtherUserProfile : AppCompatActivity() {
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var mAdView : AdView
 
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
@@ -173,14 +173,14 @@ class OtherUserProfile : AppCompatActivity() {
     }
 
     private fun setUpRecycler(){
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
 
         adapter = ProfileListAdapter(this, listProfileitem)
 
         recyclerOtherProfile.setHasFixedSize(true)
         recyclerOtherProfile.layoutManager = layoutManager
-        recyclerOtherProfile.itemAnimator = DefaultItemAnimator()
+        recyclerOtherProfile.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerOtherProfile.adapter = adapter
     }
 

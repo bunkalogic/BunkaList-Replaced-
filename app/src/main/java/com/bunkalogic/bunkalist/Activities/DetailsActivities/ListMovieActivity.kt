@@ -1,8 +1,8 @@
 package com.bunkalogic.bunkalist.Activities.DetailsActivities
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import com.google.android.material.tabs.TabLayout
 import android.util.Log
 import com.bunkalogic.bunkalist.Adapters.ListTabMoviesAdapter
 import com.bunkalogic.bunkalist.Fragments.ListMovieFragment
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_list_series.*
 
 class ListMovieActivity : AppCompatActivity() {
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

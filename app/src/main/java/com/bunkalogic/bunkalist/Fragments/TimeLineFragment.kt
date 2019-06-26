@@ -3,10 +3,10 @@ package com.bunkalogic.bunkalist.Fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +32,7 @@ import java.util.*
  */
 
 
-class TimeLineFragment : Fragment() {
+class TimeLineFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
 
@@ -219,14 +219,14 @@ class TimeLineFragment : Fragment() {
 
     // implementing the adapter in the recyclerView
     private fun setUpRecyclerViewGlobal(){
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
         adapterGlobal = TimelineMessageAdapter(context!!,timelineListGlobal)
 
 
         _view.recyclerTimeline.setHasFixedSize(true)
         _view.recyclerTimeline.layoutManager = layoutManager
-        _view.recyclerTimeline.itemAnimator = DefaultItemAnimator()
+        _view.recyclerTimeline.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         _view.recyclerTimeline.adapter = adapterGlobal
 
     }

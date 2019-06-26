@@ -5,7 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -33,7 +33,7 @@ import java.util.*
 
 class EditProfileActivity : AppCompatActivity() {
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     lateinit var mAdView : AdView
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }

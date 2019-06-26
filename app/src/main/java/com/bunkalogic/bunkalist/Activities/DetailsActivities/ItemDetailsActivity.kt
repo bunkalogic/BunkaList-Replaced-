@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Activities.DetailsActivities
 
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +12,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.Retrofit.Response.Trailer
-import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.search_item_full_details.*
@@ -20,9 +20,7 @@ import org.jetbrains.anko.toast
 import com.bumptech.glide.request.RequestOptions
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
@@ -38,12 +36,11 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import org.jetbrains.anko.activityManager
 
 
 class ItemDetailsActivity : AppCompatActivity() {
 
-    private lateinit var searchViewModel: ViewModelSearch
+    private lateinit var searchViewModel: ViewModelAPItmdb
 
 
     private lateinit var toolbar: Toolbar
@@ -71,7 +68,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         addBannerAds()
 
         //instantiate the ViewModel
-        searchViewModel = ViewModelProviders.of(this).get(ViewModelSearch::class.java)
+        searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
         setUpCurrentUser()
         isMovieOrSerie()
         onClick()
@@ -249,13 +246,17 @@ class ItemDetailsActivity : AppCompatActivity() {
                 recommendationsLabel.visibility = View.VISIBLE
                 RecyclerRecommendations.removeAllViews()
 
-                val layoutManager = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@ItemDetailsActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 AdapterMovieRec = RecommedationsMoviesAdapter(this@ItemDetailsActivity, movies)
 
 
                 RecyclerRecommendations.layoutManager = layoutManager
                 RecyclerRecommendations.setHasFixedSize(true)
-                RecyclerRecommendations.itemAnimator = DefaultItemAnimator()
+                RecyclerRecommendations.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                 RecyclerRecommendations.adapter = AdapterMovieRec
 
             }
@@ -281,25 +282,33 @@ class ItemDetailsActivity : AppCompatActivity() {
                 CastLabel.visibility = View.VISIBLE
                 RecyclerCast.removeAllViews()
 
-                val layoutManagerCast = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManagerCast = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@ItemDetailsActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
 
                 AdapterCast = CastPersonAdapter(this@ItemDetailsActivity, cast)
 
                 RecyclerCast.layoutManager = layoutManagerCast
                 RecyclerCast.setHasFixedSize(true)
-                RecyclerCast.itemAnimator = DefaultItemAnimator()
+                RecyclerCast.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                 RecyclerCast.adapter = AdapterCast
 
                 CrewLabel.visibility = View.VISIBLE
                 RecyclerCrew.removeAllViews()
 
-                val layoutManagerCrew = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManagerCrew = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@ItemDetailsActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
 
                 AdapterCrew = CrewPersonAdapter(this@ItemDetailsActivity, crew)
 
                 RecyclerCrew.layoutManager = layoutManagerCrew
                 RecyclerCrew.setHasFixedSize(true)
-                RecyclerCrew.itemAnimator = DefaultItemAnimator()
+                RecyclerCrew.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                 RecyclerCrew.adapter = AdapterCrew
 
 
@@ -429,12 +438,16 @@ class ItemDetailsActivity : AppCompatActivity() {
                 recommendationsLabel.visibility = View.VISIBLE
                 RecyclerRecommendations.removeAllViews()
 
-                val layoutManager = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@ItemDetailsActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 AdapterSeriesRec = RecommedationsSeriesAdapter(this@ItemDetailsActivity, series)
 
                 RecyclerRecommendations.layoutManager = layoutManager
                 RecyclerRecommendations.setHasFixedSize(true)
-                RecyclerRecommendations.itemAnimator = DefaultItemAnimator()
+                RecyclerRecommendations.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                 RecyclerRecommendations.adapter = AdapterSeriesRec
 
 
@@ -460,25 +473,33 @@ class ItemDetailsActivity : AppCompatActivity() {
                 CastLabel.visibility = View.VISIBLE
                 RecyclerCast.removeAllViews()
 
-                val layoutManagerCast = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManagerCast = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@ItemDetailsActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
 
                 AdapterCast = CastPersonAdapter(this@ItemDetailsActivity, cast)
 
                 RecyclerCast.layoutManager = layoutManagerCast
                 RecyclerCast.setHasFixedSize(true)
-                RecyclerCast.itemAnimator = DefaultItemAnimator()
+                RecyclerCast.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                 RecyclerCast.adapter = AdapterCast
 
                 CrewLabel.visibility = View.VISIBLE
                 RecyclerCrew.removeAllViews()
 
-                val layoutManagerCrew = LinearLayoutManager(this@ItemDetailsActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManagerCrew = androidx.recyclerview.widget.LinearLayoutManager(
+                    this@ItemDetailsActivity,
+                    androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                    false
+                )
 
                 AdapterCrew = CrewPersonAdapter(this@ItemDetailsActivity, crew)
 
                 RecyclerCrew.layoutManager = layoutManagerCrew
                 RecyclerCrew.setHasFixedSize(true)
-                RecyclerCrew.itemAnimator = DefaultItemAnimator()
+                RecyclerCrew.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                 RecyclerCrew.adapter = AdapterCrew
 
 

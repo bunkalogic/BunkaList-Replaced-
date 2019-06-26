@@ -15,11 +15,12 @@ import com.bunkalogic.bunkalist.Retrofit.Response.TrailerResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.Year
 import java.util.*
 
 
 
-class RepositorySearch internal constructor() {
+class RepositoryAPItmdb internal constructor() {
     internal var moviesOrSeriesAndAnimeClient: MoviesOrSeriesAndAnimeClient
     internal var moviesOrSeriesAndAnimeService: MoviesOrSeriesAndAnimeService
 
@@ -41,16 +42,16 @@ class RepositorySearch internal constructor() {
                     if (searchResponse.results != null){
                         callback.onSuccess(searchResponse.results!!)
                     }else {
-                        Log.d("RepositorySearch", "Something has gone wrong")
+                        Log.d("RepositoryAPItmdb", "Something has gone wrong")
                         callback.onError()
                     }
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful")
                 }
             }
             override fun onFailure(call: Call<ResponseSearchAll>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection")
+                Log.d("RepositoryAPItmdb", "Error connection")
             }
         })
 
@@ -62,7 +63,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<Movie>{
             override fun onFailure(call: Call<Movie>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Movies")
+                Log.d("RepositoryAPItmdb", "Error connection Movies")
             }
 
             override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
@@ -71,7 +72,7 @@ class RepositorySearch internal constructor() {
 
                     callback.onSuccess(movieResponse)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies")
                 }
             }
 
@@ -84,7 +85,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<Series>{
             override fun onFailure(call: Call<Series>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Series")
+                Log.d("RepositoryAPItmdb", "Error connection Series")
             }
 
             override fun onResponse(call: Call<Series>, response: Response<Series>) {
@@ -94,11 +95,11 @@ class RepositorySearch internal constructor() {
                     if (seriesResponse != null){
                         callback.onSuccess(seriesResponse)
                     }else{
-                        Log.d("RepositorySearch", "Something has gone wrong Series")
+                        Log.d("RepositoryAPItmdb", "Something has gone wrong Series")
                         callback.onError()
                     }
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Series")
                 }
             }
 
@@ -112,7 +113,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<TrailerResponse>{
             override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection TrailerMovie")
+                Log.d("RepositoryAPItmdb", "Error connection TrailerMovie")
             }
 
             override fun onResponse(call: Call<TrailerResponse>, response: Response<TrailerResponse>) {
@@ -121,7 +122,7 @@ class RepositorySearch internal constructor() {
 
                     callback.onSuccess(trailerResponse.trailers!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Trailers")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Trailers")
                 }
             }
 
@@ -136,7 +137,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<TrailerResponse>{
             override fun onFailure(call: Call<TrailerResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Trailer Series")
+                Log.d("RepositoryAPItmdb", "Error connection Trailer Series")
             }
 
             override fun onResponse(call: Call<TrailerResponse>, response: Response<TrailerResponse>) {
@@ -145,7 +146,7 @@ class RepositorySearch internal constructor() {
 
                     callback.onSuccess(trailerResponse.trailers!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series Trailers")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Series Trailers")
                 }
             }
 
@@ -159,7 +160,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<GenresResponse>{
             override fun onFailure(call: Call<GenresResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Genres")
+                Log.d("RepositoryAPItmdb", "Error connection Genres")
             }
 
             override fun onResponse(call: Call<GenresResponse>, response: Response<GenresResponse>) {
@@ -168,7 +169,7 @@ class RepositorySearch internal constructor() {
 
                     callback.onSuccess(genresResponse.genres!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Genres Movies")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Genres Movies")
                 }
             }
 
@@ -182,7 +183,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<GenresResponse>{
             override fun onFailure(call: Call<GenresResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Genres")
+                Log.d("RepositoryAPItmdb", "Error connection Genres")
             }
 
             override fun onResponse(call: Call<GenresResponse>, response: Response<GenresResponse>) {
@@ -191,7 +192,7 @@ class RepositorySearch internal constructor() {
 
                     callback.onSuccess(genresResponse.genres!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Genres Movies")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Genres Movies")
                 }
             }
 
@@ -202,10 +203,10 @@ class RepositorySearch internal constructor() {
         val call = object : Callback<MoviesResponse> {
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
                 if (response.isSuccessful) {
-                    Log.d("RepositorySearch", "Is Successful")
+                    Log.d("RepositoryAPItmdb", "Is Successful")
                     val moviesResponse = response.body()
                     if (moviesResponse != null) {
-                        Log.d("RepositorySearch", "movieResponse is not null")
+                        Log.d("RepositoryAPItmdb", "movieResponse is not null")
                         callback.onSuccess(moviesResponse.page!!, moviesResponse.results!!)
                     } else {
                         callback.onError()
@@ -217,7 +218,7 @@ class RepositorySearch internal constructor() {
 
             override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Movies List")
+                Log.d("RepositoryAPItmdb", "Error connection Movies List")
             }
         }
 
@@ -238,7 +239,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Series Popular")
+                Log.d("RepositoryAPItmdb", "Error connection Series Popular")
             }
 
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
@@ -246,7 +247,7 @@ class RepositorySearch internal constructor() {
                     val popularResponse : ResponseSeries = response.body()!!
                     callback.onSuccess(popularResponse.page!! ,popularResponse.results!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Popular Series")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Popular Series")
                 }
             }
 
@@ -260,7 +261,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Series Rated")
+                Log.d("RepositoryAPItmdb", "Error connection Series Rated")
             }
 
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
@@ -268,7 +269,7 @@ class RepositorySearch internal constructor() {
                     val ratedResponse : ResponseSeries = response.body()!!
                     callback.onSuccess(ratedResponse.page!! , ratedResponse.results!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Rated Series")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Rated Series")
                 }
             }
 
@@ -281,7 +282,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Series Rated")
+                Log.d("RepositoryAPItmdb", "Error connection Series Rated")
             }
 
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
@@ -289,7 +290,7 @@ class RepositorySearch internal constructor() {
                     val ratedResponse : ResponseSeries = response.body()!!
                     callback.onSuccess(ratedResponse.page!!, ratedResponse.results!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Rated Series")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Rated Series")
                 }
             }
 
@@ -302,7 +303,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<MoviesResponse>{
             override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Movies Recommendations")
+                Log.d("RepositoryAPItmdb", "Error connection Movies Recommendations")
             }
 
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
@@ -310,7 +311,7 @@ class RepositorySearch internal constructor() {
                     val recommendationsMoviesResponse : MoviesResponse = response.body()!!
                     callback.onSuccess(1, recommendationsMoviesResponse.results!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
                 }
             }
 
@@ -323,7 +324,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResponseSeries>{
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Movies Recommendations")
+                Log.d("RepositoryAPItmdb", "Error connection Movies Recommendations")
             }
 
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
@@ -331,7 +332,7 @@ class RepositorySearch internal constructor() {
                     val recommendationsSeriesResponse : ResponseSeries = response.body()!!
                     callback.onSuccess(1, recommendationsSeriesResponse.results!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
                 }
             }
 
@@ -344,7 +345,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResponsePeople>{
             override fun onFailure(call: Call<ResponsePeople>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Movies Credits")
+                Log.d("RepositoryAPItmdb", "Error connection Movies Credits")
             }
 
             override fun onResponse(call: Call<ResponsePeople>, response: Response<ResponsePeople>) {
@@ -352,7 +353,7 @@ class RepositorySearch internal constructor() {
                     val creditsMovie : ResponsePeople = response.body()!!
                     callback.onSuccess(creditsMovie.crew!!, creditsMovie.cast!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Movies Credits")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Credits")
                 }
             }
 
@@ -365,7 +366,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResponsePeople>{
             override fun onFailure(call: Call<ResponsePeople>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection Series Credits")
+                Log.d("RepositoryAPItmdb", "Error connection Series Credits")
             }
 
             override fun onResponse(call: Call<ResponsePeople>, response: Response<ResponsePeople>) {
@@ -373,7 +374,7 @@ class RepositorySearch internal constructor() {
                     val creditsSeries : ResponsePeople = response.body()!!
                     callback.onSuccess(creditsSeries.crew!!, creditsSeries.cast!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in Series Credits")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Series Credits")
                 }
             }
 
@@ -386,7 +387,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<ResultPeople>{
             override fun onFailure(call: Call<ResultPeople>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection People Data")
+                Log.d("RepositoryAPItmdb", "Error connection People Data")
             }
 
             override fun onResponse(call: Call<ResultPeople>, response: Response<ResultPeople>) {
@@ -394,7 +395,7 @@ class RepositorySearch internal constructor() {
                     val peopleData : ResultPeople = response.body()!!
                     callback.onSuccess(peopleData)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in People Data")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in People Data")
                 }
             }
 
@@ -407,7 +408,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<DataPeopleResponse>{
             override fun onFailure(call: Call<DataPeopleResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection People Data Cast")
+                Log.d("RepositoryAPItmdb", "Error connection People Data Cast")
             }
 
             override fun onResponse(call: Call<DataPeopleResponse>, response: Response<DataPeopleResponse>) {
@@ -415,7 +416,7 @@ class RepositorySearch internal constructor() {
                     val peopleData : DataPeopleResponse = response.body()!!
                     callback.onSuccess(peopleData.cast!!, peopleData.crew!!)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in People Data Cast")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in People Data Cast")
                 }
             }
 
@@ -428,7 +429,7 @@ class RepositorySearch internal constructor() {
         call.enqueue(object : Callback<PeopleSocialMediaResponse>{
             override fun onFailure(call: Call<PeopleSocialMediaResponse>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositorySearch", "Error connection People Data")
+                Log.d("RepositoryAPItmdb", "Error connection People Data")
             }
 
             override fun onResponse(call: Call<PeopleSocialMediaResponse>, response: Response<PeopleSocialMediaResponse>) {
@@ -436,7 +437,51 @@ class RepositorySearch internal constructor() {
                     val peopleData : PeopleSocialMediaResponse = response.body()!!
                     callback.onSuccess(peopleData)
                 }else{
-                    Log.d("RepositorySearch", "Something has gone wrong on response.isSuccessful in People Data")
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in People Data")
+                }
+            }
+
+        })
+    }
+
+    fun getMoviesListFilter(callback: OnGetMovieListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int){
+        val call = moviesOrSeriesAndAnimeService
+            .getSearchFilterMovie(Constans.API_KEY, Locale.getDefault().language, sort_By, false, page, withGenres, year)
+
+        call.enqueue(object : Callback<MoviesResponse> {
+            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection MoviesFilter")
+            }
+
+            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+                if (response.isSuccessful){
+                    val moviesFilter : MoviesResponse = response.body()!!
+                    callback.onSuccess(moviesFilter.page!!, moviesFilter.results!!)
+                }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Filter")
+                }
+            }
+
+        })
+    }
+
+    fun getSeriesListFilter(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int){
+        val call = moviesOrSeriesAndAnimeService
+            .getSearchFilterSeriesAndAnime(Constans.API_KEY, Locale.getDefault().language, sort_By, false, page, year, withGenres)
+
+        call.enqueue(object : Callback<ResponseSeries> {
+            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection MoviesFilter")
+            }
+
+            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
+                if (response.isSuccessful){
+                    val seriesFilter : ResponseSeries = response.body()!!
+                    callback.onSuccess(seriesFilter.page!!,seriesFilter.results!!)
+                }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Filter")
                 }
             }
 

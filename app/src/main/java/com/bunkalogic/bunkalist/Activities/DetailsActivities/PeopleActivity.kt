@@ -1,12 +1,9 @@
 package com.bunkalogic.bunkalist.Activities.DetailsActivities
 
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v7.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
@@ -16,13 +13,12 @@ import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleDataCallback
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleDataCastCallback
-import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleDataCrewCallback
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetPeopleSocialMediaCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.People.CastResult
 import com.bunkalogic.bunkalist.Retrofit.Response.People.CrewResult
 import com.bunkalogic.bunkalist.Retrofit.Response.People.PeopleSocialMediaResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.People.ResultPeople
-import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.firebase.auth.FirebaseAuth
@@ -39,7 +35,7 @@ import android.net.Uri
 
 class PeopleActivity : AppCompatActivity() {
 
-    private lateinit var searchViewModel: ViewModelSearch
+    private lateinit var searchViewModel: ViewModelAPItmdb
 
 
     private lateinit var toolbar: Toolbar
@@ -59,7 +55,7 @@ class PeopleActivity : AppCompatActivity() {
         setUpCurrentUser()
         addBannerAds()
         //instantiate the ViewModel
-        searchViewModel = ViewModelProviders.of(this).get(ViewModelSearch::class.java)
+        searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
 
         getPeopleData()
         getPeopleCastAndCrew()
@@ -149,12 +145,16 @@ class PeopleActivity : AppCompatActivity() {
                     textViewLabelDataCast.visibility = View.VISIBLE
                     RecyclerDataCast.removeAllViews()
 
-                    val layoutManagerCast = LinearLayoutManager(this@PeopleActivity, LinearLayoutManager.HORIZONTAL, false)
+                    val layoutManagerCast = androidx.recyclerview.widget.LinearLayoutManager(
+                        this@PeopleActivity,
+                        androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
                     adapterCast = CastDataPersonAdapter(this@PeopleActivity, peopleCast)
 
                     RecyclerDataCast.layoutManager = layoutManagerCast
                     RecyclerDataCast.setHasFixedSize(true)
-                    RecyclerDataCast.itemAnimator = DefaultItemAnimator()
+                    RecyclerDataCast.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                     RecyclerDataCast.adapter = adapterCast
 
                 }else{
@@ -165,12 +165,16 @@ class PeopleActivity : AppCompatActivity() {
                     textViewLabelDataCrew.visibility = View.VISIBLE
                     RecyclerDataCrew.removeAllViews()
 
-                    val layoutManagerCrew = LinearLayoutManager(this@PeopleActivity, LinearLayoutManager.HORIZONTAL, false)
+                    val layoutManagerCrew = androidx.recyclerview.widget.LinearLayoutManager(
+                        this@PeopleActivity,
+                        androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
                     adapterCrew = CrewDataPersonAdapter(this@PeopleActivity, peopleCrew)
 
                     RecyclerDataCrew.layoutManager = layoutManagerCrew
                     RecyclerDataCrew.setHasFixedSize(true)
-                    RecyclerDataCrew.itemAnimator = DefaultItemAnimator()
+                    RecyclerDataCrew.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
                     RecyclerDataCrew.adapter = adapterCrew
                 }else{
                     textViewLabelDataCrew.visibility = View.GONE

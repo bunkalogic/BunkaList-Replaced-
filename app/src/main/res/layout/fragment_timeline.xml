@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:id="@+id/swipeRefreshTimeline"
-             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
-             tools:context=".Fragments.TimeLineFragment">
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                       xmlns:tools="http://schemas.android.com/tools"
+                                                       android:layout_width="match_parent"
+                                                       android:id="@+id/swipeRefreshTimeline"
+                                                       android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                       tools:context=".Fragments.TimeLineFragment">
 
-   <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                android:layout_height="match_parent">
+   <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+                                                      android:layout_height="match_parent">
 
-      <android.support.v7.widget.RecyclerView
+      <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/recyclerTimeline"
               android:background="@color/colorBackground"
               android:layout_width="match_parent"
@@ -20,7 +20,7 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintBottom_toBottomOf="parent"/>
 
-      <android.support.design.widget.FloatingActionButton
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
               android:id="@+id/fabTimeline"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -31,6 +31,6 @@
               app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="16dp"
               app:layout_constraintBottom_toBottomOf="parent"/>
 
-   </android.support.constraint.ConstraintLayout>
+   </androidx.constraintlayout.widget.ConstraintLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

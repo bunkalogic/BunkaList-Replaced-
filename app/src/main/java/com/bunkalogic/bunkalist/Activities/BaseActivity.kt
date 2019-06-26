@@ -6,10 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
+import com.google.android.material.snackbar.Snackbar
+import androidx.viewpager.widget.ViewPager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -92,7 +92,7 @@ class BaseActivity : AppCompatActivity() {
     private fun setUpViewPager(adapter: PagerAdapter){
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.count
-        viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+        viewPager.addOnPageChangeListener(object: androidx.viewpager.widget.ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(p0: Int) {
 
             }

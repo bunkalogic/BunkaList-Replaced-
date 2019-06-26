@@ -3,8 +3,8 @@ package com.bunkalogic.bunkalist.Adapters
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +31,7 @@ import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: MutableList<TimelineMessage>) : RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
+class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: MutableList<TimelineMessage>) : androidx.recyclerview.widget.RecyclerView.Adapter<TimelineMessageAdapter.ViewHolder>(){
 
     lateinit var countBusListener: Disposable
 
@@ -214,7 +214,7 @@ class TimelineMessageAdapter(val ctx: Context, private val TimelineMessageList: 
     }
 
 
-    inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
+    inner class ViewHolder internal constructor(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
         internal var username: TextView
         internal var userImage: ImageView
         internal var sentAt: TextView

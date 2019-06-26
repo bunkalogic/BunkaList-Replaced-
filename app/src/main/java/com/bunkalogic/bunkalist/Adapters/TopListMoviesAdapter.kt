@@ -2,8 +2,8 @@ package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import org.jetbrains.anko.intentFor
 
-class TopListMoviesAdapter (private val ctx: Context, private var mValues: ArrayList<ResultMovie>): RecyclerView.Adapter<TopListMoviesAdapter.ViewHolder>(){
+class TopListMoviesAdapter (private val ctx: Context, private var mValues: ArrayList<ResultMovie>): androidx.recyclerview.widget.RecyclerView.Adapter<TopListMoviesAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.top_list_item_movie, parent, false)
 
@@ -59,7 +59,7 @@ class TopListMoviesAdapter (private val ctx: Context, private var mValues: Array
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(mView: View): RecyclerView.ViewHolder(mView){
+    inner class ViewHolder(mView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(mView){
         private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPosterTopMovies)
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleTopMovies)
         private val textViewDateReleast :TextView = mView.findViewById(R.id.textViewDateReleastTopMovies)

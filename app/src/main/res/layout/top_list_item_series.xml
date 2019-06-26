@@ -4,7 +4,7 @@
               android:id="@+id/linearLayout7"
               android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBackgroundPrimary"
@@ -13,7 +13,7 @@
             android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp" android:id="@+id/cardView">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -111,8 +111,8 @@
                     app:layout_constraintTop_toTopOf="@+id/view4" app:layout_constraintBottom_toBottomOf="@+id/view4"
                     app:layout_constraintStart_toStartOf="@+id/view4" android:layout_marginStart="1dp"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

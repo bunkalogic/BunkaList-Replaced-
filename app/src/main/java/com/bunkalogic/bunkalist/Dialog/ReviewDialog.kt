@@ -3,7 +3,7 @@ package com.bunkalogic.bunkalist.Dialog
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.db.NewReview
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.dialog_new_review.view.*
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
-class ReviewDialog: DialogFragment(){
+class ReviewDialog: androidx.fragment.app.DialogFragment(){
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var currentUser: FirebaseUser

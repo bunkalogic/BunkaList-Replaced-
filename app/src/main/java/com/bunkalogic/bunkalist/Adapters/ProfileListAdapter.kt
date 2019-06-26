@@ -1,9 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
-import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +17,7 @@ import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetSeriesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
-import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -29,13 +27,13 @@ import java.text.SimpleDateFormat
 
 
 
-class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
+class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): androidx.recyclerview.widget.RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
 
-    var searchViewModelSearch: ViewModelSearch? = null
+    var searchViewModelAPItmdb: ViewModelAPItmdb? = null
 
 
     init {
-        searchViewModelSearch = ViewModelProviders.of(ctx as FragmentActivity).get(ViewModelSearch::class.java)
+        searchViewModelAPItmdb = ViewModelProviders.of(ctx as androidx.fragment.app.FragmentActivity).get(ViewModelAPItmdb::class.java)
     }
 
 
@@ -153,7 +151,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
             // check which value has type to load movie or series or anime
             if (type == Constans.MOVIE_LIST){
-                searchViewModelSearch!!.getMovie(idItem!!,object :
+                searchViewModelAPItmdb!!.getMovie(idItem!!,object :
                     OnGetMovieCallback {
                     override fun onSuccess(movie: Movie) {
                         holder.title.text = movie.title
@@ -186,7 +184,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                 })
             }else if (type == Constans.SERIE_LIST){
-                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object :
+                searchViewModelAPItmdb!!.getSeriesAndAnime(idItem!!, object :
                     OnGetSeriesCallback {
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
@@ -217,7 +215,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
                 })
             }else if (type == Constans.ANIME_LIST){
-                searchViewModelSearch!!.getSeriesAndAnime(idItem!!, object :
+                searchViewModelAPItmdb!!.getSeriesAndAnime(idItem!!, object :
                     OnGetSeriesCallback {
                     override fun onSuccess(series: Series) {
                         holder.title.text = series.name
@@ -288,7 +286,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
     }
 
 
-    inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
+    inner class ViewHolder internal constructor(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
         internal var title: TextView
         internal var dateRelease: TextView
         internal var globalRating: TextView

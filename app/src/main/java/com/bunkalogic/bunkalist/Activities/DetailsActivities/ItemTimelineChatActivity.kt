@@ -1,9 +1,9 @@
 package com.bunkalogic.bunkalist.Activities.DetailsActivities
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.TimelineChatAdapter
@@ -21,7 +21,7 @@ import kotlin.collections.ArrayList
 
 class ItemTimelineChatActivity : AppCompatActivity() {
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     private lateinit var adapter: TimelineChatAdapter
     private val chatList: ArrayList<TimelineChat> = ArrayList()
@@ -101,13 +101,13 @@ class ItemTimelineChatActivity : AppCompatActivity() {
     }
 
     private fun setUpRecycler(){
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         adapter = TimelineChatAdapter(this, chatList)
 
 
         recyclerTimelineChat.setHasFixedSize(true)
         recyclerTimelineChat.layoutManager = layoutManager
-        recyclerTimelineChat.itemAnimator = DefaultItemAnimator()
+        recyclerTimelineChat.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
         recyclerTimelineChat.adapter = adapter
     }
 

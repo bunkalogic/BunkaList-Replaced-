@@ -2,10 +2,10 @@ package com.bunkalogic.bunkalist.Fragments
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.fragment_list_follow.view.*
 import org.jetbrains.anko.support.v4.toast
 
 
-class ListFollowFragment : Fragment() {
+class ListFollowFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
     lateinit var mAdView : AdView
@@ -108,12 +108,12 @@ class ListFollowFragment : Fragment() {
     }
 
     private fun setUpRecyclerView(){
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         adapter = SearchItemUserAdapter(context!!, userList)
 
         _view.RecyclerFollow.setHasFixedSize(true)
         _view.RecyclerFollow.layoutManager = layoutManager
-        _view.RecyclerFollow.itemAnimator = DefaultItemAnimator() as RecyclerView.ItemAnimator?
+        _view.RecyclerFollow.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator() as androidx.recyclerview.widget.RecyclerView.ItemAnimator?
         _view.RecyclerFollow.adapter = adapter
     }
 

@@ -1,10 +1,7 @@
 package com.bunkalogic.bunkalist.Fragments
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +11,14 @@ import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetListMoviesCallback
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
-import com.bunkalogic.bunkalist.ViewModel.ViewModelSearch
+import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.fragment_list_movie.view.*
 import org.jetbrains.anko.support.v4.toast
 
 
-class ListMovieFragment : Fragment() {
+class ListMovieFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var _view: View
     lateinit var mAdView : AdView
@@ -30,14 +27,14 @@ class ListMovieFragment : Fragment() {
 
     var adapter: TopListMoviesAdapter? = null
 
-    private lateinit var searchViewModel: ViewModelSearch
+    private lateinit var searchViewModel: ViewModelAPItmdb
 
     private var isFetchingMovies: Boolean = false
     private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelSearch::class.java)
+        searchViewModel = ViewModelProviders.of(activity!!).get(ViewModelAPItmdb::class.java)
 
         arguments?.let {
             typeList = it.getString(Constans.TYPE_LIST_TOP_MOVIES)
@@ -80,11 +77,11 @@ class ListMovieFragment : Fragment() {
     }
 
     private fun setUpOnScrollListener() {
-        val manager = LinearLayoutManager(context)
+        val manager = androidx.recyclerview.widget.LinearLayoutManager(context)
         _view.recyclerAllListTopMovies.layoutManager = manager
 
-        _view.recyclerAllListTopMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        _view.recyclerAllListTopMovies.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 val totalItemCount = manager.itemCount
                 val visibleItemCount = manager.childCount
                 val firstVisibleItem = manager.findFirstVisibleItemPosition()

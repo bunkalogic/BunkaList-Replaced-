@@ -1,8 +1,8 @@
 package com.bunkalogic.bunkalist.Activities.UserProfileActivities
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import com.google.android.material.tabs.TabLayout
 import android.util.ArrayMap
 import android.util.Log
 import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_profile_list.*
 class ProfileListActivity : AppCompatActivity(){
 
 
-    private lateinit var toolbar: android.support.v7.widget.Toolbar
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     val clickList = 1
     val clickTop = 2

@@ -2,7 +2,7 @@ package com.bunkalogic.bunkalist.Activities.Login
 
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.text.SpannableString
 import android.text.style.ClickableSpan
 import com.bunkalogic.bunkalist.Others.isValidConfirmPassword
@@ -16,7 +16,7 @@ import org.jetbrains.anko.*
 import android.view.View
 import android.content.Intent
 import android.net.Uri
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod

@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.db.Users
 import org.jetbrains.anko.intentFor
 
-class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<Users>) : RecyclerView.Adapter<SearchItemUserAdapter.ViewHolder>(){
+class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<Users>) : androidx.recyclerview.widget.RecyclerView.Adapter<SearchItemUserAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchItemUserAdapter.ViewHolder {
@@ -60,7 +60,7 @@ class SearchItemUserAdapter(val ctx: Context, private var userList: MutableList<
     }
 
 
-    inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
+    inner class ViewHolder internal constructor(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
         internal var Username : TextView
         internal var userPhoto : ImageView
 

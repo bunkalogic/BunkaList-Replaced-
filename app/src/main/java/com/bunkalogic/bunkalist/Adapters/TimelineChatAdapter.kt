@@ -1,7 +1,7 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,8 @@ import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TimelineChatAdapter(val ctx : Context, private val TimelineChatList: MutableList<TimelineChat>):RecyclerView.Adapter<TimelineChatAdapter.ViewHolder>(){
+class TimelineChatAdapter(val ctx : Context, private val TimelineChatList: MutableList<TimelineChat>):
+    androidx.recyclerview.widget.RecyclerView.Adapter<TimelineChatAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimelineChatAdapter.ViewHolder {
@@ -60,7 +61,7 @@ class TimelineChatAdapter(val ctx : Context, private val TimelineChatList: Mutab
 
     }
 
-    inner class ViewHolder internal constructor(view: View): RecyclerView.ViewHolder(view){
+    inner class ViewHolder internal constructor(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
         internal var username: TextView
         internal var userImage: ImageView
         internal var sentAt: TextView
