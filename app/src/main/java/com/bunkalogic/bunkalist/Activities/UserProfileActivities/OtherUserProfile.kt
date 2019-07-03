@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
+import com.bunkalogic.bunkalist.Adapters.ProfileOtherListAdapter
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
@@ -32,7 +33,7 @@ class OtherUserProfile : AppCompatActivity() {
     lateinit var mAdView : AdView
 
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
-    private lateinit var adapter: ProfileListAdapter
+    private lateinit var adapter: ProfileOtherListAdapter
 
     private lateinit var followDBRef: CollectionReference
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -176,7 +177,7 @@ class OtherUserProfile : AppCompatActivity() {
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
 
-        adapter = ProfileListAdapter(this, listProfileitem)
+        adapter = ProfileOtherListAdapter(this, listProfileitem)
 
         recyclerOtherProfile.setHasFixedSize(true)
         recyclerOtherProfile.layoutManager = layoutManager

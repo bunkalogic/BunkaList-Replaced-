@@ -25,6 +25,13 @@
         <item name="android:maxHeight">48dip</item>
     </style>
 
+    <!-- RatingBar Custom Mini -->
+    <style name="custom_rating_bar_mini" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar_custom</item>
+        <item name="android:minHeight">24dip</item>
+        <item name="android:maxHeight">24dip</item>
+    </style>
+
 
     <!-- Dialog Fullscreen Custom -->
     <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">

@@ -2,6 +2,8 @@ package com.bunkalogic.bunkalist.Adapters
 
 import androidx.lifecycle.ViewModelProviders
 import android.content.Context
+import android.text.InputFilter
+import android.text.Spannable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,12 +29,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import com.bumptech.glide.util.Util.getSnapshot
+import com.bunkalogic.bunkalist.Others.InputFilterRange
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.Query
 
 
 
-//TODO cambiar el adapter por FirestoreRecyclerAdapter
 
-class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): androidx.recyclerview.widget.RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
+class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
 
     var searchViewModelAPItmdb: ViewModelAPItmdb? = null
 
@@ -41,16 +46,25 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
         searchViewModelAPItmdb = ViewModelProviders.of(ctx as androidx.fragment.app.FragmentActivity).get(ViewModelAPItmdb::class.java)
     }
 
+    //TODO en el constructor de la clase que reciba  el Query
+    //val query = FirebaseFirestore.getInstance()
+    //    .collection("Users/${preferences.userId}/RatingList")
+    //    .whereEqualTo("typeOeuvre", 1)
+    //    .orderBy("finalRate", Query.Direction.DESCENDING)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileListAdapter.ViewHolder {
-       val view = LayoutInflater.from(parent.context).inflate(R.layout.list_profile_fragement_item, parent, false)
-
-        return ViewHolder(view)
-    }
+    val options: FirestoreRecyclerOptions<ItemListRating> = FirestoreRecyclerOptions.Builder<ItemListRating>()
+        .setQuery(query,ItemListRating::class.java)
+        .build()
 
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val listRating = mValues[position]
+    val adapter  = object : FirestoreRecyclerAdapter<ItemListRating, ViewHolder>(options){
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.list_profile_fragement_item, parent, false)
+
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int, listRating: ItemListRating) {
 
             val numPosition = position + 1
 
@@ -148,92 +162,8 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             }
 
 
-        //is responsible for collecting the id of the document and pass it to the fragment to delete it or edit it
 
 
-
-        holder.consContainer.visibility = View.GONE
-        //Here is responsible for the view to edit the rating
-        //holder.imageArrowDown.setOnClickListener {
-        //    if (holder.consContainer.tag == "open"){
-        //        holder.consContainer.visibility = View.GONE
-        //        holder.consContainer.tag = "close"
-        //    }else{
-        //        holder.consContainer.visibility = View.VISIBLE
-        //        holder.consContainer.tag = "open"
-        //    }
-        //}
-
-        // we add the hint with the current ratings
-        //holder.editTextRatingStory.hint = listRating.historyRate.toString()
-        //holder.editTextRatingCharacters.hint = listRating.characterRate.toString()
-        //holder.editTextRatingSoundtrack.hint = listRating.soundtrackRate.toString()
-        //holder.editTextRatingPhotography.hint = listRating.effectsRate.toString()
-        //holder.editTextRatingEnjoyment.hint = listRating.enjoymentRate.toString()
-//
-//
-//
-//
-        //// we check that this is not empty the new rating variables
-        //val ratingStory  = if (holder.editTextRatingStory.text.isNotEmpty()){
-        //    holder.editTextRatingStory.text.toString()
-        //}else{
-        //    holder.editTextRatingStory.hint.toString()
-        //}
-        //val ratingCharacters  = if (holder.editTextRatingCharacters.text.isNotEmpty()){
-        //    holder.editTextRatingCharacters.text.toString()
-        //}else{
-        //    holder.editTextRatingCharacters.hint.toString()
-        //}
-        //val ratingSoundtrack  = if (holder.editTextRatingSoundtrack.text.isNotEmpty()){
-        //    holder.editTextRatingSoundtrack.text.toString()
-        //}else{
-        //    holder.editTextRatingSoundtrack.hint.toString()
-        //}
-        //val ratingPhotography  = if (holder.editTextRatingPhotography.text.isNotEmpty()){
-        //    holder.editTextRatingPhotography.text.toString()
-        //}else{
-        //    holder.editTextRatingPhotography.hint.toString()
-        //}
-        //val ratingEnjoyment  = if (holder.editTextRatingEnjoyment.text.isNotEmpty()){
-        //    holder.editTextRatingEnjoyment.text.toString()
-        //}else{
-        //    holder.editTextRatingPhotography.hint.toString()
-        //}
-//
-//
-//
-//
-//
-        //// set up the spinner
-        //var statusInt: Int = 0
-//
-        //val adpStatus: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(ctx, R.array.status, android.R.layout.simple_spinner_item)
-        //adpStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        //holder.spinnerStatus.adapter = adpStatus
-//
-        //holder.spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-        //    override fun onNothingSelected(parent: AdapterView<*>?) {
-        //        Log.d("ProfileListAdapter", "No selected")
-        //    }
-//
-        //    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        //        Log.d("ProfileListAdapter", "Selected: $position")
-        //        statusInt = position
-        //        Log.d("ProfileListAdapter", "typeInt = $statusInt")
-        //    }
-//
-        //}
-        //// we convert all the float ratings to add them y recogemos el valor editado
-        //var resultFinalRate = ratingStory.toFloat() + ratingCharacters.toFloat() + ratingPhotography.toFloat() + ratingSoundtrack.toFloat() + ratingEnjoyment.toFloat()
-        //// we divide to get the average
-        //val result = resultFinalRate / 5
-        //Log.d("AddListDialog", "Result final rate = $result")
-        //holder.textViewNewRatingFinal.text = result.toString()
-//
-        //holder.textViewNewRatingFinal.setOnClickListener {
-        //    holder.textViewNewRatingFinal.text = result.toString()
-        //}
 
 
 
@@ -343,55 +273,176 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             }
 
 
+            //Here is responsible for the view to edit the rating
+            holder.imageArrowDown.setOnClickListener {
+                if (holder.consContainer.tag == "open"){
+                    holder.consContainer.visibility = View.GONE
+                    holder.consContainer.tag = "close"
+                }else{
+                    holder.consContainer.visibility = View.VISIBLE
+                    holder.consContainer.tag = "open"
+                }
+            }
 
-        //holder.buttonUpdate.setOnClickListener {
-        //    val newItemRating = ItemListRating(listRating.userId,
-        //        statusInt,
-        //        listRating.oeuvreId,
-        //        listRating.addDate,
-        //        ratingStory.toFloat(),
-        //        ratingCharacters.toFloat(),
-        //        ratingPhotography.toFloat(),
-        //        ratingSoundtrack.toFloat(),
-        //        ratingEnjoyment.toFloat(),
-        //        result,
-        //        listRating.seasonNumber,
-        //        listRating.episodeNumber,
-        //        listRating.typeOeuvre
-//
-        //    )
-//
-//
-//
-//
-//
-        //    //ListProfileFragment().updateRatingItem(newItemRating, position)
-        //}
+            // we add the hint with the current ratings
+            holder.editTextRatingStory.hint = listRating.historyRate.toString()
+            holder.editTextRatingCharacters.hint = listRating.characterRate.toString()
+            holder.editTextRatingSoundtrack.hint = listRating.soundtrackRate.toString()
+            holder.editTextRatingPhotography.hint = listRating.effectsRate.toString()
+            holder.editTextRatingEnjoyment.hint = listRating.enjoymentRate.toString()
 
 
 
-            holder.itemView.setOnLongClickListener {
-               val ref = FirebaseFirestore.getInstance().collection("Users/${preferences.userId}/RatingList")
-
-               //val refId = ref.document()
-               //Log.d("ProfileListAdapter", refId)
 
 
-                true
+
+            // set up the spinner
+            var statusInt: Int = 0
+
+            val adpStatus: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(ctx, R.array.status, android.R.layout.simple_spinner_item)
+            adpStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            holder.spinnerStatus.adapter = adpStatus
+
+            holder.spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    Log.d("ProfileListAdapter", "No selected")
+                }
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    Log.d("ProfileListAdapter", "Selected: $position")
+                    statusInt = position
+                    Log.d("ProfileListAdapter", "typeInt = $statusInt")
+                }
+
             }
 
 
 
+            holder.buttonUpdate.setOnClickListener {
+
+
+                // we check that this is not empty the new rating variables
+                var ratingStory  = if (holder.editTextRatingStory.text.isNullOrBlank()){
+                    holder.editTextRatingStory.hint.toString()
+                }else{
+                    holder.editTextRatingStory.text.toString()
+                }
+                var ratingCharacters  = if (holder.editTextRatingCharacters.text.isNullOrBlank()){
+                    holder.editTextRatingCharacters.hint.toString()
+                }else{
+                    holder.editTextRatingCharacters.text.toString()
+                }
+                var ratingSoundtrack  = if (holder.editTextRatingSoundtrack.text.isNullOrBlank()){
+                    holder.editTextRatingSoundtrack.hint.toString()
+                }else{
+                    holder.editTextRatingSoundtrack.text.toString()
+                }
+                var ratingPhotography  = if (holder.editTextRatingPhotography.text.isNullOrBlank()){
+                    holder.editTextRatingPhotography.hint.toString()
+                }else{
+                    holder.editTextRatingPhotography.text.toString()
+                }
+                var ratingEnjoyment  = if (holder.editTextRatingEnjoyment.text.isNullOrBlank()){
+                    holder.editTextRatingEnjoyment.hint.toString()
+                }else{
+                    holder.editTextRatingPhotography.text.toString()
+                }
+
+                //val maxValue = 10
+
+                //comprobamos si los rating superan el valor de 10 cambiar el valor para que sea 10
+                //if (ratingStory.toFloat() >= maxValue){
+                //    ratingStory = maxValue.toString()
+                //}
+                //if (ratingCharacters.toFloat() >= maxValue){
+                //    ratingCharacters = maxValue.toString()
+                //}
+                //if (ratingPhotography.toFloat() >= maxValue){
+                //    ratingPhotography = maxValue.toString()
+                //}
+                //if (ratingSoundtrack.toFloat() >= maxValue){
+                //    ratingSoundtrack = maxValue.toString()
+                //}
+                //if (ratingEnjoyment.toFloat() >= maxValue){
+                //    ratingEnjoyment = maxValue.toString()
+                //}
+
+                // we convert all the float ratings to add them y recogemos el valor editado
+                val resultFinalRate = ratingStory.toFloat() + ratingCharacters.toFloat() + ratingPhotography.toFloat() + ratingSoundtrack.toFloat() + ratingEnjoyment.toFloat()
+                // we divide to get the average
+                val result = resultFinalRate / 5
+                Log.d("ProfileListAdapterUI", "Result final rate = $result")
+                holder.textViewNewRatingFinal.text = result.toString()
+
+                holder.textViewNewRatingFinal.setOnClickListener {
+                    holder.textViewNewRatingFinal.text = result.toString()
+                }
+
+
+                val updateItemRating = ItemListRating(listRating.userId,
+                    statusInt,
+                    listRating.oeuvreId,
+                    listRating.addDate,
+                    ratingStory.toFloat(),
+                    ratingCharacters.toFloat(),
+                    ratingPhotography.toFloat(),
+                    ratingSoundtrack.toFloat(),
+                    ratingEnjoyment.toFloat(),
+                    result,
+                    listRating.seasonNumber,
+                    listRating.episodeNumber,
+                    listRating.typeOeuvre
+                )
+
+                val snapshot: DocumentSnapshot = snapshots.getSnapshot(holder.adapterPosition)
+                val id = snapshot.id
+
+                ListProfileFragment().updateRatingItem(updateItemRating, id)
+
+                holder.consContainer.visibility = View.GONE
+                holder.consContainer.tag = "close"
+                // lipiamos los editText
+                holder.editTextRatingStory.text.clear()
+                holder.editTextRatingCharacters.text.clear()
+                holder.editTextRatingSoundtrack.text.clear()
+                holder.editTextRatingPhotography.text.clear()
+                holder.editTextRatingEnjoyment.text.clear()
+
+
+
+                notifyItemChanged(holder.adapterPosition)
+            }
+
+
+
+            holder.itemView.setOnLongClickListener {
+                val ref = FirebaseFirestore.getInstance().collection("Users/${preferences.userId}/RatingList")
+
+                val snapshot: DocumentSnapshot = snapshots.getSnapshot(holder.adapterPosition)
+                val id = snapshot.id
+
+                ref.document(id)
+                    .delete()
+                    .addOnCompleteListener(object : OnCompleteListener<Void>{
+                        override fun onComplete(p0: Task<Void>) {
+                            if (p0.isSuccessful){
+                                Log.d("ProfileListAdapter", "Deleted item")
+                                notifyItemRemoved(holder.adapterPosition)
+                                notifyDataSetChanged()
+                            }else{
+                                Log.d("ProfileListAdapter", "Failed deleted item")
+                            }
+                        }
+
+                    })
+
+                true
+            }
+        }
+
     }
 
-    fun removeItemList(item: ItemListRating){
-       mValues.remove(item)
-        notifyDataSetChanged()
-    }
 
-    override fun getItemCount(): Int {
-        return mValues.size
-    }
 
 
     inner class ViewHolder internal constructor(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){

@@ -23,7 +23,7 @@
     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <!-- YOUR CUSTOM VIEWS HERE -->
         <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"

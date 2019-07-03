@@ -6,11 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemDetailsActivity
-import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetMovieCallback
@@ -22,17 +23,13 @@ import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
-import com.bumptech.glide.util.Util.getSnapshot
 
 
 
-//TODO cambiar el adapter por FirestoreRecyclerAdapter
-
-class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): androidx.recyclerview.widget.RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
+class ProfileOtherListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): androidx.recyclerview.widget.RecyclerView.Adapter<ProfileOtherListAdapter.ViewHolder>(){
 
     var searchViewModelAPItmdb: ViewModelAPItmdb? = null
 
@@ -42,8 +39,8 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileListAdapter.ViewHolder {
-       val view = LayoutInflater.from(parent.context).inflate(R.layout.list_profile_fragement_item, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileOtherListAdapter.ViewHolder {
+       val view = LayoutInflater.from(parent.context).inflate(R.layout.list_profile_other_fragement_item, parent, false)
 
         return ViewHolder(view)
     }
@@ -60,7 +57,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
 
             holder.yourRatingFilter.visibility = View.GONE
             holder.imageFilter.visibility = View.GONE
-            holder.consContainer.visibility = View.GONE
+
 
 
             // is responsible for checking the list has been filtered and if so load the corresponding notes
@@ -148,92 +145,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             }
 
 
-        //is responsible for collecting the id of the document and pass it to the fragment to delete it or edit it
 
-
-
-        holder.consContainer.visibility = View.GONE
-        //Here is responsible for the view to edit the rating
-        //holder.imageArrowDown.setOnClickListener {
-        //    if (holder.consContainer.tag == "open"){
-        //        holder.consContainer.visibility = View.GONE
-        //        holder.consContainer.tag = "close"
-        //    }else{
-        //        holder.consContainer.visibility = View.VISIBLE
-        //        holder.consContainer.tag = "open"
-        //    }
-        //}
-
-        // we add the hint with the current ratings
-        //holder.editTextRatingStory.hint = listRating.historyRate.toString()
-        //holder.editTextRatingCharacters.hint = listRating.characterRate.toString()
-        //holder.editTextRatingSoundtrack.hint = listRating.soundtrackRate.toString()
-        //holder.editTextRatingPhotography.hint = listRating.effectsRate.toString()
-        //holder.editTextRatingEnjoyment.hint = listRating.enjoymentRate.toString()
-//
-//
-//
-//
-        //// we check that this is not empty the new rating variables
-        //val ratingStory  = if (holder.editTextRatingStory.text.isNotEmpty()){
-        //    holder.editTextRatingStory.text.toString()
-        //}else{
-        //    holder.editTextRatingStory.hint.toString()
-        //}
-        //val ratingCharacters  = if (holder.editTextRatingCharacters.text.isNotEmpty()){
-        //    holder.editTextRatingCharacters.text.toString()
-        //}else{
-        //    holder.editTextRatingCharacters.hint.toString()
-        //}
-        //val ratingSoundtrack  = if (holder.editTextRatingSoundtrack.text.isNotEmpty()){
-        //    holder.editTextRatingSoundtrack.text.toString()
-        //}else{
-        //    holder.editTextRatingSoundtrack.hint.toString()
-        //}
-        //val ratingPhotography  = if (holder.editTextRatingPhotography.text.isNotEmpty()){
-        //    holder.editTextRatingPhotography.text.toString()
-        //}else{
-        //    holder.editTextRatingPhotography.hint.toString()
-        //}
-        //val ratingEnjoyment  = if (holder.editTextRatingEnjoyment.text.isNotEmpty()){
-        //    holder.editTextRatingEnjoyment.text.toString()
-        //}else{
-        //    holder.editTextRatingPhotography.hint.toString()
-        //}
-//
-//
-//
-//
-//
-        //// set up the spinner
-        //var statusInt: Int = 0
-//
-        //val adpStatus: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(ctx, R.array.status, android.R.layout.simple_spinner_item)
-        //adpStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        //holder.spinnerStatus.adapter = adpStatus
-//
-        //holder.spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-        //    override fun onNothingSelected(parent: AdapterView<*>?) {
-        //        Log.d("ProfileListAdapter", "No selected")
-        //    }
-//
-        //    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        //        Log.d("ProfileListAdapter", "Selected: $position")
-        //        statusInt = position
-        //        Log.d("ProfileListAdapter", "typeInt = $statusInt")
-        //    }
-//
-        //}
-        //// we convert all the float ratings to add them y recogemos el valor editado
-        //var resultFinalRate = ratingStory.toFloat() + ratingCharacters.toFloat() + ratingPhotography.toFloat() + ratingSoundtrack.toFloat() + ratingEnjoyment.toFloat()
-        //// we divide to get the average
-        //val result = resultFinalRate / 5
-        //Log.d("AddListDialog", "Result final rate = $result")
-        //holder.textViewNewRatingFinal.text = result.toString()
-//
-        //holder.textViewNewRatingFinal.setOnClickListener {
-        //    holder.textViewNewRatingFinal.text = result.toString()
-        //}
 
 
 
@@ -342,41 +254,27 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                 })
             }
 
-
-
-        //holder.buttonUpdate.setOnClickListener {
-        //    val newItemRating = ItemListRating(listRating.userId,
-        //        statusInt,
-        //        listRating.oeuvreId,
-        //        listRating.addDate,
-        //        ratingStory.toFloat(),
-        //        ratingCharacters.toFloat(),
-        //        ratingPhotography.toFloat(),
-        //        ratingSoundtrack.toFloat(),
-        //        ratingEnjoyment.toFloat(),
-        //        result,
-        //        listRating.seasonNumber,
-        //        listRating.episodeNumber,
-        //        listRating.typeOeuvre
-//
-        //    )
-//
-//
-//
-//
-//
-        //    //ListProfileFragment().updateRatingItem(newItemRating, position)
-        //}
-
-
-
             holder.itemView.setOnLongClickListener {
                val ref = FirebaseFirestore.getInstance().collection("Users/${preferences.userId}/RatingList")
 
                //val refId = ref.document()
                //Log.d("ProfileListAdapter", refId)
 
+                  ref
+                  .document("id")
+                      .delete()
+                  .addOnCompleteListener(object : OnCompleteListener<Void>{
+                      override fun onComplete(p0: Task<Void>) {
+                          if (p0.isSuccessful){
+                              Log.d("ProfileListAdapter", "Deleted item")
+                              mValues.removeAt(position)
+                              notifyDataSetChanged()
+                          }else{
+                              Log.d("ProfileListAdapter", "Failed deleted item")
+                          }
+                      }
 
+                  })
                 true
             }
 
@@ -405,40 +303,19 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
         internal var yourRatingFilter: TextView
         internal var imageFilter: ImageView
         internal var imageFinalRate: ImageView
-        internal var imageArrowDown: ImageView
-        internal var consContainer : ConstraintLayout
-        internal var editTextRatingStory: EditText
-        internal var editTextRatingCharacters: EditText
-        internal var editTextRatingSoundtrack: EditText
-        internal var editTextRatingPhotography: EditText
-        internal var editTextRatingEnjoyment: EditText
-        internal var textViewNewRatingFinal: TextView
-        internal var buttonUpdate: Button
-        internal var spinnerStatus: Spinner
 
 
         init {
-            title = view.findViewById(R.id.textViewTitleListProfile)
-            dateRelease = view.findViewById(R.id.textViewDateReleastListProfile)
-            globalRating = view.findViewById(R.id.textViewRatingListProfile)
-            numPosition = view.findViewById(R.id.textViewListProfileNumberPosition)
-            dateAt = view.findViewById(R.id.textViewListProfileDateAt)
-            yourRating = view.findViewById(R.id.textViewListProfileYourRating)
-            imagePoster = view.findViewById(R.id.imageViewPosterListProfile)
-            yourRatingFilter = view.findViewById(R.id.textViewRatingFilterSelected)
-            imageFilter = view.findViewById(R.id.imageViewFilterIcon)
-            imageFinalRate = view.findViewById(R.id.imageViewFinalRate)
-            imageArrowDown = view.findViewById(R.id.imageViewArrowDown)
-            consContainer = view.findViewById(R.id.ConsContainer)
-            editTextRatingStory = view.findViewById(R.id.editTextRatingStory)
-            editTextRatingCharacters = view.findViewById(R.id.editTextRatingCharacters)
-            editTextRatingSoundtrack = view.findViewById(R.id.editTextRatingSoundtrack)
-            editTextRatingPhotography = view.findViewById(R.id.editTextRatingPhotography)
-            editTextRatingEnjoyment = view.findViewById(R.id.editTextRatingEnjoyment)
-            textViewNewRatingFinal = view.findViewById(R.id.textViewNewRatingFinal)
-            spinnerStatus = view.findViewById(R.id.spinnerStatusRating)
-            buttonUpdate = view.findViewById(R.id.buttonUpdateRating)
-
+            title = view.findViewById(R.id.textViewTitleListOtherProfile)
+            dateRelease = view.findViewById(R.id.textViewDateReleastListOtherProfile)
+            globalRating = view.findViewById(R.id.textViewRatingListOtherProfile)
+            numPosition = view.findViewById(R.id.textViewListOtherProfileNumberPosition)
+            dateAt = view.findViewById(R.id.textViewListOtherProfileDateAt)
+            yourRating = view.findViewById(R.id.textViewListOtherProfileYourRating)
+            imagePoster = view.findViewById(R.id.imageViewPosterListOtherProfile)
+            yourRatingFilter = view.findViewById(R.id.textViewRatingFilterSelectedOther)
+            imageFilter = view.findViewById(R.id.imageViewFilterIconOther)
+            imageFinalRate = view.findViewById(R.id.imageViewFinalRateOther)
         }
     }
 

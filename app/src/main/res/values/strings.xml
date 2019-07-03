@@ -270,6 +270,13 @@
     <string name="fab_filter_search_sort_release_date_desc">Release Date Descend</string>
     <string name="fab_filter_search_sort_voted_average_asc">Voted Average Ascend</string>
     <string name="fab_filter_search_voted_average_desc">Voted Average Descend</string>
+    <string name="profile_rating_btn_update">Update</string>
+    <string name="profile_rating_label_update_story">Rating Story :</string>
+    <string name="profile_rating_label_update_characters">Rating Characters :</string>
+    <string name="profile_rating_label_update_soundtrack">Rating Soundtrack :</string>
+    <string name="profile_rating_label_update_photography">Rating Photography :</string>
+    <string name="profile_rating_label_update_enjoyment">Rating Enjoyment :</string>
+    <string name="profile_rating_label_update_new_final_rate">New Final Rating :</string>
 
 
 </resources>

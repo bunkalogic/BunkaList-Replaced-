@@ -11,8 +11,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowId
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment
 import com.bunkalogic.bunkalist.Adapters.ProfileListAdapter
+import com.bunkalogic.bunkalist.Adapters.ProfileListFirestoreAdapter
+import com.bunkalogic.bunkalist.Adapters.ProfileOtherListAdapter
 import com.bunkalogic.bunkalist.Fragments.FabFilter.FabFilterListFragment
 import com.bunkalogic.bunkalist.Others.Constans
 
@@ -21,12 +24,16 @@ import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_list_profile.*
 import kotlinx.android.synthetic.main.fragment_list_profile.view.*
 import org.jetbrains.anko.support.v4.intentFor
+
+
 
 
 class ListProfileFragment : androidx.fragment.app.Fragment() {
@@ -39,7 +46,12 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
     private var typeList = 0
 
     private var listProfileitem: ArrayList<ItemListRating> = ArrayList()
+    private var listOtherProfileitem: ArrayList<ItemListRating> = ArrayList()
     private lateinit var adapter: ProfileListAdapter
+
+    private var adapterFirestore: ProfileListFirestoreAdapter? = null
+
+    private lateinit var adapterOther: ProfileOtherListAdapter
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var currentUser: FirebaseUser
@@ -47,6 +59,8 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
     private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     var list_filters: ArrayMap<String, Int> = ArrayMap()
+
+    var listDocumentId : MutableList<String> = mutableListOf()
 
     //variables to collect the data from to filter
     var statusFinalId = -1
@@ -63,6 +77,16 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        adapterFirestore?.adapter?.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapterFirestore?.adapter?.stopListening()
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view =  inflater.inflate(R.layout.fragment_list_profile, container, false)
@@ -70,7 +94,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
         setUpCurrentUser()
 
         whatUserIs()
-        setUpRecycler()
+
         onClick()
 
 
@@ -96,10 +120,12 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
         _view.fabFilterClean.setOnClickListener {
             Constans.applied_list_filter.clear()
             preferences.ratingId = 0
-            getListOeuvre(currentUser.uid)
+
             _view.fabFilterClean.visibility = View.GONE
             _view.fabFilter.visibility = View.VISIBLE
             adapter.notifyDataSetChanged()
+            getListOeuvre(currentUser.uid)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
         }
 
     }
@@ -141,7 +167,9 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
                     }
                 }
-            getListOeuvre(currentUser.uid)
+            //when we filter the lists we use the normal Adapter and when the list is not filtered we use the FirestoreUI adapter
+            setUpRecycler()
+            getListOeuvreOtherUser(currentUser.uid)
         }
 
     }
@@ -180,17 +208,63 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
         _view.recyclerAllList.adapter = adapter
     }
 
+    //Todo: refactorizar el codigo del ListProfileFragment para que funcione con el FirestoreRecyclerAdapter y agregar la funcion de borrar un con LongClick
+    private fun setUpRecyclerFirestore(query : Query){
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+
+        adapterFirestore = ProfileListFirestoreAdapter(context!!, query)
+
+        _view.recyclerAllList.setHasFixedSize(true)
+        _view.recyclerAllList.layoutManager = layoutManager
+        _view.recyclerAllList.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.recyclerAllList.adapter = adapterFirestore?.adapter
+    }
+
+    private fun setUpRecyclerOther(){
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+
+
+        adapterOther = ProfileOtherListAdapter(context!!, listOtherProfileitem)
+
+        _view.recyclerAllList.setHasFixedSize(true)
+        _view.recyclerAllList.layoutManager = layoutManager
+        _view.recyclerAllList.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.recyclerAllList.adapter = adapterOther
+    }
+
     @SuppressLint("RestrictedApi")
     private fun whatUserIs(){
         if (preferences.OtherUserId.isNullOrEmpty()){
             getListOeuvre(preferences.userId!!)
         }else{
-            getListOeuvre(preferences.OtherUserId!!)
+            getListOeuvreOtherUser(preferences.OtherUserId!!)
+            setUpRecyclerOther()
             _view.fabFilter.visibility = View.INVISIBLE
         }
     }
 
     private fun getListOeuvre(userId: String){
+
+        if(statusFinalId == -1 && ratingFieldFinal == ""){
+            when (typeList) {
+                Constans.MOVIE_LIST -> subscribeToProfileListMovieFirestoreUI(userId, Constans.typeOuevre, Constans.MOVIE_LIST, Constans.filter_rating_final_name, orderDesc)
+                Constans.SERIE_LIST -> subscribeToProfileListSeriesFirestoreUI(userId, Constans.typeOuevre, Constans.SERIE_LIST, Constans.filter_rating_final_name, orderDesc)
+                Constans.ANIME_LIST -> subscribeToProfileListAnimeFirestoreUI(userId, Constans.typeOuevre, Constans.ANIME_LIST, Constans.filter_rating_final_name, orderDesc)
+                Constans.MOVIE_TOP -> subscribeToProfileTopMovie(userId)
+                Constans.SERIE_TOP -> subscribeToProfileTopSeries(userId)
+                Constans.ANIME_TOP -> subscribeToProfileTopAnime(userId)
+            }
+        }else{
+            when(typeList){
+                Constans.MOVIE_LIST -> subscribeToProfileListMovieFirestoreUI(userId, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+                Constans.SERIE_LIST ->subscribeToProfileListSeriesFirestoreUI(userId, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+                Constans.ANIME_LIST -> subscribeToProfileListAnimeFirestoreUI(userId, Constans.filter_status_name, statusFinalId, ratingFieldFinal, filterOrder)
+            }
+        }
+
+    }
+
+    private fun getListOeuvreOtherUser(userId: String){
 
         if(statusFinalId == -1 && ratingFieldFinal == ""){
             when (typeList) {
@@ -210,6 +284,103 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
         }
 
     }
+
+
+
+
+    fun updateRatingItem(itemRating : ItemListRating, id : String){
+        val docRef = store.collection("Users/${preferences.userId}/RatingList")
+
+        docRef.document(id).update(itemRating.toMap()).addOnCompleteListener(object : OnCompleteListener<Void>{
+            override fun onComplete(task: Task<Void>) {
+                if (task.isSuccessful){
+                    Log.d("ListProfileFragment", "document Id: ${docRef.document(id)}, is update")
+                    adapterFirestore?.adapter?.notifyDataSetChanged()
+                }else{
+                    Log.d("ListProfileFragment", "document Id: ${docRef.document(id)}, is not update")
+                }
+            }
+
+        })
+    }
+
+
+    private fun subscribeToProfileListMovieFirestoreUI(
+        userId: String,
+        fieldWhereEqualTo: String,
+        valueWhereEqualTo: Int,
+        fieldOrderBy: String,
+        orderType: Query.Direction,
+        value1: String = Constans.typeOuevre,
+        value2: Int = Constans.MOVIE_LIST
+    ){
+        if (fieldWhereEqualTo.isEmpty() && valueWhereEqualTo == -1){
+            val  query = store.collection("Users/$userId/RatingList")
+                .whereEqualTo(value1, value2)
+                .orderBy(fieldOrderBy, orderType)
+            setUpRecyclerFirestore(query)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
+        }else{
+           val query =  store.collection("Users/$userId/RatingList")
+                .whereEqualTo(value1, value2)
+                .whereEqualTo(fieldWhereEqualTo, valueWhereEqualTo)
+                .orderBy(fieldOrderBy, orderType)
+            setUpRecyclerFirestore(query)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    private fun subscribeToProfileListSeriesFirestoreUI(
+        userId: String,
+        fieldWhereEqualTo: String,
+        valueWhereEqualTo: Int,
+        fieldOrderBy: String,
+        orderType: Query.Direction,
+        value1: String = Constans.typeOuevre,
+        value2: Int = Constans.SERIE_LIST
+    ){
+        if (fieldWhereEqualTo.isEmpty() && valueWhereEqualTo == -1){
+            val  query = store.collection("Users/$userId/RatingList")
+                .whereEqualTo(value1, value2)
+                .orderBy(fieldOrderBy, orderType)
+            setUpRecyclerFirestore(query)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
+        }else{
+            val query =  store.collection("Users/$userId/RatingList")
+                .whereEqualTo(value1, value2)
+                .whereEqualTo(fieldWhereEqualTo, valueWhereEqualTo)
+                .orderBy(fieldOrderBy, orderType)
+            setUpRecyclerFirestore(query)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
+        }
+    }
+
+    private fun subscribeToProfileListAnimeFirestoreUI(
+        userId: String,
+        fieldWhereEqualTo: String,
+        valueWhereEqualTo: Int,
+        fieldOrderBy: String,
+        orderType: Query.Direction,
+        value1: String = Constans.typeOuevre,
+        value2: Int = Constans.ANIME_LIST
+    ){
+        if (fieldWhereEqualTo.isEmpty() && valueWhereEqualTo == -1){
+            val  query = store.collection("Users/$userId/RatingList")
+                .whereEqualTo(value1, value2)
+                .orderBy(fieldOrderBy, orderType)
+            setUpRecyclerFirestore(query)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
+        }else{
+            val query =  store.collection("Users/$userId/RatingList")
+                .whereEqualTo(value1, value2)
+                .whereEqualTo(fieldWhereEqualTo, valueWhereEqualTo)
+                .orderBy(fieldOrderBy, orderType)
+            setUpRecyclerFirestore(query)
+            adapterFirestore?.adapter?.notifyDataSetChanged()
+        }
+    }
+
+
 
 
 
@@ -237,11 +408,18 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
 
                         snapshot?.let {
-                            listProfileitem.clear()
+
                             val itemRating = it.toObjects(ItemListRating::class.java)
-                            listProfileitem.addAll(itemRating)
                             preferences.sizeMovies = it.size()
-                            adapter.notifyDataSetChanged()
+                            if (preferences.OtherUserId.isNullOrEmpty()){
+                                listProfileitem.clear()
+                                listProfileitem.addAll(itemRating)
+                                adapter.notifyDataSetChanged()
+                            }else{
+                                listOtherProfileitem.clear()
+                                listOtherProfileitem.addAll(itemRating)
+                                adapterOther.notifyDataSetChanged()
+                            }
                         }
                     }
 
@@ -260,11 +438,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
 
                         snapshot?.let {
-                            listProfileitem.clear()
                             val itemRating = it.toObjects(ItemListRating::class.java)
-                            listProfileitem.addAll(itemRating)
                             preferences.sizeMovies = it.size()
-                            adapter.notifyDataSetChanged()
+                            if (preferences.OtherUserId.isNullOrEmpty()){
+                                listProfileitem.clear()
+                                listProfileitem.addAll(itemRating)
+                                adapter.notifyDataSetChanged()
+                            }else{
+                                listOtherProfileitem.clear()
+                                listOtherProfileitem.addAll(itemRating)
+                                adapterOther.notifyDataSetChanged()
+                            }
                         }
                     }
 
@@ -294,11 +478,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
 
                         snapshot?.let {
-                            listProfileitem.clear()
                             val itemRating = it.toObjects(ItemListRating::class.java)
-                            listProfileitem.addAll(itemRating)
                             preferences.sizeMovies = it.size()
-                            adapter.notifyDataSetChanged()
+                            if (preferences.OtherUserId.isNullOrEmpty()){
+                                listProfileitem.clear()
+                                listProfileitem.addAll(itemRating)
+                                adapter.notifyDataSetChanged()
+                            }else{
+                                listOtherProfileitem.clear()
+                                listOtherProfileitem.addAll(itemRating)
+                                adapterOther.notifyDataSetChanged()
+                            }
                         }
                     }
 
@@ -317,11 +507,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
 
                         snapshot?.let {
-                            listProfileitem.clear()
                             val itemRating = it.toObjects(ItemListRating::class.java)
-                            listProfileitem.addAll(itemRating)
                             preferences.sizeMovies = it.size()
-                            adapter.notifyDataSetChanged()
+                            if (preferences.OtherUserId.isNullOrEmpty()){
+                                listProfileitem.clear()
+                                listProfileitem.addAll(itemRating)
+                                adapter.notifyDataSetChanged()
+                            }else{
+                                listOtherProfileitem.clear()
+                                listOtherProfileitem.addAll(itemRating)
+                                adapterOther.notifyDataSetChanged()
+                            }
                         }
                     }
 
@@ -350,11 +546,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
 
                         snapshot?.let {
-                            listProfileitem.clear()
                             val itemRating = it.toObjects(ItemListRating::class.java)
-                            listProfileitem.addAll(itemRating)
                             preferences.sizeMovies = it.size()
-                            adapter.notifyDataSetChanged()
+                            if (preferences.OtherUserId.isNullOrEmpty()){
+                                listProfileitem.clear()
+                                listProfileitem.addAll(itemRating)
+                                adapter.notifyDataSetChanged()
+                            }else{
+                                listOtherProfileitem.clear()
+                                listOtherProfileitem.addAll(itemRating)
+                                adapterOther.notifyDataSetChanged()
+                            }
                         }
                     }
 
@@ -373,11 +575,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                         }
 
                         snapshot?.let {
-                            listProfileitem.clear()
                             val itemRating = it.toObjects(ItemListRating::class.java)
-                            listProfileitem.addAll(itemRating)
                             preferences.sizeMovies = it.size()
-                            adapter.notifyDataSetChanged()
+                            if (preferences.OtherUserId.isNullOrEmpty()){
+                                listProfileitem.clear()
+                                listProfileitem.addAll(itemRating)
+                                adapter.notifyDataSetChanged()
+                            }else{
+                                listOtherProfileitem.clear()
+                                listOtherProfileitem.addAll(itemRating)
+                                adapterOther.notifyDataSetChanged()
+                            }
                         }
                     }
 
@@ -399,10 +607,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                     }
 
                     snapshot?.let {
-                        listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
-                        listProfileitem.addAll(itemRating)
-                        adapter.notifyDataSetChanged()
+                        preferences.sizeMovies = it.size()
+                        if (preferences.OtherUserId.isNullOrEmpty()){
+                            listProfileitem.clear()
+                            listProfileitem.addAll(itemRating)
+                            adapter.notifyDataSetChanged()
+                        }else{
+                            listOtherProfileitem.clear()
+                            listOtherProfileitem.addAll(itemRating)
+                            adapterOther.notifyDataSetChanged()
+                        }
                     }
                 }
 
@@ -422,10 +637,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                     }
 
                     snapshot?.let {
-                        listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
-                        listProfileitem.addAll(itemRating)
-                        adapter.notifyDataSetChanged()
+                        preferences.sizeMovies = it.size()
+                        if (preferences.OtherUserId.isNullOrEmpty()){
+                            listProfileitem.clear()
+                            listProfileitem.addAll(itemRating)
+                            adapter.notifyDataSetChanged()
+                        }else{
+                            listOtherProfileitem.clear()
+                            listOtherProfileitem.addAll(itemRating)
+                            adapterOther.notifyDataSetChanged()
+                        }
                     }
                 }
 
@@ -445,10 +667,17 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                     }
 
                     snapshot?.let {
-                        listProfileitem.clear()
                         val itemRating = it.toObjects(ItemListRating::class.java)
-                        listProfileitem.addAll(itemRating)
-                        adapter.notifyDataSetChanged()
+                        preferences.sizeMovies = it.size()
+                        if (preferences.OtherUserId.isNullOrEmpty()){
+                            listProfileitem.clear()
+                            listProfileitem.addAll(itemRating)
+                            adapter.notifyDataSetChanged()
+                        }else{
+                            listOtherProfileitem.clear()
+                            listOtherProfileitem.addAll(itemRating)
+                            adapterOther.notifyDataSetChanged()
+                        }
                     }
                 }
 
