@@ -5,6 +5,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.viewpager.widget.ViewPager
@@ -19,6 +21,7 @@ import com.bunkalogic.bunkalist.BuildConfig
 import com.bunkalogic.bunkalist.Fragments.*
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.R.color.colorBackgroundPrimary
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.firebase.auth.FirebaseAuth
@@ -153,9 +156,16 @@ class BaseActivity : AppCompatActivity() {
         val mode_custom = 3
         if (preferences.mode == mode_light){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.statusBarColor = resources.getColor(colorBackgroundPrimary, theme)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
         }
         if (preferences.mode == mode_dark){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                window.statusBarColor = resources.getColor(colorBackgroundPrimary, theme)
+            }
         }
         if (preferences.mode == mode_custom){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)

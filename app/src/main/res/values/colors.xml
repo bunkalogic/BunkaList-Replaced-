@@ -11,6 +11,7 @@
     <color name="colorBackgroundPrimary">#FBFBFB</color>
     <color name="colorSecondaryText">#757575</color>
     <color name="colorPrimaryTextDark">#FFFFFF</color>
+    <color name="colorPrimaryTransparent">#3F7E57C2</color>
 
     <color name="colorGooglePlusDark">#4285F4</color>
     <color name="colorBottomNavigationBar">#B0BEC5</color>

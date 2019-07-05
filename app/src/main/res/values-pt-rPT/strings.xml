@@ -181,4 +181,7 @@
     <string name="profile_rating_label_update_photography">Rating Photography :</string>
     <string name="profile_rating_label_update_enjoyment">Rating Enjoyment :</string>
     <string name="profile_rating_label_update_new_final_rate">New Final Rating :</string>
+    <string name="fragment_tops_review_button_top_anime_popular">Tops Anime Popular</string>
+    <string name="fragment_tops_review_button_top_anime_rated">Top Anime Rated</string>
+    <string name="fragment_tops_review_button_top_anime_upcoming">Tops Anime Upcoming</string>
 </resources>

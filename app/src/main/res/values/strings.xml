@@ -33,7 +33,7 @@
     <!-- Button Navigation Menu -->
 
     <string name="btn_nav_timeline">Timeline</string>
-    <string name="btn_nav_top">Tops and Review</string>
+    <string name="btn_nav_top">Tops</string>
     <string name="btn_nav_search">Search</string>
     <string name="btn_nav_profile">Profile</string>
     <string name="btn_nav_settings">Settings</string>
@@ -197,11 +197,14 @@
     <string name="profile_list_activity_tab_rated">Top Rated</string>
     <string name="profile_list_activity_tab_upcoming">Top Upcoming</string>
     <string name="fragment_top_reviews_title_list">Tops Popular, Rated, Upcoming of Movies, Series and Anime</string>
+    <string name="fragment_top_reviews_title">Tops Popular, Rated, Upcoming.</string>
     <string name="fragment_tops_review_button_top_movies_list">Tops Movies</string>
     <string name="fragment_tops_review_button_top_series_list">Tops Series and Anime</string>
     <string name="search_item_full_details_recommendations">Recommendations</string>
-    <string name="title_toolbar_tops_Movies">Tops Movies</string>
-    <string name="title_toolbar_tops_Series">Tops Series And Anime</string>
+    <string name="title_toolbar_tops_Movies">Tops of Movies.</string>
+    <string name="title_toolbar_tops_Series">Tops of Series.</string>
+    <string name="title_toolbar_tops_Anime">Tops of Animes.</string>
+    <string name="title_toolbar_tops_Series_Anime">Tops Series And Anime</string>
     <string name="search_item_full_details_cast">Casting / Characters</string>
     <string name="search_item_full_details_crew">Crew</string>
     <string name="birthday_date_activity_people">Birthday Date :</string>
@@ -277,6 +280,9 @@
     <string name="profile_rating_label_update_photography">Rating Photography :</string>
     <string name="profile_rating_label_update_enjoyment">Rating Enjoyment :</string>
     <string name="profile_rating_label_update_new_final_rate">New Final Rating :</string>
+    <string name="fragment_tops_review_button_top_anime_popular">Tops Anime Popular</string>
+    <string name="fragment_tops_review_button_top_anime_rated">Top Anime Rated</string>
+    <string name="fragment_tops_review_button_top_anime_upcoming">Tops Anime Upcoming</string>
 
 
 </resources>

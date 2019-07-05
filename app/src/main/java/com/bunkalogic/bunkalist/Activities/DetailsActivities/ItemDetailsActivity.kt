@@ -19,7 +19,9 @@ import kotlinx.android.synthetic.main.search_item_full_details.*
 import org.jetbrains.anko.toast
 import com.bumptech.glide.request.RequestOptions
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.widget.Toolbar
 import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre

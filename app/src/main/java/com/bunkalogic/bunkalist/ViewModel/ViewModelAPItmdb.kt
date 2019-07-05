@@ -49,20 +49,11 @@ class ViewModelAPItmdb(app: Application) : AndroidViewModel(app)  {
     }
 
     fun getMoviesList(page: Int, sortBy: String, callback: OnGetListMoviesCallback){
-        searchRepository.getPopularMovies(page, sortBy, callback)
+        searchRepository.getTopsMovies(page, sortBy, callback)
     }
 
-
-    fun getSeriesPopular(page: Int, callback: OnGetListSeriesCallback){
-        searchRepository.getSeriesPopular(page, callback)
-    }
-
-    fun getSeriesRated(page: Int, callback: OnGetListSeriesCallback){
-        searchRepository.getSeriesRated(page, callback)
-    }
-
-    fun getSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
-        searchRepository.getSeriesUpcoming(page, callback)
+    fun getSeriesList(page: Int, sortBy: String, callback: OnGetListSeriesCallback){
+        searchRepository.getTopsSeries(page, sortBy, callback)
     }
 
     fun getPeopleMovies(Id: Int, callback: OnGetPeopleCallback){
@@ -91,6 +82,10 @@ class ViewModelAPItmdb(app: Application) : AndroidViewModel(app)  {
 
     fun getSeriesFilters(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int){
         searchRepository.getSeriesListFilter(callback, sort_By, page, withGenres, year)
+    }
+
+    fun getTopsAnime(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int, vote_count: Int){
+        searchRepository.getAnimeTops(callback, sort_By, page, withGenres, year, vote_count)
     }
 
 

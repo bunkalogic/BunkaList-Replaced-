@@ -2,33 +2,18 @@ package com.bunkalogic.bunkalist.Fragments
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
-import com.bumptech.glide.Glide
-import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListMovieActivity
-import com.bunkalogic.bunkalist.Activities.DetailsActivities.ListSeriesActivity
-import com.bunkalogic.bunkalist.Adapters.ReviewAdapter
-import com.bunkalogic.bunkalist.Dialog.ReviewDialog
+import com.bunkalogic.bunkalist.Adapters.TopsOuevreAdapter
+import com.bunkalogic.bunkalist.Models.TopsCardItem
+import com.bunkalogic.bunkalist.Others.Constans
 
 import com.bunkalogic.bunkalist.R
-import com.bunkalogic.bunkalist.RxBus.RxBus
-import com.bunkalogic.bunkalist.db.NewReview
-import com.bunkalogic.bunkalist.db.NewReviewEvent
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.*
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_topandreview.view.*
-import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
 
 
 /**
@@ -40,17 +25,14 @@ class TopsAndReviewFragment : androidx.fragment.app.Fragment() {
     private lateinit var _view: View
     lateinit var mAdView : AdView
 
-    private val reviewList: ArrayList<NewReview> = ArrayList()
-    private lateinit var adapter : ReviewAdapter
+    private lateinit var adapterMovies: TopsOuevreAdapter
+    private lateinit var adapterSeries: TopsOuevreAdapter
+    private lateinit var adapterAnime: TopsOuevreAdapter
 
-    private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private lateinit var currentUser: FirebaseUser
+    val listTopMovies: ArrayList<TopsCardItem> by lazy { getMoviesCardItem() }
+    val listTopSeries: ArrayList<TopsCardItem> by lazy { getSeriesCardItem() }
+    val listTopAnime: ArrayList<TopsCardItem> by lazy { getAnimeCardItem() }
 
-    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private lateinit var reviewDBRef: CollectionReference
-
-    private var reviewSubscription: ListenerRegistration? = null
-    private lateinit var reviewBusListener: Disposable
 
 
     override fun onCreateView(
@@ -58,26 +40,14 @@ class TopsAndReviewFragment : androidx.fragment.app.Fragment() {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_topandreview, container, false)
 
-        fixScrollPosition()
         addBannerAds()
-        setUpReviewDB()
-        setUpCurrentUser()
-
-        setUpRecyclerView()
-        setUpFab()
-        onClick()
-
-        subscribeToReviews()
-        subscribeToNewReview()
+        setUpContainerMovies()
+        setUpContainerSeries()
+        setUpContainerAnime()
 
         return _view
     }
 
-    private fun fixScrollPosition(){
-        // This function ensures that when the fragment is loaded, it is displayed from the first position
-        _view.scrollView4.isFocusableInTouchMode = true
-        _view.scrollView4.descendantFocusability = ViewGroup.FOCUS_BEFORE_DESCENDANTS
-    }
 
     //initializing the banner in this activity
     private fun addBannerAds(){
@@ -89,91 +59,87 @@ class TopsAndReviewFragment : androidx.fragment.app.Fragment() {
 
     }
 
-    fun onClick(){
+    private fun setUpContainerMovies(){
+       _view.ContainerTopsMovies.removeAllViews()
 
-        // Cargando la imagen del cardview
-        Glide.with(_view)
-            .load(R.drawable.imagecardviewmoviesanseries)
-            .centerCrop()
-            .into(_view.imageView7)
+        val layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        adapterMovies = TopsOuevreAdapter(context!!, listTopMovies)
 
-        _view.buttonMoviesPopular.setOnClickListener {
-            startActivity(intentFor<ListMovieActivity>())
-        }
 
-        _view.buttonSeriesPopular.setOnClickListener {
-            startActivity(intentFor<ListSeriesActivity>())
-        }
+        _view.ContainerTopsMovies.layoutManager = layoutManager
+        _view.ContainerTopsMovies.setHasFixedSize(true)
+        _view.ContainerTopsMovies.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.ContainerTopsMovies.adapter = adapterMovies
     }
 
-    private fun setUpReviewDB(){
-        reviewDBRef= store.collection("Data/Content/ReviewExt")
-    }
-
-    // Creating the new instance in the database
-    private fun saveReview(itemReview : NewReview){
-        reviewDBRef.add(itemReview)
-            .addOnCompleteListener {
-                toast("Review Added!")
+    private fun getMoviesCardItem(): ArrayList<TopsCardItem> {
+        return object: ArrayList<TopsCardItem>(){
+            init {
+                add(TopsCardItem(Constans.Popular_LIST_Movies, getString(R.string.fragment_tops_review_button_top_movies_popular), R.drawable.topspopularmovies))
+                add(TopsCardItem(Constans.Rated_LIST_Movies, getString(R.string.fragment_tops_review_button_top_movies_rated), R.drawable.topsratedmovies))
+                add(TopsCardItem(Constans.Upcoming_LIST_Movies, getString(R.string.fragment_tops_review_button_top_movies_upcoming),R.drawable.topsupcomingmovies))
             }
-            .addOnFailureListener { toast("Error try Again") }
-    }
-
-
-    // Initializing the currentUser
-    private fun setUpCurrentUser(){
-        currentUser = mAuth.currentUser!!
-    }
-
-    fun setUpFab(){
-        _view.fabNewReviews.setOnClickListener {
-            ReviewDialog().show(fragmentManager, "")
         }
     }
 
-    fun setUpRecyclerView(){
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
-        adapter = ReviewAdapter(context!!, reviewList)
+    private fun setUpContainerSeries(){
+        _view.ContainerTopsSeries.removeAllViews()
 
-        _view.recyclerReviews.setHasFixedSize(true)
-        _view.recyclerReviews.layoutManager = layoutManager
-        _view.recyclerReviews.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
-        _view.recyclerReviews.adapter = adapter
+        val layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        adapterSeries = TopsOuevreAdapter(context!!, listTopSeries)
 
+
+        _view.ContainerTopsSeries.layoutManager = layoutManager
+        _view.ContainerTopsSeries.setHasFixedSize(true)
+        _view.ContainerTopsSeries.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.ContainerTopsSeries.adapter = adapterSeries
     }
 
-    fun subscribeToReviews(){
-        reviewSubscription = reviewDBRef
-            .orderBy("sentAt")
-            .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot>{
-
-                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
-                    exception?.let {
-                        Log.d("ReviewFragment", "Exception review!")
-                    }
-                    snapshot?.let {
-                        reviewList.clear()
-                        val review = it.toObjects(NewReview::class.java)
-                        reviewList.addAll(review)
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-
-            })
-    }
-
-
-    // Using RxAndroid to make the minimum calls to the database
-    private fun subscribeToNewReview(){
-        reviewBusListener = RxBus.listen(NewReviewEvent::class.java).subscribe {
-            saveReview(it.review)
+    private fun getSeriesCardItem(): ArrayList<TopsCardItem> {
+        return object: ArrayList<TopsCardItem>(){
+            init {
+                add(TopsCardItem(Constans.Popular_LIST_Series, getString(R.string.fragment_tops_review_button_top_series_popular), R.drawable.topspopularseries))
+                add(TopsCardItem(Constans.Rated_LIST_Series, getString(R.string.fragment_tops_review_button_top_series_rated), R.drawable.topsratedseries))
+                add(TopsCardItem(Constans.Upcoming_LIST_Anime, getString(R.string.fragment_tops_review_button_top_series_upcoming), R.drawable.topupcomingseries))
+            }
         }
     }
 
-    override fun onDestroyView() {
-        reviewBusListener.dispose()
-       reviewSubscription?.remove()
-        super.onDestroyView()
+    private fun setUpContainerAnime(){
+        _view.ContainerTopsAnime.removeAllViews()
+
+        val layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        adapterAnime = TopsOuevreAdapter(context!!, listTopAnime)
+
+
+        _view.ContainerTopsAnime.layoutManager = layoutManager
+        _view.ContainerTopsAnime.setHasFixedSize(true)
+        _view.ContainerTopsAnime.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.ContainerTopsAnime.adapter = adapterAnime
     }
+
+    private fun getAnimeCardItem(): ArrayList<TopsCardItem> {
+        return object: ArrayList<TopsCardItem>(){
+            init {
+                add(TopsCardItem(Constans.Popular_LIST_Anime, getString(R.string.fragment_tops_review_button_top_anime_popular), R.drawable.topspopularanime))
+                add(TopsCardItem(Constans.Rated_LIST_Anime, getString(R.string.fragment_tops_review_button_top_anime_rated), R.drawable.topsratedanime))
+                add(TopsCardItem(Constans.Upcoming_LIST_Anime, getString(R.string.fragment_tops_review_button_top_anime_upcoming), R.drawable.topsupcominganime))
+            }
+        }
+    }
+
+
 
 }

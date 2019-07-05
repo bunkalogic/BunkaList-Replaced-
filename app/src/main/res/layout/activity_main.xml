@@ -20,9 +20,9 @@
             app:itemBackground="@drawable/bottom_nav_ripple"
             app:itemIconTint="@drawable/bottom_nav_color"
             app:itemTextColor="@drawable/bottom_nav_color"
-            app:elevation="16dp" app:layout_constraintEnd_toEndOf="parent"
+            app:elevation="20dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" android:animateLayoutChanges="true"/>
 
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"

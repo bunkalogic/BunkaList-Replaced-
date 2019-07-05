@@ -58,9 +58,20 @@ object Constans{
     val Rated_LIST = "rated"
     val Upcoming_LIST = "upcoming"
 
-    val Popular_LIST_Series = 3
-    val Rated_LIST_Series = 4
-    val Upcoming_LIST_Series = 5
+    // id top's movies
+    val Popular_LIST_Movies = 1
+    val Rated_LIST_Movies = 2
+    val Upcoming_LIST_Movies = 3
+
+    // id top's series
+    val Popular_LIST_Series = 4
+    val Rated_LIST_Series = 5
+    val Upcoming_LIST_Series = 6
+
+    // id top's anime
+    val Popular_LIST_Anime = 7
+    val Rated_LIST_Anime = 8
+    val Upcoming_LIST_Anime = 9
 
     // filter id status
     val filter_status_name = "status"

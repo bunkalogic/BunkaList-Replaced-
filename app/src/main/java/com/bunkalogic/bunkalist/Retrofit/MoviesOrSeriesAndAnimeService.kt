@@ -192,6 +192,19 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("with_genres") with_genres: String
     ): Call<ResponseSeries>
 
+    @GET("discover/tv")
+    fun getFilterAnime(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("sort_by") sort_by: String,
+        @Query("include_adult") include_adult: Boolean,
+        @Query("page") page: Int,
+        @Query("first_air_date_year") first_air_date_year: Int,
+        @Query("vote_count.gte") vote_count: Int,
+        @Query("with_genres") with_genres: String,
+        @Query("with_original_language") with_original_language: String
+    ): Call<ResponseSeries>
+
 
 
 

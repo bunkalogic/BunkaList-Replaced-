@@ -21,9 +21,7 @@
 
         <activity android:name=".Activities.DetailsActivities.PeopleActivity">
         </activity>
-        <activity android:name=".Activities.DetailsActivities.ListSeriesActivity">
-        </activity>
-        <activity android:name=".Activities.DetailsActivities.ListMovieActivity">
+        <activity android:name=".Activities.DetailsActivities.ListTopsActivity">
         </activity> <!-- Sample Admob id: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"

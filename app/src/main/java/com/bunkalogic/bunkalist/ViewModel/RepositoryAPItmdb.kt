@@ -199,7 +199,7 @@ class RepositoryAPItmdb internal constructor() {
         })
     }
 
-    fun getPopularMovies(page: Int, sortBy: String, callback: OnGetListMoviesCallback){
+    fun getTopsMovies(page: Int, sortBy: String, callback: OnGetListMoviesCallback){
         val call = object : Callback<MoviesResponse> {
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
                 if (response.isSuccessful) {
@@ -232,69 +232,37 @@ class RepositoryAPItmdb internal constructor() {
         }
     }
 
-
-    fun getSeriesPopular(page: Int, callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getPopularSeries(Constans.API_KEY, Locale.getDefault().language, page)
-
-        call.enqueue(object : Callback<ResponseSeries> {
-            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
-                callback.onError()
-                Log.d("RepositoryAPItmdb", "Error connection Series Popular")
-            }
-
+    fun getTopsSeries(page: Int, sortBy: String, callback: OnGetListSeriesCallback){
+        val call = object : Callback<ResponseSeries> {
             override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
-                if (response.isSuccessful){
-                    val popularResponse : ResponseSeries = response.body()!!
-                    callback.onSuccess(popularResponse.page!! ,popularResponse.results!!)
-                }else{
-                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Popular Series")
+                if (response.isSuccessful) {
+                    Log.d("RepositoryAPItmdb", "Is Successful")
+                    val moviesResponse = response.body()
+                    if (moviesResponse != null) {
+                        Log.d("RepositoryAPItmdb", "movieResponse is not null")
+                        callback.onSuccess(moviesResponse.page!!, moviesResponse.results!!)
+                    } else {
+                        callback.onError()
+                    }
+                } else {
+                    callback.onError()
                 }
             }
 
-        })
-    }
-
-
-    fun getSeriesRated(page: Int, callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getRatedSeries(Constans.API_KEY, Locale.getDefault().language, page)
-
-        call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
                 callback.onError()
-                Log.d("RepositoryAPItmdb", "Error connection Series Rated")
+                Log.d("RepositoryAPItmdb", "Error connection Movies List")
             }
+        }
 
-            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
-                if (response.isSuccessful){
-                    val ratedResponse : ResponseSeries = response.body()!!
-                    callback.onSuccess(ratedResponse.page!! , ratedResponse.results!!)
-                }else{
-                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Rated Series")
-                }
-            }
+        when(sortBy){
 
-        })
-    }
+            Constans.Popular_LIST -> moviesOrSeriesAndAnimeService.getPopularSeries(Constans.API_KEY, Locale.getDefault().language, page).enqueue(call)
 
-    fun getSeriesUpcoming(page: Int, callback: OnGetListSeriesCallback){
-        val call = moviesOrSeriesAndAnimeService.getUpcomingSeries(Constans.API_KEY, Locale.getDefault().language, page)
+            Constans.Rated_LIST -> moviesOrSeriesAndAnimeService.getRatedSeries(Constans.API_KEY, Locale.getDefault().language, page).enqueue(call)
 
-        call.enqueue(object : Callback<ResponseSeries> {
-            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
-                callback.onError()
-                Log.d("RepositoryAPItmdb", "Error connection Series Rated")
-            }
-
-            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
-                if (response.isSuccessful){
-                    val ratedResponse : ResponseSeries = response.body()!!
-                    callback.onSuccess(ratedResponse.page!!, ratedResponse.results!!)
-                }else{
-                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Rated Series")
-                }
-            }
-
-        })
+            Constans.Upcoming_LIST -> moviesOrSeriesAndAnimeService.getUpcomingSeries(Constans.API_KEY, Locale.getDefault().language, page).enqueue(call)
+        }
     }
 
     fun getRecommendationsMovies(Id: Int, callback: OnGetListMoviesCallback){
@@ -469,6 +437,29 @@ class RepositoryAPItmdb internal constructor() {
     fun getSeriesListFilter(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int){
         val call = moviesOrSeriesAndAnimeService
             .getSearchFilterSeriesAndAnime(Constans.API_KEY, Locale.getDefault().language, sort_By, false, page, year, withGenres)
+
+        call.enqueue(object : Callback<ResponseSeries> {
+            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection MoviesFilter")
+            }
+
+            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
+                if (response.isSuccessful){
+                    val seriesFilter : ResponseSeries = response.body()!!
+                    callback.onSuccess(seriesFilter.page!!,seriesFilter.results!!)
+                }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Filter")
+                }
+            }
+
+        })
+    }
+
+
+    fun getAnimeTops(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int, vote_count: Int){
+        val call = moviesOrSeriesAndAnimeService
+            .getFilterAnime(Constans.API_KEY, Locale.getDefault().language, sort_By, false, page, year, vote_count, withGenres, Locale.JAPANESE.language)
 
         call.enqueue(object : Callback<ResponseSeries> {
             override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
