@@ -38,6 +38,9 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ItemDetailsActivity : AppCompatActivity() {
@@ -56,6 +59,8 @@ class ItemDetailsActivity : AppCompatActivity() {
     // I use these 2 variables to collect the data correctly if it is an anime
     val bundle = Bundle()
     var isAnime : Boolean = false
+
+    private var newDate = ""
 
 
     private val mAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
@@ -139,10 +144,12 @@ class ItemDetailsActivity : AppCompatActivity() {
     private fun isMovie(){
         getMovieContentForID(object: OnGetMovieCallback {
             override fun onSuccess(movie: Movie) {
+                stringDateFormat(movie.releaseDate!!)
+
                 textViewTitleDetails.text = movie.title
 
                 textViewLabelDate.visibility = View.VISIBLE
-                textViewDateRelease.text = movie.releaseDate
+                textViewDateRelease.text = newDate
 
                 summaryLabel.visibility = View.VISIBLE
                 textViewSearchDetailsAllDescription.text = movie.overview
@@ -342,11 +349,13 @@ class ItemDetailsActivity : AppCompatActivity() {
                     ListGenresSeriesAndAnime(series)
                     textViewLabelGenres.visibility = View.VISIBLE
 
+                    stringDateFormat(series.firstAirDate!!)
+
 
                         textViewTitleDetails.text = series.name
 
                         textViewLabelDate.visibility = View.VISIBLE
-                        textViewDateRelease.text = series.firstAirDate
+                        textViewDateRelease.text = newDate
 
                         summaryLabel.visibility = View.VISIBLE
                         textViewSearchDetailsAllDescription.text = series.overview
@@ -586,6 +595,20 @@ class ItemDetailsActivity : AppCompatActivity() {
     private fun showTrailer(url: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
+    }
+
+    //It is responsible for converting dates a more used format
+    private fun stringDateFormat(dateString : String){
+        val conver = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        val date = conver.parse(dateString)
+
+        val newConver = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+
+        val newFormat = newConver.format(date)
+
+        newDate = newFormat
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

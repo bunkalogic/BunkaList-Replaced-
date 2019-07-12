@@ -1,3 +1,3 @@
-package com.bunkalogic.bunkalist.Others
+package com.bunkalogic.bunkalist.db
 
 data class Shard(internal var count: Int)

@@ -93,7 +93,7 @@
 
             <View android:layout_width="45dp"
                   android:layout_height="35dp"
-                  android:background="#A77E57C2" app:layout_constraintStart_toStartOf="parent"
+                  android:background="#1A7E57C2" app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintTop_toTopOf="parent" android:id="@+id/view4"/>
 
             <TextView
@@ -107,9 +107,9 @@
                     android:shadowDy="3"
                     android:shadowRadius="3"
                     android:padding="4dp"
-                    android:textSize="24sp"
+                    android:textSize="28sp"
                     app:layout_constraintTop_toTopOf="@+id/view4" app:layout_constraintBottom_toBottomOf="@+id/view4"
-                    app:layout_constraintStart_toStartOf="@+id/view4" android:layout_marginStart="1dp"/>
+                    app:layout_constraintStart_toStartOf="@+id/view4" android:layout_marginStart="0dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

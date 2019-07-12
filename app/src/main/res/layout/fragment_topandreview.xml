@@ -36,7 +36,7 @@
 
         <androidx.core.widget.NestedScrollView
                 android:layout_width="0dp"
-                android:layout_height="230dp" android:fillViewport="true"
+                android:layout_height="250dp" android:fillViewport="true"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLabelTopMovies"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
                 android:layout_marginEnd="8dp"/>
         <androidx.core.widget.NestedScrollView
                 android:layout_width="0dp"
-                android:layout_height="230dp" android:fillViewport="true"
+                android:layout_height="250dp" android:fillViewport="true"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLabelTopAnime"
                 app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,7 @@
 
         <androidx.core.widget.NestedScrollView
                 android:layout_width="0dp"
-                android:layout_height="230dp" android:fillViewport="true"
+                android:layout_height="250dp" android:fillViewport="true"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLabelTopSeries"
                 app:layout_constraintStart_toStartOf="parent"

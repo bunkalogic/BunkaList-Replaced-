@@ -197,11 +197,9 @@ class BaseActivity : AppCompatActivity() {
 
         // listen to update
         installStateUpdatedListener = InstallStateUpdatedListener { state ->
-            when {
-                state.installStatus() == InstallStatus.DOWNLOADED -> popupSnackbarForCompleteUpdate()
-                state.installStatus() == InstallStatus.INSTALLED -> appUpdateManager.unregisterListener(installStateUpdatedListener)
-                else -> Log.d("BaseActivity", "InstallStateUpdatedListener: state: " + state.installStatus())
-            }
+            if (state.installStatus() == InstallStatus.DOWNLOADED) popupSnackbarForCompleteUpdate()
+            else if (state.installStatus() == InstallStatus.INSTALLED) appUpdateManager.unregisterListener(installStateUpdatedListener)
+            else Log.d("BaseActivity", "InstallStateUpdatedListener: state: " + state.installStatus())
         }
 
 

@@ -12,7 +12,7 @@ class TimelineMessage{
     var numSeason: String? = null
     var numEpisode: String? = null
     var content: String? = null
-    var numPositive: String? = null
+    var numPositive: Int = 0
     var isSpoiler: Boolean? = false
     var tokenId: String? = null
 
@@ -27,7 +27,7 @@ class TimelineMessage{
         numSeason: String,
         numEpisode: String,
         content: String,
-        numPositive: String,
+        numPositive: Int,
         isSpoiler: Boolean,
         tokenId: String
     ) {
@@ -56,7 +56,7 @@ class TimelineMessage{
         result["numSeason"] = numSeason!!
         result["numEpisode"] = numEpisode!!
         result["content"] = content!!
-        result["numPositive"] = numPositive!!
+        result["numPositive"] = numPositive
         result["isSpoiler"] = isSpoiler!!
         result["tokenId"] = tokenId!!
         return result

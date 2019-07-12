@@ -46,11 +46,6 @@ class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
         searchViewModelAPItmdb = ViewModelProviders.of(ctx as androidx.fragment.app.FragmentActivity).get(ViewModelAPItmdb::class.java)
     }
 
-    //TODO en el constructor de la clase que reciba  el Query
-    //val query = FirebaseFirestore.getInstance()
-    //    .collection("Users/${preferences.userId}/RatingList")
-    //    .whereEqualTo("typeOeuvre", 1)
-    //    .orderBy("finalRate", Query.Direction.DESCENDING)
 
     val options: FirestoreRecyclerOptions<ItemListRating> = FirestoreRecyclerOptions.Builder<ItemListRating>()
         .setQuery(query,ItemListRating::class.java)

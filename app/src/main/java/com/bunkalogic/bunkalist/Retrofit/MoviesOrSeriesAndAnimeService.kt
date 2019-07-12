@@ -2,8 +2,7 @@ package com.bunkalogic.bunkalist.Retrofit
 
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetMovieListFilterCallback
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetSeriesListFilterCallback
-import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
-import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
+import com.bunkalogic.bunkalist.Retrofit.Response.*
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResponseUpcoming
@@ -12,19 +11,17 @@ import com.bunkalogic.bunkalist.Retrofit.Response.People.*
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Query
-import retrofit2.http.Path
-import com.bunkalogic.bunkalist.Retrofit.Response.TrailerResponse
-
-
-
-
+import retrofit2.http.*
 
 
 interface MoviesOrSeriesAndAnimeService {
 
     // https://api.themoviedb.org/3/search/multi?api_key=7bcf40aff5d7be80e294d763234a6930&language=en-US&query=cowboy%20bebop&page=1&include_adult=false
+
+    @GET("authentication/guest_session/new")
+    fun getGuestSession(
+        @Query("api_key") apiKey: String
+    ): Call<GuestSession>
 
     @GET("search/multi")
     fun getSearchAll(
@@ -204,6 +201,35 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("with_genres") with_genres: String,
         @Query("with_original_language") with_original_language: String
     ): Call<ResponseSeries>
+
+
+    @GET("discover/tv")
+    fun getTopsSeries(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("sort_by") sort_by: String,
+        @Query("include_adult") include_adult: Boolean,
+        @Query("page") page: Int,
+        @Query("without_genres") without_genres: String,
+        @Query("vote_count.gte") vote_count: Int
+    ): Call<ResponseSeries>
+
+
+    @POST("movie/{movie_id}/rating")
+    fun postRateMovie(
+        @Path("movie_id") movie_id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("guest_session_id") guest_session_id: String,
+        @Body ratePost : RatePost
+    ): Call<RatePost>
+
+    @POST("tv/{tv_id}/rating")
+    fun postRateSeriesAndAnime(
+        @Path("tv_id") tv_id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("guest_session_id") guest_session_id: String,
+        @Body ratePost : RatePost
+    ): Call<RatePost>
 
 
 

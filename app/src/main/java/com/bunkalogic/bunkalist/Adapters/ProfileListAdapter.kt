@@ -30,7 +30,6 @@ import com.bumptech.glide.util.Util.getSnapshot
 
 
 
-//TODO cambiar el adapter por FirestoreRecyclerAdapter
 
 class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): androidx.recyclerview.widget.RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
 

@@ -97,11 +97,11 @@ class ListTopsActivity : AppCompatActivity() {
             }
 
             Constans.Popular_LIST_Series -> {
-                getSeriesList(Constans.Popular_LIST, currentPage + 1)
+                isSeriesPopular(currentPage + 1)
             }
 
             Constans.Rated_LIST_Series -> {
-                getSeriesList(Constans.Rated_LIST, currentPage + 1)
+                isSeriesRated(currentPage + 1)
             }
 
             Constans.Upcoming_LIST_Series -> {
@@ -150,7 +150,7 @@ class ListTopsActivity : AppCompatActivity() {
         })
     }
 
-    // Is responsible for showing the lists of the series
+    // Is responsible for showing the lists of the series upcoming
     private fun getSeriesList(typeList: String, page: Int){
         isFetching = true
         searchViewModel.getSeriesList(page, typeList, object :
@@ -177,10 +177,81 @@ class ListTopsActivity : AppCompatActivity() {
     }
 
 
+    private fun getSeriesListPopular(page: Int,callback: OnGetSeriesListFilterCallback) {
+        //pass the filtering data
+        searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
+        searchViewModel.getTopsSeries(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), 7)
+
+
+
+    }
+
+    // Responsible for displaying an series list Popular
+    private fun isSeriesPopular(page: Int){
+        isFetching = true
+        getSeriesListPopular(page, object : OnGetSeriesListFilterCallback{
+            override fun onSuccess(page: Int, series: List<ResultSeries>) {
+                if (adapterSeries == null){
+                    adapterSeries = TopListSeriesAdapter(this@ListTopsActivity, series as ArrayList)
+                    RecyclerViewTops.adapter = adapterSeries
+                }else{
+                    if (page == 1){
+                        adapterSeries?.clearList()
+                    }
+                    adapterSeries?.appendSeries(series)
+                }
+
+                currentPage = page
+                isFetching = false
+            }
+
+            override fun onError() {
+                toast("Please check your internet connection")
+            }
+
+        })
+    }
+
+    private fun getSeriesListRated(page: Int,callback: OnGetSeriesListFilterCallback) {
+        //pass the filtering data
+        searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
+        searchViewModel.getTopsSeries(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), 50)
+
+
+
+    }
+
+    // Responsible for displaying an anime list Rated
+    private fun isSeriesRated(page: Int){
+        isFetching = true
+        getSeriesListRated(page, object : OnGetSeriesListFilterCallback{
+            override fun onSuccess(page: Int, series: List<ResultSeries>) {
+                if (adapterSeries == null){
+                    adapterSeries = TopListSeriesAdapter(this@ListTopsActivity, series as ArrayList)
+                    RecyclerViewTops.adapter = adapterSeries
+                }else{
+                    if (page == 1){
+                        adapterSeries?.clearList()
+                    }
+                    adapterSeries?.appendSeries(series)
+                }
+
+                currentPage = page
+                isFetching = false
+            }
+
+            override fun onError() {
+                toast("Please check your internet connection")
+            }
+
+        })
+    }
+
+
     private fun getAnimeListPopular(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 4)
+        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 3)
 
 
 
@@ -188,6 +259,7 @@ class ListTopsActivity : AppCompatActivity() {
 
     // Responsible for displaying an anime list Popular
     private fun isAnimePopular(page: Int){
+        isFetching = true
         getAnimeListPopular(page, object : OnGetSeriesListFilterCallback{
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 if (adapterSeries == null){
@@ -215,7 +287,7 @@ class ListTopsActivity : AppCompatActivity() {
     private fun getAnimeListRated(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 4)
+        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 7)
 
 
 
@@ -223,6 +295,7 @@ class ListTopsActivity : AppCompatActivity() {
 
     // Responsible for displaying an anime list Rated
     private fun isAnimeRated(page: Int){
+        isFetching = true
         getAnimeListRated(page, object : OnGetSeriesListFilterCallback{
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 if (adapterSeries == null){
@@ -259,6 +332,7 @@ class ListTopsActivity : AppCompatActivity() {
 
     // Responsible for displaying an anime list Upcoming
     private fun isAnimeUpcoming(page: Int){
+        isFetching = true
         getAnimeListUpcoming(page, object : OnGetSeriesListFilterCallback{
             override fun onSuccess(page: Int, series: List<ResultSeries>) {
                 if (adapterSeries == null){

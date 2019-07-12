@@ -12,6 +12,11 @@ class ViewModelAPItmdb(app: Application) : AndroidViewModel(app)  {
         searchRepository = RepositoryAPItmdb()
     }
 
+    fun getGuestSession(callback: OnGetGuestSessionCallback){
+        searchRepository.getGuestSession(callback)
+    }
+
+
     fun getSearchAll(title: String, callback: OnGetSearchCallback){
         searchRepository.getAll(title, callback)
     }
@@ -86,6 +91,18 @@ class ViewModelAPItmdb(app: Application) : AndroidViewModel(app)  {
 
     fun getTopsAnime(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withGenres: String, year: Int, vote_count: Int){
         searchRepository.getAnimeTops(callback, sort_By, page, withGenres, year, vote_count)
+    }
+
+    fun getTopsSeries(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withoutGenres: String, vote_count: Int){
+        searchRepository.getSeriesTops(callback, sort_By, page, withoutGenres, vote_count)
+    }
+
+    fun postMovie(movieId: Int, valueRate: Double){
+        searchRepository.postRateMovie(movieId, valueRate)
+    }
+
+    fun postSeriesAndAnime(serieId: Int, valueRate: Double){
+        searchRepository.postRateSeriesAndAnime(serieId, valueRate)
     }
 
 

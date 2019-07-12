@@ -208,7 +208,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
         _view.recyclerAllList.adapter = adapter
     }
 
-    //Todo: refactorizar el codigo del ListProfileFragment para que funcione con el FirestoreRecyclerAdapter y agregar la funcion de borrar un con LongClick
+
     private fun setUpRecyclerFirestore(query : Query){
         val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
 
@@ -250,9 +250,19 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 Constans.MOVIE_LIST -> subscribeToProfileListMovieFirestoreUI(userId, Constans.typeOuevre, Constans.MOVIE_LIST, Constans.filter_rating_final_name, orderDesc)
                 Constans.SERIE_LIST -> subscribeToProfileListSeriesFirestoreUI(userId, Constans.typeOuevre, Constans.SERIE_LIST, Constans.filter_rating_final_name, orderDesc)
                 Constans.ANIME_LIST -> subscribeToProfileListAnimeFirestoreUI(userId, Constans.typeOuevre, Constans.ANIME_LIST, Constans.filter_rating_final_name, orderDesc)
-                Constans.MOVIE_TOP -> subscribeToProfileTopMovie(userId)
-                Constans.SERIE_TOP -> subscribeToProfileTopSeries(userId)
-                Constans.ANIME_TOP -> subscribeToProfileTopAnime(userId)
+
+                Constans.MOVIE_TOP ->{
+                    setUpRecycler()
+                    subscribeToProfileTopMovie(userId)
+                }
+                Constans.SERIE_TOP ->{
+                    setUpRecycler()
+                    subscribeToProfileTopSeries(userId)
+                }
+                Constans.ANIME_TOP ->{
+                    setUpRecycler()
+                    subscribeToProfileTopAnime(userId)
+                }
             }
         }else{
             when(typeList){

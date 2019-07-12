@@ -286,7 +286,6 @@ class SearchFragment : androidx.fragment.app.Fragment() {
                 }
             }
             Constans.filter_search_type_anime_id -> {
-                //TODO: comprobar por que al filtrar una lista con el tipo anime, a la segunda vez no devuelve los datos correctament
                if (genresList.contains(Constans.filter_search_genres_movies_animation)){
                    Log.d("FragmentSearch", "contains animation genre")
                }else{

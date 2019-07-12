@@ -66,6 +66,16 @@ class TimeLineFragment : androidx.fragment.app.Fragment() {
 
    //}
 
+    override fun onStart() {
+        super.onStart()
+        adapterGlobal.adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapterGlobal.adapter.stopListening()
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -74,12 +84,10 @@ class TimeLineFragment : androidx.fragment.app.Fragment() {
         setUpCurrentUser()
         //setUpTimeLineDB()
         //setUpTabLayout()
+        setUpRecyclerViewGlobal()
         setUpFab()
         //setUpRecyclerView()
-        setUpRecyclerViewGlobal()
         setUpSwipeRefreshLayout()
-
-        subscribeToTimelineMessageGlobal()
         subscribeToNewMessageTimeLineGlobal()
 
         //isGlobalOrPersonal()
@@ -106,6 +114,14 @@ class TimeLineFragment : androidx.fragment.app.Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             _view.swipeRefreshTimeline.setColorSchemeColors(resources.getColor(R.color.colorPrimaryDark, resources.newTheme()))
         }
+        _view.swipeRefreshTimeline.setOnRefreshListener {
+            _view.swipeRefreshTimeline.isRefreshing = false
+            adapterGlobal.adapter.notifyDataSetChanged()
+        }
+
+
+
+
     }
 
     // root : Users/uid/username
@@ -219,15 +235,18 @@ class TimeLineFragment : androidx.fragment.app.Fragment() {
 
     // implementing the adapter in the recyclerView
     private fun setUpRecyclerViewGlobal(){
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        val query = timelineGlobalDBRef.orderBy("sentAt", Query.Direction.DESCENDING)
 
-        adapterGlobal = TimelineMessageAdapter(context!!,timelineListGlobal)
+        adapterGlobal = TimelineMessageAdapter(context!!, query)
 
 
         _view.recyclerTimeline.setHasFixedSize(true)
         _view.recyclerTimeline.layoutManager = layoutManager
-        _view.recyclerTimeline.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
-        _view.recyclerTimeline.adapter = adapterGlobal
+        _view.recyclerTimeline.itemAnimator = DefaultItemAnimator()
+        _view.recyclerTimeline.adapter = adapterGlobal.adapter
+
+        adapterGlobal.adapter.notifyDataSetChanged()
 
     }
 
@@ -253,36 +272,6 @@ class TimeLineFragment : androidx.fragment.app.Fragment() {
 //
     //}
 
-    private fun subscribeToTimelineMessageGlobal(){
-        tlmessageGlobalSubscription = timelineGlobalDBRef
-            .orderBy("sentAt", Query.Direction.DESCENDING)
-            .addSnapshotListener(object: java.util.EventListener, EventListener<QuerySnapshot>{
-                override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?){
-                    exception?.let {
-                        Log.d("TimelineMessage", "Exception Global")
-                        return
-                    }
-                    snapshot?.let {
-                        timelineListGlobal.clear()
-                        val message = it.toObjects(TimelineMessage::class.java)
-                        timelineListGlobal.addAll(message)
-
-                        _view.swipeRefreshTimeline.setOnRefreshListener {
-                            _view.swipeRefreshTimeline.isRefreshing = true
-                            adapterGlobal.notifyDataSetChanged()
-                            _view.swipeRefreshTimeline.isRefreshing = false
-                        }
-                        adapterGlobal.notifyDataSetChanged()
-
-                        //_view.swipeRefreshTimeline.isRefreshing = false
-
-                    }
-                }
-
-            })
-
-
-    }
 
     // Using RxAndroid to make the minimum calls to the database
     //private fun subscribeToNewMessageTimeLine(){

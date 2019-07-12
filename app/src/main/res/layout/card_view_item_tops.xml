@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
-              android:layout_width="370dp"
+              android:layout_width="390dp"
               android:animateLayoutChanges="true"
-              android:layout_height="230dp">
+              android:layout_height="250dp">
 
 
 
@@ -22,14 +22,39 @@
                 android:layout_height="match_parent">
 
 
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/imageViewPosterTops1"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline10"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageViewPosterTops"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
-
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/imageViewPosterTops2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline8"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/guideline10"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/imageViewPosterTops3"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/guideline10"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/imageViewPosterTops4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline8"
+                    app:layout_constraintTop_toTopOf="@+id/guideline10"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
 
             <View android:layout_width="match_parent" android:layout_height="match_parent"
@@ -52,6 +77,16 @@
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginTop="8dp" android:layout_marginEnd="8dp" android:layout_marginStart="16dp"
                     android:textAlignment="viewStart"/>
+            <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:id="@+id/guideline8"
+                                                        android:orientation="vertical"
+                                                        app:layout_constraintGuide_percent="0.5"/>
+            <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:id="@+id/guideline10"
+                                                        android:orientation="horizontal"
+                                                        app:layout_constraintGuide_percent="0.5"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,14 @@
 package com.bunkalogic.bunkalist.Others
 
-import androidx.annotation.NonNull
-import com.google.android.gms.tasks.Continuation
+import com.bunkalogic.bunkalist.db.Counter
+import com.bunkalogic.bunkalist.db.Shard
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.*
+import kotlin.math.floor
 
 
-class SolutionCounters {
-
-    private val db: FirebaseFirestore? = null
-
+class SolutionCounters(val db: FirebaseFirestore) {
 
 
 
@@ -41,7 +39,7 @@ class SolutionCounters {
 
     // [START increment_counter]
     fun incrementCounter(ref: DocumentReference, numShards: Int): Task<Void> {
-        val shardId = Math.floor(Math.random() * numShards).toInt()
+        val shardId = floor(Math.random() * numShards).toInt()
         val shardRef = ref.collection("shards").document(shardId.toString())
 
         return shardRef.update("count", FieldValue.increment(1))
@@ -51,7 +49,7 @@ class SolutionCounters {
     // [START get_count]
     fun getCount(ref: DocumentReference): Task<Int> {
         // Sum the count of each shard in the subcollection
-        return ref.collection("").get()
+        return ref.collection("shards").get()
             .continueWith { task ->
                 var count = 0
                 for (snap in task.result!!) {
@@ -62,5 +60,4 @@ class SolutionCounters {
             }
     }
     // [END get_count]
-
 }

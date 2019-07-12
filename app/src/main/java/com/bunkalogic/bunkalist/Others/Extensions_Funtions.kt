@@ -7,6 +7,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
+import java.util.*
 import java.util.regex.Pattern
 
 fun EditText.validate(validation: (String) -> Unit){

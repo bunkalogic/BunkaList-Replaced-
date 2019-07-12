@@ -54,7 +54,7 @@ class TimeLineDialog : androidx.fragment.app.DialogFragment(){
 
                 if(textContent.isNotEmpty() && textContent != "text"  && textContent != "text1234" && currentUser.displayName!!.isNotEmpty()){
 
-                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,"", isSpoiler, token)
+                    val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,0, isSpoiler, token)
 
                     RxBus.publish(NewTimeLineEventGlobal(tlmessage))
                 }

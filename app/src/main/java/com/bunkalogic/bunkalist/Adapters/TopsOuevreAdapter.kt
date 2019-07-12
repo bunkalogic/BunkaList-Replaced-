@@ -36,7 +36,7 @@ class TopsOuevreAdapter(private val ctx: Context,val mValues: List<TopsCardItem>
         val id = mItem.id
         val title = mItem.title
 
-        //TODO: Agregar la logica para vaya a tipo de top u otro
+
 
         holder.itemView.setOnClickListener {
             ctx.startActivity(ctx.intentFor<ListTopsActivity>(
@@ -52,7 +52,10 @@ class TopsOuevreAdapter(private val ctx: Context,val mValues: List<TopsCardItem>
 
     inner class ViewHolder(mView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(mView){
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleTops)
-        private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPosterTops)
+        private val imageViewPoster1: ImageView = mView.findViewById(R.id.imageViewPosterTops1)
+        private val imageViewPoster2: ImageView = mView.findViewById(R.id.imageViewPosterTops2)
+        private val imageViewPoster3: ImageView = mView.findViewById(R.id.imageViewPosterTops3)
+        private val imageViewPoster4: ImageView = mView.findViewById(R.id.imageViewPosterTops4)
 
         fun bind(mItem: TopsCardItem){
 
@@ -60,9 +63,28 @@ class TopsOuevreAdapter(private val ctx: Context,val mValues: List<TopsCardItem>
 
 
             Glide.with(ctx)
-                .load(mItem.image)
+                .load(mItem.image1)
+                .placeholder(R.color.colorPrimary)
                 .centerCrop()
-                .into(imageViewPoster)
+                .into(imageViewPoster1)
+
+            Glide.with(ctx)
+                .load(mItem.image2)
+                .placeholder(R.color.colorPrimary)
+                .centerCrop()
+                .into(imageViewPoster2)
+
+            Glide.with(ctx)
+                .load(mItem.image3)
+                .placeholder(R.color.colorPrimary)
+                .centerCrop()
+                .into(imageViewPoster3)
+
+            Glide.with(ctx)
+                .load(mItem.image4)
+                .placeholder(R.color.colorPrimary)
+                .centerCrop()
+                .into(imageViewPoster4)
 
         }
 

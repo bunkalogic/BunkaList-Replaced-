@@ -10,10 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.lifecycle.ViewModelProviders
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
+import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetGuestSessionCallback
 import com.bunkalogic.bunkalist.RxBus.RxBus
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.bunkalogic.bunkalist.ViewModel.ViewModelAPItmdb
 import com.bunkalogic.bunkalist.db.ItemListRating
 import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +38,8 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
     var typeInt: Int = 0
     var statusInt: Int = 0
 
+    private lateinit var searchViewModel: ViewModelAPItmdb
+
 
 
     override fun onStart() {
@@ -50,6 +55,8 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.FullScreenDialogStyle)
+        searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
+
         val args = arguments
         val Id = args?.getInt("id")
         val isAnime = args?.getBoolean("anime")
@@ -210,6 +217,13 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
                     typeInt
                 )
                 RxBus.publish(NewListRating(itemRating))
+
+                // post the rate in TMDB
+                if (preferences.userGuestSesionId!!.isEmpty()){
+                    createGuestSession()
+                }
+                Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId}")
+                postRateMovieOrSeries(result.toDouble())
                 dismiss()
             }else{
                 val itemRatingGeneral = ItemListRating(
@@ -228,11 +242,45 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
                     typeInt
                 )
                 RxBus.publish(NewListRating(itemRatingGeneral))
+                // post the rate in TMDB
+                if (preferences.userGuestSesionId!!.isEmpty()){
+                    createGuestSession()
+                }
+                Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId}")
+                postRateMovieOrSeries(ratingGeneral.toDouble())
+
                 dismiss()
             }
 
 
 
+        }
+    }
+
+
+    private fun createGuestSession(){
+            searchViewModel.getGuestSession(object : OnGetGuestSessionCallback{
+                override fun onSuccess(guestId: String) {
+                    preferences.userGuestSesionId = guestId
+                }
+
+                override fun onError() {
+                    Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId} ")
+                }
+
+            })
+    }
+
+    private fun postRateMovieOrSeries(rate: Double){
+        val args = arguments
+        val type = args?.getString("type")
+        val Id = args?.getInt("id")
+
+        if (type == "movie"){
+            searchViewModel.postMovie(Id!!, rate)
+        }
+        if (type == "tv"){
+            searchViewModel.postSeriesAndAnime(Id!!, rate)
         }
     }
 }

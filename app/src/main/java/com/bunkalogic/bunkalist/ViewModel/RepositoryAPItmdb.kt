@@ -4,14 +4,13 @@ import android.util.Log
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.Retrofit.*
 import com.bunkalogic.bunkalist.Retrofit.Callback.*
-import com.bunkalogic.bunkalist.Retrofit.Response.GenresResponse
+import com.bunkalogic.bunkalist.Retrofit.Response.*
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.People.*
-import com.bunkalogic.bunkalist.Retrofit.Response.ResponseSearchAll
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
-import com.bunkalogic.bunkalist.Retrofit.Response.TrailerResponse
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +29,39 @@ class RepositoryAPItmdb internal constructor() {
         moviesOrSeriesAndAnimeService = moviesOrSeriesAndAnimeClient.getMoviesOrSeriesAndAnimeService()
 
     }
+
+
+    fun getGuestSession(callback : OnGetGuestSessionCallback){
+        val call = moviesOrSeriesAndAnimeService.getGuestSession(Constans.API_KEY)
+
+        call.enqueue(object: Callback<GuestSession>{
+            override fun onFailure(call: Call<GuestSession>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection")
+            }
+
+            override fun onResponse(call: Call<GuestSession>, response: Response<GuestSession>) {
+               if (response.isSuccessful){
+                   val guestSessionResponse : GuestSession = response.body()!!
+                   if (guestSessionResponse.success!! && preferences.userGuestSesionId!!.isEmpty()){
+                       callback.onSuccess(guestSessionResponse.guestSessionId!!)
+                   }else{
+                       Log.d("RepositoryAPItmdb", "Guest Session: ${preferences.userGuestSesionId}")
+                       Log.d("RepositoryAPItmdb", "Error cant create GuestSession")
+                   }
+               }else{
+                   Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful GuestSession")
+               }
+            }
+
+        })
+
+    }
+
+
+
+
+
 
     fun getAll(title: String, callback: OnGetSearchCallback){
         val call = moviesOrSeriesAndAnimeService.getSearchAll(Constans.API_KEY,Locale.getDefault().language, title)
@@ -472,12 +504,81 @@ class RepositoryAPItmdb internal constructor() {
                     val seriesFilter : ResponseSeries = response.body()!!
                     callback.onSuccess(seriesFilter.page!!,seriesFilter.results!!)
                 }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Anime Tops Filter")
+                }
+            }
+
+        })
+    }
+
+
+    fun getSeriesTops(callback: OnGetSeriesListFilterCallback, sort_By: String, page: Int, withoutGenres: String,  vote_count: Int){
+        val call = moviesOrSeriesAndAnimeService
+            .getTopsSeries(Constans.API_KEY, Locale.getDefault().language, sort_By, false, page, withoutGenres, vote_count)
+
+        call.enqueue(object : Callback<ResponseSeries> {
+            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection MoviesFilter")
+            }
+
+            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
+                if (response.isSuccessful){
+                    val seriesFilter : ResponseSeries = response.body()!!
+                    callback.onSuccess(seriesFilter.page!!,seriesFilter.results!!)
+                }else{
                     Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Filter")
                 }
             }
 
         })
     }
+
+    fun postRateMovie(movieId: Int, valueRate: Double){
+        val postRate = RatePost(valueRate)
+
+        val call = moviesOrSeriesAndAnimeService
+            .postRateMovie(movieId, Constans.API_KEY, preferences.userGuestSesionId!!, postRate)
+
+        call.enqueue(object : Callback<RatePost>{
+            override fun onFailure(call: Call<RatePost>, t: Throwable) {
+                Log.d("RepositoryAPItmdb", "Error post Movie")
+            }
+
+            override fun onResponse(call: Call<RatePost>, response: Response<RatePost>) {
+                if (response.isSuccessful){
+                    Log.d("RepositoryAPItmdb", "Is postRateMovies successful: ${response.body().toString()}")
+                }else{
+                    Log.d("RepositoryAPItmdb", "Is postRateMovies not successful: ${response.body().toString()}")
+                }
+            }
+
+        })
+    }
+
+    fun postRateSeriesAndAnime(serieId: Int, valueRate: Double){
+        val postRate = RatePost(valueRate)
+
+        val call = moviesOrSeriesAndAnimeService
+            .postRateSeriesAndAnime(serieId, Constans.API_KEY, preferences.userGuestSesionId!!, postRate)
+
+        call.enqueue(object : Callback<RatePost>{
+            override fun onFailure(call: Call<RatePost>, t: Throwable) {
+                Log.d("RepositoryAPItmdb", "Error post Serie and Anime")
+            }
+
+            override fun onResponse(call: Call<RatePost>, response: Response<RatePost>) {
+                if (response.isSuccessful){
+                    Log.d("RepositoryAPItmdb", "Is postRateSeries successful: ${response.body().toString()}")
+                }else{
+                    Log.d("RepositoryAPItmdb", "Is postRateSeries not successful: ${response.body().toString()}")
+                }
+            }
+
+        })
+    }
+
+
 
 
 
