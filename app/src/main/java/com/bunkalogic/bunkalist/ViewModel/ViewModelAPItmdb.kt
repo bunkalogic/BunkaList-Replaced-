@@ -105,6 +105,19 @@ class ViewModelAPItmdb(app: Application) : AndroidViewModel(app)  {
         searchRepository.postRateSeriesAndAnime(serieId, valueRate)
     }
 
+    fun getNetwrokTv(netId: Int, callback: OnGetNetworkTVCallback){
+        searchRepository.getNetworkSeriesTv(netId, callback)
+    }
+
+
+    fun getMovieSimilar(Id: Int, callback: OnGetListMoviesCallback){
+        searchRepository.getSimilarMovies(Id, callback)
+    }
+
+    fun getSeriesAndAnimeSimilar(Id: Int, callback: OnGetListSeriesCallback){
+        searchRepository.getSimilarSeries(Id, callback)
+    }
+
 
 
 

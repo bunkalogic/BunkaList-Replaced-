@@ -178,7 +178,6 @@ class BaseActivity : AppCompatActivity() {
     private fun checkNewUpdates(){
         appUpdateManager = AppUpdateManagerFactory.create(this)
 
-        appUpdateManager.registerListener(installStateUpdatedListener)// Error: that was originally registered here. Are you missing a call to unregisterReceiver()?
 
         appUpdateManager.appUpdateInfo.addOnSuccessListener {
             if (it.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
@@ -201,6 +200,8 @@ class BaseActivity : AppCompatActivity() {
             else if (state.installStatus() == InstallStatus.INSTALLED) appUpdateManager.unregisterListener(installStateUpdatedListener)
             else Log.d("BaseActivity", "InstallStateUpdatedListener: state: " + state.installStatus())
         }
+
+        appUpdateManager.registerListener(installStateUpdatedListener)// Error: that was originally registered here. Are you missing a call to unregisterReceiver()?
 
 
     }

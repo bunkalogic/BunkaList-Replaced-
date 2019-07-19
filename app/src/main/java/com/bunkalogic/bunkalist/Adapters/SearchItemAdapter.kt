@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.ItemDetailsActivity
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.PeopleActivity
 import com.bunkalogic.bunkalist.Dialog.AddListDialog
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
@@ -19,7 +20,7 @@ import com.bunkalogic.bunkalist.Retrofit.Response.ResultSearchAll
 import org.jetbrains.anko.intentFor
 
 
-class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): androidx.recyclerview.widget.RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
+class SearchItemAdapter(private val ctx: Context, private var mValues: List<ResultSearchAll>?): RecyclerView.Adapter<SearchItemAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,19 +38,37 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val mItem = mValues!![position]
 
-        val id = mItem.id
-        val type = mItem.mediaType
-        val title = mItem.title
-        val name =  mItem.name
+        if (mItem.mediaType == "movie" || mItem.mediaType == "tv"){
+            val id = mItem.id
+            val type = mItem.mediaType
+            val title = mItem.title
+            val name =  mItem.name
 
-        holder.itemView.setOnClickListener {
-            ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
-                "id" to id,
-                "type" to type,
-                "title" to title,
-                "name" to name
-            ))
+            holder.itemView.setOnClickListener {
+                ctx.startActivity(ctx.intentFor<ItemDetailsActivity>(
+                    "id" to id,
+                    "type" to type,
+                    "title" to title,
+                    "name" to name
+                ))
+            }
         }
+
+        if (mItem.mediaType == "person"){
+
+                val personName = mItem.name
+                val personId = mItem.id
+
+                holder.itemView.setOnClickListener {
+                    ctx.startActivity(ctx.intentFor<PeopleActivity>(
+                        "name" to personName,
+                        "idPerson" to personId
+                    ))
+                }
+
+
+        }
+
 
             holder.bind(mItem)
     }
@@ -60,73 +79,96 @@ class SearchItemAdapter(private val ctx: Context, private var mValues: List<Resu
    }
 
 
-    inner class ViewHolder(mView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
         private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPoster)
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitle)
         private val textViewDateReleast :TextView = mView.findViewById(R.id.textViewDateReleast)
         private val textViewDescription: TextView = mView.findViewById(R.id.textViewDescription)
         private val imageViewRating: ImageView = mView.findViewById(R.id.imageViewAddToMyList)
         private val textViewRating: TextView = mView.findViewById(R.id.textViewRating)
+        private val imageStar: ImageView = mView.findViewById(R.id.imageView3)
 
         fun bind(mItem : ResultSearchAll){
 
-            textViewTitle.text = mItem.title
-            if (textViewTitle.text.isEmpty()){
-                textViewTitle.text = mItem.name
-            }//else{
+            if (mItem.mediaType == "movie" || mItem.mediaType == "tv"){
+                textViewTitle.text = mItem.title
+                if (textViewTitle.text.isEmpty()){
+                    textViewTitle.text = mItem.name
+                }//else{
                 //textViewTitle.text = ctx.getString(R.string.search_item_not_have_tittle)
-            //}
+                //}
 
-            // It is responsible for just showing the date age of the movie or series
-            textViewDateReleast.text = mItem.releaseDate
-            if (textViewDateReleast.text.isEmpty()){
-                textViewDateReleast.text = mItem.firstAirDate?.split("-")?.get(0) ?: mItem.firstAirDate
-            }else{
-                textViewDateReleast.text = mItem.releaseDate?.split("-")?.get(0) ?: mItem.releaseDate
-            }
+                // It is responsible for just showing the date age of the movie or series
+                textViewDateReleast.text = mItem.releaseDate
+                if (textViewDateReleast.text.isEmpty()){
+                    textViewDateReleast.text = mItem.firstAirDate?.split("-")?.get(0) ?: mItem.firstAirDate
+                }else{
+                    textViewDateReleast.text = mItem.releaseDate?.split("-")?.get(0) ?: mItem.releaseDate
+                }
 
 
-            // It is responsible for loading the poster of the movies and series
-            textViewRating.text = mItem.voteAverage.toString()
-            textViewDescription.text = mItem.overview
+                // It is responsible for loading the poster of the movies and series
+                textViewRating.text = mItem.voteAverage.toString()
+                textViewDescription.text = mItem.overview
 
-            val photo = mItem.posterPath
+                val photo = mItem.posterPath
 
                 Glide.with(ctx)
                     .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + photo)
+                    .placeholder(R.drawable.ic_placeholder_image)
                     .into(imageViewPoster)
 
 
-            // get list genres
-            val currentGenres: List<Int> = mItem.genreIds!!
 
-            Log.d("SearchItemAdapter", "List: $currentGenres")
+                // get list genres
+                val currentGenres: List<Int> = mItem.genreIds!!
 
-            val typeAnime = currentGenres.filter { it == 16 }.any()
+                Log.d("SearchItemAdapter", "List: $currentGenres")
 
-
-            // is responsible for collecting the id and type to load after depending on whether it is a movie or series
-            val id = mItem.id
-            val type = mItem.mediaType.toString()
-            val title = mItem.title
-            val name =  mItem.name.toString()
-
-            val bundle = Bundle()
-
-            bundle.putInt("id", id!!)
-            bundle.putString("title", title)
-            bundle.putString("name", name)
-            bundle.putString("type", type)
-            bundle.putBoolean("anime", typeAnime)
+                val typeAnime = currentGenres.filter { it == 16 }.any()
 
 
+                // is responsible for collecting the id and type to load after depending on whether it is a movie or series
+                val id = mItem.id
+                val type = mItem.mediaType.toString()
+                val title = mItem.title
+                val name =  mItem.name.toString()
 
-            imageViewRating.setOnClickListener {
+                val bundle = Bundle()
 
-                val dialog = AddListDialog()
-                dialog.arguments = bundle
-                val manager = (ctx as AppCompatActivity).supportFragmentManager.beginTransaction()
-                dialog.show(manager, null)
+                bundle.putInt("id", id!!)
+                bundle.putString("title", title)
+                bundle.putString("name", name)
+                bundle.putString("type", type)
+                bundle.putBoolean("anime", typeAnime)
+
+                imageViewRating.setOnClickListener {
+
+                    val dialog = AddListDialog()
+                    dialog.arguments = bundle
+                    val manager = (ctx as AppCompatActivity).supportFragmentManager.beginTransaction()
+                    dialog.show(manager, null)
+
+                }
+            }
+
+            if (mItem.mediaType == "person"){
+
+                    textViewTitle.textSize = 20.0F
+
+                    textViewTitle.text = mItem.name
+                    textViewDateReleast.visibility = View.GONE
+                    textViewDescription.visibility = View.INVISIBLE
+                    imageStar.visibility = View.GONE
+
+                    textViewRating.visibility = View.INVISIBLE
+                    imageViewRating.visibility = View.INVISIBLE
+
+
+                    Glide.with(ctx)
+                        .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + mItem.profilePath)
+                        .placeholder(R.drawable.ic_person_black_24dp)
+                        .into(imageViewPoster)
 
             }
         }

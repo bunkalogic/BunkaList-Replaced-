@@ -215,7 +215,7 @@ class ListTopsActivity : AppCompatActivity() {
     private fun getSeriesListRated(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getTopsSeries(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), 50)
+        searchViewModel.getTopsSeries(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), 100)
 
 
 
@@ -251,7 +251,7 @@ class ListTopsActivity : AppCompatActivity() {
     private fun getAnimeListPopular(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 3)
+        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 15)
 
 
 
@@ -287,7 +287,7 @@ class ListTopsActivity : AppCompatActivity() {
     private fun getAnimeListRated(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 7)
+        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_voted_average_desc, page, Constans.filter_search_genres_movies_animation.toString(), -1, 16)
 
 
 
@@ -324,7 +324,7 @@ class ListTopsActivity : AppCompatActivity() {
     private fun getAnimeListUpcoming(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getSeriesFilters(callback, Constans.filter_search_sort_series_first_air_date_desc, page, Constans.filter_search_genres_movies_animation.toString(), 2019)
+        searchViewModel.getTopsAnime(callback, Constans.filter_search_sort_series_first_air_date_desc, page, Constans.filter_search_genres_movies_animation.toString(), 2019, 0)
 
 
 

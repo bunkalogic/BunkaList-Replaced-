@@ -330,6 +330,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 .orderBy(fieldOrderBy, orderType)
             setUpRecyclerFirestore(query)
             adapterFirestore?.adapter?.notifyDataSetChanged()
+            preferences.sizeMovies = adapterFirestore?.adapter?.itemCount!!.toInt()
         }else{
            val query =  store.collection("Users/$userId/RatingList")
                 .whereEqualTo(value1, value2)
@@ -355,6 +356,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 .orderBy(fieldOrderBy, orderType)
             setUpRecyclerFirestore(query)
             adapterFirestore?.adapter?.notifyDataSetChanged()
+            preferences.sizeSeries = adapterFirestore?.adapter?.itemCount!!.toInt()
         }else{
             val query =  store.collection("Users/$userId/RatingList")
                 .whereEqualTo(value1, value2)
@@ -380,6 +382,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 .orderBy(fieldOrderBy, orderType)
             setUpRecyclerFirestore(query)
             adapterFirestore?.adapter?.notifyDataSetChanged()
+            preferences.sizeAnime = adapterFirestore?.adapter?.itemCount!!.toInt()
         }else{
             val query =  store.collection("Users/$userId/RatingList")
                 .whereEqualTo(value1, value2)

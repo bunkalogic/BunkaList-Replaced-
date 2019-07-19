@@ -116,7 +116,7 @@ class OtherUserProfile : AppCompatActivity() {
         val username = intent.extras?.getString("username")
 
 
-        followersDBRef= store.collection("Data/Users/$userId/ $username /Followers")
+        followersDBRef= store.collection("Data/Users/$userId/@$userId/Followers")
     }
 
     // Creating the new instance in the database
@@ -145,18 +145,29 @@ class OtherUserProfile : AppCompatActivity() {
         }
 
         buttonFollows.setOnClickListener {
+            var isAdded = 0
             if (buttonFollows.tag == "click"){
                 Log.d("OtherUserProfile", "is click")
                 buttonFollows.tag = "unclick"
                 buttonFollows.backgroundResource = R.drawable.button_rounded_transparent_color
 
-            }else{
+            }else if(buttonFollows.tag == "unclick"){
+                isAdded++
                 buttonFollows.tag = "click"
                 buttonFollows.backgroundResource = R.drawable.button_rounded_transparent_color_selected
-                val follow = Users(userId!!, username!!, userPhoto!!)
-                saveUsers(follow)
-                val followers = Users(preferences.userId!!, preferences.userName!!, preferences.imageProfilePath!!)
-                saveFollowersUsers(followers)
+
+                //is responsible for only being added once to firestore
+
+                if (preferences.userName == "Nuage Laboratoire"){
+                    isAdded++
+                }
+
+                if (isAdded == 1){
+                    val follow = Users(userId!!, username!!, userPhoto!!)
+                    saveUsers(follow)
+                    val followers = Users(preferences.userId!!, preferences.userName!!, preferences.imageProfilePath!!)
+                    saveFollowersUsers(followers)
+                }
             }
 
         }

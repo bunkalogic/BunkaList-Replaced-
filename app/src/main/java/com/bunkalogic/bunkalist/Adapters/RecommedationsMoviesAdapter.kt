@@ -57,7 +57,7 @@ class RecommedationsMoviesAdapter(private val ctx: Context, private var mValues:
 
             Glide.with(ctx)
                 .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP + poster)
-                .placeholder(R.color.colorPrimary)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .centerCrop()
                 .into(imageViewPoster)
 

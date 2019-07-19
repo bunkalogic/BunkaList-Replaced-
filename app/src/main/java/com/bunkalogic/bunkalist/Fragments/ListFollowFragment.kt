@@ -83,11 +83,11 @@ class ListFollowFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun setUpFollowsDB(){
-        followDBRef= store.collection("Users/${preferences.userId}/Follows")
+        followDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userIdDatabase} /Follows")
     }
 
     private fun setUpFollowersDB(){
-        followersDBRef= store.collection("Users/${preferences.userId}/Followers")
+        followersDBRef= store.collection("Data/Users/${preferences.userId}/ ${preferences.userIdDatabase} /Followers")
     }
 
     // Creating the new instance in the database
@@ -113,7 +113,7 @@ class ListFollowFragment : androidx.fragment.app.Fragment() {
 
         _view.RecyclerFollow.setHasFixedSize(true)
         _view.RecyclerFollow.layoutManager = layoutManager
-        _view.RecyclerFollow.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator() as androidx.recyclerview.widget.RecyclerView.ItemAnimator?
+        _view.RecyclerFollow.itemAnimator = DefaultItemAnimator()
         _view.RecyclerFollow.adapter = adapter
     }
 
@@ -140,8 +140,10 @@ class ListFollowFragment : androidx.fragment.app.Fragment() {
                         userList.clear()
                         val users = it.toObjects(Users::class.java)
                         userList.addAll(users)
+                        //filterListUsers(userList)
                         preferences.follows = it.size()
                         adapter.notifyDataSetChanged()
+
                     }
                 }
 
@@ -160,6 +162,7 @@ class ListFollowFragment : androidx.fragment.app.Fragment() {
                         userList.clear()
                         val users = it.toObjects(Users::class.java)
                         userList.addAll(users)
+                        //filterListUsers(userList)
                         preferences.followers = it.size()
                         adapter.notifyDataSetChanged()
                     }
@@ -167,6 +170,18 @@ class ListFollowFragment : androidx.fragment.app.Fragment() {
 
             })
     }
+
+    //private fun filterListUsers(userList: ArrayList<Users>){
+    //    var userId = ""
+    //    for (user in userList){
+    //        userId = user.userId.toString()
+//
+    //    }
+    //    userList.distinctBy { it.userId == userId }
+    //    preferences.follows = userList.size
+    //    preferences.followers = userList.size
+    //    adapter.notifyDataSetChanged()
+    //}
 
 
 

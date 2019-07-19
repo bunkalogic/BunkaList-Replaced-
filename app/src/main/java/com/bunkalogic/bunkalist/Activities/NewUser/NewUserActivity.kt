@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bunkalogic.bunkalist.Activities.BaseActivity
@@ -117,7 +118,12 @@ class NewUserActivity : AppCompatActivity() {
 
         buttonGoTo.setOnClickListener {
             uploadedImageinStorage()
-            startActivity(intentFor<BaseActivity>().clearTask().newTask())
+            if (editTextUserName.text.isNullOrEmpty()){
+                toast(R.string.add_new_username)
+            }else{
+                startActivity(intentFor<BaseActivity>().clearTask().newTask())
+            }
+
         }
 
     }

@@ -81,6 +81,7 @@ class SortListMoviesAdapter (private val ctx: Context, private var mValues: Arra
 
             Glide.with(ctx)
                 .load(Constans.API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER + photo)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .into(imageViewPoster)
 
             // is responsible for collecting the id and type to load after depending on whether it is a movie or series

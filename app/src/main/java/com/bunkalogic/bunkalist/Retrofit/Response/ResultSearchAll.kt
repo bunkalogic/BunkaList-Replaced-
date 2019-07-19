@@ -62,6 +62,9 @@ class ResultSearchAll {
     var adult: Boolean? = null
     @SerializedName("release_date")
     @Expose
+    var profilePath: String? = null
+    @SerializedName("profile_path")
+    @Expose
     var releaseDate: String? = null
 
     /**
@@ -111,7 +114,8 @@ class ResultSearchAll {
         title: String,
         originalTitle: String,
         adult: Boolean?,
-        releaseDate: String
+        releaseDate: String,
+        profilePath: String
     ) : super() {
         this.originalName = originalName
         this.id = id
@@ -132,6 +136,7 @@ class ResultSearchAll {
         this.originalTitle = originalTitle
         this.adult = adult
         this.releaseDate = releaseDate
+        this.profilePath = profilePath
     }
 
 }

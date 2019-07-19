@@ -64,25 +64,25 @@ class TopsOuevreAdapter(private val ctx: Context,val mValues: List<TopsCardItem>
 
             Glide.with(ctx)
                 .load(mItem.image1)
-                .placeholder(R.color.colorPrimary)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .centerCrop()
                 .into(imageViewPoster1)
 
             Glide.with(ctx)
                 .load(mItem.image2)
-                .placeholder(R.color.colorPrimary)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .centerCrop()
                 .into(imageViewPoster2)
 
             Glide.with(ctx)
                 .load(mItem.image3)
-                .placeholder(R.color.colorPrimary)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .centerCrop()
                 .into(imageViewPoster3)
 
             Glide.with(ctx)
                 .load(mItem.image4)
-                .placeholder(R.color.colorPrimary)
+                .placeholder(R.drawable.ic_placeholder_image)
                 .centerCrop()
                 .into(imageViewPoster4)
 

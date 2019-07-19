@@ -52,7 +52,7 @@ class TimeLineDialog : androidx.fragment.app.DialogFragment(){
                 val token = UUID.randomUUID().toString()
 
 
-                if(textContent.isNotEmpty() && textContent != "text"  && textContent != "text1234" && currentUser.displayName!!.isNotEmpty()){
+                if(textContent.isNotEmpty() && textContent != "text"  && textContent != "text1234" && textContent != "texttext"  && currentUser.displayName!!.isNotEmpty()){
 
                     val tlmessage = TimelineMessage(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), textNameOeuvre, textSeason, textChapter, textContent ,0, isSpoiler, token)
 

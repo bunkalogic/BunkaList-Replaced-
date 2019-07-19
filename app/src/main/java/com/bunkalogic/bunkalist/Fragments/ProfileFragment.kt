@@ -60,12 +60,10 @@ class ProfileFragment : androidx.fragment.app.Fragment() {
     private var itemRatingSubscription: ListenerRegistration? = null
     private lateinit var itemRatingBusListener: Disposable
 
-    private var notificationHandler: NotificationHandler? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _view = inflater.inflate(R.layout.fragment_profile, container, false)
-        notificationHandler = NotificationHandler(context!!)
         fixScrollPosition()
         setUpAddListDB()
         setUpCurrentUser()
@@ -115,7 +113,7 @@ class ProfileFragment : androidx.fragment.app.Fragment() {
     private fun subscribeToProfileAllList(){
         itemRatingSubscription = addItemListDBRef
             .orderBy("addDate", Query.Direction.DESCENDING)
-            .limit(15)
+            .limit(10)
             .addSnapshotListener(object : java.util.EventListener, EventListener<QuerySnapshot> {
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
                     exception?.let {

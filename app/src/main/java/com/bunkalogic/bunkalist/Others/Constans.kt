@@ -9,6 +9,7 @@ object Constans{
 
     val API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_POSTER = "https://image.tmdb.org/t/p/w780"
     val API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PATH_BACKDROP = "https://image.tmdb.org/t/p/w1280"
+    val API_MOVIE_SERIES_ANIME_BASE_URL_IMG_LOGOS = "https://image.tmdb.org/t/p/w300"
     val API_MOVIE_SERIES_ANIME_BASE_URL_IMG_PROFILE = "https://image.tmdb.org/t/p/original"
 
 

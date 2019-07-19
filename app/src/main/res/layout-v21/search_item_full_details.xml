@@ -19,11 +19,11 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:titleTextAppearance="@font/overpass"
                 android:fitsSystemWindows="true"
-
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                     android:id="@+id/imageViewBackDrop"
@@ -31,13 +31,16 @@
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_collapseMode="pin" />
 
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbarFullDetails"
                     android:layout_width="match_parent"
+                    app:titleTextAppearance="@font/overpass"
+                    app:titleTextColor="@color/colorPrimaryTextDark"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="parallax" />
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -68,20 +71,33 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
-            <TextView
-                    android:id="@+id/textViewDetailsGenres"
+            <LinearLayout
+                    android:id="@+id/linearGenres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/overpass"
-                    android:textColor="@color/colorPrimaryText"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="32dp"
-                    android:alpha="0.7"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonSearchItemDetailsAddInYourList"
-                    android:textStyle="bold|italic" android:textSize="18sp" android:textAlignment="center"/>
+                    android:orientation="vertical" app:layout_constraintTop_toBottomOf="@+id/textViewLabelGenres"
+                    android:layout_marginTop="8dp">
+
+
+                <com.google.android.flexbox.FlexboxLayout
+                        android:id="@+id/flexboxGenres"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:paddingTop="8dp"
+                        app:alignContent="flex_start"
+                        app:alignItems="flex_start"
+                        app:flexDirection="row"
+                        app:flexWrap="wrap"
+                        app:justifyContent="flex_start"/>
+
+
+            </LinearLayout>
 
             <TextView
                     android:id="@+id/textViewSearchDetailsAllDescription"
@@ -106,11 +122,11 @@
                     android:textColor="@color/colorPrimaryText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:textAllCaps="false"
                     android:background="@drawable/button_rounded_transparent_color"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetails"
-                    android:layout_marginEnd="32dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="24dp" app:layout_constraintEnd_toEndOf="parent"
             />
 
             <TextView
@@ -130,7 +146,7 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewDateRelease" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDateRelease"/>
 
             <TextView
                     android:id="@+id/textViewDateRelease"
@@ -138,14 +154,12 @@
                     android:fontFamily="@font/overpass"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryText"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="32dp"
                     android:alpha="0.7"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewDetailsGenres" android:textStyle="bold"
-                    android:textSize="18sp" android:textAlignment="center"/>
+                    android:textStyle="bold"
+                    android:textSize="18sp" android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="@+id/textViewLabelDate"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewLabelDate"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewLabelDate" android:layout_marginTop="2dp"/>
 
 
             <androidx.core.widget.NestedScrollView
@@ -184,7 +198,7 @@
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewSearchDetailsAllDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewSearchDetailsAllDescription"/>
 
             <androidx.core.widget.NestedScrollView
                     android:id="@+id/CrewContainer"
@@ -222,7 +236,7 @@
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/CastContainer" />
+                    app:layout_constraintTop_toBottomOf="@+id/CastContainer"/>
 
             <HorizontalScrollView
                     android:id="@+id/TrailersContainer"
@@ -258,7 +272,7 @@
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/CrewContainer" />
+                    app:layout_constraintTop_toBottomOf="@+id/CrewContainer"/>
 
             <androidx.core.widget.NestedScrollView
                     android:id="@+id/recommendationsContainer"
@@ -271,7 +285,6 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recommendationsLabel"
-                    app:layout_constraintBottom_toTopOf="@+id/adViewBannerItemDetails"
                     android:layout_marginBottom="16dp">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -297,14 +310,54 @@
                     android:visibility="gone"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/TrailersContainer" />
+                    app:layout_constraintTop_toBottomOf="@+id/TrailersContainer"/>
+
+
+            <androidx.core.widget.NestedScrollView
+                    android:id="@+id/similarContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/similarLabel"
+                    app:layout_constraintBottom_toTopOf="@+id/adViewBannerItemDetails"
+                    android:layout_marginBottom="16dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/RecyclerSimilar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
+            </androidx.core.widget.NestedScrollView>
+
+            <TextView
+                    android:id="@+id/similarLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/overpass"
+                    android:text="@string/search_item_full_details_similar"
+                    android:textColor="@color/colorPrimaryText"
+                    android:textSize="24sp"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recommendationsContainer"/>
 
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
-                    android:id="@+id/textViewDetailsRating" android:layout_marginTop="24dp"
+                    android:id="@+id/textViewDetailsRating" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetails"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="32dp"
                     android:textStyle="bold" android:textColor="@color/colorAccent" android:textSize="24sp"/>
@@ -312,7 +365,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/imageView5" app:layout_constraintStart_toEndOf="@+id/textViewDetailsRating"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="8dp"
                     app:layout_constraintTop_toTopOf="@+id/textViewDetailsRating"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewDetailsRating"
                     android:background="@drawable/ic_star_orange_rating_24dp"/>
@@ -322,22 +375,24 @@
                     android:fontFamily="@font/overpass"
                     android:id="@+id/textViewLabelGenres"
                     android:textColor="@color/colorPrimaryText"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="@+id/textViewDetailsGenres" android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/linearGenres" android:layout_marginStart="8dp"
                     android:text="@string/activity_full_details" android:textSize="18sp" android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/textViewDetailsGenres" android:layout_marginBottom="8dp"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonSearchItemDetailsAddInYourList"/>
             <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
                     android:id="@+id/textViewLabelDate"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewDetailsGenres"
-                    app:layout_constraintStart_toStartOf="@+id/textViewDateRelease" android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp" app:layout_constraintBottom_toTopOf="@+id/textViewDateRelease"
+                    app:layout_constraintTop_toBottomOf="@+id/linearGenres"
+                    android:layout_marginTop="8dp"
                     android:text="@string/activity_full_details_date" android:textSize="18sp"
                     android:textColor="@color/colorPrimaryText"
-                    android:textStyle="bold|italic" android:visibility="invisible"/>
+                    android:textStyle="bold|italic" android:visibility="invisible"
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                    android:textAlignment="center" android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             <com.google.android.gms.ads.AdView
                     xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -351,7 +406,30 @@
                     ads:layout_constraintStart_toStartOf="parent">
             </com.google.android.gms.ads.AdView>
 
-
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewNetworkTV"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewLabelNetwork"
+                    app:layout_constraintStart_toStartOf="@+id/textViewLabelNetwork"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewLabelNetwork" android:visibility="gone"/>
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewLabelNetwork"
+                    android:fontFamily="@font/overpass" android:textSize="18sp" android:textStyle="bold|italic"
+                    android:text="@string/search_item_details_network_label"
+                    android:textColor="@color/colorPrimaryText" android:visibility="invisible"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline4" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearGenres" android:textAlignment="center"/>
+            <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:id="@+id/guideline4"
+                                                        android:orientation="vertical"
+                                                        app:layout_constraintGuide_percent="0.5"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

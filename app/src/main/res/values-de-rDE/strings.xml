@@ -183,4 +183,7 @@
     <string name="fragment_tops_review_button_top_anime_popular">Tops Anime Popular</string>
     <string name="fragment_tops_review_button_top_anime_rated">Top Anime Rated</string>
     <string name="fragment_tops_review_button_top_anime_upcoming">Tops Anime Upcoming</string>
+    <string name="search_item_details_network_label">produced by :</string>
+    <string name="search_item_full_details_similar">Similar</string>
+    <string name="add_new_username">Please add your NickName before continuing</string>
 </resources>

@@ -33,6 +33,8 @@ import com.bunkalogic.bunkalist.Others.InputFilterRange
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
+import androidx.paging.PagedList
+import com.bunkalogic.bunkalist.Utils.InputFilterMinMax
 
 
 
@@ -286,6 +288,13 @@ class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
             holder.editTextRatingPhotography.hint = listRating.effectsRate.toString()
             holder.editTextRatingEnjoyment.hint = listRating.enjoymentRate.toString()
 
+            // is responsible for limiting the values ​​of the edittext from 0 - 10
+
+            holder.editTextRatingStory.filters = arrayOf<InputFilter>(InputFilterMinMax(0.0, 10.0))
+            holder.editTextRatingCharacters.filters = arrayOf<InputFilter>(InputFilterMinMax(0.0, 10.0))
+            holder.editTextRatingSoundtrack.filters = arrayOf<InputFilter>(InputFilterMinMax(0.0, 10.0))
+            holder.editTextRatingPhotography.filters = arrayOf<InputFilter>(InputFilterMinMax(0.0, 10.0))
+            holder.editTextRatingEnjoyment.filters = arrayOf<InputFilter>(InputFilterMinMax(0.0, 10.0))
 
 
 
@@ -436,6 +445,8 @@ class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
         }
 
     }
+
+
 
 
 

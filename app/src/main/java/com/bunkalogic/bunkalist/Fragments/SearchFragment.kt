@@ -131,11 +131,15 @@ class SearchFragment : androidx.fragment.app.Fragment() {
                                 toast("Please search again")
                             }else{
                                 adapter.setData(all)
+                                _view.animation_search_data_null.visibility = View.GONE
+                                adapter.notifyDataSetChanged()
 
                             }
                         }
 
                         override fun onError() {
+                            adapter.notifyDataSetChanged()
+                            _view.animation_search_data_null.visibility = View.VISIBLE
                             toast("Please check your internet connection")
                         }
                     })

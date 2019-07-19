@@ -8,6 +8,8 @@ import com.bunkalogic.bunkalist.Retrofit.Response.*
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.Movie
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.People.*
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.LogosNetworkResponse
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Network
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
@@ -572,6 +574,71 @@ class RepositoryAPItmdb internal constructor() {
                     Log.d("RepositoryAPItmdb", "Is postRateSeries successful: ${response.body().toString()}")
                 }else{
                     Log.d("RepositoryAPItmdb", "Is postRateSeries not successful: ${response.body().toString()}")
+                }
+            }
+
+        })
+    }
+
+
+    fun getNetworkSeriesTv(Id : Int, callback: OnGetNetworkTVCallback){
+        val call = moviesOrSeriesAndAnimeService.getNetworkTv(Id, Constans.API_KEY)
+
+        call.enqueue(object : Callback<LogosNetworkResponse>{
+            override fun onFailure(call: Call<LogosNetworkResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection Network Tv")
+            }
+
+            override fun onResponse(call: Call<LogosNetworkResponse>, response: Response<LogosNetworkResponse>) {
+                if (response.isSuccessful){
+                    val netTV : LogosNetworkResponse = response.body()!!
+                    callback.onSuccess(netTV.logos!!)
+                }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Network Tv")
+                }
+            }
+
+        })
+    }
+
+
+    fun getSimilarMovies(Id: Int, callback: OnGetListMoviesCallback){
+        val call = moviesOrSeriesAndAnimeService.getSimilarMovies(Id, Constans.API_KEY, Locale.getDefault().toString(), 1)
+
+        call.enqueue(object : Callback<MoviesResponse>{
+            override fun onFailure(call: Call<MoviesResponse>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection Movies Similar")
+            }
+
+            override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>) {
+                if (response.isSuccessful){
+                    val recommendationsMoviesResponse : MoviesResponse = response.body()!!
+                    callback.onSuccess(1, recommendationsMoviesResponse.results!!)
+                }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Similar")
+                }
+            }
+
+        })
+    }
+
+    fun getSimilarSeries(Id: Int, callback: OnGetListSeriesCallback){
+        val call = moviesOrSeriesAndAnimeService.getSimilarSeries(Id, Constans.API_KEY, Locale.getDefault().toString(), 1)
+
+        call.enqueue(object : Callback<ResponseSeries>{
+            override fun onFailure(call: Call<ResponseSeries>, t: Throwable) {
+                callback.onError()
+                Log.d("RepositoryAPItmdb", "Error connection Movies Recommendations")
+            }
+
+            override fun onResponse(call: Call<ResponseSeries>, response: Response<ResponseSeries>) {
+                if (response.isSuccessful){
+                    val recommendationsSeriesResponse : ResponseSeries = response.body()!!
+                    callback.onSuccess(1, recommendationsSeriesResponse.results!!)
+                }else{
+                    Log.d("RepositoryAPItmdb", "Something has gone wrong on response.isSuccessful in Movies Recommendations")
                 }
             }
 

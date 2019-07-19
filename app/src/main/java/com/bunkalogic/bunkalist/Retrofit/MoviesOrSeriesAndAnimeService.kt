@@ -8,6 +8,8 @@ import com.bunkalogic.bunkalist.Retrofit.Response.Movies.MoviesResponse
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResponseUpcoming
 import com.bunkalogic.bunkalist.Retrofit.Response.Movies.ResultMovie
 import com.bunkalogic.bunkalist.Retrofit.Response.People.*
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.LogosNetworkResponse
+import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Network
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResponseSeries
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Series
 import retrofit2.Call
@@ -230,6 +232,29 @@ interface MoviesOrSeriesAndAnimeService {
         @Query("guest_session_id") guest_session_id: String,
         @Body ratePost : RatePost
     ): Call<RatePost>
+
+
+    @GET("network/{network_id}/images")
+    fun getNetworkTv(
+        @Path("network_id") id: Int,
+        @Query("api_key") apiKey: String
+    ): Call<LogosNetworkResponse>
+
+    @GET("movie/{movie_id}/similar")
+    fun getSimilarMovies(
+        @Path("movie_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<MoviesResponse>
+
+    @GET("tv/{tv_id}/similar")
+    fun getSimilarSeries(
+        @Path("tv_id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Call<ResponseSeries>
 
 
 

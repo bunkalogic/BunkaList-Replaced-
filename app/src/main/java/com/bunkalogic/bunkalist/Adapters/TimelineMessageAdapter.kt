@@ -173,45 +173,54 @@ class TimelineMessageAdapter(val ctx: Context, query: Query){
             val idItemTimelineMessage = snapshot.id
 
 
+            if(holder.imageStarFav.tag == "full"){
+                holder.imageStarFav.backgroundResource = R.drawable.ic_star_complete_24dp
+            }else if (holder.imageStarFav.tag == "empty"){
+                holder.imageStarFav.backgroundResource = R.drawable.ic_star_filled_24dp
+            }
+
+
 
             holder.imageStarFav.setOnClickListener {
 
-                if (holder.imageStarFav.tag == "empty"){
+                if (holder.imageStarFav.tag == "full"){
 
-                    holder.imageStarFav.tag = "full"
-                    holder.imageStarFav.backgroundResource = R.drawable.ic_star_complete_24dp
-
-                    Timer("decrease", false).schedule(1200){
-                        refDoc
-                            .document(idItemTimelineMessage)
-                            .update("numPositive", FieldValue.increment(1))
-                            .addOnCompleteListener {
-                                if (it.isSuccessful){
-                                    Log.d("TimelineMessageAdapter", "fav is increment: +1")
-                                    notifyItemChanged(position)
-                                }else{
-                                    Log.d("TimelineMessageAdapter", "fav error")
-                                }
-                            }
-                    }
-
-                }else{
-                    holder.imageStarFav.tag = "empty"
-                    holder.imageStarFav.backgroundResource = R.drawable.ic_star_filled_24dp
-
-                    Timer("decrease", false).schedule(1200){
+                    Timer("decrease", false).schedule(500){
                         refDoc
                             .document(idItemTimelineMessage)
                             .update("numPositive", FieldValue.increment(-1))
                             .addOnCompleteListener {
                                 if (it.isSuccessful){
-                                    Log.d("TimelineMessageAdapter", "fav is increment: +1")
-                                    notifyItemChanged(position)
+                                    Log.d("TimelineMessageAdapter", "fav is increment: -1")
                                 }else{
                                     Log.d("TimelineMessageAdapter", "fav error")
                                 }
                             }
                     }
+
+                    holder.imageStarFav.tag = "empty"
+                    holder.imageStarFav.backgroundResource = R.drawable.ic_star_filled_24dp
+                    notifyItemChanged(position)
+
+                }else if(holder.imageStarFav.tag == "empty"){
+
+
+                    Timer("decrease", false).schedule(500){
+                        refDoc
+                            .document(idItemTimelineMessage)
+                            .update("numPositive", FieldValue.increment(+1))
+                            .addOnCompleteListener {
+                                if (it.isSuccessful){
+                                    Log.d("TimelineMessageAdapter", "fav is increment: +1")
+                                }else{
+                                    Log.d("TimelineMessageAdapter", "fav error")
+                                }
+                            }
+                    }
+
+                    holder.imageStarFav.tag = "full"
+                    holder.imageStarFav.backgroundResource = R.drawable.ic_star_complete_24dp
+                    notifyItemChanged(position)
                 }
             }
 
