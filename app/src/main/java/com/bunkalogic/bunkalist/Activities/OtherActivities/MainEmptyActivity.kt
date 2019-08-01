@@ -42,7 +42,7 @@ class MainEmptyActivity : AppCompatActivity() {
         val intent = Intent(this, ReceiverNotification::class.java)
         val pIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
         val alarmManager : AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),AlarmManager.INTERVAL_DAY*5, pIntent)
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),7 * 24 * 60 * 60 * 1000, pIntent)
     }
 
 }

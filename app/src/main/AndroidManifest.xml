@@ -27,7 +27,8 @@
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value=""/>
 
-        <activity android:name=".Activities.DetailsActivities.TermsAndPrivacyActivity">
+        <activity android:name=".Activities.DetailsActivities.TermsAndPrivacyActivity"
+        android:theme="@style/AppTheme.TransparentTheme">
         </activity>
         <activity android:name=".Activities.DetailsActivities.LicenseActivity">
         </activity>

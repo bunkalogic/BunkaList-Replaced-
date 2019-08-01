@@ -1,6 +1,7 @@
 package com.bunkalogic.bunkalist.Dialog
 
 
+import android.content.res.AssetManager
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.appcompat.widget.Toolbar
@@ -11,6 +12,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
+import com.airbnb.lottie.LottieAnimationView
+import com.bunkalogic.bunkalist.Adapters.StatusColorsAdapter
+import com.bunkalogic.bunkalist.Models.FilterSearchData
+import com.bunkalogic.bunkalist.Models.StatusColorItem
 import com.bunkalogic.bunkalist.Others.Constans
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Retrofit.Callback.OnGetGuestSessionCallback
@@ -22,6 +28,7 @@ import com.bunkalogic.bunkalist.db.NewListRating
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.dialog_add_list.view.*
+import org.jetbrains.anko.support.v4.toast
 import java.util.*
 
 
@@ -35,10 +42,13 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
 
     private lateinit var viewDialog: View
 
+    private lateinit var adapter : StatusColorsAdapter
+
     var typeInt: Int = 0
-    var statusInt: Int = 0
+
 
     private lateinit var searchViewModel: ViewModelAPItmdb
+    val filterListSort: ArrayList<StatusColorItem> by lazy { getStatus() }
 
 
 
@@ -75,7 +85,8 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
         setUpCurrentUser()
         setUpToolbar()
         whatTypeIs()
-        setUpSpinner()
+        setAdapter()
+        //setUpSpinner()
         onClicks()
 
         return viewDialog
@@ -101,26 +112,41 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
 
     }
 
-    private fun setUpSpinner(){
-        // Creating the spinnerStatus adapter
-        val adpStatus: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(context!!, R.array.status, android.R.layout.simple_spinner_item)
-        adpStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        viewDialog.spinnerStatus.adapter = adpStatus
+    private fun setAdapter(){
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            context,
+            androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        adapter = StatusColorsAdapter(context!!, getStatus())
 
-        viewDialog.spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.d("AddListDialog", "No selected")
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("AddListDialog", "Selected: $position")
-                statusInt = position
-                Log.d("AddListDialog", "typeInt = $statusInt")
-            }
-
-        }
+        viewDialog.RecyclerStatusColor.layoutManager = layoutManager
+        viewDialog.RecyclerStatusColor.setHasFixedSize(true)
+        viewDialog.RecyclerStatusColor.itemAnimator = DefaultItemAnimator()
+        viewDialog.RecyclerStatusColor.adapter = adapter
 
     }
+
+    //private fun setUpSpinner(){
+    //    // Creating the spinnerStatus adapter
+    //    val adpStatus: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(context!!, R.array.status, android.R.layout.simple_spinner_item)
+    //    adpStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    //    viewDialog.spinnerStatus.adapter = adpStatus
+//
+    //    viewDialog.spinnerStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    //        override fun onNothingSelected(parent: AdapterView<*>?) {
+    //            Log.d("AddListDialog", "No selected")
+    //        }
+//
+    //        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+    //            Log.d("AddListDialog", "Selected: $position")
+    //            statusInt = position
+    //            Log.d("AddListDialog", "typeInt = $statusInt")
+    //        }
+//
+    //    }
+//
+    //}
 
     private fun whatTypeIs(){
         val args = arguments
@@ -192,67 +218,68 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
             val ratingSoundtrack = viewDialog.ratingBarSoundtrack.rating
             val ratingEnjoyment = viewDialog.ratingBarEnjoyment.rating
 
-            
-            if(ratingGeneral.toInt() == 0){
-                Log.d("AddListDialog", "it is a note in detail")
-                var resultFinalRate = ratingHistory + ratingCharacter + ratingEffects + ratingSoundtrack + ratingEnjoyment
-                // we divide to get the average
-                val result = resultFinalRate / 5
-                Log.d("AddListDialog", "Result final rate = $result")
-
-
-                val itemRating = ItemListRating(
-                    currentUser.uid,
-                    statusInt,
-                    Id,
-                    Date(),
-                    ratingHistory,
-                    ratingCharacter,
-                    ratingEffects,
-                    ratingSoundtrack,
-                    ratingEnjoyment,
-                    result,
-                    season,
-                    episode,
-                    typeInt
-                )
-                RxBus.publish(NewListRating(itemRating))
-
-                // post the rate in TMDB
-                if (preferences.userGuestSesionId!!.isEmpty()){
-                    createGuestSession()
-                }
-                Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId}")
-                postRateMovieOrSeries(result.toDouble())
-                dismiss()
+            if (adapter.getStatusId() == -1){
+                toast(R.string.dialog_add_list_select_one_status)
             }else{
-                val itemRatingGeneral = ItemListRating(
-                    currentUser.uid,
-                    statusInt,
-                    Id,
-                    Date(),
-                    ratingGeneral,
-                    ratingGeneral,
-                    ratingGeneral,
-                    ratingGeneral,
-                    ratingGeneral,
-                    ratingGeneral,
-                    season,
-                    episode,
-                    typeInt
-                )
-                RxBus.publish(NewListRating(itemRatingGeneral))
-                // post the rate in TMDB
-                if (preferences.userGuestSesionId!!.isEmpty()){
-                    createGuestSession()
+                if(ratingGeneral.toInt() == 0){
+                    Log.d("AddListDialog", "it is a note in detail")
+                    var resultFinalRate = ratingHistory + ratingCharacter + ratingEffects + ratingSoundtrack + ratingEnjoyment
+                    // we divide to get the average
+                    val result = resultFinalRate / 5
+                    Log.d("AddListDialog", "Result final rate = $result")
+
+
+                    val itemRating = ItemListRating(
+                        currentUser.uid,
+                        adapter.getStatusId(),
+                        Id,
+                        Date(),
+                        ratingHistory,
+                        ratingCharacter,
+                        ratingEffects,
+                        ratingSoundtrack,
+                        ratingEnjoyment,
+                        result,
+                        season,
+                        episode,
+                        typeInt
+                    )
+                    RxBus.publish(NewListRating(itemRating))
+
+                    // post the rate in TMDB
+                    if (preferences.userGuestSesionId!!.isEmpty()){
+                        createGuestSession()
+                    }
+                    Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId}")
+                    postRateMovieOrSeries(result.toDouble())
+                    dismiss()
+                }else{
+                    val itemRatingGeneral = ItemListRating(
+                        currentUser.uid,
+                        adapter.getStatusId(),
+                        Id,
+                        Date(),
+                        ratingGeneral,
+                        ratingGeneral,
+                        ratingGeneral,
+                        ratingGeneral,
+                        ratingGeneral,
+                        ratingGeneral,
+                        season,
+                        episode,
+                        typeInt
+                    )
+                    RxBus.publish(NewListRating(itemRatingGeneral))
+                    // post the rate in TMDB
+                    if (preferences.userGuestSesionId!!.isEmpty()){
+                        createGuestSession()
+                    }
+                    Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId}")
+                    postRateMovieOrSeries(ratingGeneral.toDouble())
+
+                    dismiss()
                 }
-                Log.d("AddListDialog", "Guest Session: ${preferences.userGuestSesionId}")
-                postRateMovieOrSeries(ratingGeneral.toDouble())
-
-                dismiss()
             }
-
-
 
         }
     }
@@ -283,4 +310,19 @@ class AddListDialog : androidx.fragment.app.DialogFragment(){
             searchViewModel.postSeriesAndAnime(Id!!, rate)
         }
     }
+
+
+    private fun getStatus(): ArrayList<StatusColorItem> {
+        return object: ArrayList<StatusColorItem>(){
+            init {
+                add(StatusColorItem(Constans.filter_status_complete, R.color.colorStatusComplete, getString(R.string.fab_filter_profile_status_complete)))
+                add(StatusColorItem(Constans.filter_status_watching, R.color.colorStatusWatching, getString(R.string.fab_filter_profile_status_watching)))
+                add(StatusColorItem(Constans.filter_status_waiting, R.color.colorStatusPending, getString(R.string.fab_filter_profile_status_waiting)))
+                add(StatusColorItem(Constans.filter_status_pause, R.color.colorStatusPause, getString(R.string.fab_filter_profile_status_pause)))
+                add(StatusColorItem(Constans.filter_status_dropped, R.color.colorStatusDropped, getString(R.string.fab_filter_profile_status_dropped)))
+            }
+        }
+    }
+
+
 }

@@ -21,13 +21,14 @@
             android:id="@+id/btn_nav_View"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="50dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorBackgroundPrimaryNav"
             app:menu="@menu/button_navigation_menu"
             app:itemBackground="@drawable/bottom_nav_ripple"
             app:itemIconTint="@drawable/bottom_nav_color"
             app:itemTextColor="@drawable/bottom_nav_color"
-            app:elevation="20dp" app:layout_constraintEnd_toEndOf="parent"
+            app:elevation="8dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:animateLayoutChanges="true"/>
 

@@ -15,9 +15,9 @@
             android:layout_height="wrap_content">
 
         <ImageView
-                android:layout_width="121dp"
-                android:layout_height="106dp"
-                android:background="@mipmap/ic_launcher_foreground"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/new_icon_design_bk_rounded"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="32dp"

@@ -61,7 +61,7 @@ class SortListSeriesAdapter(private val ctx: Context, private var mValues: Array
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder (mView: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(mView){
+    inner class ViewHolder (mView: View): RecyclerView.ViewHolder(mView){
         private val imageViewPoster: ImageView = mView.findViewById(R.id.imageViewPosterSortSeries)
         private val textViewTitle: TextView = mView.findViewById(R.id.textViewTitleSortSeries)
         private val textViewDateReleast : TextView = mView.findViewById(R.id.textViewDateReleastSortSeries)

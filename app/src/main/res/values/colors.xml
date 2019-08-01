@@ -9,18 +9,27 @@
     <color name="colorPrimaryText">#211F1F</color>
     <color name="colorBackground">#F0EAEA</color>
     <color name="colorBackgroundPrimary">#FBFBFB</color>
+    <color name="colorBackgroundPrimaryNav">#F8F8F8</color>
     <color name="colorSecondaryText">#757575</color>
     <color name="colorPrimaryTextDark">#FFFFFF</color>
     <color name="colorPrimaryTransparent">#597E57C2</color>
+    <color name="colorTransparent">#00FBFBFB</color>
 
     <color name="colorGooglePlusDark">#4285F4</color>
-    <color name="colorBottomNavigationBar">#B0BEC5</color>
+    <color name="colorBottomNavigationBar">#95A6AA</color>
+    <color name="colorBottomNavigationBarBackground">#5E35B1</color>
     <color name="colorDivider">#757575</color>
     <color name="colorLauncher">#673AB7</color>
     <color name="colorItemTimeline">#3C3C42</color>
     <color name="colorStarRating">#FF6D00</color>
     <color name="colorPrimaryDarkSecond">#4A148C</color>
     <color name="colorStarFavs">#FFD600</color>
+
+    <color name="colorStatusComplete">#43A047</color>
+    <color name="colorStatusWatching">#00ACC1</color>
+    <color name="colorStatusPause">#F4511E</color>
+    <color name="colorStatusPending">#5E35B1</color>
+    <color name="colorStatusDropped">#D81B60</color>
 
 
 </resources>

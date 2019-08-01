@@ -615,7 +615,7 @@
                     app:layout_constraintTop_toTopOf="@+id/textView63" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             <TextView
-                    android:text="Icon made by :"
+                    android:text="LottieFiles made by :"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
@@ -625,7 +625,7 @@
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                     android:textStyle="bold"/>
             <TextView
-                    android:text="https://www.alfredocreates.com/"
+                    android:text="https://lottiefiles.com/fuad , https://lottiefiles.com/gbagaoisan "
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"
@@ -644,7 +644,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView55" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:textStyle="bold" android:layout_marginTop="8dp"/>
             <TextView
-                    android:text="www.flaticon.com"
+                    android:text="lottiefiles.com"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/overpass"

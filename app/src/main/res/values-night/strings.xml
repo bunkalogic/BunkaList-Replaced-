@@ -55,4 +55,6 @@
     <string name="search_item_details_network_label">produced by :</string>
     <string name="search_item_full_details_similar">Similar</string>
     <string name="add_new_username">Please add your NickName before continuing</string>
+    <string name="dialog_add_list_select_one_status">select a state before add it to your list</string>
+    <string name="is_added_in_your_list">It is already added to your list</string>
 </resources>

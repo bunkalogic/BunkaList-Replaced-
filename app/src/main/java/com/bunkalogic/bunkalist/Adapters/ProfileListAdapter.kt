@@ -27,8 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import org.jetbrains.anko.intentFor
 import java.text.SimpleDateFormat
 import com.bumptech.glide.util.Util.getSnapshot
-
-
+import org.jetbrains.anko.backgroundColorResource
 
 
 class ProfileListAdapter(private val ctx: Context, private var mValues: MutableList<ItemListRating>): androidx.recyclerview.widget.RecyclerView.Adapter<ProfileListAdapter.ViewHolder>(){
@@ -41,7 +40,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_profile_fragement_item, parent, false)
 
         return ViewHolder(view)
@@ -341,6 +340,26 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
                 })
             }
 
+        // se encarga de comprobar el status de darle un color personalizado dependiendo del status
+
+        when(listRating.status){
+            Constans.filter_status_complete ->{
+                holder.viewStatus.backgroundColorResource =  R.color.colorStatusComplete
+            }
+            Constans.filter_status_watching ->{
+                holder.viewStatus.backgroundColorResource = R.color.colorStatusWatching
+            }
+            Constans.filter_status_waiting ->{
+                holder.viewStatus.backgroundColorResource = R.color.colorStatusPending
+            }
+            Constans.filter_status_pause ->{
+                holder.viewStatus.backgroundColorResource = R.color.colorStatusPause
+            }
+            Constans.filter_status_dropped ->{
+                holder.viewStatus.backgroundColorResource = R.color.colorStatusDropped
+            }
+        }
+
 
 
         //holder.buttonUpdate.setOnClickListener {
@@ -414,6 +433,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
         internal var textViewNewRatingFinal: TextView
         internal var buttonUpdate: Button
         internal var spinnerStatus: Spinner
+        internal var viewStatus: View
 
 
         init {
@@ -437,6 +457,7 @@ class ProfileListAdapter(private val ctx: Context, private var mValues: MutableL
             textViewNewRatingFinal = view.findViewById(R.id.textViewNewRatingFinal)
             spinnerStatus = view.findViewById(R.id.spinnerStatusRating)
             buttonUpdate = view.findViewById(R.id.buttonUpdateRating)
+            viewStatus = view.findViewById(R.id.viewStatus)
 
         }
     }

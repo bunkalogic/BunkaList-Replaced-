@@ -1,6 +1,8 @@
 package com.bunkalogic.bunkalist.Adapters
 
 import android.content.Context
+import android.graphics.BlurMaskFilter
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -66,12 +68,20 @@ class TimelineMessageAdapter(val ctx: Context, query: Query){
             // if isSpoiler is true, delete the message if it is false.
             if (tlmessage.isSpoiler == true){
                 holder.content.text = ctx.getString(R.string.timeline_message_is_spoiler)
-                holder.content.setTypeface(null , Typeface.BOLD_ITALIC)
+                val radiusText = holder.content.textSize / 4
+
+                val blureffect = BlurMaskFilter(radiusText, BlurMaskFilter.Blur.NORMAL)
+                holder.content.paint.maskFilter = blureffect
+                holder.content.setTypeface(null, Typeface.DEFAULT.style)
             }else{
                 holder.content.text = tlmessage.content
             }
 
             holder.content.setOnLongClickListener {
+                holder.content.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+
+                holder.content.paint.maskFilter = null
+
                 holder.content.text = tlmessage.content
                 true
             }

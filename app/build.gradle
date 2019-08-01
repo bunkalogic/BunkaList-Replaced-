@@ -21,8 +21,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 28
         multiDexEnabled true
-        versionCode 33
-        versionName "0.9.91"
+        versionCode 38
+        versionName "0.9.107"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         each {
@@ -88,11 +88,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
-    implementation 'com.google.firebase:firebase-firestore:20.1.0'
-    implementation 'com.google.firebase:firebase-storage:18.1.0'
+    implementation 'com.google.firebase:firebase-firestore:20.2.0'
+    implementation 'com.google.firebase:firebase-storage:18.1.1'
     implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'
-    implementation 'com.google.firebase:firebase-storage:18.1.0'
-    implementation 'com.google.firebase:firebase-ads:18.1.0'
+    implementation 'com.google.firebase:firebase-storage:18.1.1'
+    implementation 'com.google.firebase:firebase-ads:18.1.1'
     implementation 'com.google.android.play:core:1.6.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'

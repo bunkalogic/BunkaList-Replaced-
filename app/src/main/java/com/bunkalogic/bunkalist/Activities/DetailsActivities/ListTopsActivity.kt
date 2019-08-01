@@ -180,7 +180,7 @@ class ListTopsActivity : AppCompatActivity() {
     private fun getSeriesListPopular(page: Int,callback: OnGetSeriesListFilterCallback) {
         //pass the filtering data
         searchViewModel = ViewModelProviders.of(this).get(ViewModelAPItmdb::class.java)
-        searchViewModel.getTopsSeries(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), 7)
+        searchViewModel.getTopsSeries(callback, Constans.filter_search_sort_populary_desc, page, Constans.filter_search_genres_movies_animation.toString(), 5)
 
 
 

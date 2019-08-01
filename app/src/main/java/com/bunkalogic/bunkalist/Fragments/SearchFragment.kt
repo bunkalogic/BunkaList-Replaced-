@@ -129,6 +129,8 @@ class SearchFragment : androidx.fragment.app.Fragment() {
                             Log.d("FragmentSearch", "On success data")
                             if (all.isEmpty()){
                                 toast("Please search again")
+                                adapter.notifyDataSetChanged()
+                                _view.animation_search_data_null.visibility = View.VISIBLE
                             }else{
                                 adapter.setData(all)
                                 _view.animation_search_data_null.visibility = View.GONE

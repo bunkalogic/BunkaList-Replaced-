@@ -41,6 +41,8 @@ class ItemTimelineChatActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
         setUpCurrentUser()
         setUpTimelineChatDB()
         getExtrasForTimeline()

@@ -4,7 +4,7 @@
     <item android:drawable="@drawable/bg_gradient_splash"/>
 
     <item>
-        <bitmap android:src="@drawable/ic_launcher_foreground"
+        <bitmap android:src="@drawable/ic_launcher_round"
                 android:gravity="center"/>
 
     </item>

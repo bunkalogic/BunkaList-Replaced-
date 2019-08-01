@@ -197,38 +197,38 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun setUpRecycler(){
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
 
 
         adapter = ProfileListAdapter(context!!, listProfileitem)
 
         _view.recyclerAllList.setHasFixedSize(true)
         _view.recyclerAllList.layoutManager = layoutManager
-        _view.recyclerAllList.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.recyclerAllList.itemAnimator = DefaultItemAnimator()
         _view.recyclerAllList.adapter = adapter
     }
 
 
     private fun setUpRecyclerFirestore(query : Query){
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
 
         adapterFirestore = ProfileListFirestoreAdapter(context!!, query)
 
         _view.recyclerAllList.setHasFixedSize(true)
         _view.recyclerAllList.layoutManager = layoutManager
-        _view.recyclerAllList.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.recyclerAllList.itemAnimator = DefaultItemAnimator()
         _view.recyclerAllList.adapter = adapterFirestore?.adapter
     }
 
     private fun setUpRecyclerOther(){
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
 
 
         adapterOther = ProfileOtherListAdapter(context!!, listOtherProfileitem)
 
         _view.recyclerAllList.setHasFixedSize(true)
         _view.recyclerAllList.layoutManager = layoutManager
-        _view.recyclerAllList.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
+        _view.recyclerAllList.itemAnimator = DefaultItemAnimator()
         _view.recyclerAllList.adapter = adapterOther
     }
 
@@ -330,7 +330,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 .orderBy(fieldOrderBy, orderType)
             setUpRecyclerFirestore(query)
             adapterFirestore?.adapter?.notifyDataSetChanged()
-            preferences.sizeMovies = adapterFirestore?.adapter?.itemCount!!.toInt()
+            preferences.sizeMovies = adapterFirestore!!.options.snapshots.size
         }else{
            val query =  store.collection("Users/$userId/RatingList")
                 .whereEqualTo(value1, value2)
@@ -356,7 +356,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 .orderBy(fieldOrderBy, orderType)
             setUpRecyclerFirestore(query)
             adapterFirestore?.adapter?.notifyDataSetChanged()
-            preferences.sizeSeries = adapterFirestore?.adapter?.itemCount!!.toInt()
+            preferences.sizeSeries = adapterFirestore!!.options.snapshots.size
         }else{
             val query =  store.collection("Users/$userId/RatingList")
                 .whereEqualTo(value1, value2)
@@ -382,7 +382,7 @@ class ListProfileFragment : androidx.fragment.app.Fragment() {
                 .orderBy(fieldOrderBy, orderType)
             setUpRecyclerFirestore(query)
             adapterFirestore?.adapter?.notifyDataSetChanged()
-            preferences.sizeAnime = adapterFirestore?.adapter?.itemCount!!.toInt()
+            preferences.sizeAnime = adapterFirestore!!.options.snapshots.size
         }else{
             val query =  store.collection("Users/$userId/RatingList")
                 .whereEqualTo(value1, value2)

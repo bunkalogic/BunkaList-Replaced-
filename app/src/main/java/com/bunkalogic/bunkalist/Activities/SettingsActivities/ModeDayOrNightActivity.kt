@@ -34,6 +34,9 @@ class ModeDayOrNightActivity : ToolbarActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
+
         addBannerAds()
         //onRadioButtonClicked()
         clicksListener()

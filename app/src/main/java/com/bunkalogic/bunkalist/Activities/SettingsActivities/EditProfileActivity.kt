@@ -52,6 +52,9 @@ class EditProfileActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
+
         addBannerAds()
         setUpCurrentUser()
         clicksListeners()

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import android.util.ArrayMap
 import android.util.Log
+import androidx.viewpager.widget.ViewPager
 import com.bunkalogic.bunkalist.Adapters.ListTabProfileAdapter
 import com.bunkalogic.bunkalist.Adapters.TopsTabProfileAdapter
 import com.bunkalogic.bunkalist.Fragments.FabFilter.FabFilterListFragment
@@ -67,7 +68,7 @@ class ProfileListActivity : AppCompatActivity(){
         val Adapter = ListTabProfileAdapter(supportFragmentManager, tabLayoutFilter.tabCount)
         viewPagerFilter.adapter = Adapter
 
-        viewPagerFilter.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayoutFilter))
+        viewPagerFilter.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayoutFilter) as ViewPager.OnPageChangeListener)
 
         tabLayoutFilter.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(p0: TabLayout.Tab?) {

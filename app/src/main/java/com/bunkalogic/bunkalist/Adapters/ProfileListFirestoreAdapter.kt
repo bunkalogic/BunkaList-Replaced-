@@ -2,6 +2,7 @@ package com.bunkalogic.bunkalist.Adapters
 
 import androidx.lifecycle.ViewModelProviders
 import android.content.Context
+import android.os.Build
 import android.text.InputFilter
 import android.text.Spannable
 import android.util.Log
@@ -35,8 +36,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.Query
 import androidx.paging.PagedList
 import com.bunkalogic.bunkalist.Utils.InputFilterMinMax
-
-
+import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.backgroundColorResource
 
 
 class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
@@ -268,6 +269,28 @@ class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
 
                 })
             }
+            // se encarga de comprobar el status de darle un color personalizado dependiendo del status
+
+            when(listRating.status){
+                Constans.filter_status_complete ->{
+                    holder.viewStatus.backgroundColorResource =  R.color.colorStatusComplete
+                }
+                Constans.filter_status_watching ->{
+                    holder.viewStatus.backgroundColorResource = R.color.colorStatusWatching
+                }
+                Constans.filter_status_waiting ->{
+                    holder.viewStatus.backgroundColorResource = R.color.colorStatusPending
+                }
+                Constans.filter_status_pause ->{
+                    holder.viewStatus.backgroundColorResource = R.color.colorStatusPause
+                }
+                Constans.filter_status_dropped ->{
+                    holder.viewStatus.backgroundColorResource = R.color.colorStatusDropped
+                }
+            }
+
+
+
 
 
             //Here is responsible for the view to edit the rating
@@ -472,6 +495,7 @@ class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
         internal var textViewNewRatingFinal: TextView
         internal var buttonUpdate: Button
         internal var spinnerStatus: Spinner
+        internal var viewStatus: View
 
 
         init {
@@ -495,6 +519,7 @@ class ProfileListFirestoreAdapter(var ctx : Context, query : Query){
             textViewNewRatingFinal = view.findViewById(R.id.textViewNewRatingFinal)
             spinnerStatus = view.findViewById(R.id.spinnerStatusRating)
             buttonUpdate = view.findViewById(R.id.buttonUpdateRating)
+            viewStatus = view.findViewById(R.id.viewStatus)
 
         }
     }

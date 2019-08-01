@@ -27,6 +27,8 @@ import android.widget.ImageView
 import com.bunkalogic.bunkalist.Retrofit.Response.Genre
 import android.text.TextUtils
 import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import android.widget.TextView
 import com.bunkalogic.bunkalist.Adapters.CastPersonAdapter
 import com.bunkalogic.bunkalist.Adapters.CrewPersonAdapter
@@ -40,8 +42,14 @@ import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.LogosNetwork
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.Network
 import com.bunkalogic.bunkalist.Retrofit.Response.SeriesAndAnime.ResultSeries
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
+import com.bunkalogic.bunkalist.db.ItemListRating
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
+import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.layoutInflater
 import java.text.SimpleDateFormat
 import java.util.*
@@ -65,9 +73,17 @@ class ItemDetailsActivity : AppCompatActivity() {
     private lateinit var AdapterCast: CastPersonAdapter
     private lateinit var AdapterCrew: CrewPersonAdapter
 
+    private val store: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+
     // I use these 2 variables to collect the data correctly if it is an anime
     val bundle = Bundle()
     var isAnime : Boolean = false
+
+
+
+    var itemList : MutableList<ItemListRating> = mutableListOf()
+    var isAddedInYourList = false
 
     private var newDate = ""
 
@@ -105,6 +121,11 @@ class ItemDetailsActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbarFullDetails)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val w : Window = window
+            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        }
 
 
         val extrasTitle = intent.extras?.getString("title")
@@ -157,6 +178,10 @@ class ItemDetailsActivity : AppCompatActivity() {
         getMovieContentForID(object: OnGetMovieCallback {
             override fun onSuccess(movie: Movie) {
                 stringDateFormat(movie.releaseDate!!)
+                isInYourList(movie.id!!)
+                if (isAddedInYourList){
+                    buttonSearchItemDetailsAddInYourList.backgroundResource = R.drawable.button_rounded_transparent_color_selected
+                }
 
                 textViewTitleDetails.text = movie.originalTitle
 
@@ -192,10 +217,16 @@ class ItemDetailsActivity : AppCompatActivity() {
 
                 buttonSearchItemDetailsAddInYourList.setOnClickListener {
 
-                    val dialog = AddListDialog()
-                    dialog.arguments = bundle
-                    val manager = supportFragmentManager.beginTransaction()
-                    dialog.show(manager, null)
+                    if (isAddedInYourList){
+                       buttonSearchItemDetailsAddInYourList.backgroundResource = R.drawable.button_rounded_transparent_color_selected
+                        toast(R.string.is_added_in_your_list)
+                    }else{
+                        val dialog = AddListDialog()
+                        dialog.arguments = bundle
+                        val manager = supportFragmentManager.beginTransaction()
+                        dialog.show(manager, null)
+                    }
+
 
                 }
 
@@ -411,8 +442,11 @@ class ItemDetailsActivity : AppCompatActivity() {
             getSeriesContentForID(object : OnGetSeriesCallback {
                 override fun onSuccess(series: Series) {
                     textViewLabelGenres.visibility = View.VISIBLE
-
                     stringDateFormat(series.firstAirDate!!)
+                    isInYourList(series.id!!)
+                    if (isAddedInYourList){
+                        buttonSearchItemDetailsAddInYourList.backgroundResource = R.drawable.button_rounded_transparent_color_selected
+                    }
 
 
                         textViewTitleDetails.text = series.originalName
@@ -439,6 +473,21 @@ class ItemDetailsActivity : AppCompatActivity() {
                         bundle.putInt("id", id!!)
                         bundle.putString("title", title)
                         bundle.putString("type", type)
+
+                    buttonSearchItemDetailsAddInYourList.setOnClickListener {
+
+                        if (isAddedInYourList){
+                            buttonSearchItemDetailsAddInYourList.backgroundResource = R.drawable.button_rounded_transparent_color_selected
+                            toast(R.string.is_added_in_your_list)
+                        }else{
+                            val dialog = AddListDialog()
+                            dialog.arguments = bundle
+                            val manager = supportFragmentManager.beginTransaction()
+                            dialog.show(manager, null)
+                        }
+
+
+                    }
 
 
                         // Load images
@@ -784,6 +833,26 @@ class ItemDetailsActivity : AppCompatActivity() {
             dialog.show(manager, null)
 
         }
+    }
+
+    // check if it's on your list
+    private fun isInYourList(idOuevre: Int){
+        store
+           .collection("Users/${preferences.userId}/RatingList")
+            .whereEqualTo("oeuvreId", idOuevre)
+           .get().addOnSuccessListener {
+                val itemRatingList = it.toObjects(ItemListRating::class.java)
+
+                for (item in itemRatingList){
+                    if (item.oeuvreId == idOuevre){
+                        isAddedInYourList = true
+                        buttonSearchItemDetailsAddInYourList.backgroundResource = R.drawable.button_rounded_transparent_color_selected
+                    }else{
+                        isAddedInYourList = false
+                        buttonSearchItemDetailsAddInYourList.backgroundResource = R.drawable.button_rounded_transparent_color
+                    }
+                }
+            }
     }
 
     // Is responsible for launching the YouTube App

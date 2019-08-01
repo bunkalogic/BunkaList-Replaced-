@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_add_list_select_one_status">select a state before add it to your list</string>
+    <string name="is_added_in_your_list">It is already added to your list</string>
+</resources>
