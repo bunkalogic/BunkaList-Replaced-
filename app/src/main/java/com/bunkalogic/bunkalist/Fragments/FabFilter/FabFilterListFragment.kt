@@ -23,6 +23,8 @@ import com.bunkalogic.bunkalist.Models.FilterListUser
 import com.bunkalogic.bunkalist.Others.Constans
 import java.lang.Exception
 import com.bunkalogic.bunkalist.Fragments.ListProfileFragment
+import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.toast
 
 
 class FabFilterListFragment : AAH_FabulousFragment() {
@@ -56,6 +58,7 @@ class FabFilterListFragment : AAH_FabulousFragment() {
         contentView.findViewById<ImageButton>(R.id.fabFilterOk).setOnClickListener {
             Constans.applied_list_filter = applied_filters
             closeFilter(applied_filters)
+            longToast(R.string.apply_filter)
         }
 
         contentView.findViewById<ImageButton>(R.id.fabFilterClose).setOnClickListener {

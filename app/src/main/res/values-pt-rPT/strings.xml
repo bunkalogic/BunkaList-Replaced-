@@ -188,5 +188,21 @@
     <string name="search_item_full_details_similar">Semelhante</string>
     <string name="add_new_username">Por favor, adicione seu apado antes de continuar</string>
     <string name="dialog_add_list_select_one_status">selecione um estado antes de adicioná-lo à sua lista</string>
-    <string name="is_added_in_your_list">It is already added to your list</string>
+    <string name="is_added_in_your_list">Já está adicionado à sua lista</string>
+    <string name="apply_filter">clique no botão novamente para aplicar os filtros</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Obrigado por baixar BunkaList !</string>
+    <string name="slide_1_desc">o aplicativo que permite salvar o que você viu ou está assistindo!</string>
+
+    <string name="slide_2_title">Comente com todos!</string>
+    <string name="slide_2_desc">Comente, eu já conheço um filme que você gostou, uma temporada de uma série ou o capítulo de um anime.</string>
+
+    <string name="slide_3_title">Avalie o que você viu de forma simples ou detalhada!</string>
+    <string name="slide_3_desc">Classifique cada trabalho com um sistema de pontuação que valorize todos os aspectos importantes dele.</string>
+
+    <string name="slide_4_title">Descubra novas obras!</string>
+    <string name="slide_4_desc">Descubra novas obras, seja procurando por gêneros ou por ano, pelos tops.</string>
 </resources>

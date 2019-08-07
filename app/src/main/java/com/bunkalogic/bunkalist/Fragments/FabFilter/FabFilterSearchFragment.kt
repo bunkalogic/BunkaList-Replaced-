@@ -23,8 +23,7 @@ import com.bunkalogic.bunkalist.Others.Constans
 import java.lang.Exception
 import com.bunkalogic.bunkalist.Fragments.SearchFragment
 import com.bunkalogic.bunkalist.Models.FilterSearchData
-
-
+import org.jetbrains.anko.support.v4.longToast
 
 
 class FabFilterSearchFragment : AAH_FabulousFragment() {
@@ -65,6 +64,7 @@ class FabFilterSearchFragment : AAH_FabulousFragment() {
 
             }
             closeFilter(applied_filters)
+            longToast(R.string.apply_filter)
         }
 
         contentView.findViewById<ImageButton>(R.id.fabFilterClose).setOnClickListener {

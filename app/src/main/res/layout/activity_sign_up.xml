@@ -141,7 +141,7 @@
                 android:text="@string/sign_up_terms_anduse"
                 app:layout_constraintEnd_toEndOf="@+id/editTextConfirmPassword"
                 android:textStyle="bold|italic" android:textAlignment="textStart"
-                android:textColor="@color/colorPrimaryText"/>
+                android:textColor="@color/colorPrimaryTextDark"/>
         <androidx.constraintlayout.widget.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
                                                     android:id="@+id/guideline7"
                                                     android:orientation="horizontal"

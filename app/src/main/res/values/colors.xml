@@ -32,4 +32,37 @@
     <color name="colorStatusDropped">#D81B60</color>
 
 
+    <!-- Screens background color-->
+    <color name="bg_screen1">#8E24AA</color>
+    <color name="bg_screen2">#00897B</color>
+    <color name="bg_screen3">#039BE5</color>
+    <color name="bg_screen4">#D81B60</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#AB47BC</color>
+    <color name="dot_dark_screen2">#26A69A</color>
+    <color name="dot_dark_screen3">#29B6F6</color>
+    <color name="dot_dark_screen4">#EC407A</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#BA68C8</color>
+    <color name="dot_light_screen2">#4DB6AC</color>
+    <color name="dot_light_screen3">#4FC3F7</color>
+    <color name="dot_light_screen4">#F06292</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+
 </resources>

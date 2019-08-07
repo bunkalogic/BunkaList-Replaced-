@@ -20,6 +20,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:statusBarScrim="@android:color/transparent"
                 app:titleTextAppearance="@font/overpass"
                 android:fitsSystemWindows="true"
                 app:expandedTitleMarginEnd="64dp"

@@ -19,8 +19,7 @@
                 android:src="@drawable/new_icon_design_bk_rounded"
                 android:id="@+id/imageView4" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/textViewCharacter"/>
 
         <EditText
                 android:id="@+id/editTextEmail"
@@ -40,7 +39,7 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="24dp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextPassword" app:layout_constraintHorizontal_bias="0.0"
-                android:textColorHint="@color/colorPrimaryText"/>
+                android:textColorHint="@color/colorPrimaryTextDark"/>
         <EditText
                 android:id="@+id/editTextPassword"
                 android:inputType="textPassword"
@@ -59,7 +58,8 @@
                 android:layout_marginEnd="32dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:layout_marginBottom="36dp"
-                app:layout_constraintBottom_toTopOf="@+id/buttonLogIn" android:textColorHint="@color/colorPrimaryText"/>
+                app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
+                android:textColorHint="@color/colorPrimaryTextDark"/>
 
         <Button
                 android:id="@+id/buttonLogIn"
@@ -118,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                android:layout_marginBottom="2dp" android:textAllCaps="false"/>
+                android:textAllCaps="false" android:layout_marginBottom="8dp"/>
         <TextView
                 android:text="BunkaList"
                 android:layout_width="wrap_content"
@@ -129,25 +129,8 @@
                 android:textColor="@color/colorAccentDark"
                 app:layout_constraintEnd_toEndOf="@+id/imageView4"
                 android:textAllCaps="false" android:textStyle="italic"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4"/>
-        <ImageView
-                android:src="@drawable/themoviedblogo"
-                android:layout_width="100dp"
-                android:layout_height="60dp"
-                android:id="@+id/imageView" app:layout_constraintStart_toStartOf="@+id/textViewCharacter"
-                app:layout_constraintEnd_toEndOf="@+id/textViewCharacter" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCharacter"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3"
-                android:fontFamily="@font/overpass"
-                android:text="@string/activity_login_db_notice" android:textAlignment="center"
-                android:textSize="12sp" android:textStyle="italic"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="parent" android:textColor="@color/colorPrimaryTextDark"
-                android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/editTextEmail"/>
+                android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/editTextEmail"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

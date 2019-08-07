@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.bunkalogic.bunkalist.Adapters.TimelineChatAdapter
+import com.bunkalogic.bunkalist.Notification.NotificationHandler
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.RxBus.RxBus
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.bunkalogic.bunkalist.db.TimelineChat
 import com.bunkalogic.bunkalist.db.TimelineChatEvent
 import com.google.firebase.auth.FirebaseAuth
@@ -120,6 +122,7 @@ class ItemTimelineChatActivity : AppCompatActivity() {
             if (message.isNotEmpty() && message != "text" && message != "text1234"){
                 val messageEvent = TimelineChat(currentUser.uid, currentUser.displayName!!, currentUser.photoUrl.toString(), Date(), message)
                 saveMessageChat(messageEvent)
+                //notifyUser(currentUser.displayName!!, message)
             }
             editTextTimelineChat.text.clear()
             editTextTimelineChat.text.clearSpans()
@@ -127,6 +130,15 @@ class ItemTimelineChatActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun notifyUser(title: String, message: String){
+        //TODO: lanzar la notificacion al usuario del chat
+        val extrasUserId = intent.extras?.getString("userId")
+
+        if (extrasUserId == preferences.userId){
+            NotificationHandler(this).createNotification(title, message, false)
+        }
     }
 
     private fun subscribeToChatMessage(){

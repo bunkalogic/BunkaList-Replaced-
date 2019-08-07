@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bunkalogic.bunkalist.Activities.DetailsActivities.AttributionActivity
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.LicenseActivity
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.TermsAndPrivacyActivity
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
@@ -75,6 +76,10 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
 
         _view.textView_Terms_use.setOnClickListener {
             startActivity(intentFor<TermsAndPrivacyActivity>())
+        }
+
+        _view.textViewAttribution.setOnClickListener {
+            startActivity(intentFor<AttributionActivity>())
         }
     }
 

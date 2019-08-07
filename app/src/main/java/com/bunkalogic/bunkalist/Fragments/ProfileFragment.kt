@@ -151,10 +151,20 @@ class ProfileFragment : androidx.fragment.app.Fragment() {
 
         _view.userNameProfile.text = currentUser.displayName
 
+
+        if (currentUser.photoUrl.toString().isEmpty()){
+            Glide.with(this)
+                .load(R.drawable.ic_person_black_24dp)
+                .placeholder(R.drawable.ic_person_black_24dp)
+                .override(160, 160)
+                .into(_view.userImageProfile)
+        }else{
             Glide.with(this)
                 .load(currentUser.photoUrl)
                 .override(160, 160)
                 .into(_view.userImageProfile)
+        }
+
 
 
         _view.numberMovie.text = "Movies views: " + preferences.sizeMovies

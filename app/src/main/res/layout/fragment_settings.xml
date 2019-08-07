@@ -131,6 +131,19 @@
                 android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp" android:textSize="14sp"
                 android:textStyle="bold"
+                android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/textViewAttribution"/>
+
+        <TextView
+                android:text="@string/about_the_app"
+                android:fontFamily="@font/overpass"
+                android:textColor="@color/colorPrimaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textViewAttribution"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:textSize="14sp"
+                android:textStyle="bold"
                 android:layout_marginBottom="24dp" app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"/>
 
 

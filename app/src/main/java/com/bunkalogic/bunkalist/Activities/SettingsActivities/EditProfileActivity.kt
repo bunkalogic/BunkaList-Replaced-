@@ -85,7 +85,7 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         buttonApplyChanges.setOnClickListener {
-            uploadedImageinStorage()
+            uploadedImageInStorage()
 
 
 
@@ -110,7 +110,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     // Collect the selected image and upload it to Firebase Storage and Save the image in currentUser.photoUrl
-    private fun uploadedImageinStorage(){
+    private fun uploadedImageInStorage(){
         if (selectedPhotoUri != null){
             val filename = UUID.randomUUID().toString()
            val fbStorageRef = storageRef.child("IMAGES/$filename")

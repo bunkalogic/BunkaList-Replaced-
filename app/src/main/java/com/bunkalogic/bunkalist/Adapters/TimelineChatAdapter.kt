@@ -36,7 +36,7 @@ class TimelineChatAdapter(val ctx : Context, private val TimelineChatList: Mutab
         holder.content.text = itemChat.contentChat
         holder.sentAt.text = SimpleDateFormat("h:mm, EEE/MMM", Locale.getDefault()).format(itemChat.sentAt)
 
-        if (itemChat.profileImageUrl!!.isEmpty()){
+        if (itemChat.profileImageUrl.isNullOrEmpty()){
             Glide.with(holder.userImage)
                 .load(R.drawable.ic_person_black_24dp)
                 .override(60, 60)
@@ -44,6 +44,7 @@ class TimelineChatAdapter(val ctx : Context, private val TimelineChatList: Mutab
         }else{
             Glide.with(holder.userImage)
                 .load(itemChat.profileImageUrl)
+                .placeholder(R.drawable.ic_person_black_24dp)
                 .override(60, 60)
                 .into(holder.userImage)
         }

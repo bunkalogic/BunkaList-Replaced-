@@ -2,6 +2,7 @@ package com.bunkalogic.bunkalist.Activities.DetailsActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProviders
 import com.bunkalogic.bunkalist.Adapters.TopListMoviesAdapter
 import com.bunkalogic.bunkalist.Adapters.TopListSeriesAdapter
@@ -17,6 +18,9 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.activity_list_tops.*
 import org.jetbrains.anko.toast
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 class ListTopsActivity : AppCompatActivity() {
 
@@ -127,6 +131,7 @@ class ListTopsActivity : AppCompatActivity() {
     // Is responsible for showing the lists of the movies
     private fun getMovieList(typeList: String, page: Int){
         isFetching = true
+
         searchViewModel.getMoviesList(page, typeList, object :
             OnGetListMoviesCallback {
             override fun onSuccess(page: Int, movies: List<ResultMovie>) {
@@ -138,7 +143,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterMovies?.clearList()
                     }
                     adapterMovies?.appendMovies(movies)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
+                AnimationLoadingTops.visibility = View.GONE
 
                 currentPage = page
                 isFetching = false
@@ -164,8 +171,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterSeries?.clearList()
                     }
                     adapterSeries?.appendSeries(series)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
-
+                AnimationLoadingTops.visibility = View.GONE
                 currentPage = page
                 isFetching = false
             }
@@ -199,8 +207,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterSeries?.clearList()
                     }
                     adapterSeries?.appendSeries(series)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
-
+                AnimationLoadingTops.visibility = View.GONE
                 currentPage = page
                 isFetching = false
             }
@@ -234,8 +243,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterSeries?.clearList()
                     }
                     adapterSeries?.appendSeries(series)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
-
+                AnimationLoadingTops.visibility = View.GONE
                 currentPage = page
                 isFetching = false
             }
@@ -270,8 +280,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterSeries?.clearList()
                     }
                     adapterSeries?.appendSeries(series)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
-
+                AnimationLoadingTops.visibility = View.GONE
                 currentPage = page
                 isFetching = false
             }
@@ -306,8 +317,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterSeries?.clearList()
                     }
                     adapterSeries?.appendSeries(series)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
-
+                AnimationLoadingTops.visibility = View.GONE
                 currentPage = page
                 isFetching = false
             }
@@ -343,8 +355,9 @@ class ListTopsActivity : AppCompatActivity() {
                         adapterSeries?.clearList()
                     }
                     adapterSeries?.appendSeries(series)
+                    AnimationLoadingTops.visibility = View.VISIBLE
                 }
-
+                AnimationLoadingTops.visibility = View.GONE
                 currentPage = page
                 isFetching = false
             }

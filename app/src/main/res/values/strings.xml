@@ -288,6 +288,25 @@
     <string name="add_new_username">Please add your NickName before continuing</string>
     <string name="dialog_add_list_select_one_status">select a state before add it to your list</string>
     <string name="is_added_in_your_list">It is already added to your list</string>
+    <string name="apply_filter">click on the button again to apply the filters</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Thanks for downloading BunkaList!!!</string>
+    <string name="slide_1_desc">the application that allows you to save what you\'ve seen or are watching!</string>
+
+    <string name="slide_2_title">Comment with everyone!</string>
+    <string name="slide_2_desc">Comment, I already know a movie that you liked, a season of a series or the chapter of
+        an anime.
+    </string>
+
+    <string name="slide_3_title">Rate what you\'ve seen simply or in detail!</string>
+    <string name="slide_3_desc">Rate each work with a scoring system that values every important aspect of it.</string>
+
+    <string name="slide_4_title">Discover new oeuvre!</string>
+    <string name="slide_4_desc">discover new oeuvre either looking for them by genres or year, by the tops.</string>
 
 
 </resources>

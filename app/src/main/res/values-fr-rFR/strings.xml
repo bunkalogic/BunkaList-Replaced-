@@ -202,5 +202,21 @@
     <string name="search_item_full_details_similar">Similaire</string>
     <string name="add_new_username">S\'il vous plaît ajouter votre pseudo avant de continuer</string>
     <string name="dialog_add_list_select_one_status">sélectionnez un état avant de l\'ajouter à votre liste</string>
-    <string name="is_added_in_your_list">It is already added to your list</string>
+    <string name="is_added_in_your_list">Il est déjà ajouté à votre liste</string>
+    <string name="apply_filter">cliquez à nouveau sur le bouton pour appliquer les filtres</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Merci d\'avoir téléchargé BunkaList!</string>
+    <string name="slide_1_desc">l’application qui vous permet de sauvegarder ce que vous avez vu ou regardez!</string>
+
+    <string name="slide_2_title">Commentez avec tout le monde!</string>
+    <string name="slide_2_desc">Commentaire, je connais déjà un film que vous avez aimé, une saison d\'une série ou le chapitre d\'un anime.</string>
+
+    <string name="slide_3_title">Notez ce que vous avez vu simplement ou en détail!</string>
+    <string name="slide_3_desc">Notez chaque travail avec un système de notation qui valorise chaque aspect important de celui-ci.</string>
+
+    <string name="slide_4_title">Découvrez nouvelle oeuvre!</string>
+    <string name="slide_4_desc">découvrez une nouvelle œuvre en recherchant par genre ou année, par sommet.</string>
 </resources>

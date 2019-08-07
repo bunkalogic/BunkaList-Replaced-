@@ -115,6 +115,7 @@ class TimelineMessageAdapter(val ctx: Context, query: Query){
             }else{
                 Glide.with(holder.itemView)
                     .load(tlmessage.profileImageUrl)
+                    .placeholder(R.drawable.ic_person_black_24dp)
                     .override(60, 60)
                     .into(holder.userImage)
 

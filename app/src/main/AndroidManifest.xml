@@ -16,8 +16,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.DetailsActivities.AttributionActivity">
+        </activity>
+        <activity android:name=".Activities.NewUser.WelcomeActivity">
+        </activity>
 
-        <receiver android:name=".Receiver.ReceiverNotification"></receiver>
+        <receiver android:name=".Receiver.ReceiverNotification"/>
 
         <activity android:name=".Activities.DetailsActivities.PeopleActivity">
         </activity>
@@ -27,8 +31,9 @@
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value=""/>
 
-        <activity android:name=".Activities.DetailsActivities.TermsAndPrivacyActivity"
-        android:theme="@style/AppTheme.TransparentTheme">
+        <activity
+                android:name=".Activities.DetailsActivities.TermsAndPrivacyActivity"
+                android:theme="@style/AppTheme.TransparentTheme">
         </activity>
         <activity android:name=".Activities.DetailsActivities.LicenseActivity">
         </activity>

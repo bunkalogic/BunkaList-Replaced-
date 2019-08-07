@@ -186,5 +186,22 @@
     <string name="search_item_full_details_similar">Ähnlich</string>
     <string name="add_new_username">Bitte geben Sie Ihren Nickname ein, bevor Sie fortfahren</string>
     <string name="dialog_add_list_select_one_status">Wählen Sie einen Staat aus, bevor Sie ihn Ihrer Liste hinzufügen</string>
-    <string name="is_added_in_your_list">It is already added to your list</string>
+    <string name="is_added_in_your_list">Es wurde bereits zu Ihrer Liste hinzugefügt</string>
+    <string name="apply_filter">Klicken Sie erneut auf die Schaltfläche, um die Filter anzuwenden</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Vielen Dank, dass Sie BunkaList heruntergeladen haben!</string>
+    <string name="slide_1_desc">die Anwendung, mit der Sie speichern können, was Sie gesehen haben oder gerade sehen!</string>
+
+    <string name="slide_2_title">Kommentar mit allen!</string>
+    <string name="slide_2_desc">Kommentar, ich kenne bereits einen Film, den Sie mochten, eine Staffel einer Serie oder das Kapitel eines Anime.</string>
+
+    <string name="slide_3_title">Bewerten Sie, was Sie einfach oder ausführlich gesehen haben!</string>
+    <string name="slide_3_desc">Bewerten Sie jede Arbeit mit einem Bewertungssystem, das jeden wichtigen Aspekt bewertet.</string>
+
+    <string name="slide_4_title">Neues Werk entdecken!</string>
+    <string name="slide_4_desc">entdecken sie neues eitheruvre, entweder nach Genres oder nach Jahr, ganz oben.</string>
+
 </resources>

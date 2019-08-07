@@ -80,9 +80,6 @@ class ItemDetailsActivity : AppCompatActivity() {
     val bundle = Bundle()
     var isAnime : Boolean = false
 
-
-
-    var itemList : MutableList<ItemListRating> = mutableListOf()
     var isAddedInYourList = false
 
     private var newDate = ""
@@ -122,10 +119,20 @@ class ItemDetailsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val w : Window = window
-            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            w.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_OVERSCAN)
+            w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            w.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+
+            w.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+            w.statusBarColor = Color.TRANSPARENT
+
         }
+
+
+
 
 
         val extrasTitle = intent.extras?.getString("title")
@@ -473,6 +480,7 @@ class ItemDetailsActivity : AppCompatActivity() {
                         bundle.putInt("id", id!!)
                         bundle.putString("title", title)
                         bundle.putString("type", type)
+                        bundle.putBoolean("anime", isAnime)
 
                     buttonSearchItemDetailsAddInYourList.setOnClickListener {
 

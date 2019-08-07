@@ -21,6 +21,17 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" android:id="@+id/RecyclerViewTops"
             app:layout_constraintBottom_toTopOf="@+id/adViewBannerFragmentListTopMovies"/>
 
+    <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:lottie_fileName="loading_list.json"
+            app:lottie_loop="true"
+            app:lottie_autoPlay="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" android:id="@+id/AnimationLoadingTops"
+            app:layout_constraintBottom_toTopOf="@+id/adViewBannerFragmentListTopMovies"/>
+
     <com.google.android.gms.ads.AdView
             xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adViewBannerFragmentListTopMovies"

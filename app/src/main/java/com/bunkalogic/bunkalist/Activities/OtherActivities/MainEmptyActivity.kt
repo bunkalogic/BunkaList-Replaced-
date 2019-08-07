@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.Activities.BaseActivity
+import com.bunkalogic.bunkalist.Activities.NewUser.WelcomeActivity
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.Receiver.ReceiverNotification
+import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.intentFor
@@ -26,12 +28,25 @@ class MainEmptyActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         MobileAds.initialize(this, "")
+        isFirstOpen()
+
+    }
+
+    private fun isFirstOpen(){
+        if (preferences.isFirstLaunch){
+            startActivity(intentFor<WelcomeActivity>().newTask())
+            finish()
+        }else{
+            isNotFirstOpen()
+        }
+    }
+
+    private fun isNotFirstOpen(){
         if (mAuth.currentUser == null){
             startActivity(intentFor<LoginActivity>().newTask())
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
         }else{
-            notificationReminder()
             startActivity(intentFor<BaseActivity>().newTask())
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             finish()
@@ -42,7 +57,7 @@ class MainEmptyActivity : AppCompatActivity() {
         val intent = Intent(this, ReceiverNotification::class.java)
         val pIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
         val alarmManager : AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),7 * 24 * 60 * 60 * 1000, pIntent)
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),7 * 24 * 60 * 60 * 1000, pIntent)
     }
 
 }
