@@ -6,6 +6,10 @@ discover and comment on their favorite works.
 
 > If you are interested and want to support you can donate [PayPal](https://paypal.me/bunkalist?locale.x=es_ES)
 
+# **Screenshot**
+
+
+
 # **The Bunkalist Road Map** :clipboard:
 - Improve stability and add new features.
 - Implement that users can also add manga and books to their lists.
