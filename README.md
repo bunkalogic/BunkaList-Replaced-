@@ -6,7 +6,7 @@ discover and comment on their favorite works.
 
 > If you are interested and want to support you can donate [PayPal](https://paypal.me/bunkalist?locale.x=es_ES)
 
-# **Screenshot**
+# **Screenshot** :camera:
 
 
 
