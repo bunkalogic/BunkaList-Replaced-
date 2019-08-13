@@ -6,10 +6,17 @@ discover and comment on their favorite works.
 
 > If you are interested and want to support you can donate [PayPal](https://paypal.me/bunkalist?locale.x=es_ES)
 
+# **Screenshot** :camera:
+
+![google-pixel1m](https://user-images.githubusercontent.com/37332713/62721686-030c7500-ba0d-11e9-9749-3e47d6fbf41f.png)
+![google-pixel2m](https://user-images.githubusercontent.com/37332713/62722712-5aabe000-ba0f-11e9-8c93-0b106cf50c14.png)
+
+
+
 # **The Bunkalist Road Map** :clipboard:
-- Improve and repair the Android version and get a stronger version.
+- Improve stability and add new features.
 - Implement that users can also add manga and books to their lists.
-- The iOS version of [BunkaList](https://play.google.com/store/apps/details?id=com.bunkalogic.bunkalist) with Flutter.
+- The iOS version of [BunkaList](https://bunkalist.com) with Flutter.
 
 
 # **License**
