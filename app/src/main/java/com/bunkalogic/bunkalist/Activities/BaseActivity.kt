@@ -64,7 +64,8 @@ class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        whatIsMode()
+        //whatIsMode()
+        whatModeIs()
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
         setUpCurrentUser()
@@ -150,29 +151,46 @@ class BaseActivity : AppCompatActivity() {
     }
 
     // Check if the user has chosen some theme mode in the ModeDayOrNightActivity
-    private fun whatIsMode(){
-        val mode_light = 1
-        val mode_dark = 2
-        val mode_custom = 3
-        if (preferences.mode == mode_light){
+    //private fun whatIsMode(){
+    //    val mode_light = 1
+    //    val mode_dark = 2
+    //    val mode_custom = 3
+    //    if (preferences.mode == mode_light){
+    //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    //            window.statusBarColor = resources.getColor(colorBackgroundPrimary, theme)
+    //            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    //        }
+    //    }
+    //    if (preferences.mode == mode_dark){
+    //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    //            window.statusBarColor = resources.getColor(colorBackgroundPrimary, theme)
+    //        }
+    //    }
+    //    if (preferences.mode == mode_custom){
+    //        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
+    //    }
+    //    AppCompatDelegate.getDefaultNightMode()
+//
+    //}
+
+    private fun whatModeIs(){
+        if (!preferences.isNightMode){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 window.statusBarColor = resources.getColor(colorBackgroundPrimary, theme)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
-        }
-        if (preferences.mode == mode_dark){
+        }else if (preferences.isNightMode){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 window.statusBarColor = resources.getColor(colorBackgroundPrimary, theme)
             }
         }
-        if (preferences.mode == mode_custom){
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO)
-        }
-        AppCompatDelegate.getDefaultNightMode()
-
     }
+
+
 
     // Check if there are any updates available
     private fun checkNewUpdates(){

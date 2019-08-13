@@ -7,8 +7,6 @@ import com.bunkalogic.bunkalist.R
 
 class AttributionActivity : AppCompatActivity() {
 
-    //TODO: Agregar la atribucion a la Api, tambien las de las animaciones de Lottie Files y de Flat icons
-    // traducir los string del Welcome Activity
 
     private lateinit var toolbar: Toolbar
 

@@ -29,7 +29,7 @@
         </activity> <!-- Sample Admob id: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value=""/>
+                android:value="ca-app-pub-6667428027256827~7372710211"/>
 
         <activity
                 android:name=".Activities.DetailsActivities.TermsAndPrivacyActivity"
@@ -65,11 +65,7 @@
         </activity>
         <activity android:name=".Activities.OtherActivities.ToolbarActivity">
         </activity>
-        <activity android:name=".Activities.SettingsActivities.ModeDayOrNightActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".Activities.BaseActivity"/>
-        </activity>
+
         <activity android:name=".Activities.NewUser.NewUserActivity">
         </activity>
         <activity

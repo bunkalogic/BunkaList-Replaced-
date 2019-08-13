@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.AttributionActivity
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.LicenseActivity
 import com.bunkalogic.bunkalist.Activities.DetailsActivities.TermsAndPrivacyActivity
 import com.bunkalogic.bunkalist.Activities.Login.LoginActivity
 import com.bunkalogic.bunkalist.Activities.SettingsActivities.EditProfileActivity
-import com.bunkalogic.bunkalist.Activities.SettingsActivities.ModeDayOrNightActivity
 import com.bunkalogic.bunkalist.R
 import com.bunkalogic.bunkalist.SharedPreferences.preferences
 import com.google.android.gms.ads.AdRequest
@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.fragment_settings.view.*
 import org.jetbrains.anko.clearTask
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.support.v4.intentFor
+import com.bunkalogic.bunkalist.Activities.OtherActivities.MainEmptyActivity
+
 
 /**
  *  Created by @author Naim Dridi on 25/02/19
@@ -40,6 +42,7 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
         // Inflate the layout for this fragment
         _view =  inflater.inflate(R.layout.fragment_settings, container, false)
         addBannerAds()
+        whatModeIs()
         clicksListeners()
 
         return _view
@@ -62,7 +65,10 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
 
         _view.buttonApplyChanges.setOnClickListener { startActivity(intentFor<EditProfileActivity>()) }
 
-        _view.buttonMode.setOnClickListener { startActivity(intentFor<ModeDayOrNightActivity>()) }
+        _view.buttonMode.setOnClickListener {
+            changedMode()
+            startActivity(intentFor<MainEmptyActivity>())
+        }
 
         _view.buttonSignOut.setOnClickListener {
             preferences.deleteAll()
@@ -82,6 +88,31 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
             startActivity(intentFor<AttributionActivity>())
         }
     }
+
+    private fun whatModeIs(){
+        when(preferences.isNightMode){
+            true ->{
+                _view.buttonMode.frame = 120
+            }
+            false ->{
+                _view.buttonMode.frame = 0
+            }
+        }
+    }
+
+    private fun changedMode(){
+        if (preferences.isNightMode){
+            preferences.isNightMode = false
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            _view.buttonMode.playAnimation()
+
+        }else{
+            preferences.isNightMode = true
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            _view.buttonMode.playAnimation()
+        }
+    }
+
 
 
 }

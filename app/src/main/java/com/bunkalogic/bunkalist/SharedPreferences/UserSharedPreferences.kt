@@ -90,10 +90,15 @@ class UserSharedPreferences(context: Context){
         get() = prefsUser.getString("userGuestSesionId", "")
         set(value) = prefsUser.edit().putString("userGuestSesionId",value).apply()
 
-    // data current user
+    // is First Open?
     var isFirstLaunch: Boolean
         get() = prefsUser.getBoolean("isFirstLaunch", true)
         set(value) = prefsUser.edit().putBoolean("isFirstLaunch",value).apply()
+
+    // is Night mode
+    var isNightMode: Boolean
+        get() = prefsUser.getBoolean("isNightMode", false)
+        set(value) = prefsUser.edit().putBoolean("isNightMode",value).apply()
 
 
     fun editCurrentUser(){

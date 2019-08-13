@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BunkaList</string>
+
+
+    <!-- Login View -->
+    <string name="login_email">Email</string>
+    <string name="login_username">Nombre de usuario</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_confirm_password">Confirmar contraseña</string>
+    <string name="login_sign_in">Iniciar Sesion</string>
+    <string name="login_sign_up">Crea tu cuenta</string>
+    <string name="login_reset_password">Restablecer mi contraseña</string>
+    <string name="login_sign_in_google">Inicia sesión con Google</string>
+    <string name="login_forgot_password">Olvidé mi contraseña</string>
+    <string name="login_create_account">Crea una cuenta nueva</string>
+    <string name="go_to_login">Volver al inicio de sesión</string>
+    <string name="select_image_user">seleccione la imagen de perfil</string>
+    <string name="email_reset_to_password">Un Email ha sido enviado para restablecer su contraseña</string>
+    <string name="email_reset_to_password_failed">Por favor, asegúrese de que la dirección de email es correcta</string>
+    <string name="user_confirm_email">El usuario debe confirmar el correo electrónico primero</string>
+    <string name="login_error">Ocurrió un error inesperado, por favor intente de nuevo</string>
+    <string name="confirm_email_send">Se te ha enviado un correo electrónico. Por favor confirme antes de iniciar sesion</string>
+    <string name="signUp_data_incorrect">Por favor, asegúrese de que todos los datos son correctos</string>
+    <string name="add_correct_username_and_image_profile">Su nombre de usuario y su perfil de imagen han sido añadidos
+        correctamente
+    </string>
+
+
+    <!-- New User view -->
+    <string name="welcome_new_user">Bienvenido nuevo usuario</string>
+    <string name="btn_go_toActivity">siguiente</string>
+    <string name="error_new_user">Inténtalo de nuevo</string>
+    <string name="accept_the_permissions">Aceptar el permiso</string>
+
+    <!-- Button Navigation Menu -->
+
+    <string name="btn_nav_timeline">Timeline</string>
+    <string name="btn_nav_top">Tops</string>
+    <string name="btn_nav_search">Buscar</string>
+    <string name="btn_nav_profile">Perfil</string>
+    <string name="btn_nav_settings">Ajustes</string>
+
+
+    <!-- SettingsFragments -->
+    <string name="edit_profile">Edite su perfil</string>
+    <string name="apply_changes">Aplicar los cambios</string>
+    <string name="mode_light_dark">Seleccione Modo Día / Noche</string>
+    <string name="terms_of_use">Política de privacidad</string>
+    <string name="licence">Licencias de Codigo Abierto</string>
+    <string name="about_the_app">Sobre la aplicación</string>
+    <string name="changed_mode_light">Modo: Día</string>
+    <string name="changed_mode_dark">Modo: Noche</string>
+    <string name="changed_mode_custom">Mode: Día-Noche</string>
+    <string name="sign_out">Cerrar Sesion</string>
+
+
+    <!-- ProfileFragments -->
+    <string name="name_view_movie">List User Movie</string>
+    <string name="btn_top_movie">Tus tops</string>
+    <string name="btn_list_all_movies">Tus listas</string>
+    <string name="name_view_series">List User Series</string>
+    <string name="btn_top_series">Your Top Series</string>
+    <string name="btn_list_all_series">Your List Series</string>
+    <string name="name_view_anime">List User Anime</string>
+    <string name="btn_top_anime">Your Top Anime</string>
+    <string name="btn_list_all_anime">Your List Anime</string>
+    <string name="name_view_manga">List User Manga</string>
+    <string name="btn_top_manga">Your Top Manga</string>
+    <string name="btn_list_all_manga">Your List Manga</string>
+    <string name="fragment_profile">Recientemente añadido:</string>
+    <string name="fragment_profile_follow_list">gente que sigues</string>
+    <string name="fragment_profile_followers_list">Personas que te siguen</string>
+
+
+    <!-- ItemTimeLine -->
+    <string name="item_timeline_chapter">Episodio:</string>
+    <string name="item_timeline_season">Temporada:</string>
+    <string name="timeline_message_is_spoiler">[ Este comentario contine spoiler, manten pulsado si no le importa los spoilers]
+    </string>
+    <string name="toolbar_title_home">Home</string>
+    <string name="timeline_tab_layout">Global</string>
+    <string name="timeline_tab_layout_personal">Follows</string>
+    <string name="timeline_chat_hint_answer">Responde este comentario</string>
+
+
+    <!-- ItemTimeLineDialog -->
+    <string name="checkbox_is_spoiler">Es spoiler</string>
+    <string name="dialog_timeline">Comenta tu opinión</string>
+    <string name="send_opinion">Enviar</string>
+    <string name="dialog_cancel_timeline">Cancelar</string>
+    <string name="hint_name_oeuvre">Nombre de la película, serie, anime.</string>
+    <string name="hint_dialog_timeline_season">Temporada</string>
+    <string name="hint_dialog_timeline_chapter">Episodio</string>
+    <string name="hint_edit_text_content_dialog_timeline">Comenta tu opinión de un episodio</string>
+    <string name="dialog_timeline_checkbox_only_followers">Solo para tus seguidores.</string>
+
+    <!-- SearchFragment -->
+    <string name="fragment_search">Buscar Peliculas, Series, Anime y Personas</string>
+    <string name="text_view_get_full_details_search_item">Ver todos los detalles</string>
+
+    <!-- SearchFragmentItemDetails -->
+    <string name="search_item_details_original_title">Original Title :</string>
+    <string name="search_item_details_director">Director :</string>
+    <string name="search_item_details_status">Status :</string>
+    <string name="btn_search_item_details_your_list">Añadir en tu lista</string>
+    <string name="searchItemDetailsrating">Rating:</string>
+    <string name="search_item_not_have_tittle">Not title</string>
+    <string name="search_item_full_details_trailers">Trailers</string>
+    <string name="search_item_details_summary_label">Resumen</string>
+    <string name="activity_full_details">Géneros :</string>
+    <string name="activity_full_details_date">Fecha de lanzamiento :</string>
+
+
+    <!-- SearchFragmentItemDetailsDialog -->
+    <string name="dialog_add_list_title">Añadir en tu lista</string>
+    <string name="dialog_add_list_add_positive_button">Añadir en tu lista</string>
+    <string name="dialog_add_list_add_negative_button">Cancelar</string>
+    <string name="dialogAddList">Elige un estado</string>
+    <string name="dialog_add_list_what_type">Que tipo es</string>
+    <string name="dialog_add_list_text_view_arguments">¿Qué nota le das como argumento?</string>
+    <string name="dialog_add_list_text_view_character">¿Qué nota le das a los personajes?</string>
+    <string name="dialog_add_list_text_view_band_sound">¿Qué nota le das a la Banda Sonora?</string>
+    <string name="dialog_add_list_text_view_effects">¿Qué nota le das a la Fotografia/Animacion?</string>
+    <string name="dialog_add_list_text_view_Enjoyment">¿Cuanto has disfrutado con esta Obra?</string>
+
+    <string-array name="status">
+        <item>Completado</item>
+        <item>Viendolo</item>
+        <item>En Pediente o Deseado</item>
+        <item>En pausa</item>
+        <item>Abandonado</item>
+    </string-array>
+
+    <string-array name="rating">
+        <item>Rating Argumento</item>
+        <item>Rating Personajes</item>
+        <item>Rating Banda Sonora</item>
+        <item>Rating Fotografia/Animacion</item>
+        <item>Rating Disfrute</item>
+        <item>Rating Final</item>
+    </string-array>
+
+    <string-array name="order">
+        <item>Ascendente</item>
+        <item>Descendente</item>
+    </string-array>
+
+    <string-array name="type">
+        <item>Peliculas</item>
+        <item>Series</item>
+        <item>Anime</item>
+    </string-array>
+
+    <!-- ProfileListActivity -->
+    <string name="profile_list_activity_tab_all">All</string>
+    <string name="profile_list_activity_tab_movie">Peliculas</string>
+    <string name="profile_list_activity_tab_serie">Series</string>
+    <string name="profile_list_activity_tab_anime">Anime</string>
+
+    <!-- ReviewDialog -->
+    <string name="dialog_review_title">Review Extensa</string>
+    <string name="dialog_review_your_title">Titulo de tu Review</string>
+    <string name="dialog_review">Comenta tu opinión sobre una obra en detalle</string>
+    <string name="dialog_review_positive_button">Publicar la Review</string>
+    <string name="fragment_review_item">Write by</string>
+    <string name="fragment_review_content_spoiler">Esta Review contiene un spoiler, haga clic si no está preocupado por
+                el spoiler
+    </string>
+    <string name="activity_other_user_profile">Seguir</string>
+    <string name="dialog_add_the_list_alert">Alert elige el tipo de obra correcta para que todo se muestre correctamente
+        en sus listas.
+    </string>
+    <string name="activity_login_db_notice">This product uses the TMDb API but is not endorsed or certified by TMDb.
+    </string>
+    <string name="activity_licence">This application uses open source components. You can find the source code and
+        license information of these open source projects
+    </string>
+    <string name="sign_up_terms_anduse">"I accept the Privacy Policy and consent to the proccesing of my personal information in accordance with it."</string>
+
+    <string name="sign_up_accept_terms_and_use">"Acepte los términos y condiciones de uso, política de privacidad para
+        continuar"
+    </string>
+    <string name="fragment_tops_review_button_top_movies_popular">Top Peliculas Populares</string>
+    <string name="fragment_tops_review_button_top_series_popular">Top Series Populares</string>
+    <string name="fragment_top_reviews_title_popular"><![CDATA[Top 100 Movies & Series]]></string>
+    <string name="fragment_tops_review_button_top_movies_rated">Top Peliculas mejor valoradas</string>
+    <string name="fragment_tops_review_button_top_series_rated">Top Series mejor valoradas</string>
+    <string name="fragment_top_reviews_title_rated"><![CDATA[Top 100 Rated Movies & Series]]></string>
+    <string name="fragment_tops_review_button_top_movies_upcoming">Top Proximos Estrenos de Peliculas</string>
+    <string name="fragment_tops_review_button_top_series_upcoming">Top Proximos Estrenos Series</string>
+    <string name="fragment_top_reviews_title_Upcoming"><![CDATA[Movies & Series Upcoming]]></string>
+    <string name="profile_list_activity_tab_popular">Top Popular</string>
+    <string name="profile_list_activity_tab_rated">Top Rated</string>
+    <string name="profile_list_activity_tab_upcoming">Top Upcoming</string>
+    <string name="fragment_top_reviews_title_list">Tops Peliculas, Series and Anime por mas Populares, mejor Puntuadas, Proximos Estrenos </string>
+    <string name="fragment_tops_review_button_top_movies_list">Tops Peliculas.</string>
+    <string name="fragment_tops_review_button_top_series_list">Tops Series.</string>
+    <string name="search_item_full_details_recommendations">Recomendaciones</string>
+    <string name="title_toolbar_tops_Movies">Tops de Peliculas.</string>
+    <string name="title_toolbar_tops_Series">Tops de Series.</string>
+    <string name="search_item_full_details_cast">Casting / Personajes</string>
+    <string name="search_item_full_details_crew">Direccion / Personal</string>
+    <string name="birthday_date_activity_people">Fecha de Nacimiento :</string>
+    <string name="deathday_date_activity_people">Fecha de Fallecimiento :</string>
+    <string name="place_birth_activity_people">Lugar de Nacimiento :</string>
+    <string name="cast_historial_people_activity">Historial de Interpretaciones :</string>
+    <string name="crew_historial_people_activity">Directores / Productores</string>
+    <string name="item_cast_people_data">Numero de Episodios :</string>
+    <string name="item_cast_people_data_character">nombre del personaje :</string>
+    <string name="item_crew_people_data_work">nombre de departamento :</string>
+    <string name="dialog_add_list_text_view_general">¿Qué nota le das a toda la obra general?</string>
+    <string name="dialog_add_list_in_details">En Detalle</string>
+    <string name="fab_filter_list_profile_status">Estado</string>
+    <string name="fab_filter_list_profile_rating">Puntuacion</string>
+    <string name="fab_filter_list_profile_order">Orden</string>
+    <string name="fab_filter_profile_order_ascendent">Ascendente</string>
+    <string name="fab_filter_profile_order_descend">Descendente</string>
+    <string name="fab_filter_profile_rating_characters">Rating Personajes</string>
+    <string name="fab_filter_profile_rating_photography">Rating Fotografia/Animacion</string>
+    <string name="fab_filter_profile_rating_soundtrack">Rating Banda Sonora</string>
+    <string name="fab_filter_profile_rating_enjoyment">Rating Entretenimiento</string>
+    <string name="fab_filter_profile_rating_final">Rating Final</string>
+    <string name="fab_filter_profile_rating_story">Rating Argumento</string>
+    <string name="fab_filter_profile_status_complete">Terminado</string>
+    <string name="fab_filter_profile_status_watching">Viendolo</string>
+    <string name="fab_filter_profile_status_waiting">En deseado/pendiente</string>
+    <string name="fab_filter_profile_status_pause">En pausa</string>
+    <string name="fab_filter_profile_status_dropped">Abandonada</string>
+    <string name="app_is_update">BunkaList ya se ha actualizado, reinicia</string>
+    <string name="notification_week_title">¿Qué has visto durante esta semana?</string>
+    <string name="notification_week_message">Añádelo a tus listas y comenta.</string>
+    <string name="fab_filter_search_type">Tipo</string>
+    <string name="fab_filter_search_genres">Generos</string>
+    <string name="fab_filter_search_year">Año</string>
+    <string name="fab_filter_search_sort">Ordenar</string>
+    <string name="fab_filter_search_genres_action">Acción</string>
+    <string name="fab_filter_search_genres_adventure">Aventura</string>
+    <string name="fab_filter_search_genres_animation">Animacion</string>
+    <string name="fab_filter_search_genres_comedy">Comedia</string>
+    <string name="fab_filter_search_genres_crime">Crimen</string>
+    <string name="fab_filter_search_genres_documentary">Documental</string>
+    <string name="fab_filter_search_genres_drama">Drama</string>
+    <string name="fab_filter_search_genres_family">Familiar</string>
+    <string name="fab_filter_search_genres_fantasy">Fantasia</string>
+    <string name="fab_filter_search_genres_history">Historica</string>
+    <string name="fab_filter_search_genres_horror">Horror</string>
+    <string name="fab_filter_search_genres_mistery">Misterio</string>
+    <string name="fab_filter_search_genres_music">Musical</string>
+    <string name="fab_filter_search_genres_romance">Romance</string>
+    <string name="fab_filter_science_fiction">Ciencia Ficción</string>
+    <string name="fab_filter_search_genres_thriller">Thriller</string>
+    <string name="fab_filter_search_genres_tv">Movies tv</string>
+    <string name="fab_filter_search_genres_war">Belica</string>
+    <string name="fab_filter_search_genres_western">Western</string>
+    <string name="fab_filter_search_genres_action_adventure"><![CDATA[Action & Aventure]]></string>
+    <string name="fab_filter_search_genres_reality">Reality</string>
+    <string name="fab_filter_science_fiction_fantasy"><![CDATA[Science Fiction & Fantasy]]></string>
+    <string name="fab_filter_search_genres_telenovel"><![CDATA[Soap & Dorama]]></string>
+    <string name="fab_filter_search_genres_war_politics">Politics</string>
+    <string name="fab_filter_search_sort_populary_asc">Popularidad Ascendente</string>
+    <string name="fab_filter_search_sort_populary_desc">Popularidad Descendente</string>
+    <string name="fab_filter_search_sort_release_date_asc">Fecha de salida Ascendente</string>
+    <string name="fab_filter_search_sort_release_date_desc">Fecha de salida Descendente</string>
+    <string name="fab_filter_search_sort_voted_average_asc">Puntacion Ascendente</string>
+    <string name="fab_filter_search_voted_average_desc">Puntuacion Descendente</string>
+    <string name="profile_rating_btn_update">Actualizar</string>
+    <string name="profile_rating_label_update_story">Nota Argumento :</string>
+    <string name="profile_rating_label_update_characters">Nota Personajes :</string>
+    <string name="profile_rating_label_update_soundtrack">Nota Banda Sonora :</string>
+    <string name="profile_rating_label_update_photography">Nota Fotografia :</string>
+    <string name="profile_rating_label_update_enjoyment">Nota Entretenimiento :</string>
+    <string name="profile_rating_label_update_new_final_rate">Nueva Nota Final :</string>
+    <string name="fragment_tops_review_button_top_anime_popular">Top Anime Populares</string>
+    <string name="fragment_tops_review_button_top_anime_rated">"Top Anime mejor valorados"</string>
+    <string name="fragment_tops_review_button_top_anime_upcoming">Top Proximos Estrenos Anime</string>
+    <string name="title_toolbar_tops_Anime">Tops de Anime.</string>
+    <string name="search_item_details_network_label">produced by :</string>
+    <string name="search_item_full_details_similar">Similar</string>
+    <string name="add_new_username">Agregue su nombre de usuario antes de continuar</string>
+    <string name="dialog_add_list_select_one_status">seleccione un estado antes de agregarlo a su lista</string>
+    <string name="is_added_in_your_list">Ya está agregado a tu lista</string>
+    <string name="apply_filter">haga clic nuevamente en el botón para aplicar los filtros</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Gracias por descargar BunkaList!</string>
+    <string name="slide_1_desc">¡la aplicación que te permite guardar lo que has visto o estás viendo!</string>
+
+    <string name="slide_2_title">¡Comenta con todos!</string>
+    <string name="slide_2_desc">Comenta, ya sea una película que te gustó, una temporada de una serie o el capítulo de un anime.</string>
+
+    <string name="slide_3_title">¡Califica lo que has visto de forma simple o en detalle!</string>
+    <string name="slide_3_desc">Califique cada obra con un sistema de puntuación que valore cada aspecto importante del mismo.</string>
+
+    <string name="slide_4_title">¡Descubra nuevas peliculas, series y anime!</string>
+    <string name="slide_4_desc">Descubra nuevas obras buscándolas por géneros o año, por los tops.</string>
+</resources>
