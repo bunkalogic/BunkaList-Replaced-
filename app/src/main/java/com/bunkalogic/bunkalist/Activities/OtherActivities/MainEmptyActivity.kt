@@ -27,7 +27,7 @@ class MainEmptyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        MobileAds.initialize(this, "ca-app-pub-6667428027256827~7372710211")
+        MobileAds.initialize(this, "")
         isFirstOpen()
 
     }

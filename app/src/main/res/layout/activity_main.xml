@@ -10,35 +10,83 @@
         tools:context=".Activities.BaseActivity">
 
 
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+    >
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorBackgroundPrimaryNav"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imageViewToolbarPhoto"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_person_black_24dp"/>
+
+                <TextView
+                        android:id="@+id/textViewToolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/overpass"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/colorPrimaryText"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageViewToolbarPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/imageViewToolbarPhoto"
+                        app:layout_constraintTop_toTopOf="@+id/imageViewToolbarPhoto"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <View android:layout_width="match_parent"
           android:layout_height="0.7dp"
           android:background="@color/colorDivider"
           app:layout_constraintBottom_toBottomOf="@+id/viewPager"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"/>
+          app:layout_constraintStart_toStartOf="parent" android:id="@+id/view7"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/btn_nav_View"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorBackgroundPrimaryNav"
             app:menu="@menu/button_navigation_menu"
             app:itemBackground="@drawable/bottom_nav_ripple"
             app:itemIconTint="@drawable/bottom_nav_color"
             app:itemTextColor="@drawable/bottom_nav_color"
-            app:elevation="20dp" app:layout_constraintEnd_toEndOf="parent"
+            app:elevation="8dp" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:animateLayoutChanges="true"/>
 
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_above="@+id/btn_nav_View"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btn_nav_View" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
 
 
 

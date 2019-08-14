@@ -64,11 +64,11 @@ class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //whatIsMode()
         whatModeIs()
+        setUpCurrentUser()
         setUpViewPager(getPagerAdapter())
         setUpBottomNavigationBar()
-        setUpCurrentUser()
+        setUpToolbar()
         checkNewUpdates()
 
 
@@ -78,6 +78,16 @@ class BaseActivity : AppCompatActivity() {
     // Initializing the currentUser
     private fun setUpCurrentUser(){
         currentUser = mAuth.currentUser!!
+    }
+
+    private fun setUpToolbar(){
+        if(currentUser.photoUrl != null){
+
+            Glide.with(this)
+                .load(currentUser.photoUrl)
+                .into(this.imageViewToolbarPhoto)
+
+        }
     }
 
 
@@ -122,27 +132,33 @@ class BaseActivity : AppCompatActivity() {
 
 
     private fun setUpBottomNavigationBar(){
+        this.textViewToolbar.text = getString(R.string.btn_nav_timeline)
+
         btn_nav_View.setOnNavigationItemSelectedListener {Item ->
             when(Item.itemId){
                 R.id.bottom_nav_timeline -> {
+                    this.textViewToolbar.text = getString(R.string.btn_nav_timeline)
                     viewPager.currentItem = 0;true
                 }
 
                 R.id.bottom_nav_top_and_review -> {
+                    this.textViewToolbar.text = getString(R.string.btn_nav_top)
                     viewPager.currentItem = 1;true
                 }
 
                 R.id.bottom_nav_search -> {
-
+                    this.textViewToolbar.text = getString(R.string.btn_nav_search)
                     viewPager.currentItem = 2;true
 
                 }
 
                 R.id.bottom_nav_profile -> {
+                    this.textViewToolbar.text = getString(R.string.btn_nav_profile)
                     viewPager.currentItem = 3;true
                 }
 
                 R.id.bottom_nav_settings -> {
+                    this.textViewToolbar.text = getString(R.string.btn_nav_settings)
                     viewPager.currentItem = 4;true
                 }
                 else -> false

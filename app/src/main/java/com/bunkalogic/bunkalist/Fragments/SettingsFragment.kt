@@ -67,6 +67,7 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
 
         _view.buttonMode.setOnClickListener {
             changedMode()
+            _view.buttonMode.playAnimation()
             startActivity(intentFor<MainEmptyActivity>())
         }
 
@@ -104,12 +105,9 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
         if (preferences.isNightMode){
             preferences.isNightMode = false
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            _view.buttonMode.playAnimation()
-
         }else{
             preferences.isNightMode = true
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            _view.buttonMode.playAnimation()
         }
     }
 
