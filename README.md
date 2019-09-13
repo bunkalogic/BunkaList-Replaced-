@@ -14,7 +14,7 @@ discover and comment on their favorite works.
 
 
 # **The Bunkalist Road Map** :clipboard:
-- Replace the native Andriod [version with the Flutter](https://github.com/bunkalogic/BunkaList-Flutter-Version) version by the beginning of next year.
+- Replace the native Android [version with the Flutter](https://github.com/bunkalogic/BunkaList-Flutter-Version) version by the beginning of next year.
 - Improve stability and add new features.
 - Implement that users can also add manga and books to their lists.
 
